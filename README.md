@@ -6,6 +6,6 @@ Advanced Config Editor for Dead by Daylight
 ## Contact 
 #### Join Discord server: [Discord](https://discord.com/invite/EY9uaqTS7Z). or dm me: єℓєνєи#8485
 ## Download
-#### Download the latest version from [website](http://dbdconfigeditor.epizy.com/) or from [releases](https://github.com/elefelen/dead-by-daylight-advanced-settings-changer/releases).
+#### Download the latest version from [website](http://dbdconfigeditor.epizy.com/) or from [releases](https://github.com/elefelen/dead-by-daylight-advanced-settings-changer/releases).<br />
 ## Screenshot:<br /><br />
 ![Screenshot](https://github.com/elefelen/dead-by-daylight-advanced-settings-changer/blob/main/image2.PNG)

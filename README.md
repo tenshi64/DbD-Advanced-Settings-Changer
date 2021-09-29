@@ -6,3 +6,6 @@ Advanced Config Editor for Dead by Daylight
 **Discord server: [Discord](https://discord.com/invite/EY9uaqTS7Z).**
 
 **Download the latest version here: [Website](http://dbdconfigeditor.epizy.com/).**
+
+**Screenshot:**
+![This is an image](http://dbdconfigeditor.epizy.com/image2.PNG)

@@ -46,7 +46,7 @@ namespace DbD_Settings_Changer
             try
             {
                 WebClient wc = new WebClient();
-                string textFromFile = wc.DownloadString("https://pastebin.com/yjMGKd4u");
+                string textFromFile = wc.DownloadString("link");
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 if (!textFromFile.Contains(version))
                 { 

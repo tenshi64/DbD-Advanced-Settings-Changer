@@ -1,4 +1,4 @@
-# dead-by-daylight-advanced-settings-changer
+# Dead by Daylight | ADVANCED SETTINGS CHANGER
 Adcanced Config Editor for Dead by Daylight
 
 Discord server: https://discord.com/invite/EY9uaqTS7Z

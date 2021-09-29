@@ -8,4 +8,4 @@ Advanced Config Editor for Dead by Daylight
 **Download the latest version here: [Website](http://dbdconfigeditor.epizy.com/).**
 
 **Screenshot:**
-![screenshot](https://github.com/elefelen/dead-by-daylight-advanced-settings-changer/blob/main/screen.PNG)
+![Screenshot](https://github.com/elefelen/dead-by-daylight-advanced-settings-changer/blob/main/image2.PNG)

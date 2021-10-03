@@ -6,7 +6,7 @@ Advanced Config Editor for Dead by Daylight
 ## Contact 
 #### Join [Discord server](https://discord.com/invite/EY9uaqTS7Z) or dm me: єℓєνєи#8485<br /><br />
 ## New Features
-#### Want to see some new feature in the program? Write on Discord (server)!<br /><br />
+#### Want to see some new feature in the program? Write on Discord server!<br /><br />
 ## Reporting bugs
 #### Submit a bug report on [issues](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/issues) or on a Discord server on the "bug-reports" channel
 ## Download

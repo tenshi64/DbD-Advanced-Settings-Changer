@@ -11,6 +11,7 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace DbD_Settings_Changer
 {
@@ -20,6 +21,7 @@ namespace DbD_Settings_Changer
         public string SettingsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\WindowsNoEditor\GameUserSettings.ini";
         public string EnginePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\WindowsNoEditor\Engine.ini";
         public string ApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Autosave\";
+        public string UpdatePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Update";
 
         ToolTip tip = new ToolTip();
 
@@ -43,6 +45,18 @@ namespace DbD_Settings_Changer
                 Application.Exit();
             }
 
+            using (var client = new WebClient())
+            {
+                if (!Directory.Exists(UpdatePath))
+                {
+                    Directory.CreateDirectory(UpdatePath);
+                }
+                client.DownloadFile("https://www.dropbox.com/s/58labg5onm9fvvf/DbD%20Settings%20Changer.exe?dl=1", UpdatePath + @"\DbD Settings Changer.exe");
+                Process.Start("explorer.exe", UpdatePath);
+                MessageBox.Show("The latest version of the program has been downloaded! Enter the open File Explorer and replace the old version of the program with the new one!", "Update",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.Exit();
+            }
             try
             {
                 WebClient wc = new WebClient();
@@ -50,7 +64,7 @@ namespace DbD_Settings_Changer
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 if (!textFromFile.Contains(version))
                 { 
-                    DialogResult result = MessageBox.Show("A new version of the program has been found. \nBefore installing the new version, please uninstall the old one.\n\nDo you want to download it?", "Check for updates",
+                    DialogResult result = MessageBox.Show("A new version of the program has been found.\n\nDo you want to download it?", "Check for updates",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (result == DialogResult.Yes)
                     {
@@ -216,8 +230,8 @@ namespace DbD_Settings_Changer
                             }
                             if (result == 5)
                             {
-                                btnVwEpic.BackColor = Color.Crimson;
-                                btnVwEpic.ForeColor = Color.White;
+                                btnVwAwesome.BackColor = Color.Crimson;
+                                btnVwAwesome.ForeColor = Color.White;
                             }
                         }
                         if (lines[i].Contains("sg.AntiAliasingQuality"))
@@ -252,8 +266,8 @@ namespace DbD_Settings_Changer
                             }
                             if (result == 5)
                             {
-                                btnAaEpic.BackColor = Color.Crimson;
-                                btnAaEpic.ForeColor = Color.White;
+                                btnAaAwesome.BackColor = Color.Crimson;
+                                btnAaAwesome.ForeColor = Color.White;
                             }
                         }
                         if (lines[i].Contains("sg.ShadowQuality"))
@@ -288,8 +302,8 @@ namespace DbD_Settings_Changer
                             }
                             if (result == 5)
                             {
-                                btnShadEpic.BackColor = Color.Crimson;
-                                btnShadEpic.ForeColor = Color.White;
+                                btnShadAwesome.BackColor = Color.Crimson;
+                                btnShadAwesome.ForeColor = Color.White;
                             }
                         }
                         if (lines[i].Contains("sg.PostProcessQuality"))
@@ -324,8 +338,8 @@ namespace DbD_Settings_Changer
                             }
                             if (result == 5)
                             {
-                                btnPpEpic.BackColor = Color.Crimson;
-                                btnPpEpic.ForeColor = Color.White;
+                                btnPpAwesome.BackColor = Color.Crimson;
+                                btnPpAwesome.ForeColor = Color.White;
                             }
                         }
                         if (lines[i].Contains("sg.TextureQuality"))
@@ -360,8 +374,8 @@ namespace DbD_Settings_Changer
                             }
                             if (result == 5)
                             {
-                                btnTxtEpic.BackColor = Color.Crimson;
-                                btnTxtEpic.ForeColor = Color.White;
+                                btnTxtAwesome.BackColor = Color.Crimson;
+                                btnTxtAwesome.ForeColor = Color.White;
                             }
                         }
                         if (lines[i].Contains("sg.EffectsQuality"))
@@ -396,8 +410,8 @@ namespace DbD_Settings_Changer
                             }
                             if (result == 5)
                             {
-                                btnEffEpic.BackColor = Color.Crimson;
-                                btnEffEpic.ForeColor = Color.White;
+                                btnEffAwesome.BackColor = Color.Crimson;
+                                btnEffAwesome.ForeColor = Color.White;
                             }
                         }
                         if (lines[i].Contains("sg.FoliageQuality"))
@@ -432,8 +446,8 @@ namespace DbD_Settings_Changer
                             }
                             if (result == 5)
                             {
-                                btnFolEpic.BackColor = Color.Crimson;
-                                btnFolEpic.ForeColor = Color.White;
+                                btnFolAwesome.BackColor = Color.Crimson;
+                                btnFolAwesome.ForeColor = Color.White;
                             }
                         }
                         if (lines[i].Contains("sg.ShadingQuality"))
@@ -468,8 +482,8 @@ namespace DbD_Settings_Changer
                             }
                             if (result == 5)
                             {
-                                btnShEpic.BackColor = Color.Crimson;
-                                btnShEpic.ForeColor = Color.White;
+                                btnShAwesome.BackColor = Color.Crimson;
+                                btnShAwesome.ForeColor = Color.White;
                             }
                         }
                         if (lines[i].Contains("sg.AnimationQuality"))
@@ -504,8 +518,8 @@ namespace DbD_Settings_Changer
                             }
                             if (result == 5)
                             {
-                                btnAnimEpic.BackColor = Color.Crimson;
-                                btnAnimEpic.ForeColor = Color.White;
+                                btnAnimAwesome.BackColor = Color.Crimson;
+                                btnAnimAwesome.ForeColor = Color.White;
                             }
                         }
                         if (lines[i].Contains("AudioQualityLevel"))
@@ -540,8 +554,8 @@ namespace DbD_Settings_Changer
                             }
                             if (result == 5)
                             {
-                                btnAudioEpic.BackColor = Color.Crimson;
-                                btnAudioEpic.ForeColor = Color.White;
+                                btnAudioAwesome.BackColor = Color.Crimson;
+                                btnAudioAwesome.ForeColor = Color.White;
                             }
                         }
                         if (lines[i].Contains("MainVolume"))
@@ -781,6 +795,8 @@ namespace DbD_Settings_Changer
             btnVwUltra.BackColor = Color.Transparent;
             btnVwEpic.ForeColor = Color.Black;
             btnVwEpic.BackColor = Color.Transparent;
+            btnVwAwesome.ForeColor = Color.Black;
+            btnVwAwesome.BackColor = Color.Transparent;
             btnAaLow.ForeColor = Color.Black;
             btnAaLow.BackColor = Color.Transparent;
             btnAaMedium.ForeColor = Color.Black;
@@ -791,6 +807,8 @@ namespace DbD_Settings_Changer
             btnAaUltra.BackColor = Color.Transparent;
             btnAaEpic.ForeColor = Color.Black;
             btnAaEpic.BackColor = Color.Transparent;
+            btnAaAwesome.ForeColor = Color.Black;
+            btnAaAwesome.BackColor = Color.Transparent;
             btnShadLow.ForeColor = Color.Black;
             btnShadLow.BackColor = Color.Transparent;
             btnShadMedium.ForeColor = Color.Black;
@@ -801,6 +819,8 @@ namespace DbD_Settings_Changer
             btnShadUltra.ForeColor = Color.Black;
             btnShadEpic.ForeColor = Color.Black;
             btnShadEpic.BackColor = Color.Transparent;
+            btnShadAwesome.ForeColor = Color.Black;
+            btnShadAwesome.BackColor = Color.Transparent;
             btnPpLow.ForeColor = Color.Black;
             btnPpLow.BackColor = Color.Transparent;
             btnPpMedium.ForeColor = Color.Black;
@@ -811,6 +831,8 @@ namespace DbD_Settings_Changer
             btnPpUltra.BackColor = Color.Transparent;
             btnPpEpic.ForeColor = Color.Black;
             btnPpEpic.BackColor = Color.Transparent;
+            btnPpAwesome.ForeColor = Color.Black;
+            btnPpAwesome.BackColor = Color.Transparent;
             btnTxtLow.ForeColor = Color.Black;
             btnTxtLow.BackColor = Color.Transparent;
             btnTxtMedium.ForeColor = Color.Black;
@@ -821,6 +843,8 @@ namespace DbD_Settings_Changer
             btnTxtUltra.BackColor = Color.Transparent;
             btnTxtEpic.ForeColor = Color.Black;
             btnTxtEpic.BackColor = Color.Transparent;
+            btnTxtAwesome.ForeColor = Color.Black;
+            btnTxtAwesome.BackColor = Color.Transparent;
             btnEffLow.ForeColor = Color.Black;
             btnEffLow.BackColor = Color.Transparent;
             btnEffMedium.ForeColor = Color.Black;
@@ -831,6 +855,8 @@ namespace DbD_Settings_Changer
             btnEffUltra.BackColor = Color.Transparent;
             btnEffEpic.ForeColor = Color.Black;
             btnEffEpic.BackColor = Color.Transparent;
+            btnEffAwesome.ForeColor = Color.Black;
+            btnEffAwesome.BackColor = Color.Transparent;
             btnFolLow.ForeColor = Color.Black;
             btnFolLow.BackColor = Color.Transparent;
             btnFolMedium.ForeColor = Color.Black;
@@ -840,15 +866,21 @@ namespace DbD_Settings_Changer
             btnFolUltra.ForeColor = Color.Black;
             btnFolUltra.BackColor = Color.Transparent;
             btnFolEpic.ForeColor = Color.Black;
-            btnFolEpic.BackColor = Color.Transparent; 
+            btnFolEpic.BackColor = Color.Transparent;
+            btnFolAwesome.ForeColor = Color.Black;
+            btnFolAwesome.BackColor = Color.Transparent;
+            btnShLow.BackColor = Color.Transparent;
             btnShLow.ForeColor = Color.Black;
             btnShMedium.ForeColor = Color.Black;
+            btnShMedium.BackColor = Color.Transparent;
             btnShHigh.ForeColor = Color.Black;
             btnShHigh.BackColor = Color.Transparent;
             btnShUltra.BackColor = Color.Transparent;
+            btnShUltra.ForeColor = Color.Black;
             btnShEpic.ForeColor = Color.Black;
             btnShEpic.BackColor = Color.Transparent;
-            btnShLow.ForeColor = Color.Black;
+            btnShAwesome.ForeColor = Color.Black;
+            btnShAwesome.BackColor = Color.Transparent;
             btnAnimLow.BackColor = Color.Transparent;
             btnAnimLow.ForeColor = Color.Black;
             btnAnimMedium.ForeColor = Color.Black;
@@ -858,7 +890,9 @@ namespace DbD_Settings_Changer
             btnAnimUltra.ForeColor = Color.Black;
             btnAnimUltra.BackColor = Color.Transparent;
             btnAnimEpic.ForeColor = Color.Black;
-            btnAnimEpic.BackColor = Color.Transparent; 
+            btnAnimEpic.BackColor = Color.Transparent;
+            btnAnimAwesome.ForeColor = Color.Black;
+            btnAnimAwesome.BackColor = Color.Transparent;
             btnAudioLow.ForeColor = Color.Black;
             btnAudioLow.BackColor = Color.Transparent;
             btnAudioMedium.ForeColor = Color.Black;
@@ -869,6 +903,8 @@ namespace DbD_Settings_Changer
             btnAudioUltra.BackColor = Color.Transparent;
             btnAudioEpic.ForeColor = Color.Black;
             btnAudioEpic.BackColor = Color.Transparent;
+            btnAudioAwesome.ForeColor = Color.Black;
+            btnAudioAwesome.BackColor = Color.Transparent;
 
             try
             {
@@ -974,8 +1010,8 @@ namespace DbD_Settings_Changer
                         }
                         if (result == 5)
                         {
-                            btnVwEpic.BackColor = Color.Crimson;
-                            btnVwEpic.ForeColor = Color.White;
+                            btnVwAwesome.BackColor = Color.Crimson;
+                            btnVwAwesome.ForeColor = Color.White;
                         }
                     }
                     if (lines[i].Contains("sg.AntiAliasingQuality"))
@@ -1010,8 +1046,8 @@ namespace DbD_Settings_Changer
                         }
                         if (result == 5)
                         {
-                            btnAaEpic.BackColor = Color.Crimson;
-                            btnAaEpic.ForeColor = Color.White;
+                            btnAaAwesome.BackColor = Color.Crimson;
+                            btnAaAwesome.ForeColor = Color.White;
                         }
                     }
                     if (lines[i].Contains("sg.ShadowQuality"))
@@ -1046,8 +1082,8 @@ namespace DbD_Settings_Changer
                         }
                         if (result == 5)
                         {
-                            btnShadEpic.BackColor = Color.Crimson;
-                            btnShadEpic.ForeColor = Color.White;
+                            btnShadAwesome.BackColor = Color.Crimson;
+                            btnShadAwesome.ForeColor = Color.White;
                         }
                     }
                     if (lines[i].Contains("sg.PostProcessQuality"))
@@ -1082,8 +1118,8 @@ namespace DbD_Settings_Changer
                         }
                         if (result == 5)
                         {
-                            btnPpEpic.BackColor = Color.Crimson;
-                            btnPpEpic.ForeColor = Color.White;
+                            btnPpAwesome.BackColor = Color.Crimson;
+                            btnPpAwesome.ForeColor = Color.White;
                         }
                     }
                     if (lines[i].Contains("sg.TextureQuality"))
@@ -1118,8 +1154,8 @@ namespace DbD_Settings_Changer
                         }
                         if (result == 5)
                         {
-                            btnTxtEpic.BackColor = Color.Crimson;
-                            btnTxtEpic.ForeColor = Color.White;
+                            btnTxtAwesome.BackColor = Color.Crimson;
+                            btnTxtAwesome.ForeColor = Color.White;
                         }
                     }
                     if (lines[i].Contains("sg.EffectsQuality"))
@@ -1154,8 +1190,8 @@ namespace DbD_Settings_Changer
                         }
                         if (result == 5)
                         {
-                            btnEffEpic.BackColor = Color.Crimson;
-                            btnEffEpic.ForeColor = Color.White;
+                            btnEffAwesome.BackColor = Color.Crimson;
+                            btnEffAwesome.ForeColor = Color.White;
                         }
                     }
                     if (lines[i].Contains("sg.FoliageQuality"))
@@ -1190,8 +1226,8 @@ namespace DbD_Settings_Changer
                         }
                         if (result == 5)
                         {
-                            btnFolEpic.BackColor = Color.Crimson;
-                            btnFolEpic.ForeColor = Color.White;
+                            btnFolAwesome.BackColor = Color.Crimson;
+                            btnFolAwesome.ForeColor = Color.White;
                         }
                     }
                     if (lines[i].Contains("sg.ShadingQuality"))
@@ -1226,8 +1262,8 @@ namespace DbD_Settings_Changer
                         }
                         if (result == 5)
                         {
-                            btnShEpic.BackColor = Color.Crimson;
-                            btnShEpic.ForeColor = Color.White;
+                            btnShAwesome.BackColor = Color.Crimson;
+                            btnShAwesome.ForeColor = Color.White;
                         }
                     }
                     if (lines[i].Contains("sg.AnimationQuality"))
@@ -1262,8 +1298,8 @@ namespace DbD_Settings_Changer
                         }
                         if (result == 5)
                         {
-                            btnAnimEpic.BackColor = Color.Crimson;
-                            btnAnimEpic.ForeColor = Color.White;
+                            btnAnimAwesome.BackColor = Color.Crimson;
+                            btnAnimAwesome.ForeColor = Color.White;
                         }
                     }
                     if (lines[i].Contains("AudioQualityLevel"))
@@ -1298,8 +1334,8 @@ namespace DbD_Settings_Changer
                         }
                         if (result == 5)
                         {
-                            btnAudioEpic.BackColor = Color.Crimson;
-                            btnAudioEpic.ForeColor = Color.White;
+                            btnAudioAwesome.BackColor = Color.Crimson;
+                            btnAudioAwesome.ForeColor = Color.White;
                         }
                     }
                     if (lines[i].Contains("MainVolume"))
@@ -1485,8 +1521,6 @@ namespace DbD_Settings_Changer
                         tbScRes.Value = result;
                         lblScRes.Text = tbScRes.Value + "%";
                     }
-
-
                 }
             }
             catch(Exception)
@@ -1517,6 +1551,8 @@ namespace DbD_Settings_Changer
             btnVwUltra.ForeColor = Color.Black;
             btnVwEpic.BackColor = Color.Transparent;
             btnVwEpic.ForeColor = Color.Black;
+            btnVwAwesome.BackColor = Color.Transparent;
+            btnVwAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnVwLow.BackColor = Color.Crimson;
             btnVwLow.ForeColor = Color.White;
@@ -1555,6 +1591,8 @@ namespace DbD_Settings_Changer
             btnVwUltra.ForeColor = Color.Black;
             btnVwEpic.BackColor = Color.Transparent;
             btnVwEpic.ForeColor = Color.Black;
+            btnVwAwesome.BackColor = Color.Transparent;
+            btnVwAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnVwMedium.BackColor = Color.Crimson;
             btnVwMedium.ForeColor = Color.White;
@@ -1593,6 +1631,8 @@ namespace DbD_Settings_Changer
             btnVwUltra.ForeColor = Color.Black;
             btnVwEpic.BackColor = Color.Transparent;
             btnVwEpic.ForeColor = Color.Black;
+            btnVwAwesome.BackColor = Color.Transparent;
+            btnVwAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnVwHigh.BackColor = Color.Crimson;
             btnVwHigh.ForeColor = Color.White;
@@ -1631,6 +1671,8 @@ namespace DbD_Settings_Changer
             btnVwHigh.ForeColor = Color.Black;
             btnVwEpic.BackColor = Color.Transparent;
             btnVwEpic.ForeColor = Color.Black;
+            btnVwAwesome.BackColor = Color.Transparent;
+            btnVwAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnVwUltra.BackColor = Color.Crimson;
             btnVwUltra.ForeColor = Color.White;
@@ -1669,6 +1711,8 @@ namespace DbD_Settings_Changer
             btnVwUltra.ForeColor = Color.Black;
             btnVwHigh.BackColor = Color.Transparent;
             btnVwHigh.ForeColor = Color.Black;
+            btnVwAwesome.BackColor = Color.Transparent;
+            btnVwAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnVwEpic.BackColor = Color.Crimson;
             btnVwEpic.ForeColor = Color.White;
@@ -1707,6 +1751,8 @@ namespace DbD_Settings_Changer
             btnAaUltra.ForeColor = Color.Black;
             btnAaEpic.BackColor = Color.Transparent;
             btnAaEpic.ForeColor = Color.Black;
+            btnAaAwesome.BackColor = Color.Transparent;
+            btnAaAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAaLow.BackColor = Color.Crimson;
             btnAaLow.ForeColor = Color.White;
@@ -1745,6 +1791,8 @@ namespace DbD_Settings_Changer
             btnAaUltra.ForeColor = Color.Black;
             btnAaEpic.BackColor = Color.Transparent;
             btnAaEpic.ForeColor = Color.Black;
+            btnAaAwesome.BackColor = Color.Transparent;
+            btnAaAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAaMedium.BackColor = Color.Crimson;
             btnAaMedium.ForeColor = Color.White;
@@ -1783,6 +1831,8 @@ namespace DbD_Settings_Changer
             btnAaUltra.ForeColor = Color.Black;
             btnAaEpic.BackColor = Color.Transparent;
             btnAaEpic.ForeColor = Color.Black;
+            btnAaAwesome.BackColor = Color.Transparent;
+            btnAaAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAaHigh.BackColor = Color.Crimson;
             btnAaHigh.ForeColor = Color.White;
@@ -1821,6 +1871,8 @@ namespace DbD_Settings_Changer
             btnAaLow.ForeColor = Color.Black;
             btnAaEpic.BackColor = Color.Transparent;
             btnAaEpic.ForeColor = Color.Black;
+            btnAaAwesome.BackColor = Color.Transparent;
+            btnAaAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAaUltra.BackColor = Color.Crimson;
             btnAaUltra.ForeColor = Color.White;
@@ -1859,6 +1911,8 @@ namespace DbD_Settings_Changer
             btnAaLow.ForeColor = Color.Black;
             btnAaUltra.BackColor = Color.Transparent;
             btnAaUltra.ForeColor = Color.Black;
+            btnAaAwesome.BackColor = Color.Transparent;
+            btnAaAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAaEpic.BackColor = Color.Crimson;
             btnAaEpic.ForeColor = Color.White;
@@ -1897,6 +1951,8 @@ namespace DbD_Settings_Changer
             btnShadMedium.ForeColor = Color.Black;
             btnShadUltra.BackColor = Color.Transparent;
             btnShadUltra.ForeColor = Color.Black;
+            btnShadAwesome.BackColor = Color.Transparent;
+            btnShadAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShadLow.BackColor = Color.Crimson;
             btnShadLow.ForeColor = Color.White;
@@ -1935,6 +1991,8 @@ namespace DbD_Settings_Changer
             btnShadLow.ForeColor = Color.Black;
             btnShadUltra.BackColor = Color.Transparent;
             btnShadUltra.ForeColor = Color.Black;
+            btnShadAwesome.BackColor = Color.Transparent;
+            btnShadAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShadMedium.BackColor = Color.Crimson;
             btnShadMedium.ForeColor = Color.White;
@@ -1973,6 +2031,8 @@ namespace DbD_Settings_Changer
             btnShadMedium.ForeColor = Color.Black;
             btnShadUltra.BackColor = Color.Transparent;
             btnShadUltra.ForeColor = Color.Black;
+            btnShadAwesome.BackColor = Color.Transparent;
+            btnShadAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShadHigh.BackColor = Color.Crimson;
             btnShadHigh.ForeColor = Color.White;
@@ -2011,6 +2071,8 @@ namespace DbD_Settings_Changer
             btnShadMedium.ForeColor = Color.Black;
             btnShadLow.BackColor = Color.Transparent;
             btnShadLow.ForeColor = Color.Black;
+            btnShadAwesome.BackColor = Color.Transparent;
+            btnShadAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShadUltra.BackColor = Color.Crimson;
             btnShadUltra.ForeColor = Color.White;
@@ -2049,6 +2111,8 @@ namespace DbD_Settings_Changer
             btnShadMedium.ForeColor = Color.Black;
             btnShadUltra.BackColor = Color.Transparent;
             btnShadUltra.ForeColor = Color.Black;
+            btnShadAwesome.BackColor = Color.Transparent;
+            btnShadAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShadEpic.BackColor = Color.Crimson;
             btnShadEpic.ForeColor = Color.White;
@@ -2087,6 +2151,8 @@ namespace DbD_Settings_Changer
             btnPpMedium.ForeColor = Color.Black;
             btnPpUltra.BackColor = Color.Transparent;
             btnPpUltra.ForeColor = Color.Black;
+            btnPpAwesome.BackColor = Color.Transparent;
+            btnPpAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnPpLow.BackColor = Color.Crimson;
             btnPpLow.ForeColor = Color.White;
@@ -2125,6 +2191,8 @@ namespace DbD_Settings_Changer
             btnPpLow.ForeColor = Color.Black;
             btnPpUltra.BackColor = Color.Transparent;
             btnPpUltra.ForeColor = Color.Black;
+            btnPpAwesome.BackColor = Color.Transparent;
+            btnPpAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnPpMedium.BackColor = Color.Crimson;
             btnPpMedium.ForeColor = Color.White;
@@ -2163,6 +2231,8 @@ namespace DbD_Settings_Changer
             btnPpLow.ForeColor = Color.Black;
             btnPpUltra.BackColor = Color.Transparent;
             btnPpUltra.ForeColor = Color.Black;
+            btnPpAwesome.BackColor = Color.Transparent;
+            btnPpAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnPpHigh.BackColor = Color.Crimson;
             btnPpHigh.ForeColor = Color.White;
@@ -2201,6 +2271,8 @@ namespace DbD_Settings_Changer
             btnPpLow.ForeColor = Color.Black;
             btnPpMedium.BackColor = Color.Transparent;
             btnPpMedium.ForeColor = Color.Black;
+            btnPpAwesome.BackColor = Color.Transparent;
+            btnPpAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnPpUltra.BackColor = Color.Crimson;
             btnPpUltra.ForeColor = Color.White;
@@ -2239,6 +2311,8 @@ namespace DbD_Settings_Changer
             btnPpLow.ForeColor = Color.Black;
             btnPpUltra.BackColor = Color.Transparent;
             btnPpUltra.ForeColor = Color.Black;
+            btnPpAwesome.BackColor = Color.Transparent;
+            btnPpAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnPpEpic.BackColor = Color.Crimson;
             btnPpEpic.ForeColor = Color.White;
@@ -2277,6 +2351,8 @@ namespace DbD_Settings_Changer
             btnTxtEpic.ForeColor = Color.Black;
             btnTxtUltra.BackColor = Color.Transparent;
             btnTxtUltra.ForeColor = Color.Black;
+            btnTxtAwesome.BackColor = Color.Transparent;
+            btnTxtAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnTxtLow.BackColor = Color.Crimson;
             btnTxtLow.ForeColor = Color.White;
@@ -2315,6 +2391,8 @@ namespace DbD_Settings_Changer
             btnTxtEpic.ForeColor = Color.Black;
             btnTxtUltra.BackColor = Color.Transparent;
             btnTxtUltra.ForeColor = Color.Black;
+            btnTxtAwesome.BackColor = Color.Transparent;
+            btnTxtAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnTxtMedium.BackColor = Color.Crimson;
             btnTxtMedium.ForeColor = Color.White;
@@ -2353,6 +2431,8 @@ namespace DbD_Settings_Changer
             btnTxtEpic.ForeColor = Color.Black;
             btnTxtUltra.BackColor = Color.Transparent;
             btnTxtUltra.ForeColor = Color.Black;
+            btnTxtAwesome.BackColor = Color.Transparent;
+            btnTxtAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnTxtHigh.BackColor = Color.Crimson;
             btnTxtHigh.ForeColor = Color.White;
@@ -2391,6 +2471,8 @@ namespace DbD_Settings_Changer
             btnTxtEpic.ForeColor = Color.Black;
             btnTxtLow.BackColor = Color.Transparent;
             btnTxtLow.ForeColor = Color.Black;
+            btnTxtAwesome.BackColor = Color.Transparent;
+            btnTxtAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnTxtUltra.BackColor = Color.Crimson;
             btnTxtUltra.ForeColor = Color.White;
@@ -2429,6 +2511,8 @@ namespace DbD_Settings_Changer
             btnTxtLow.ForeColor = Color.Black;
             btnTxtUltra.BackColor = Color.Transparent;
             btnTxtUltra.ForeColor = Color.Black;
+            btnTxtAwesome.BackColor = Color.Transparent;
+            btnTxtAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnTxtEpic.BackColor = Color.Crimson;
             btnTxtEpic.ForeColor = Color.White;
@@ -2467,6 +2551,8 @@ namespace DbD_Settings_Changer
             btnEffMedium.ForeColor = Color.Black;
             btnEffUltra.BackColor = Color.Transparent;
             btnEffUltra.ForeColor = Color.Black;
+            btnEffAwesome.BackColor = Color.Transparent;
+            btnEffAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnEffLow.BackColor = Color.Crimson;
             btnEffLow.ForeColor = Color.White;
@@ -2505,6 +2591,8 @@ namespace DbD_Settings_Changer
             btnEffLow.ForeColor = Color.Black;
             btnEffUltra.BackColor = Color.Transparent;
             btnEffUltra.ForeColor = Color.Black;
+            btnEffAwesome.BackColor = Color.Transparent;
+            btnEffAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnEffMedium.BackColor = Color.Crimson;
             btnEffMedium.ForeColor = Color.White;
@@ -2543,6 +2631,8 @@ namespace DbD_Settings_Changer
             btnEffLow.ForeColor = Color.Black;
             btnEffUltra.BackColor = Color.Transparent;
             btnEffUltra.ForeColor = Color.Black;
+            btnEffAwesome.BackColor = Color.Transparent;
+            btnEffAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnEffHigh.BackColor = Color.Crimson;
             btnEffHigh.ForeColor = Color.White;
@@ -2581,6 +2671,8 @@ namespace DbD_Settings_Changer
             btnEffLow.ForeColor = Color.Black;
             btnEffHigh.BackColor = Color.Transparent;
             btnEffHigh.ForeColor = Color.Black;
+            btnEffAwesome.BackColor = Color.Transparent;
+            btnEffAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnEffUltra.BackColor = Color.Crimson;
             btnEffUltra.ForeColor = Color.White;
@@ -2619,6 +2711,8 @@ namespace DbD_Settings_Changer
             btnEffLow.ForeColor = Color.Black;
             btnEffHigh.BackColor = Color.Transparent;
             btnEffHigh.ForeColor = Color.Black;
+            btnEffAwesome.BackColor = Color.Transparent;
+            btnEffAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnEffEpic.BackColor = Color.Crimson;
             btnEffEpic.ForeColor = Color.White;
@@ -2657,6 +2751,8 @@ namespace DbD_Settings_Changer
             btnFolEpic.ForeColor = Color.Black;
             btnFolHigh.BackColor = Color.Transparent;
             btnFolHigh.ForeColor = Color.Black;
+            btnFolAwesome.BackColor = Color.Transparent;
+            btnFolAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnFolLow.BackColor = Color.Crimson;
             btnFolLow.ForeColor = Color.White;
@@ -2695,6 +2791,8 @@ namespace DbD_Settings_Changer
             btnFolEpic.ForeColor = Color.Black;
             btnFolHigh.BackColor = Color.Transparent;
             btnFolHigh.ForeColor = Color.Black;
+            btnFolAwesome.BackColor = Color.Transparent;
+            btnFolAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnFolMedium.BackColor = Color.Crimson;
             btnFolMedium.ForeColor = Color.White;
@@ -2733,6 +2831,8 @@ namespace DbD_Settings_Changer
             btnFolEpic.ForeColor = Color.Black;
             btnFolMedium.BackColor = Color.Transparent;
             btnFolMedium.ForeColor = Color.Black;
+            btnFolAwesome.BackColor = Color.Transparent;
+            btnFolAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnFolHigh.BackColor = Color.Crimson;
             btnFolHigh.ForeColor = Color.White;
@@ -2771,6 +2871,8 @@ namespace DbD_Settings_Changer
             btnFolEpic.ForeColor = Color.Black;
             btnFolMedium.BackColor = Color.Transparent;
             btnFolMedium.ForeColor = Color.Black;
+            btnFolAwesome.BackColor = Color.Transparent;
+            btnFolAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnFolUltra.BackColor = Color.Crimson;
             btnFolUltra.ForeColor = Color.White;
@@ -2809,6 +2911,8 @@ namespace DbD_Settings_Changer
             btnFolHigh.ForeColor = Color.Black;
             btnFolMedium.BackColor = Color.Transparent;
             btnFolMedium.ForeColor = Color.Black;
+            btnFolAwesome.BackColor = Color.Transparent;
+            btnFolAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnFolEpic.BackColor = Color.Crimson;
             btnFolEpic.ForeColor = Color.White;
@@ -2847,6 +2951,8 @@ namespace DbD_Settings_Changer
             btnShEpic.ForeColor = Color.Black;
             btnShMedium.BackColor = Color.Transparent;
             btnShMedium.ForeColor = Color.Black;
+            btnShAwesome.BackColor = Color.Transparent;
+            btnShAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShLow.BackColor = Color.Crimson;
             btnShLow.ForeColor = Color.White;
@@ -2885,6 +2991,8 @@ namespace DbD_Settings_Changer
             btnShEpic.ForeColor = Color.Black;
             btnShLow.BackColor = Color.Transparent;
             btnShLow.ForeColor = Color.Black;
+            btnShAwesome.BackColor = Color.Transparent;
+            btnShAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShMedium.BackColor = Color.Crimson;
             btnShMedium.ForeColor = Color.White;
@@ -2923,6 +3031,8 @@ namespace DbD_Settings_Changer
             btnShEpic.ForeColor = Color.Black;
             btnShLow.BackColor = Color.Transparent;
             btnShLow.ForeColor = Color.Black;
+            btnShAwesome.BackColor = Color.Transparent;
+            btnShAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShHigh.BackColor = Color.Crimson;
             btnShHigh.ForeColor = Color.White;
@@ -2961,6 +3071,8 @@ namespace DbD_Settings_Changer
             btnShEpic.ForeColor = Color.Black;
             btnShLow.BackColor = Color.Transparent;
             btnShLow.ForeColor = Color.Black;
+            btnShAwesome.BackColor = Color.Transparent;
+            btnShAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShUltra.BackColor = Color.Crimson;
             btnShUltra.ForeColor = Color.White;
@@ -2999,6 +3111,8 @@ namespace DbD_Settings_Changer
             btnShUltra.ForeColor = Color.Black;
             btnShLow.BackColor = Color.Transparent;
             btnShLow.ForeColor = Color.Black;
+            btnShAwesome.BackColor = Color.Transparent;
+            btnShAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShEpic.BackColor = Color.Crimson;
             btnShEpic.ForeColor = Color.White;
@@ -3037,6 +3151,8 @@ namespace DbD_Settings_Changer
             btnAnimUltra.ForeColor = Color.Black;
             btnAnimEpic.BackColor = Color.Transparent;
             btnAnimEpic.ForeColor = Color.Black;
+            btnAnimAwesome.BackColor = Color.Transparent;
+            btnAnimAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAnimLow.BackColor = Color.Crimson;
             btnAnimLow.ForeColor = Color.White;
@@ -3075,6 +3191,8 @@ namespace DbD_Settings_Changer
             btnAnimUltra.ForeColor = Color.Black;
             btnAnimEpic.BackColor = Color.Transparent;
             btnAnimEpic.ForeColor = Color.Black;
+            btnAnimAwesome.BackColor = Color.Transparent;
+            btnAnimAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAnimMedium.BackColor = Color.Crimson;
             btnAnimMedium.ForeColor = Color.White;
@@ -3113,6 +3231,8 @@ namespace DbD_Settings_Changer
             btnAnimUltra.ForeColor = Color.Black;
             btnAnimEpic.BackColor = Color.Transparent;
             btnAnimEpic.ForeColor = Color.Black;
+            btnAnimAwesome.BackColor = Color.Transparent;
+            btnAnimAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAnimHigh.BackColor = Color.Crimson;
             btnAnimHigh.ForeColor = Color.White;
@@ -3151,6 +3271,8 @@ namespace DbD_Settings_Changer
             btnAnimHigh.ForeColor = Color.Black;
             btnAnimEpic.BackColor = Color.Transparent;
             btnAnimEpic.ForeColor = Color.Black;
+            btnAnimAwesome.BackColor = Color.Transparent;
+            btnAnimAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAnimUltra.BackColor = Color.Crimson;
             btnAnimUltra.ForeColor = Color.White;
@@ -3189,6 +3311,8 @@ namespace DbD_Settings_Changer
             btnAnimHigh.ForeColor = Color.Black;
             btnAnimUltra.BackColor = Color.Transparent;
             btnAnimUltra.ForeColor = Color.Black;
+            btnAnimAwesome.BackColor = Color.Transparent;
+            btnAnimAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAnimEpic.BackColor = Color.Crimson;
             btnAnimEpic.ForeColor = Color.White;
@@ -3252,6 +3376,8 @@ namespace DbD_Settings_Changer
             btnAudioHigh.ForeColor = Color.Black;
             btnAudioUltra.BackColor = Color.Transparent;
             btnAudioUltra.ForeColor = Color.Black;
+            btnAudioAwesome.BackColor = Color.Transparent;
+            btnAudioAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAudioLow.BackColor = Color.Crimson;
             btnAudioLow.ForeColor = Color.White;
@@ -3296,6 +3422,8 @@ namespace DbD_Settings_Changer
             btnAudioHigh.ForeColor = Color.Black;
             btnAudioUltra.BackColor = Color.Transparent;
             btnAudioUltra.ForeColor = Color.Black;
+            btnAudioAwesome.BackColor = Color.Transparent;
+            btnAudioAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAudioMedium.BackColor = Color.Crimson;
             btnAudioMedium.ForeColor = Color.White;
@@ -3339,6 +3467,8 @@ namespace DbD_Settings_Changer
             btnAudioMedium.ForeColor = Color.Black;
             btnAudioUltra.BackColor = Color.Transparent;
             btnAudioUltra.ForeColor = Color.Black;
+            btnAudioAwesome.BackColor = Color.Transparent;
+            btnAudioAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAudioHigh.BackColor = Color.Crimson;
             btnAudioHigh.ForeColor = Color.White;
@@ -3382,6 +3512,8 @@ namespace DbD_Settings_Changer
             btnAudioMedium.ForeColor = Color.Black;
             btnAudioHigh.BackColor = Color.Transparent;
             btnAudioHigh.ForeColor = Color.Black;
+            btnAudioAwesome.BackColor = Color.Transparent;
+            btnAudioAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAudioUltra.BackColor = Color.Crimson;
             btnAudioUltra.ForeColor = Color.White;
@@ -3425,6 +3557,8 @@ namespace DbD_Settings_Changer
             btnAudioMedium.ForeColor = Color.Black;
             btnAudioHigh.BackColor = Color.Transparent;
             btnAudioHigh.ForeColor = Color.Black;
+            btnAudioAwesome.BackColor = Color.Transparent;
+            btnAudioAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAudioEpic.BackColor = Color.Crimson;
             btnAudioEpic.ForeColor = Color.White;
@@ -4436,9 +4570,6 @@ namespace DbD_Settings_Changer
             string[] lines = File.ReadAllLines(SettingsPath);
             Console.WriteLine(String.Join(Environment.NewLine, lines));
 
-
-
-
             for (int i = 0; i <= numLines - 1; i++)
             {
                 if (lines[i].Contains("sg.ResolutionQuality"))
@@ -4461,6 +4592,8 @@ namespace DbD_Settings_Changer
                     btnVwUltra.ForeColor = Color.Black;
                     btnVwEpic.BackColor = Color.Transparent;
                     btnVwEpic.ForeColor = Color.Black;
+                    btnVwAwesome.BackColor = Color.Transparent;
+                    btnVwAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnVwMedium.BackColor = Color.Transparent;
                     btnVwMedium.ForeColor = Color.Black;
@@ -4496,8 +4629,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnVwEpic.BackColor = Color.Crimson;
-                        btnVwEpic.ForeColor = Color.White;
+                        btnVwAwesome.BackColor = Color.Crimson;
+                        btnVwAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.AntiAliasingQuality"))
@@ -4511,6 +4644,8 @@ namespace DbD_Settings_Changer
                     btnAaUltra.ForeColor = Color.Black;
                     btnAaEpic.BackColor = Color.Transparent;
                     btnAaEpic.ForeColor = Color.Black;
+                    btnAaAwesome.BackColor = Color.Transparent;
+                    btnAaAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnAaMedium.BackColor = Color.Transparent;
                     btnAaMedium.ForeColor = Color.Black;
@@ -4546,8 +4681,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnAaEpic.BackColor = Color.Crimson;
-                        btnAaEpic.ForeColor = Color.White;
+                        btnAaAwesome.BackColor = Color.Crimson;
+                        btnAaAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.ShadowQuality"))
@@ -4561,6 +4696,8 @@ namespace DbD_Settings_Changer
                     btnShadUltra.ForeColor = Color.Black;
                     btnShadEpic.BackColor = Color.Transparent;
                     btnShadEpic.ForeColor = Color.Black;
+                    btnShadAwesome.BackColor = Color.Transparent;
+                    btnShadAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnShadMedium.BackColor = Color.Transparent;
                     btnShadMedium.ForeColor = Color.Black;
@@ -4596,8 +4733,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnShadEpic.BackColor = Color.Crimson;
-                        btnShadEpic.ForeColor = Color.White;
+                        btnShadAwesome.BackColor = Color.Crimson;
+                        btnShadAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.PostProcessQuality"))
@@ -4611,6 +4748,8 @@ namespace DbD_Settings_Changer
                     btnPpUltra.ForeColor = Color.Black;
                     btnPpEpic.BackColor = Color.Transparent;
                     btnPpEpic.ForeColor = Color.Black;
+                    btnPpAwesome.BackColor = Color.Transparent;
+                    btnPpAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnPpMedium.BackColor = Color.Transparent;
                     btnPpMedium.ForeColor = Color.Black;
@@ -4646,8 +4785,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnPpEpic.BackColor = Color.Crimson;
-                        btnPpEpic.ForeColor = Color.White;
+                        btnPpAwesome.BackColor = Color.Crimson;
+                        btnPpAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.TextureQuality"))
@@ -4661,6 +4800,8 @@ namespace DbD_Settings_Changer
                     btnTxtUltra.ForeColor = Color.Black;
                     btnTxtEpic.BackColor = Color.Transparent;
                     btnTxtEpic.ForeColor = Color.Black;
+                    btnTxtAwesome.BackColor = Color.Transparent;
+                    btnTxtAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnTxtMedium.BackColor = Color.Transparent;
                     btnTxtMedium.ForeColor = Color.Black;
@@ -4696,8 +4837,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnTxtEpic.BackColor = Color.Crimson;
-                        btnTxtEpic.ForeColor = Color.White;
+                        btnTxtAwesome.BackColor = Color.Crimson;
+                        btnTxtAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.EffectsQuality"))
@@ -4711,6 +4852,8 @@ namespace DbD_Settings_Changer
                     btnEffUltra.ForeColor = Color.Black;
                     btnEffEpic.BackColor = Color.Transparent;
                     btnEffEpic.ForeColor = Color.Black;
+                    btnEffAwesome.BackColor = Color.Transparent;
+                    btnEffAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnEffMedium.BackColor = Color.Transparent;
                     btnEffMedium.ForeColor = Color.Black;
@@ -4746,8 +4889,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnEffEpic.BackColor = Color.Crimson;
-                        btnEffEpic.ForeColor = Color.White;
+                        btnEffAwesome.BackColor = Color.Crimson;
+                        btnEffAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.FoliageQuality"))
@@ -4761,6 +4904,8 @@ namespace DbD_Settings_Changer
                     btnFolUltra.ForeColor = Color.Black;
                     btnFolEpic.BackColor = Color.Transparent;
                     btnFolEpic.ForeColor = Color.Black;
+                    btnFolAwesome.BackColor = Color.Transparent;
+                    btnFolAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnFolMedium.BackColor = Color.Transparent;
                     btnFolMedium.ForeColor = Color.Black;
@@ -4796,8 +4941,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnFolEpic.BackColor = Color.Crimson;
-                        btnFolEpic.ForeColor = Color.White;
+                        btnFolAwesome.BackColor = Color.Crimson;
+                        btnFolAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.ShadingQuality"))
@@ -4811,6 +4956,8 @@ namespace DbD_Settings_Changer
                     btnShUltra.ForeColor = Color.Black;
                     btnShEpic.BackColor = Color.Transparent;
                     btnShEpic.ForeColor = Color.Black;
+                    btnShAwesome.BackColor = Color.Transparent;
+                    btnShAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnShMedium.BackColor = Color.Transparent;
                     btnShMedium.ForeColor = Color.Black;
@@ -4846,8 +4993,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnShEpic.BackColor = Color.Crimson;
-                        btnShEpic.ForeColor = Color.White;
+                        btnShAwesome.BackColor = Color.Crimson;
+                        btnShAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.AnimationQuality"))
@@ -4861,6 +5008,8 @@ namespace DbD_Settings_Changer
                     btnAnimUltra.ForeColor = Color.Black;
                     btnAnimEpic.BackColor = Color.Transparent;
                     btnAnimEpic.ForeColor = Color.Black;
+                    btnAnimAwesome.BackColor = Color.Transparent;
+                    btnAnimAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnAnimMedium.BackColor = Color.Transparent;
                     btnAnimMedium.ForeColor = Color.Black;
@@ -4896,8 +5045,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnAnimEpic.BackColor = Color.Crimson;
-                        btnAnimEpic.ForeColor = Color.White;
+                        btnAnimAwesome.BackColor = Color.Crimson;
+                        btnAnimAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("ScreenResolution"))
@@ -4906,494 +5055,6 @@ namespace DbD_Settings_Changer
                     File.WriteAllText(SettingsPath, ReadConfig);
 
                     int result = 1;
-                    tbScRes.Value = result;
-                    lblScRes.Text = tbScRes.Value + "%";
-                }
-            }
-        }
-
-        private void btnPresetMedium_Click(object sender, EventArgs e)
-        {
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
-
-            lblHideFocus.Focus();
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
-
-            int numLines = ReadConfig.Split('\n').Length;
-
-            string[] lines = File.ReadAllLines(SettingsPath);
-            Console.WriteLine(String.Join(Environment.NewLine, lines));
-
-
-
-
-            for (int i = 0; i <= numLines - 1; i++)
-            {
-                if (lines[i].Contains("sg.ResolutionQuality"))
-                {
-                    ReadConfig = ReadConfig.Replace(lines[i], "sg.ResolutionQuality=67.000000");
-                    File.WriteAllText(SettingsPath, ReadConfig);
-
-                    int result = 67;
-                    tbRes.Value = result;
-                    lblRes.Text = tbRes.Value + "%";
-                }
-                if (lines[i].Contains("sg.ViewDistanceQuality"))
-                {
-                    btnVwLow.BackColor = Color.Transparent;
-                    btnVwLow.ForeColor = Color.Black;
-                    //nazwa wcześniejszego
-                    btnVwHigh.BackColor = Color.Transparent;
-                    btnVwHigh.ForeColor = Color.Black;
-                    btnVwUltra.BackColor = Color.Transparent;
-                    btnVwUltra.ForeColor = Color.Black;
-                    btnVwEpic.BackColor = Color.Transparent;
-                    btnVwEpic.ForeColor = Color.Black;
-                    //nazwa klikniętego (poniżej)
-                    btnVwMedium.BackColor = Color.Transparent;
-                    btnVwMedium.ForeColor = Color.Black;
-                    ReadConfig = ReadConfig.Replace(lines[i], "sg.ViewDistanceQuality=1");
-                    File.WriteAllText(SettingsPath, ReadConfig);
-
-                    int result = 1;
-
-                    if (result == 0)
-                    {
-                        btnVwLow.BackColor = Color.Crimson;
-                        btnVwLow.ForeColor = Color.White;
-                    }
-                    if (result == 1)
-                    {
-                        btnVwMedium.BackColor = Color.Crimson;
-                        btnVwMedium.ForeColor = Color.White;
-                    }
-                    if (result == 2)
-                    {
-                        btnVwHigh.BackColor = Color.Crimson;
-                        btnVwHigh.ForeColor = Color.White;
-                    }
-                    if (result == 3)
-                    {
-                        btnVwUltra.BackColor = Color.Crimson;
-                        btnVwUltra.ForeColor = Color.White;
-                    }
-                    if (result == 4)
-                    {
-                        btnVwEpic.BackColor = Color.Crimson;
-                        btnVwEpic.ForeColor = Color.White;
-                    }
-                    if (result == 5)
-                    {
-                        btnVwEpic.BackColor = Color.Crimson;
-                        btnVwEpic.ForeColor = Color.White;
-                    }
-                }
-                if (lines[i].Contains("sg.AntiAliasingQuality"))
-                {
-                    btnAaLow.BackColor = Color.Transparent;
-                    btnAaLow.ForeColor = Color.Black;
-                    //nazwa wcześniejszego
-                    btnAaHigh.BackColor = Color.Transparent;
-                    btnAaHigh.ForeColor = Color.Black;
-                    btnAaUltra.BackColor = Color.Transparent;
-                    btnAaUltra.ForeColor = Color.Black;
-                    btnAaEpic.BackColor = Color.Transparent;
-                    btnAaEpic.ForeColor = Color.Black;
-                    //nazwa klikniętego (poniżej)
-                    btnAaMedium.BackColor = Color.Transparent;
-                    btnAaMedium.ForeColor = Color.Black;
-                    ReadConfig = ReadConfig.Replace(lines[i], "sg.AntiAliasingQuality=0");
-                    File.WriteAllText(SettingsPath, ReadConfig);
-
-                    int result = 0;
-
-                    if (result == 0)
-                    {
-                        btnAaLow.BackColor = Color.Crimson;
-                        btnAaLow.ForeColor = Color.White;
-                    }
-                    if (result == 1)
-                    {
-                        btnAaMedium.BackColor = Color.Crimson;
-                        btnAaMedium.ForeColor = Color.White;
-                    }
-                    if (result == 2)
-                    {
-                        btnAaHigh.BackColor = Color.Crimson;
-                        btnAaHigh.ForeColor = Color.White;
-                    }
-                    if (result == 3)
-                    {
-                        btnAaUltra.BackColor = Color.Crimson;
-                        btnAaUltra.ForeColor = Color.White;
-                    }
-                    if (result == 4)
-                    {
-                        btnAaEpic.BackColor = Color.Crimson;
-                        btnAaEpic.ForeColor = Color.White;
-                    }
-                    if (result == 5)
-                    {
-                        btnAaEpic.BackColor = Color.Crimson;
-                        btnAaEpic.ForeColor = Color.White;
-                    }
-                }
-                if (lines[i].Contains("sg.ShadowQuality"))
-                {
-                    btnShadLow.BackColor = Color.Transparent;
-                    btnShadLow.ForeColor = Color.Black;
-                    //nazwa wcześniejszego
-                    btnShadHigh.BackColor = Color.Transparent;
-                    btnShadHigh.ForeColor = Color.Black;
-                    btnShadUltra.BackColor = Color.Transparent;
-                    btnShadUltra.ForeColor = Color.Black;
-                    btnShadEpic.BackColor = Color.Transparent;
-                    btnShadEpic.ForeColor = Color.Black;
-                    //nazwa klikniętego (poniżej)
-                    btnShadMedium.BackColor = Color.Transparent;
-                    btnShadMedium.ForeColor = Color.Black;
-                    ReadConfig = ReadConfig.Replace(lines[i], "sg.ShadowQuality=1");
-                    File.WriteAllText(SettingsPath, ReadConfig);
-
-                    int result = 1;
-
-                    if (result == 0)
-                    {
-                        btnShadLow.BackColor = Color.Crimson;
-                        btnShadLow.ForeColor = Color.White;
-                    }
-                    if (result == 1)
-                    {
-                        btnShadMedium.BackColor = Color.Crimson;
-                        btnShadMedium.ForeColor = Color.White;
-                    }
-                    if (result == 2)
-                    {
-                        btnShadHigh.BackColor = Color.Crimson;
-                        btnShadHigh.ForeColor = Color.White;
-                    }
-                    if (result == 3)
-                    {
-                        btnShadUltra.BackColor = Color.Crimson;
-                        btnShadUltra.ForeColor = Color.White;
-                    }
-                    if (result == 4)
-                    {
-                        btnShadEpic.BackColor = Color.Crimson;
-                        btnShadEpic.ForeColor = Color.White;
-                    }
-                    if (result == 5)
-                    {
-                        btnShadEpic.BackColor = Color.Crimson;
-                        btnShadEpic.ForeColor = Color.White;
-                    }
-                }
-                if (lines[i].Contains("sg.PostProcessQuality"))
-                {
-                    btnPpLow.BackColor = Color.Transparent;
-                    btnPpLow.ForeColor = Color.Black;
-                    //nazwa wcześniejszego
-                    btnPpHigh.BackColor = Color.Transparent;
-                    btnPpHigh.ForeColor = Color.Black;
-                    btnPpUltra.BackColor = Color.Transparent;
-                    btnPpUltra.ForeColor = Color.Black;
-                    btnPpEpic.BackColor = Color.Transparent;
-                    btnPpEpic.ForeColor = Color.Black;
-                    //nazwa klikniętego (poniżej)
-                    btnPpMedium.BackColor = Color.Transparent;
-                    btnPpMedium.ForeColor = Color.Black;
-                    ReadConfig = ReadConfig.Replace(lines[i], "sg.PostProcessQuality=5");
-                    File.WriteAllText(SettingsPath, ReadConfig);
-
-                    int result = 5;
-
-                    if (result == 0)
-                    {
-                        btnPpLow.BackColor = Color.Crimson;
-                        btnPpLow.ForeColor = Color.White;
-                    }
-                    if (result == 1)
-                    {
-                        btnPpMedium.BackColor = Color.Crimson;
-                        btnPpMedium.ForeColor = Color.White;
-                    }
-                    if (result == 2)
-                    {
-                        btnPpHigh.BackColor = Color.Crimson;
-                        btnPpHigh.ForeColor = Color.White;
-                    }
-                    if (result == 3)
-                    {
-                        btnPpUltra.BackColor = Color.Crimson;
-                        btnPpUltra.ForeColor = Color.White;
-                    }
-                    if (result == 4)
-                    {
-                        btnPpEpic.BackColor = Color.Crimson;
-                        btnPpEpic.ForeColor = Color.White;
-                    }
-                    if (result == 5)
-                    {
-                        btnPpEpic.BackColor = Color.Crimson;
-                        btnPpEpic.ForeColor = Color.White;
-                    }
-                }
-                if (lines[i].Contains("sg.TextureQuality"))
-                {
-                    btnTxtLow.BackColor = Color.Transparent;
-                    btnTxtLow.ForeColor = Color.Black;
-                    //nazwa wcześniejszego
-                    btnTxtHigh.BackColor = Color.Transparent;
-                    btnTxtHigh.ForeColor = Color.Black;
-                    btnTxtUltra.BackColor = Color.Transparent;
-                    btnTxtUltra.ForeColor = Color.Black;
-                    btnTxtEpic.BackColor = Color.Transparent;
-                    btnTxtEpic.ForeColor = Color.Black;
-                    //nazwa klikniętego (poniżej)
-                    btnTxtMedium.BackColor = Color.Transparent;
-                    btnTxtMedium.ForeColor = Color.Black;
-                    ReadConfig = ReadConfig.Replace(lines[i], "sg.TextureQuality=0");
-                    File.WriteAllText(SettingsPath, ReadConfig);
-
-                    int result = 1;
-
-                    if (result == 0)
-                    {
-                        btnTxtLow.BackColor = Color.Crimson;
-                        btnTxtLow.ForeColor = Color.White;
-                    }
-                    if (result == 1)
-                    {
-                        btnTxtMedium.BackColor = Color.Crimson;
-                        btnTxtMedium.ForeColor = Color.White;
-                    }
-                    if (result == 2)
-                    {
-                        btnTxtHigh.BackColor = Color.Crimson;
-                        btnTxtHigh.ForeColor = Color.White;
-                    }
-                    if (result == 3)
-                    {
-                        btnTxtUltra.BackColor = Color.Crimson;
-                        btnTxtUltra.ForeColor = Color.White;
-                    }
-                    if (result == 4)
-                    {
-                        btnTxtEpic.BackColor = Color.Crimson;
-                        btnTxtEpic.ForeColor = Color.White;
-                    }
-                    if (result == 5)
-                    {
-                        btnTxtEpic.BackColor = Color.Crimson;
-                        btnTxtEpic.ForeColor = Color.White;
-                    }
-                }
-                if (lines[i].Contains("sg.EffectsQuality"))
-                {
-                    btnEffLow.BackColor = Color.Transparent;
-                    btnEffLow.ForeColor = Color.Black;
-                    //nazwa wcześniejszego
-                    btnEffHigh.BackColor = Color.Transparent;
-                    btnEffHigh.ForeColor = Color.Black;
-                    btnEffUltra.BackColor = Color.Transparent;
-                    btnEffUltra.ForeColor = Color.Black;
-                    btnEffEpic.BackColor = Color.Transparent;
-                    btnEffEpic.ForeColor = Color.Black;
-                    //nazwa klikniętego (poniżej)
-                    btnEffMedium.BackColor = Color.Transparent;
-                    btnEffMedium.ForeColor = Color.Black;
-                    ReadConfig = ReadConfig.Replace(lines[i], "sg.EffectsQuality=1");
-                    File.WriteAllText(SettingsPath, ReadConfig);
-
-                    int result = 1;
-
-                    if (result == 0)
-                    {
-                        btnEffLow.BackColor = Color.Crimson;
-                        btnEffLow.ForeColor = Color.White;
-                    }
-                    if (result == 1)
-                    {
-                        btnEffMedium.BackColor = Color.Crimson;
-                        btnEffMedium.ForeColor = Color.White;
-                    }
-                    if (result == 2)
-                    {
-                        btnEffHigh.BackColor = Color.Crimson;
-                        btnEffHigh.ForeColor = Color.White;
-                    }
-                    if (result == 3)
-                    {
-                        btnEffUltra.BackColor = Color.Crimson;
-                        btnEffUltra.ForeColor = Color.White;
-                    }
-                    if (result == 4)
-                    {
-                        btnEffEpic.BackColor = Color.Crimson;
-                        btnEffEpic.ForeColor = Color.White;
-                    }
-                    if (result == 5)
-                    {
-                        btnEffEpic.BackColor = Color.Crimson;
-                        btnEffEpic.ForeColor = Color.White;
-                    }
-                }
-                if (lines[i].Contains("sg.FoliageQuality"))
-                {
-                    btnFolLow.BackColor = Color.Transparent;
-                    btnFolLow.ForeColor = Color.Black;
-                    //nazwa wcześniejszego
-                    btnFolHigh.BackColor = Color.Transparent;
-                    btnFolHigh.ForeColor = Color.Black;
-                    btnFolUltra.BackColor = Color.Transparent;
-                    btnFolUltra.ForeColor = Color.Black;
-                    btnFolEpic.BackColor = Color.Transparent;
-                    btnFolEpic.ForeColor = Color.Black;
-                    //nazwa klikniętego (poniżej)
-                    btnFolMedium.BackColor = Color.Transparent;
-                    btnFolMedium.ForeColor = Color.Black;
-                    ReadConfig = ReadConfig.Replace(lines[i], "sg.FoliageQuality=1");
-                    File.WriteAllText(SettingsPath, ReadConfig);
-
-                    int result = 1;
-
-                    if (result == 0)
-                    {
-                        btnFolLow.BackColor = Color.Crimson;
-                        btnFolLow.ForeColor = Color.White;
-                    }
-                    if (result == 1)
-                    {
-                        btnFolMedium.BackColor = Color.Crimson;
-                        btnFolMedium.ForeColor = Color.White;
-                    }
-                    if (result == 2)
-                    {
-                        btnFolHigh.BackColor = Color.Crimson;
-                        btnFolHigh.ForeColor = Color.White;
-                    }
-                    if (result == 3)
-                    {
-                        btnFolUltra.BackColor = Color.Crimson;
-                        btnFolUltra.ForeColor = Color.White;
-                    }
-                    if (result == 4)
-                    {
-                        btnFolEpic.BackColor = Color.Crimson;
-                        btnFolEpic.ForeColor = Color.White;
-                    }
-                    if (result == 5)
-                    {
-                        btnFolEpic.BackColor = Color.Crimson;
-                        btnFolEpic.ForeColor = Color.White;
-                    }
-                }
-                if (lines[i].Contains("sg.ShadingQuality"))
-                {
-                    btnShLow.BackColor = Color.Transparent;
-                    btnShLow.ForeColor = Color.Black;
-                    //nazwa wcześniejszego
-                    btnShHigh.BackColor = Color.Transparent;
-                    btnShHigh.ForeColor = Color.Black;
-                    btnShUltra.BackColor = Color.Transparent;
-                    btnShUltra.ForeColor = Color.Black;
-                    btnShEpic.BackColor = Color.Transparent;
-                    btnShEpic.ForeColor = Color.Black;
-                    //nazwa klikniętego (poniżej)
-                    btnShMedium.BackColor = Color.Transparent;
-                    btnShMedium.ForeColor = Color.Black;
-                    ReadConfig = ReadConfig.Replace(lines[i], "sg.ShadingQuality=1");
-                    File.WriteAllText(SettingsPath, ReadConfig);
-
-                    int result = 1;
-
-                    if (result == 0)
-                    {
-                        btnShLow.BackColor = Color.Crimson;
-                        btnShLow.ForeColor = Color.White;
-                    }
-                    if (result == 1)
-                    {
-                        btnShMedium.BackColor = Color.Crimson;
-                        btnShMedium.ForeColor = Color.White;
-                    }
-                    if (result == 2)
-                    {
-                        btnShHigh.BackColor = Color.Crimson;
-                        btnShHigh.ForeColor = Color.White;
-                    }
-                    if (result == 3)
-                    {
-                        btnShUltra.BackColor = Color.Crimson;
-                        btnShUltra.ForeColor = Color.White;
-                    }
-                    if (result == 4)
-                    {
-                        btnShEpic.BackColor = Color.Crimson;
-                        btnShEpic.ForeColor = Color.White;
-                    }
-                    if (result == 5)
-                    {
-                        btnShEpic.BackColor = Color.Crimson;
-                        btnShEpic.ForeColor = Color.White;
-                    }
-                }
-                if (lines[i].Contains("sg.AnimationQuality"))
-                {
-                    btnAnimLow.BackColor = Color.Transparent;
-                    btnAnimLow.ForeColor = Color.Black;
-                    //nazwa wcześniejszego
-                    btnAnimHigh.BackColor = Color.Transparent;
-                    btnAnimHigh.ForeColor = Color.Black;
-                    btnAnimUltra.BackColor = Color.Transparent;
-                    btnAnimUltra.ForeColor = Color.Black;
-                    btnAnimEpic.BackColor = Color.Transparent;
-                    btnAnimEpic.ForeColor = Color.Black;
-                    //nazwa klikniętego (poniżej)
-                    btnAnimMedium.BackColor = Color.Transparent;
-                    btnAnimMedium.ForeColor = Color.Black;
-                    ReadConfig = ReadConfig.Replace(lines[i], "sg.AnimationQuality=1");
-                    File.WriteAllText(SettingsPath, ReadConfig);
-
-                    int result = 1;
-
-                    if (result == 0)
-                    {
-                        btnAnimLow.BackColor = Color.Crimson;
-                        btnAnimLow.ForeColor = Color.White;
-                    }
-                    if (result == 1)
-                    {
-                        btnAnimMedium.BackColor = Color.Crimson;
-                        btnAnimMedium.ForeColor = Color.White;
-                    }
-                    if (result == 2)
-                    {
-                        btnAnimHigh.BackColor = Color.Crimson;
-                        btnAnimHigh.ForeColor = Color.White;
-                    }
-                    if (result == 3)
-                    {
-                        btnAnimUltra.BackColor = Color.Crimson;
-                        btnAnimUltra.ForeColor = Color.White;
-                    }
-                    if (result == 4)
-                    {
-                        btnAnimEpic.BackColor = Color.Crimson;
-                        btnAnimEpic.ForeColor = Color.White;
-                    }
-                    if (result == 5)
-                    {
-                        btnAnimEpic.BackColor = Color.Crimson;
-                        btnAnimEpic.ForeColor = Color.White;
-                    }
-                }
-                if (lines[i].Contains("ScreenResolution"))
-                {
-                    ReadConfig = ReadConfig.Replace(lines[i], "ScreenResolution=100");
-                    File.WriteAllText(SettingsPath, ReadConfig);
-
-                    int result = 100;
                     tbScRes.Value = result;
                     lblScRes.Text = tbScRes.Value + "%";
                 }
@@ -5410,9 +5071,6 @@ namespace DbD_Settings_Changer
 
             string[] lines = File.ReadAllLines(SettingsPath);
             Console.WriteLine(String.Join(Environment.NewLine, lines));
-
-
-
 
             for (int i = 0; i <= numLines - 1; i++)
             {
@@ -5436,6 +5094,8 @@ namespace DbD_Settings_Changer
                     btnVwUltra.ForeColor = Color.Black;
                     btnVwEpic.BackColor = Color.Transparent;
                     btnVwEpic.ForeColor = Color.Black;
+                    btnVwAwesome.BackColor = Color.Transparent;
+                    btnVwAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnVwMedium.BackColor = Color.Transparent;
                     btnVwMedium.ForeColor = Color.Black;
@@ -5471,8 +5131,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnVwEpic.BackColor = Color.Crimson;
-                        btnVwEpic.ForeColor = Color.White;
+                        btnVwAwesome.BackColor = Color.Crimson;
+                        btnVwAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.AntiAliasingQuality"))
@@ -5486,6 +5146,8 @@ namespace DbD_Settings_Changer
                     btnAaUltra.ForeColor = Color.Black;
                     btnAaEpic.BackColor = Color.Transparent;
                     btnAaEpic.ForeColor = Color.Black;
+                    btnAaAwesome.BackColor = Color.Transparent;
+                    btnAaAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnAaMedium.BackColor = Color.Transparent;
                     btnAaMedium.ForeColor = Color.Black;
@@ -5521,8 +5183,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnAaEpic.BackColor = Color.Crimson;
-                        btnAaEpic.ForeColor = Color.White;
+                        btnAaAwesome.BackColor = Color.Crimson;
+                        btnAaAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.ShadowQuality"))
@@ -5536,6 +5198,8 @@ namespace DbD_Settings_Changer
                     btnShadUltra.ForeColor = Color.Black;
                     btnShadEpic.BackColor = Color.Transparent;
                     btnShadEpic.ForeColor = Color.Black;
+                    btnShadAwesome.BackColor = Color.Transparent;
+                    btnShadAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnShadMedium.BackColor = Color.Transparent;
                     btnShadMedium.ForeColor = Color.Black;
@@ -5571,8 +5235,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnShadEpic.BackColor = Color.Crimson;
-                        btnShadEpic.ForeColor = Color.White;
+                        btnShadAwesome.BackColor = Color.Crimson;
+                        btnShadAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.PostProcessQuality"))
@@ -5586,6 +5250,8 @@ namespace DbD_Settings_Changer
                     btnPpUltra.ForeColor = Color.Black;
                     btnPpEpic.BackColor = Color.Transparent;
                     btnPpEpic.ForeColor = Color.Black;
+                    btnPpAwesome.BackColor = Color.Transparent;
+                    btnPpAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnPpMedium.BackColor = Color.Transparent;
                     btnPpMedium.ForeColor = Color.Black;
@@ -5621,8 +5287,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnPpEpic.BackColor = Color.Crimson;
-                        btnPpEpic.ForeColor = Color.White;
+                        btnPpAwesome.BackColor = Color.Crimson;
+                        btnPpAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.TextureQuality"))
@@ -5636,6 +5302,8 @@ namespace DbD_Settings_Changer
                     btnTxtUltra.ForeColor = Color.Black;
                     btnTxtEpic.BackColor = Color.Transparent;
                     btnTxtEpic.ForeColor = Color.Black;
+                    btnTxtAwesome.BackColor = Color.Transparent;
+                    btnTxtAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnTxtMedium.BackColor = Color.Transparent;
                     btnTxtMedium.ForeColor = Color.Black;
@@ -5671,8 +5339,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnTxtEpic.BackColor = Color.Crimson;
-                        btnTxtEpic.ForeColor = Color.White;
+                        btnTxtAwesome.BackColor = Color.Crimson;
+                        btnTxtAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.EffectsQuality"))
@@ -5686,6 +5354,8 @@ namespace DbD_Settings_Changer
                     btnEffUltra.ForeColor = Color.Black;
                     btnEffEpic.BackColor = Color.Transparent;
                     btnEffEpic.ForeColor = Color.Black;
+                    btnEffAwesome.BackColor = Color.Transparent;
+                    btnEffAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnEffMedium.BackColor = Color.Transparent;
                     btnEffMedium.ForeColor = Color.Black;
@@ -5721,8 +5391,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnEffEpic.BackColor = Color.Crimson;
-                        btnEffEpic.ForeColor = Color.White;
+                        btnEffAwesome.BackColor = Color.Crimson;
+                        btnEffAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.FoliageQuality"))
@@ -5736,6 +5406,8 @@ namespace DbD_Settings_Changer
                     btnFolUltra.ForeColor = Color.Black;
                     btnFolEpic.BackColor = Color.Transparent;
                     btnFolEpic.ForeColor = Color.Black;
+                    btnFolAwesome.BackColor = Color.Transparent;
+                    btnFolAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnFolMedium.BackColor = Color.Transparent;
                     btnFolMedium.ForeColor = Color.Black;
@@ -5771,8 +5443,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnFolEpic.BackColor = Color.Crimson;
-                        btnFolEpic.ForeColor = Color.White;
+                        btnFolAwesome.BackColor = Color.Crimson;
+                        btnFolAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.ShadingQuality"))
@@ -5786,12 +5458,14 @@ namespace DbD_Settings_Changer
                     btnShUltra.ForeColor = Color.Black;
                     btnShEpic.BackColor = Color.Transparent;
                     btnShEpic.ForeColor = Color.Black;
+                    btnShAwesome.BackColor = Color.Transparent;
+                    btnShAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnShMedium.BackColor = Color.Transparent;
                     btnShMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.ShadingQuality=5");
                     File.WriteAllText(SettingsPath, ReadConfig);
-                    
+
                     int result = 5;
 
                     if (result == 0)
@@ -5821,8 +5495,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnShEpic.BackColor = Color.Crimson;
-                        btnShEpic.ForeColor = Color.White;
+                        btnShAwesome.BackColor = Color.Crimson;
+                        btnShAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("sg.AnimationQuality"))
@@ -5836,6 +5510,8 @@ namespace DbD_Settings_Changer
                     btnAnimUltra.ForeColor = Color.Black;
                     btnAnimEpic.BackColor = Color.Transparent;
                     btnAnimEpic.ForeColor = Color.Black;
+                    btnAnimAwesome.BackColor = Color.Transparent;
+                    btnAnimAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
                     btnAnimMedium.BackColor = Color.Transparent;
                     btnAnimMedium.ForeColor = Color.Black;
@@ -5871,8 +5547,8 @@ namespace DbD_Settings_Changer
                     }
                     if (result == 5)
                     {
-                        btnAnimEpic.BackColor = Color.Crimson;
-                        btnAnimEpic.ForeColor = Color.White;
+                        btnAnimAwesome.BackColor = Color.Crimson;
+                        btnAnimAwesome.ForeColor = Color.White;
                     }
                 }
                 if (lines[i].Contains("ScreenResolution"))
@@ -6151,6 +5827,868 @@ namespace DbD_Settings_Changer
         private void btnDiscord_MouseEnter(object sender, EventArgs e)
         {
             btnDiscord.BackColor = Color.Crimson;
+        }
+
+        private void btnPresetMedium_Click(object sender, EventArgs e)
+        {
+            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+
+            lblHideFocus.Focus();
+
+            int numLines = ReadConfig.Split('\n').Length;
+
+            string[] lines = File.ReadAllLines(SettingsPath);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+            for (int i = 0; i <= numLines - 1; i++)
+            {
+                if (lines[i].Contains("sg.ResolutionQuality"))
+                {
+                    ReadConfig = ReadConfig.Replace(lines[i], "sg.ResolutionQuality=100.000000");
+                    File.WriteAllText(SettingsPath, ReadConfig);
+
+                    int result = 100;
+                    tbRes.Value = result;
+                    lblRes.Text = tbRes.Value + "%";
+                }
+                if (lines[i].Contains("sg.ViewDistanceQuality"))
+                {
+                    btnVwLow.BackColor = Color.Transparent;
+                    btnVwLow.ForeColor = Color.Black;
+                    //nazwa wcześniejszego
+                    btnVwHigh.BackColor = Color.Transparent;
+                    btnVwHigh.ForeColor = Color.Black;
+                    btnVwUltra.BackColor = Color.Transparent;
+                    btnVwUltra.ForeColor = Color.Black;
+                    btnVwEpic.BackColor = Color.Transparent;
+                    btnVwEpic.ForeColor = Color.Black;
+                    btnVwAwesome.BackColor = Color.Transparent;
+                    btnVwAwesome.ForeColor = Color.Black;
+                    //nazwa klikniętego (poniżej)
+                    btnVwMedium.BackColor = Color.Transparent;
+                    btnVwMedium.ForeColor = Color.Black;
+                    ReadConfig = ReadConfig.Replace(lines[i], "sg.ViewDistanceQuality=2");
+                    File.WriteAllText(SettingsPath, ReadConfig);
+
+                    int result = 2;
+
+                    if (result == 0)
+                    {
+                        btnVwLow.BackColor = Color.Crimson;
+                        btnVwLow.ForeColor = Color.White;
+                    }
+                    if (result == 1)
+                    {
+                        btnVwMedium.BackColor = Color.Crimson;
+                        btnVwMedium.ForeColor = Color.White;
+                    }
+                    if (result == 2)
+                    {
+                        btnVwHigh.BackColor = Color.Crimson;
+                        btnVwHigh.ForeColor = Color.White;
+                    }
+                    if (result == 3)
+                    {
+                        btnVwUltra.BackColor = Color.Crimson;
+                        btnVwUltra.ForeColor = Color.White;
+                    }
+                    if (result == 4)
+                    {
+                        btnVwEpic.BackColor = Color.Crimson;
+                        btnVwEpic.ForeColor = Color.White;
+                    }
+                    if (result == 5)
+                    {
+                        btnVwAwesome.BackColor = Color.Crimson;
+                        btnVwAwesome.ForeColor = Color.White;
+                    }
+                }
+                if (lines[i].Contains("sg.AntiAliasingQuality"))
+                {
+                    btnAaLow.BackColor = Color.Transparent;
+                    btnAaLow.ForeColor = Color.Black;
+                    //nazwa wcześniejszego
+                    btnAaHigh.BackColor = Color.Transparent;
+                    btnAaHigh.ForeColor = Color.Black;
+                    btnAaUltra.BackColor = Color.Transparent;
+                    btnAaUltra.ForeColor = Color.Black;
+                    btnAaEpic.BackColor = Color.Transparent;
+                    btnAaEpic.ForeColor = Color.Black;
+                    btnAaAwesome.BackColor = Color.Transparent;
+                    btnAaAwesome.ForeColor = Color.Black;
+                    //nazwa klikniętego (poniżej)
+                    btnAaMedium.BackColor = Color.Transparent;
+                    btnAaMedium.ForeColor = Color.Black;
+                    ReadConfig = ReadConfig.Replace(lines[i], "sg.AntiAliasingQuality=0");
+                    File.WriteAllText(SettingsPath, ReadConfig);
+
+                    int result = 0;
+
+                    if (result == 0)
+                    {
+                        btnAaLow.BackColor = Color.Crimson;
+                        btnAaLow.ForeColor = Color.White;
+                    }
+                    if (result == 1)
+                    {
+                        btnAaMedium.BackColor = Color.Crimson;
+                        btnAaMedium.ForeColor = Color.White;
+                    }
+                    if (result == 2)
+                    {
+                        btnAaHigh.BackColor = Color.Crimson;
+                        btnAaHigh.ForeColor = Color.White;
+                    }
+                    if (result == 3)
+                    {
+                        btnAaUltra.BackColor = Color.Crimson;
+                        btnAaUltra.ForeColor = Color.White;
+                    }
+                    if (result == 4)
+                    {
+                        btnAaEpic.BackColor = Color.Crimson;
+                        btnAaEpic.ForeColor = Color.White;
+                    }
+                    if (result == 5)
+                    {
+                        btnAaAwesome.BackColor = Color.Crimson;
+                        btnAaAwesome.ForeColor = Color.White;
+                    }
+                }
+                if (lines[i].Contains("sg.ShadowQuality"))
+                {
+                    btnShadLow.BackColor = Color.Transparent;
+                    btnShadLow.ForeColor = Color.Black;
+                    //nazwa wcześniejszego
+                    btnShadHigh.BackColor = Color.Transparent;
+                    btnShadHigh.ForeColor = Color.Black;
+                    btnShadUltra.BackColor = Color.Transparent;
+                    btnShadUltra.ForeColor = Color.Black;
+                    btnShadEpic.BackColor = Color.Transparent;
+                    btnShadEpic.ForeColor = Color.Black;
+                    btnShadAwesome.BackColor = Color.Transparent;
+                    btnShadAwesome.ForeColor = Color.Black;
+                    //nazwa klikniętego (poniżej)
+                    btnShadMedium.BackColor = Color.Transparent;
+                    btnShadMedium.ForeColor = Color.Black;
+                    ReadConfig = ReadConfig.Replace(lines[i], "sg.ShadowQuality=2");
+                    File.WriteAllText(SettingsPath, ReadConfig);
+
+                    int result = 2;
+
+                    if (result == 0)
+                    {
+                        btnShadLow.BackColor = Color.Crimson;
+                        btnShadLow.ForeColor = Color.White;
+                    }
+                    if (result == 1)
+                    {
+                        btnShadMedium.BackColor = Color.Crimson;
+                        btnShadMedium.ForeColor = Color.White;
+                    }
+                    if (result == 2)
+                    {
+                        btnShadHigh.BackColor = Color.Crimson;
+                        btnShadHigh.ForeColor = Color.White;
+                    }
+                    if (result == 3)
+                    {
+                        btnShadUltra.BackColor = Color.Crimson;
+                        btnShadUltra.ForeColor = Color.White;
+                    }
+                    if (result == 4)
+                    {
+                        btnShadEpic.BackColor = Color.Crimson;
+                        btnShadEpic.ForeColor = Color.White;
+                    }
+                    if (result == 5)
+                    {
+                        btnShadAwesome.BackColor = Color.Crimson;
+                        btnShadAwesome.ForeColor = Color.White;
+                    }
+                }
+                if (lines[i].Contains("sg.PostProcessQuality"))
+                {
+                    btnPpLow.BackColor = Color.Transparent;
+                    btnPpLow.ForeColor = Color.Black;
+                    //nazwa wcześniejszego
+                    btnPpHigh.BackColor = Color.Transparent;
+                    btnPpHigh.ForeColor = Color.Black;
+                    btnPpUltra.BackColor = Color.Transparent;
+                    btnPpUltra.ForeColor = Color.Black;
+                    btnPpEpic.BackColor = Color.Transparent;
+                    btnPpEpic.ForeColor = Color.Black;
+                    btnPpAwesome.BackColor = Color.Transparent;
+                    btnPpAwesome.ForeColor = Color.Black;
+                    //nazwa klikniętego (poniżej)
+                    btnPpMedium.BackColor = Color.Transparent;
+                    btnPpMedium.ForeColor = Color.Black;
+                    ReadConfig = ReadConfig.Replace(lines[i], "sg.PostProcessQuality=5");
+                    File.WriteAllText(SettingsPath, ReadConfig);
+
+                    int result = 5;
+
+                    if (result == 0)
+                    {
+                        btnPpLow.BackColor = Color.Crimson;
+                        btnPpLow.ForeColor = Color.White;
+                    }
+                    if (result == 1)
+                    {
+                        btnPpMedium.BackColor = Color.Crimson;
+                        btnPpMedium.ForeColor = Color.White;
+                    }
+                    if (result == 2)
+                    {
+                        btnPpHigh.BackColor = Color.Crimson;
+                        btnPpHigh.ForeColor = Color.White;
+                    }
+                    if (result == 3)
+                    {
+                        btnPpUltra.BackColor = Color.Crimson;
+                        btnPpUltra.ForeColor = Color.White;
+                    }
+                    if (result == 4)
+                    {
+                        btnPpEpic.BackColor = Color.Crimson;
+                        btnPpEpic.ForeColor = Color.White;
+                    }
+                    if (result == 5)
+                    {
+                        btnPpAwesome.BackColor = Color.Crimson;
+                        btnPpAwesome.ForeColor = Color.White;
+                    }
+                }
+                if (lines[i].Contains("sg.TextureQuality"))
+                {
+                    btnTxtLow.BackColor = Color.Transparent;
+                    btnTxtLow.ForeColor = Color.Black;
+                    //nazwa wcześniejszego
+                    btnTxtHigh.BackColor = Color.Transparent;
+                    btnTxtHigh.ForeColor = Color.Black;
+                    btnTxtUltra.BackColor = Color.Transparent;
+                    btnTxtUltra.ForeColor = Color.Black;
+                    btnTxtEpic.BackColor = Color.Transparent;
+                    btnTxtEpic.ForeColor = Color.Black;
+                    btnTxtAwesome.BackColor = Color.Transparent;
+                    btnTxtAwesome.ForeColor = Color.Black;
+                    //nazwa klikniętego (poniżej)
+                    btnTxtMedium.BackColor = Color.Transparent;
+                    btnTxtMedium.ForeColor = Color.Black;
+                    ReadConfig = ReadConfig.Replace(lines[i], "sg.TextureQuality=2");
+                    File.WriteAllText(SettingsPath, ReadConfig);
+
+                    int result = 2;
+
+                    if (result == 0)
+                    {
+                        btnTxtLow.BackColor = Color.Crimson;
+                        btnTxtLow.ForeColor = Color.White;
+                    }
+                    if (result == 1)
+                    {
+                        btnTxtMedium.BackColor = Color.Crimson;
+                        btnTxtMedium.ForeColor = Color.White;
+                    }
+                    if (result == 2)
+                    {
+                        btnTxtHigh.BackColor = Color.Crimson;
+                        btnTxtHigh.ForeColor = Color.White;
+                    }
+                    if (result == 3)
+                    {
+                        btnTxtUltra.BackColor = Color.Crimson;
+                        btnTxtUltra.ForeColor = Color.White;
+                    }
+                    if (result == 4)
+                    {
+                        btnTxtEpic.BackColor = Color.Crimson;
+                        btnTxtEpic.ForeColor = Color.White;
+                    }
+                    if (result == 5)
+                    {
+                        btnTxtAwesome.BackColor = Color.Crimson;
+                        btnTxtAwesome.ForeColor = Color.White;
+                    }
+                }
+                if (lines[i].Contains("sg.EffectsQuality"))
+                {
+                    btnEffLow.BackColor = Color.Transparent;
+                    btnEffLow.ForeColor = Color.Black;
+                    //nazwa wcześniejszego
+                    btnEffHigh.BackColor = Color.Transparent;
+                    btnEffHigh.ForeColor = Color.Black;
+                    btnEffUltra.BackColor = Color.Transparent;
+                    btnEffUltra.ForeColor = Color.Black;
+                    btnEffEpic.BackColor = Color.Transparent;
+                    btnEffEpic.ForeColor = Color.Black;
+                    btnEffAwesome.BackColor = Color.Transparent;
+                    btnEffAwesome.ForeColor = Color.Black;
+                    //nazwa klikniętego (poniżej)
+                    btnEffMedium.BackColor = Color.Transparent;
+                    btnEffMedium.ForeColor = Color.Black;
+                    ReadConfig = ReadConfig.Replace(lines[i], "sg.EffectsQuality=3");
+                    File.WriteAllText(SettingsPath, ReadConfig);
+
+                    int result = 3;
+
+                    if (result == 0)
+                    {
+                        btnEffLow.BackColor = Color.Crimson;
+                        btnEffLow.ForeColor = Color.White;
+                    }
+                    if (result == 1)
+                    {
+                        btnEffMedium.BackColor = Color.Crimson;
+                        btnEffMedium.ForeColor = Color.White;
+                    }
+                    if (result == 2)
+                    {
+                        btnEffHigh.BackColor = Color.Crimson;
+                        btnEffHigh.ForeColor = Color.White;
+                    }
+                    if (result == 3)
+                    {
+                        btnEffUltra.BackColor = Color.Crimson;
+                        btnEffUltra.ForeColor = Color.White;
+                    }
+                    if (result == 4)
+                    {
+                        btnEffEpic.BackColor = Color.Crimson;
+                        btnEffEpic.ForeColor = Color.White;
+                    }
+                    if (result == 5)
+                    {
+                        btnEffAwesome.BackColor = Color.Crimson;
+                        btnEffAwesome.ForeColor = Color.White;
+                    }
+                }
+                if (lines[i].Contains("sg.FoliageQuality"))
+                {
+                    btnFolLow.BackColor = Color.Transparent;
+                    btnFolLow.ForeColor = Color.Black;
+                    //nazwa wcześniejszego
+                    btnFolHigh.BackColor = Color.Transparent;
+                    btnFolHigh.ForeColor = Color.Black;
+                    btnFolUltra.BackColor = Color.Transparent;
+                    btnFolUltra.ForeColor = Color.Black;
+                    btnFolEpic.BackColor = Color.Transparent;
+                    btnFolEpic.ForeColor = Color.Black;
+                    btnFolAwesome.BackColor = Color.Transparent;
+                    btnFolAwesome.ForeColor = Color.Black;
+                    //nazwa klikniętego (poniżej)
+                    btnFolMedium.BackColor = Color.Transparent;
+                    btnFolMedium.ForeColor = Color.Black;
+                    ReadConfig = ReadConfig.Replace(lines[i], "sg.FoliageQuality=2");
+                    File.WriteAllText(SettingsPath, ReadConfig);
+
+                    int result = 2;
+
+                    if (result == 0)
+                    {
+                        btnFolLow.BackColor = Color.Crimson;
+                        btnFolLow.ForeColor = Color.White;
+                    }
+                    if (result == 1)
+                    {
+                        btnFolMedium.BackColor = Color.Crimson;
+                        btnFolMedium.ForeColor = Color.White;
+                    }
+                    if (result == 2)
+                    {
+                        btnFolHigh.BackColor = Color.Crimson;
+                        btnFolHigh.ForeColor = Color.White;
+                    }
+                    if (result == 3)
+                    {
+                        btnFolUltra.BackColor = Color.Crimson;
+                        btnFolUltra.ForeColor = Color.White;
+                    }
+                    if (result == 4)
+                    {
+                        btnFolEpic.BackColor = Color.Crimson;
+                        btnFolEpic.ForeColor = Color.White;
+                    }
+                    if (result == 5)
+                    {
+                        btnFolAwesome.BackColor = Color.Crimson;
+                        btnFolAwesome.ForeColor = Color.White;
+                    }
+                }
+                if (lines[i].Contains("sg.ShadingQuality"))
+                {
+                    btnShLow.BackColor = Color.Transparent;
+                    btnShLow.ForeColor = Color.Black;
+                    //nazwa wcześniejszego
+                    btnShHigh.BackColor = Color.Transparent;
+                    btnShHigh.ForeColor = Color.Black;
+                    btnShUltra.BackColor = Color.Transparent;
+                    btnShUltra.ForeColor = Color.Black;
+                    btnShEpic.BackColor = Color.Transparent;
+                    btnShEpic.ForeColor = Color.Black;
+                    btnShAwesome.BackColor = Color.Transparent;
+                    btnShAwesome.ForeColor = Color.Black;
+                    //nazwa klikniętego (poniżej)
+                    btnShMedium.BackColor = Color.Transparent;
+                    btnShMedium.ForeColor = Color.Black;
+                    ReadConfig = ReadConfig.Replace(lines[i], "sg.ShadingQuality=2");
+                    File.WriteAllText(SettingsPath, ReadConfig);
+
+                    int result = 2;
+
+                    if (result == 0)
+                    {
+                        btnShLow.BackColor = Color.Crimson;
+                        btnShLow.ForeColor = Color.White;
+                    }
+                    if (result == 1)
+                    {
+                        btnShMedium.BackColor = Color.Crimson;
+                        btnShMedium.ForeColor = Color.White;
+                    }
+                    if (result == 2)
+                    {
+                        btnShHigh.BackColor = Color.Crimson;
+                        btnShHigh.ForeColor = Color.White;
+                    }
+                    if (result == 3)
+                    {
+                        btnShUltra.BackColor = Color.Crimson;
+                        btnShUltra.ForeColor = Color.White;
+                    }
+                    if (result == 4)
+                    {
+                        btnShEpic.BackColor = Color.Crimson;
+                        btnShEpic.ForeColor = Color.White;
+                    }
+                    if (result == 5)
+                    {
+                        btnShAwesome.BackColor = Color.Crimson;
+                        btnShAwesome.ForeColor = Color.White;
+                    }
+                }
+                if (lines[i].Contains("sg.AnimationQuality"))
+                {
+                    btnAnimLow.BackColor = Color.Transparent;
+                    btnAnimLow.ForeColor = Color.Black;
+                    //nazwa wcześniejszego
+                    btnAnimHigh.BackColor = Color.Transparent;
+                    btnAnimHigh.ForeColor = Color.Black;
+                    btnAnimUltra.BackColor = Color.Transparent;
+                    btnAnimUltra.ForeColor = Color.Black;
+                    btnAnimEpic.BackColor = Color.Transparent;
+                    btnAnimEpic.ForeColor = Color.Black;
+                    btnAnimAwesome.BackColor = Color.Transparent;
+                    btnAnimAwesome.ForeColor = Color.Black;
+                    //nazwa klikniętego (poniżej)
+                    btnAnimMedium.BackColor = Color.Transparent;
+                    btnAnimMedium.ForeColor = Color.Black;
+                    ReadConfig = ReadConfig.Replace(lines[i], "sg.AnimationQuality=3");
+                    File.WriteAllText(SettingsPath, ReadConfig);
+
+                    int result = 3;
+
+                    if (result == 0)
+                    {
+                        btnAnimLow.BackColor = Color.Crimson;
+                        btnAnimLow.ForeColor = Color.White;
+                    }
+                    if (result == 1)
+                    {
+                        btnAnimMedium.BackColor = Color.Crimson;
+                        btnAnimMedium.ForeColor = Color.White;
+                    }
+                    if (result == 2)
+                    {
+                        btnAnimHigh.BackColor = Color.Crimson;
+                        btnAnimHigh.ForeColor = Color.White;
+                    }
+                    if (result == 3)
+                    {
+                        btnAnimUltra.BackColor = Color.Crimson;
+                        btnAnimUltra.ForeColor = Color.White;
+                    }
+                    if (result == 4)
+                    {
+                        btnAnimEpic.BackColor = Color.Crimson;
+                        btnAnimEpic.ForeColor = Color.White;
+                    }
+                    if (result == 5)
+                    {
+                        btnAnimAwesome.BackColor = Color.Crimson;
+                        btnAnimAwesome.ForeColor = Color.White;
+                    }
+                }
+                if (lines[i].Contains("ScreenResolution"))
+                {
+                    ReadConfig = ReadConfig.Replace(lines[i], "ScreenResolution=100");
+                    File.WriteAllText(SettingsPath, ReadConfig);
+
+                    int result = 100;
+                    tbScRes.Value = result;
+                    lblScRes.Text = tbScRes.Value + "%";
+                }
+            }
+        }
+
+        private void btnVwAwesome_Click(object sender, EventArgs e)
+        {
+            btnVwMedium.BackColor = Color.Transparent;
+            btnVwMedium.ForeColor = Color.Black;
+            //nazwa wcześniejszego
+            btnAaHigh.BackColor = Color.Transparent;
+            btnAaHigh.ForeColor = Color.Black;
+            btnVwUltra.BackColor = Color.Transparent;
+            btnVwUltra.ForeColor = Color.Black;
+            btnVwEpic.BackColor = Color.Transparent;
+            btnVwEpic.ForeColor = Color.Black;
+            btnVwLow.BackColor = Color.Transparent;
+            btnVwLow.ForeColor = Color.Black;
+            //nazwa klikniętego (poniżej)
+            btnVwAwesome.BackColor = Color.Crimson;
+            btnVwAwesome.ForeColor = Color.White;
+
+            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+
+            lblHideFocus.Focus();
+            string view = File.ReadAllText(SettingsPath);
+            string config = File.ReadAllText(SettingsPath);
+            int graphic = 5;
+
+            int numLines = config.Split('\n').Length;
+            string[] lines = File.ReadAllLines(SettingsPath);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+            for (int i = 0; i <= numLines - 1; i++)
+            {
+
+                if (lines[i].Contains("ViewDistanceQuality"))
+                {
+                    //lines[i] = "sg.ResolutionQuality=" + resolution + "0.000000";
+                    view = view.Replace(lines[i], "sg.ViewDistanceQuality=" + graphic);
+                    File.WriteAllText(SettingsPath, view);
+                }
+            }
+        }
+
+        private void btnAaAwesome_Click(object sender, EventArgs e)
+        {
+            btnAaMedium.BackColor = Color.Transparent;
+            btnAaMedium.ForeColor = Color.Black;
+            //nazwa wcześniejszego
+            btnAaHigh.BackColor = Color.Transparent;
+            btnAaHigh.ForeColor = Color.Black;
+            btnAaUltra.BackColor = Color.Transparent;
+            btnAaUltra.ForeColor = Color.Black;
+            btnAaEpic.BackColor = Color.Transparent;
+            btnAaEpic.ForeColor = Color.Black;
+            btnAaLow.BackColor = Color.Transparent;
+            btnAaLow.ForeColor = Color.Black;
+            //nazwa klikniętego (poniżej)
+            btnAaAwesome.BackColor = Color.Crimson;
+            btnAaAwesome.ForeColor = Color.White;
+
+            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+
+            lblHideFocus.Focus();
+            string view = File.ReadAllText(SettingsPath);
+            string config = File.ReadAllText(SettingsPath);
+            int graphic = 5;
+
+            int numLines = config.Split('\n').Length;
+            string[] lines = File.ReadAllLines(SettingsPath);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+            for (int i = 0; i <= numLines - 1; i++)
+            {
+
+                if (lines[i].Contains("AntiAliasingQuality"))
+                {
+                    //lines[i] = "sg.ResolutionQuality=" + resolution + "0.000000";
+                    view = view.Replace(lines[i], "sg.AntiAliasingQuality=" + graphic);
+                    File.WriteAllText(SettingsPath, view);
+                }
+            }
+        }
+
+        private void btnShadAwesome_Click(object sender, EventArgs e)
+        {
+            btnShadEpic.BackColor = Color.Transparent;
+            btnShadEpic.ForeColor = Color.Black;
+            //nazwa wcześniejszego
+            btnShadHigh.BackColor = Color.Transparent;
+            btnShadHigh.ForeColor = Color.Black;
+            btnShadMedium.BackColor = Color.Transparent;
+            btnShadMedium.ForeColor = Color.Black;
+            btnShadUltra.BackColor = Color.Transparent;
+            btnShadUltra.ForeColor = Color.Black;
+            btnShadLow.BackColor = Color.Transparent;
+            btnShadLow.ForeColor = Color.Black;
+            //nazwa klikniętego (poniżej)
+            btnShadAwesome.BackColor = Color.Crimson;
+            btnShadAwesome.ForeColor = Color.White;
+
+            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+
+            lblHideFocus.Focus();
+            string view = File.ReadAllText(SettingsPath);
+            string config = File.ReadAllText(SettingsPath);
+            int graphic = 5;
+
+            int numLines = config.Split('\n').Length;
+            string[] lines = File.ReadAllLines(SettingsPath);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+            for (int i = 0; i <= numLines - 1; i++)
+            {
+
+                if (lines[i].Contains("ShadowQuality"))
+                {
+                    //lines[i] = "sg.ResolutionQuality=" + resolution + "0.000000";
+                    view = view.Replace(lines[i], "sg.ShadowQuality=" + graphic);
+                    File.WriteAllText(SettingsPath, view);
+                }
+            }
+        }
+
+        private void btnPpAwesome_Click(object sender, EventArgs e)
+        {
+            btnPpEpic.BackColor = Color.Transparent;
+            btnPpEpic.ForeColor = Color.Black;
+            //nazwa wcześniejszego
+            btnPpHigh.BackColor = Color.Transparent;
+            btnPpHigh.ForeColor = Color.Black;
+            btnPpMedium.BackColor = Color.Transparent;
+            btnPpMedium.ForeColor = Color.Black;
+            btnPpUltra.BackColor = Color.Transparent;
+            btnPpUltra.ForeColor = Color.Black;
+            btnPpLow.BackColor = Color.Transparent;
+            btnPpLow.ForeColor = Color.Black;
+            //nazwa klikniętego (poniżej)
+            btnPpAwesome.BackColor = Color.Crimson;
+            btnPpAwesome.ForeColor = Color.White;
+
+            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+
+            lblHideFocus.Focus();
+            string view = File.ReadAllText(SettingsPath);
+            string config = File.ReadAllText(SettingsPath);
+            int graphic = 5;
+
+            int numLines = config.Split('\n').Length;
+            string[] lines = File.ReadAllLines(SettingsPath);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+            for (int i = 0; i <= numLines - 1; i++)
+            {
+
+                if (lines[i].Contains("PostProcessQuality"))
+                {
+                    //lines[i] = "sg.ResolutionQuality=" + resolution + "0.000000";
+                    view = view.Replace(lines[i], "sg.PostProcessQuality=" + graphic);
+                    File.WriteAllText(SettingsPath, view);
+                }
+            }
+        }
+
+        private void btnTxtAwesome_Click(object sender, EventArgs e)
+        {
+            btnTxtMedium.BackColor = Color.Transparent;
+            btnTxtMedium.ForeColor = Color.Black;
+            //nazwa wcześniejszego
+            btnTxtHigh.BackColor = Color.Transparent;
+            btnTxtHigh.ForeColor = Color.Black;
+            btnTxtEpic.BackColor = Color.Transparent;
+            btnTxtEpic.ForeColor = Color.Black;
+            btnTxtUltra.BackColor = Color.Transparent;
+            btnTxtUltra.ForeColor = Color.Black;
+            btnTxtLow.BackColor = Color.Transparent;
+            btnTxtLow.ForeColor = Color.Black;
+            //nazwa klikniętego (poniżej)
+            btnTxtAwesome.BackColor = Color.Crimson;
+            btnTxtAwesome.ForeColor = Color.White;
+
+            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+
+            lblHideFocus.Focus();
+            string view = File.ReadAllText(SettingsPath);
+            string config = File.ReadAllText(SettingsPath);
+            int graphic = 5;
+
+            int numLines = config.Split('\n').Length;
+            string[] lines = File.ReadAllLines(SettingsPath);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+            for (int i = 0; i <= numLines - 1; i++)
+            {
+
+                if (lines[i].Contains("TextureQuality"))
+                {
+                    //lines[i] = "sg.ResolutionQuality=" + resolution + "0.000000";
+                    view = view.Replace(lines[i], "sg.TextureQuality=" + graphic);
+                    File.WriteAllText(SettingsPath, view);
+                }
+            }
+        }
+
+        private void btnEffAwesome_Click(object sender, EventArgs e)
+        {
+            btnEffEpic.BackColor = Color.Transparent;
+            btnEffEpic.ForeColor = Color.Black;
+            //nazwa wcześniejszego
+            btnEffHigh.BackColor = Color.Transparent;
+            btnEffHigh.ForeColor = Color.Black;
+            btnEffMedium.BackColor = Color.Transparent;
+            btnEffMedium.ForeColor = Color.Black;
+            btnEffUltra.BackColor = Color.Transparent;
+            btnEffUltra.ForeColor = Color.Black;
+            btnEffLow.BackColor = Color.Transparent;
+            btnEffLow.ForeColor = Color.Black;
+            //nazwa klikniętego (poniżej)
+            btnEffAwesome.BackColor = Color.Crimson;
+            btnEffAwesome.ForeColor = Color.White;
+
+            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+
+            lblHideFocus.Focus();
+            string view = File.ReadAllText(SettingsPath);
+            string config = File.ReadAllText(SettingsPath);
+            int graphic = 5;
+
+            int numLines = config.Split('\n').Length;
+            string[] lines = File.ReadAllLines(SettingsPath);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+            for (int i = 0; i <= numLines - 1; i++)
+            {
+
+                if (lines[i].Contains("EffectsQuality"))
+                {
+                    //lines[i] = "sg.ResolutionQuality=" + resolution + "0.000000";
+                    view = view.Replace(lines[i], "sg.EffectsQuality=" + graphic);
+                    File.WriteAllText(SettingsPath, view);
+                }
+            }
+        }
+
+        private void btnFolAwesome_Click(object sender, EventArgs e)
+        {
+            btnFolUltra.BackColor = Color.Transparent;
+            btnFolUltra.ForeColor = Color.Black;
+            //nazwa wcześniejszego
+            btnFolMedium.BackColor = Color.Transparent;
+            btnFolMedium.ForeColor = Color.Black;
+            btnFolEpic.BackColor = Color.Transparent;
+            btnFolEpic.ForeColor = Color.Black;
+            btnFolHigh.BackColor = Color.Transparent;
+            btnFolHigh.ForeColor = Color.Black;
+            btnFolLow.BackColor = Color.Transparent;
+            btnFolLow.ForeColor = Color.Black;
+            //nazwa klikniętego (poniżej)
+            btnFolAwesome.BackColor = Color.Crimson;
+            btnFolAwesome.ForeColor = Color.White;
+
+            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+
+            lblHideFocus.Focus();
+            string view = File.ReadAllText(SettingsPath);
+            string config = File.ReadAllText(SettingsPath);
+            int graphic = 5;
+
+            int numLines = config.Split('\n').Length;
+            string[] lines = File.ReadAllLines(SettingsPath);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+            for (int i = 0; i <= numLines - 1; i++)
+            {
+
+                if (lines[i].Contains("FoliageQuality"))
+                {
+                    //lines[i] = "sg.ResolutionQuality=" + resolution + "0.000000";
+                    view = view.Replace(lines[i], "sg.FoliageQuality=" + graphic);
+                    File.WriteAllText(SettingsPath, view);
+                }
+            }
+        }
+
+        private void btnShAwesome_Click(object sender, EventArgs e)
+        {
+            btnShHigh.BackColor = Color.Transparent;
+            btnShHigh.ForeColor = Color.Black;
+            //nazwa wcześniejszego
+            btnShUltra.BackColor = Color.Transparent;
+            btnShUltra.ForeColor = Color.Black;
+            btnShEpic.BackColor = Color.Transparent;
+            btnShEpic.ForeColor = Color.Black;
+            btnShMedium.BackColor = Color.Transparent;
+            btnShMedium.ForeColor = Color.Black;
+            btnShLow.BackColor = Color.Transparent;
+            btnShLow.ForeColor = Color.Black;
+            //nazwa klikniętego (poniżej)
+            btnShAwesome.BackColor = Color.Crimson;
+            btnShAwesome.ForeColor = Color.White;
+
+            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+
+            lblHideFocus.Focus();
+            string view = File.ReadAllText(SettingsPath);
+            string config = File.ReadAllText(SettingsPath);
+            int graphic = 5;
+
+            int numLines = config.Split('\n').Length;
+            string[] lines = File.ReadAllLines(SettingsPath);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+            for (int i = 0; i <= numLines - 1; i++)
+            {
+
+                if (lines[i].Contains("ShadingQuality"))
+                {
+                    //lines[i] = "sg.ResolutionQuality=" + resolution + "0.000000";
+                    view = view.Replace(lines[i], "sg.ShadingQuality=" + graphic);
+                    File.WriteAllText(SettingsPath, view);
+                }
+            }
+        }
+
+        private void btnAnimAwesome_Click(object sender, EventArgs e)
+        {
+            btnAnimMedium.BackColor = Color.Transparent;
+            btnAnimMedium.ForeColor = Color.Black;
+            //nazwa wcześniejszego
+            btnAnimHigh.BackColor = Color.Transparent;
+            btnAnimHigh.ForeColor = Color.Black;
+            btnAnimUltra.BackColor = Color.Transparent;
+            btnAnimUltra.ForeColor = Color.Black;
+            btnAnimEpic.BackColor = Color.Transparent;
+            btnAnimEpic.ForeColor = Color.Black;
+            btnAnimLow.BackColor = Color.Transparent;
+            btnAnimLow.ForeColor = Color.Black;
+            //nazwa klikniętego (poniżej)
+            btnAnimAwesome.BackColor = Color.Crimson;
+            btnAnimAwesome.ForeColor = Color.White;
+
+            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+
+            lblHideFocus.Focus();
+            string view = File.ReadAllText(SettingsPath);
+            string config = File.ReadAllText(SettingsPath);
+            int graphic = 5;
+
+            int numLines = config.Split('\n').Length;
+            string[] lines = File.ReadAllLines(SettingsPath);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+            for (int i = 0; i <= numLines - 1; i++)
+            {
+
+                if (lines[i].Contains("AnimationQuality"))
+                {
+                    //lines[i] = "sg.ResolutionQuality=" + resolution + "0.000000";
+                    view = view.Replace(lines[i], "sg.AnimationQuality=" + graphic);
+                    File.WriteAllText(SettingsPath, view);
+                }
+            }
         }
     }
 }

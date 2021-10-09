@@ -6678,5 +6678,99 @@ namespace DbD_Settings_Changer
                 }
             }
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            panelGraphics.BringToFront();
+            label2.BringToFront();
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+            panelAudio.BringToFront();
+            label12.BringToFront();
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+            panelFPS.BringToFront();
+            label14.BringToFront();
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+            panelPresets.BringToFront();
+            label16.BringToFront();
+        }
+
+        private void label19_Click(object sender, EventArgs e)
+        {
+            panelRes.BringToFront();
+            label19.BringToFront();
+        }
+
+        private void label26_Click(object sender, EventArgs e)
+        {
+            panelScrRes.BringToFront();
+            label26.BringToFront();
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+            panelSens.BringToFront();
+            label15.BringToFront();
+        }
+
+        private void panelGraphics_Click(object sender, EventArgs e)
+        {
+            panelGraphics.BringToFront();
+            label2.BringToFront();
+        }
+
+        private void panelAudio_Click(object sender, EventArgs e)
+        {
+            panelAudio.BringToFront();
+            label12.BringToFront();
+        }
+
+        private void panelFPS_Click(object sender, EventArgs e)
+        {
+            panelFPS.BringToFront();
+            label14.BringToFront();
+        }
+
+        private void panelPresets_Click(object sender, EventArgs e)
+        {
+            panelPresets.BringToFront();
+            label16.BringToFront();
+        }
+
+        private void panelSens_Click(object sender, EventArgs e)
+        {
+            panelSens.BringToFront();
+            label15.BringToFront();
+        }
+
+        private void panelScrRes_Click(object sender, EventArgs e)
+        {
+            panelScrRes.BringToFront();
+            label26.BringToFront();
+        }
+
+        private void panelRes_Click(object sender, EventArgs e)
+        {
+            panelRes.BringToFront();
+            label19.BringToFront();
+        }
+
+        private void PanelUser_Click(object sender, EventArgs e)
+        {
+            PanelUser.BringToFront();
+        }
+
+        private void panelDiscord_Click(object sender, EventArgs e)
+        {
+            panelDiscord.BringToFront();
+        }
     }
 }

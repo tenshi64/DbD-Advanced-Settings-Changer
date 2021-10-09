@@ -45,18 +45,6 @@ namespace DbD_Settings_Changer
                 Application.Exit();
             }
 
-            using (var client = new WebClient())
-            {
-                if (!Directory.Exists(UpdatePath))
-                {
-                    Directory.CreateDirectory(UpdatePath);
-                }
-                client.DownloadFile("https://www.dropbox.com/s/58labg5onm9fvvf/DbD%20Settings%20Changer.exe?dl=1", UpdatePath + @"\DbD Settings Changer.exe");
-                Process.Start("explorer.exe", UpdatePath);
-                MessageBox.Show("The latest version of the program has been downloaded! Enter the open File Explorer and replace the old version of the program with the new one!", "Update",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Application.Exit();
-            }
             try
             {
                 WebClient wc = new WebClient();
@@ -68,12 +56,18 @@ namespace DbD_Settings_Changer
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (result == DialogResult.Yes)
                     {
-                        var uri = "http://dbdconfigeditor.epizy.com/";
-                        var psi = new System.Diagnostics.ProcessStartInfo();
-                        psi.UseShellExecute = true;
-                        psi.FileName = uri;
-                        System.Diagnostics.Process.Start(psi);
-                        Application.Exit();
+                        using (var client = new WebClient())
+                        {
+                            if (!Directory.Exists(UpdatePath))
+                            {
+                                Directory.CreateDirectory(UpdatePath);
+                            }
+                            client.DownloadFile("https://www.dropbox.com/s/58labg5onm9fvvf/DbD%20Settings%20Changer.exe?dl=1", UpdatePath + @"\DbD Settings Changer.exe");
+                            Process.Start("explorer.exe", UpdatePath);
+                            MessageBox.Show("The latest version of the program has been downloaded! Enter the open File Explorer and replace the old version of the program with the new one!", "Update",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Application.Exit();
+                        }
                     }
                 }
             }

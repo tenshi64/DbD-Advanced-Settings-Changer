@@ -38,6 +38,81 @@ namespace DbD_Settings_Changer
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //halloween
+            DateTime date = DateTime.Now;
+            if (date.Month == 10 && date.Day >= 16 && date.Day <= 31)
+            {
+                imgPumpkin.Show();
+            }
+            else
+            {
+                imgPumpkin.Hide();
+            }
+
+            //christmas
+            if (date.Month == 12 && date.Day >= 1 && date.Day <= 28)
+            {
+                imgXmasTree.Show();
+            }
+            else
+            {
+                imgXmasTree.Hide();
+            }
+            //new Year's Eve
+            if (date.Month == 12 && date.Day >= 29 && date.Day <= 31)
+            {
+                imgFireworks.Show();
+            }
+            else
+            {
+                imgFireworks.Hide();
+            }
+
+            btnPresetLow.BackColor = Color.Transparent;
+            btnPresetLow.ForeColor = Color.Black;
+            btnPresetMedium.BackColor = Color.Transparent;
+            btnPresetMedium.ForeColor = Color.Black;
+            btnPresetEpic.BackColor = Color.Transparent;
+            btnPresetEpic.ForeColor = Color.Black;
+
+            this.Size = new Size(1145, 1022);
+            label2.BackColor = Color.Crimson;
+            label2.Location = new Point(label2.Location.X, 2);
+            label2.Size = new Size(label2.Size.Width, 40);
+
+            label12.Location = new Point(label12.Location.X, 2);
+            label12.Size = new Size(label12.Size.Width, 40);
+
+            label14.Location = new Point(label14.Location.X, 2);
+            label14.Size = new Size(label14.Size.Width, 40);
+
+            label16.Location = new Point(label16.Location.X, 2);
+            label16.Size = new Size(label16.Size.Width, 40);
+
+            label19.Location = new Point(label19.Location.X, 2);
+            label19.Size = new Size(label19.Size.Width, 40);
+
+
+            label15.Location = new Point(label15.Location.X, 2);
+            label15.Size = new Size(label15.Size.Width, 40);
+
+            label12.Location = new Point(label12.Location.X, 4);
+            label14.Location = new Point(label14.Location.X, 4);
+            label16.Location = new Point(label16.Location.X, 4);
+            label19.Location = new Point(label19.Location.X, 4);
+            label15.Location = new Point(label15.Location.X, 4);
+
+            label12.BackColor = Color.FromArgb(57, 59, 57);
+            label14.BackColor = Color.FromArgb(57, 59, 57);
+            label16.BackColor = Color.FromArgb(57, 59, 57);
+            label19.BackColor = Color.FromArgb(57, 59, 57);
+            label15.BackColor = Color.FromArgb(57, 59, 57);
+            panelGraphics.Show();
+            panelAudio.Hide();
+            panelFPS.Hide();
+            panelPresets.Hide();
+            panelSens.Hide();
+            panelRes.Hide();
             if (!File.Exists(EnginePath) || !File.Exists(SettingsPath))
             {
                 MessageBox.Show("Dead by Daylight confiuration files do not exist! Please, launch the game.", "Error",
@@ -48,7 +123,7 @@ namespace DbD_Settings_Changer
             try
             {
                 WebClient wc = new WebClient();
-                string textFromFile = wc.DownloadString("https://pastebin.com/yjMGKd4u");
+                string textFromFile = wc.DownloadString("link.com");
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 if (!textFromFile.Contains(version))
                 { 
@@ -677,12 +752,42 @@ namespace DbD_Settings_Changer
                         {
                             string resultString = Regex.Match(lines[i], @"\d+").Value;
                             int result = int.Parse(resultString);
+
+                            if(result > numWidth.Maximum)
+                            {
+                                result = 1920;
+                                ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeX=" + 1920);
+                                File.WriteAllText(SettingsPath, ReadConfig);
+                            }
+
+                            if (result < numWidth.Minimum)
+                            {
+                                result = 1920;
+                                ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeX=" + 1920);
+                                File.WriteAllText(SettingsPath, ReadConfig);
+                            }
+
                             numWidth.Value = result;
                         }
                         if (lines[i].Contains("ResolutionSizeY"))
                         {
                             string resultString = Regex.Match(lines[i], @"\d+").Value;
                             int result = int.Parse(resultString);
+
+                            if (result > numHeight.Maximum)
+                            {
+                                result = 1080;
+                                ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeY=" + 1080);
+                                File.WriteAllText(SettingsPath, ReadConfig);
+                            }
+
+                            if (result < numHeight.Minimum)
+                            {
+                                result = 1080;
+                                ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeY=" + 1080);
+                                File.WriteAllText(SettingsPath, ReadConfig);
+                            }
+
                             numHeight.Value = result;
                         }
                         if (lines[i].Contains("bUseVSync"))
@@ -3706,6 +3811,12 @@ namespace DbD_Settings_Changer
                         engine = Regex.Replace(engine, @"\n\n", String.Empty);
                         File.WriteAllText(EnginePath, engine);
                     }
+                    if (eng[a].Contains("bUseVSync"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
                     //Powyżej 120 fpsów
                     if (eng[a].Contains("Paths=../../../Engine/Plugins/Experimental/GeometryProcessing/Content"))
                     {
@@ -3816,32 +3927,17 @@ namespace DbD_Settings_Changer
             }
             if(numFPS.Value > 120)
             {
+                MessageBox.Show("The maximum frame rate in Dead by Daylight is 120.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                numFPS.Value = 120;
                 for (int i = 0; i <= numLines - 1; i++)
-                {            
+                {
                     read = Regex.Replace(read, Environment.NewLine + Environment.NewLine, "\r");
                     if (lines[i].Contains("FrameRateLimit"))
                     {
-                        view = view.Replace(lines[i], "FrameRateLimit=" + "0.000000");
+                        view = view.Replace(lines[i], "FrameRateLimit=" + "120.000000");
                         File.WriteAllText(SettingsPath, view);
                     }
                 }
-                engine += "\n\n\nPaths=../../../Engine/Plugins/Experimental/GeometryProcessing/Content\n" +
-                    "Paths=../../../DeadByDaylight/Plugins/Runtime/Bhvr/DBDUICore/Content\n" +
-                    "Paths=../../../DeadByDaylight/Plugins/Wwise/Content\n" +
-                    "Paths=../../../DeadByDaylight/Plugins/Runtime/Bhvr/DBDUIMobile/Content\n" +
-                    "Paths=../../../Engine/Plugins/2D/Paper2D/Content\n" +
-                    "Paths=../../../Engine/Plugins/Developer/TraceSourceFiltering/Content\n" +
-                    "Paths=../../../DeadByDaylight/Plugins/Runtime/Bhvr/SentryIo/Content\n" +
-                    "Paths=../../../Engine/Plugins/FX/Niagara/Content\n" +
-                    "Paths=../../../Engine/Plugins/Developer/AnimationSharing/Content\n" +
-                    "Paths=../../../Engine/Plugins/Editor/GeometryMode/Content\n" +
-                    "Paths=../../../Engine/Plugins/Experimental/ChaosClothEditor/Content\n" +
-                    "Paths=../../../Engine/Plugins/Experimental/ChaosNiagara/Content\n" +
-                    "Paths=../../../Engine/Plugins/MagicLeap/MagicLeapPassableWorld/Content\n" +
-                    "Paths=../../../Engine/Plugins/MagicLeap/MagicLeap/Content\n" +
-                    "Paths=../../../Engine/Plugins/Media/MediaCompositing/Content\n" +
-                    "Paths=../../../Engine/Plugins/MovieScene/MovieRenderPipeline/Content\n";
-                File.WriteAllText(EnginePath, engine);
             }
             if(numFPS.Value < 120)
             {
@@ -3866,6 +3962,12 @@ namespace DbD_Settings_Changer
                         File.WriteAllText(EnginePath, engine);
                     }
                     if (eng[a].Contains("MaxSmoothedFrameRate"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("bUseVSync"))
                     {
                         engine = engine.Replace(eng[a], String.Empty);
                         engine = Regex.Replace(engine, @"\n\n", String.Empty);
@@ -4017,6 +4119,12 @@ namespace DbD_Settings_Changer
                         engine = Regex.Replace(engine, @"\n\n", String.Empty);
                         File.WriteAllText(EnginePath, engine);
                     }
+                    if (eng[a].Contains("bUseVSync"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
                     //Powyżej 120 fpsów
                     if (eng[a].Contains("Paths=../../../Engine/Plugins/Experimental/GeometryProcessing/Content"))
                     {
@@ -4142,6 +4250,12 @@ namespace DbD_Settings_Changer
                         File.WriteAllText(EnginePath, engine);
                     }
                     if (eng[a].Contains("MaxSmoothedFrameRate"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("bUseVSync"))
                     {
                         engine = engine.Replace(eng[a], String.Empty);
                         engine = Regex.Replace(engine, @"\n\n", String.Empty);
@@ -4287,6 +4401,12 @@ namespace DbD_Settings_Changer
                     File.WriteAllText(EnginePath, engine);
                 }
                 if (eng[a].Contains("MaxSmoothedFrameRate"))
+                {
+                    engine = engine.Replace(eng[a], String.Empty);
+                    engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                    File.WriteAllText(EnginePath, engine);
+                }
+                if (eng[a].Contains("bUseVSync"))
                 {
                     engine = engine.Replace(eng[a], String.Empty);
                     engine = Regex.Replace(engine, @"\n\n", String.Empty);
@@ -6681,96 +6801,251 @@ namespace DbD_Settings_Changer
 
         private void label2_Click(object sender, EventArgs e)
         {
-            panelGraphics.BringToFront();
-            label2.BringToFront();
+            this.Size = new Size(1145, 1022);
+            label2.BackColor = Color.Crimson;
+            label2.Location = new Point(label2.Location.X, 2);
+            label2.Size = new Size(label2.Size.Width, 40);
+
+            label12.Location = new Point(label12.Location.X, 2);
+            label12.Size = new Size(label12.Size.Width, 40);
+
+            label14.Location = new Point(label14.Location.X, 2);
+            label14.Size = new Size(label14.Size.Width, 40);
+
+            label16.Location = new Point(label16.Location.X, 2);
+            label16.Size = new Size(label16.Size.Width, 40);
+
+            label19.Location = new Point(label19.Location.X, 2);
+            label19.Size = new Size(label19.Size.Width, 40);
+
+
+            label15.Location = new Point(label15.Location.X, 2);
+            label15.Size = new Size(label15.Size.Width, 40);
+
+            label12.Location = new Point(label12.Location.X, 4);
+            label14.Location = new Point(label14.Location.X, 4);
+            label16.Location = new Point(label16.Location.X, 4);
+            label19.Location = new Point(label19.Location.X, 4);
+            label15.Location = new Point(label15.Location.X, 4);
+
+            label12.BackColor = Color.FromArgb(57, 59, 57);
+            label14.BackColor = Color.FromArgb(57, 59, 57);
+            label16.BackColor = Color.FromArgb(57, 59, 57);
+            label19.BackColor = Color.FromArgb(57, 59, 57);
+            label15.BackColor = Color.FromArgb(57, 59, 57);
+            panelGraphics.Show();
+            panelAudio.Hide();
+            panelFPS.Hide();
+            panelPresets.Hide();
+            panelSens.Hide();
+            panelRes.Hide();
         }
 
         private void label12_Click(object sender, EventArgs e)
         {
-            panelAudio.BringToFront();
-            label12.BringToFront();
+            this.Size = new Size(1145, 566);
+            label12.BackColor = Color.Crimson;
+            label12.Location = new Point(label12.Location.X, 2);
+            label12.Size = new Size(label12.Size.Width, 40);
+
+            label2.Location = new Point(label2.Location.X, 2);
+            label2.Size = new Size(label2.Size.Width, 40);
+
+            label14.Location = new Point(label14.Location.X, 2);
+            label14.Size = new Size(label14.Size.Width, 40);
+
+            label16.Location = new Point(label16.Location.X, 2);
+            label16.Size = new Size(label16.Size.Width, 40);
+
+            label19.Location = new Point(label19.Location.X, 2);
+            label19.Size = new Size(label19.Size.Width, 40);
+
+            label15.Location = new Point(label15.Location.X, 2);
+            label15.Size = new Size(label15.Size.Width, 40);
+
+            label2.Location = new Point(label2.Location.X, 4);
+            label14.Location = new Point(label14.Location.X, 4);
+            label16.Location = new Point(label16.Location.X, 4);
+            label19.Location = new Point(label19.Location.X, 4);
+            label15.Location = new Point(label15.Location.X, 4);
+
+            label2.BackColor = Color.FromArgb(57, 59, 57);
+            label14.BackColor = Color.FromArgb(57, 59, 57);
+            label16.BackColor = Color.FromArgb(57, 59, 57);
+            label19.BackColor = Color.FromArgb(57, 59, 57);
+            label15.BackColor = Color.FromArgb(57, 59, 57);
+            panelGraphics.Hide();
+            panelAudio.Show();
+            panelFPS.Hide();
+            panelPresets.Hide();
+            panelSens.Hide();
+            panelRes.Hide();
         }
 
         private void label14_Click(object sender, EventArgs e)
         {
-            panelFPS.BringToFront();
-            label14.BringToFront();
+            this.Size = new Size(1145, 408);
+            label14.BackColor = Color.Crimson;
+            label14.Location = new Point(label14.Location.X, 2);
+            label14.Size = new Size(label14.Size.Width, 40);
+
+            label12.Location = new Point(label12.Location.X, 2);
+            label12.Size = new Size(label12.Size.Width, 40);
+
+            label2.Location = new Point(label2.Location.X, 2);
+            label2.Size = new Size(label2.Size.Width, 40);
+
+            label16.Location = new Point(label16.Location.X, 2);
+            label16.Size = new Size(label16.Size.Width, 40);
+
+            label19.Location = new Point(label19.Location.X, 2);
+            label19.Size = new Size(label19.Size.Width, 40);
+
+            label15.Location = new Point(label15.Location.X, 2);
+            label15.Size = new Size(label15.Size.Width, 40);
+
+            label12.Location = new Point(label12.Location.X, 4);
+            label2.Location = new Point(label2.Location.X, 4);
+            label16.Location = new Point(label16.Location.X, 4);
+            label19.Location = new Point(label19.Location.X, 4);
+            label15.Location = new Point(label15.Location.X, 4);
+
+            label12.BackColor = Color.FromArgb(57, 59, 57);
+            label2.BackColor = Color.FromArgb(57, 59, 57);
+            label16.BackColor = Color.FromArgb(57, 59, 57);
+            label19.BackColor = Color.FromArgb(57, 59, 57);
+            label15.BackColor = Color.FromArgb(57, 59, 57);
+            panelGraphics.Hide();
+            panelAudio.Hide();
+            panelFPS.Show();
+            panelPresets.Hide();
+            panelSens.Hide();
+            panelRes.Hide();
         }
 
         private void label16_Click(object sender, EventArgs e)
         {
-            panelPresets.BringToFront();
-            label16.BringToFront();
+            this.Size = new Size(1145, 448);
+            label16.BackColor = Color.Crimson;
+            label16.Location = new Point(label16.Location.X, 2);
+            label16.Size = new Size(label16.Size.Width, 40);
+
+            label12.Location = new Point(label12.Location.X, 2);
+            label12.Size = new Size(label12.Size.Width, 40);
+
+            label14.Location = new Point(label14.Location.X, 2);
+            label14.Size = new Size(label14.Size.Width, 40);
+
+            label2.Location = new Point(label2.Location.X, 2);
+            label2.Size = new Size(label2.Size.Width, 40);
+
+            label19.Location = new Point(label19.Location.X, 2);
+            label19.Size = new Size(label19.Size.Width, 40);
+
+            label15.Location = new Point(label15.Location.X, 2);
+            label15.Size = new Size(label15.Size.Width, 40);
+
+            label12.Location = new Point(label12.Location.X, 4);
+            label14.Location = new Point(label14.Location.X, 4);
+            label2.Location = new Point(label2.Location.X, 4);
+            label19.Location = new Point(label19.Location.X, 4);
+            label15.Location = new Point(label15.Location.X, 4);
+
+            label12.BackColor = Color.FromArgb(57, 59, 57);
+            label14.BackColor = Color.FromArgb(57, 59, 57);
+            label2.BackColor = Color.FromArgb(57, 59, 57);
+            label19.BackColor = Color.FromArgb(57, 59, 57);
+            label15.BackColor = Color.FromArgb(57, 59, 57);
+            panelGraphics.Hide();
+            panelAudio.Hide();
+            panelFPS.Hide();
+            panelPresets.Show();
+            panelSens.Hide();
+            panelRes.Hide();
         }
 
         private void label19_Click(object sender, EventArgs e)
         {
-            panelRes.BringToFront();
-            label19.BringToFront();
+            this.Size = new Size(1145, 530);
+            label19.BackColor = Color.Crimson;
+            label19.Location = new Point(label19.Location.X, 2);
+            label19.Size = new Size(label19.Size.Width, 40);
+
+            label12.Location = new Point(label12.Location.X, 2);
+            label12.Size = new Size(label12.Size.Width, 40);
+
+            label14.Location = new Point(label14.Location.X, 2);
+            label14.Size = new Size(label14.Size.Width, 40);
+
+            label16.Location = new Point(label16.Location.X, 2);
+            label16.Size = new Size(label16.Size.Width, 40);
+
+            label2.Location = new Point(label2.Location.X, 2);
+            label2.Size = new Size(label2.Size.Width, 40);
+
+            label15.Location = new Point(label15.Location.X, 2);
+            label15.Size = new Size(label15.Size.Width, 40);
+
+            label12.Location = new Point(label12.Location.X, 4);
+            label14.Location = new Point(label14.Location.X, 4);
+            label16.Location = new Point(label16.Location.X, 4);
+            label2.Location = new Point(label2.Location.X, 4);
+            label15.Location = new Point(label15.Location.X, 4);
+
+            label12.BackColor = Color.FromArgb(57, 59, 57);
+            label14.BackColor = Color.FromArgb(57, 59, 57);
+            label16.BackColor = Color.FromArgb(57, 59, 57);
+            label2.BackColor = Color.FromArgb(57, 59, 57);
+            label15.BackColor = Color.FromArgb(57, 59, 57);
+            panelGraphics.Hide();
+            panelAudio.Hide();
+            panelFPS.Hide();
+            panelPresets.Hide();
+            panelSens.Hide();
+            panelRes.Show();
         }
 
-        private void label26_Click(object sender, EventArgs e)
-        {
-            panelScrRes.BringToFront();
-            label26.BringToFront();
-        }
 
         private void label15_Click(object sender, EventArgs e)
         {
-            panelSens.BringToFront();
-            label15.BringToFront();
-        }
+            this.Size = new Size(1145, 665);
+            label15.BackColor = Color.Crimson;
+            label15.Location = new Point(label15.Location.X, 2);
+            label15.Size = new Size(label15.Size.Width, 40);
 
-        private void panelGraphics_Click(object sender, EventArgs e)
-        {
-            panelGraphics.BringToFront();
-            label2.BringToFront();
-        }
+            label12.Location = new Point(label12.Location.X, 2);
+            label12.Size = new Size(label12.Size.Width, 40);
 
-        private void panelAudio_Click(object sender, EventArgs e)
-        {
-            panelAudio.BringToFront();
-            label12.BringToFront();
-        }
+            label14.Location = new Point(label14.Location.X, 2);
+            label14.Size = new Size(label14.Size.Width, 40);
 
-        private void panelFPS_Click(object sender, EventArgs e)
-        {
-            panelFPS.BringToFront();
-            label14.BringToFront();
-        }
+            label16.Location = new Point(label16.Location.X, 2);
+            label16.Size = new Size(label16.Size.Width, 40);
 
-        private void panelPresets_Click(object sender, EventArgs e)
-        {
-            panelPresets.BringToFront();
-            label16.BringToFront();
-        }
+            label19.Location = new Point(label19.Location.X, 2);
+            label19.Size = new Size(label19.Size.Width, 40);
 
-        private void panelSens_Click(object sender, EventArgs e)
-        {
-            panelSens.BringToFront();
-            label15.BringToFront();
-        }
 
-        private void panelScrRes_Click(object sender, EventArgs e)
-        {
-            panelScrRes.BringToFront();
-            label26.BringToFront();
-        }
+            label2.Location = new Point(label2.Location.X, 2);
+            label2.Size = new Size(label2.Size.Width, 40);
 
-        private void panelRes_Click(object sender, EventArgs e)
-        {
-            panelRes.BringToFront();
-            label19.BringToFront();
-        }
+            label12.Location = new Point(label12.Location.X, 4);
+            label14.Location = new Point(label14.Location.X, 4);
+            label16.Location = new Point(label16.Location.X, 4);
+            label19.Location = new Point(label19.Location.X, 4);
+            label2.Location = new Point(label2.Location.X, 4);
 
-        private void PanelUser_Click(object sender, EventArgs e)
-        {
-            PanelUser.BringToFront();
-        }
-
-        private void panelDiscord_Click(object sender, EventArgs e)
-        {
-            panelDiscord.BringToFront();
+            label12.BackColor = Color.FromArgb(57, 59, 57);
+            label14.BackColor = Color.FromArgb(57, 59, 57);
+            label16.BackColor = Color.FromArgb(57, 59, 57);
+            label19.BackColor = Color.FromArgb(57, 59, 57);
+            label2.BackColor = Color.FromArgb(57, 59, 57);
+            panelGraphics.Hide();
+            panelAudio.Hide();
+            panelFPS.Hide();
+            panelPresets.Hide();
+            panelSens.Show();
+            panelRes.Hide();
         }
     }
 }

@@ -11,5 +11,10 @@ Advanced Config Editor for Dead by Daylight
 #### Submit a bug report on [issues](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/issues) or on a Discord server on the "bug-reports" channel
 ## Download
 #### Download the latest version from [website](http://dbdconfigeditor.epizy.com/) or from [releases](https://github.com/elefelen/dead-by-daylight-advanced-settings-changer/releases).<br /><br />
-## Screenshot:<br />
-![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/image2.png)
+## Screenshots:<br />
+![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/image10.PNG)
+![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/image11.PNG)
+![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/image12.PNG)
+![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/image13.PNG)
+![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/image8.PNG)
+![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/image9.PNG)

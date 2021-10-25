@@ -123,7 +123,7 @@ namespace DbD_Settings_Changer
             try
             {
                 WebClient wc = new WebClient();
-                string textFromFile = wc.DownloadString("link.com");
+                string textFromFile = wc.DownloadString("Link");
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 if (!textFromFile.Contains(version))
                 { 
@@ -3920,21 +3920,151 @@ namespace DbD_Settings_Changer
                     read = Regex.Replace(read, Environment.NewLine + Environment.NewLine, "\r");
                     if (lines[i].Contains("FrameRateLimit"))
                     {
-                        view = view.Replace(lines[i], "FrameRateLimit=" + "120.000000");
+                        view = view.Replace(lines[i], "FrameRateLimit=" + numFPS.Value + ".000000");
                         File.WriteAllText(SettingsPath, view);
                     }
                 }
             }
             if(numFPS.Value > 120)
             {
-                MessageBox.Show("The maximum frame rate in Dead by Daylight is 120.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                numFPS.Value = 120;
+                for (int a = 0; a <= numLines2 - 1; a++)
+                {
+                    if (eng[a].Contains("script/engine.engine"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("bSmoothFrameRate"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("MinSmoothedFrameRate"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("MaxSmoothedFrameRate"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("bUseVSync"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    //Powyżej 120 fpsów
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/Experimental/GeometryProcessing/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../DeadByDaylight/Plugins/Runtime/Bhvr/DBDUICore/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../DeadByDaylight/Plugins/Wwise/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../DeadByDaylight/Plugins/Runtime/Bhvr/DBDUIMobile/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/2D/Paper2D/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/Developer/TraceSourceFiltering/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../DeadByDaylight/Plugins/Runtime/Bhvr/SentryIo/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/FX/Niagara/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/Developer/AnimationSharing/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/Editor/GeometryMode/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/Experimental/ChaosClothEditor/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/Experimental/ChaosNiagara/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/MagicLeap/MagicLeapPassableWorld/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/MagicLeap/MagicLeap/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/Media/MediaCompositing/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                    if (eng[a].Contains("Paths=../../../Engine/Plugins/MovieScene/MovieRenderPipeline/Content"))
+                    {
+                        engine = engine.Replace(eng[a], String.Empty);
+                        engine = Regex.Replace(engine, @"\n\n", String.Empty);
+                        File.WriteAllText(EnginePath, engine);
+                    }
+                }
+                MessageBox.Show("The maximum frame rate in Dead by Daylight is 120. The game will be displayed at 120 frames per second anyway.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 for (int i = 0; i <= numLines - 1; i++)
                 {
                     read = Regex.Replace(read, Environment.NewLine + Environment.NewLine, "\r");
                     if (lines[i].Contains("FrameRateLimit"))
                     {
-                        view = view.Replace(lines[i], "FrameRateLimit=" + "120.000000");
+                        view = view.Replace(lines[i], "FrameRateLimit=" + numFPS.Value + ".000000");
                         File.WriteAllText(SettingsPath, view);
                     }
                 }
@@ -4566,7 +4696,6 @@ namespace DbD_Settings_Changer
             int numLines = config.Split('\n').Length;
             string[] lines = File.ReadAllLines(SettingsPath);
             Console.WriteLine(String.Join(Environment.NewLine, lines));
-
             for (int i = 0; i <= numLines - 1; i++)
             {
 

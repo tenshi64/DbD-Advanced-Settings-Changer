@@ -68,11 +68,11 @@ namespace DbD_Settings_Changer
                 imgFireworks.Hide();
             }
 
-            btnPresetLow.BackColor = Color.Transparent;
+            btnPresetLow.BackColor = Color.FromArgb(224, 224, 224);
             btnPresetLow.ForeColor = Color.Black;
-            btnPresetMedium.BackColor = Color.Transparent;
+            btnPresetMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnPresetMedium.ForeColor = Color.Black;
-            btnPresetEpic.BackColor = Color.Transparent;
+            btnPresetEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnPresetEpic.ForeColor = Color.Black;
 
             this.Size = new Size(1145, 1022);
@@ -123,7 +123,7 @@ namespace DbD_Settings_Changer
             try
             {
                 WebClient wc = new WebClient();
-                string textFromFile = wc.DownloadString("Link");
+                string textFromFile = wc.DownloadString("Check update");
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 if (!textFromFile.Contains(version))
                 { 
@@ -879,125 +879,125 @@ namespace DbD_Settings_Changer
         private void btnUsersSettings_Click(object sender, EventArgs e)
         {
             btnVwLow.ForeColor = Color.Black;
-            btnVwLow.BackColor = Color.Transparent;
+            btnVwLow.BackColor = Color.FromArgb(224, 224, 224);
             btnVwMedium.ForeColor = Color.Black;
-            btnVwMedium.BackColor = Color.Transparent;
+            btnVwMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnVwHigh.ForeColor = Color.Black;
-            btnVwHigh.BackColor = Color.Transparent;
+            btnVwHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnVwUltra.ForeColor = Color.Black;
-            btnVwUltra.BackColor = Color.Transparent;
+            btnVwUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnVwEpic.ForeColor = Color.Black;
-            btnVwEpic.BackColor = Color.Transparent;
+            btnVwEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnVwAwesome.ForeColor = Color.Black;
-            btnVwAwesome.BackColor = Color.Transparent;
+            btnVwAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAaLow.ForeColor = Color.Black;
-            btnAaLow.BackColor = Color.Transparent;
+            btnAaLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAaMedium.ForeColor = Color.Black;
-            btnAaMedium.BackColor = Color.Transparent;
+            btnAaMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAaHigh.ForeColor = Color.Black;
-            btnAaHigh.BackColor = Color.Transparent;
+            btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAaUltra.ForeColor = Color.Black;
-            btnAaUltra.BackColor = Color.Transparent;
+            btnAaUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAaEpic.ForeColor = Color.Black;
-            btnAaEpic.BackColor = Color.Transparent;
+            btnAaEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAaAwesome.ForeColor = Color.Black;
-            btnAaAwesome.BackColor = Color.Transparent;
+            btnAaAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnShadLow.ForeColor = Color.Black;
-            btnShadLow.BackColor = Color.Transparent;
+            btnShadLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShadMedium.ForeColor = Color.Black;
-            btnShadMedium.BackColor = Color.Transparent;
+            btnShadMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShadHigh.ForeColor = Color.Black;
-            btnShadHigh.BackColor = Color.Transparent;
-            btnShadUltra.BackColor = Color.Transparent;
+            btnShadHigh.BackColor = Color.FromArgb(224, 224, 224);
+            btnShadUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShadUltra.ForeColor = Color.Black;
             btnShadEpic.ForeColor = Color.Black;
-            btnShadEpic.BackColor = Color.Transparent;
+            btnShadEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShadAwesome.ForeColor = Color.Black;
-            btnShadAwesome.BackColor = Color.Transparent;
+            btnShadAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnPpLow.ForeColor = Color.Black;
-            btnPpLow.BackColor = Color.Transparent;
+            btnPpLow.BackColor = Color.FromArgb(224, 224, 224);
             btnPpMedium.ForeColor = Color.Black;
-            btnPpMedium.BackColor = Color.Transparent;
+            btnPpMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnPpHigh.ForeColor = Color.Black;
-            btnPpHigh.BackColor = Color.Transparent;
+            btnPpHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnPpUltra.ForeColor = Color.Black;
-            btnPpUltra.BackColor = Color.Transparent;
+            btnPpUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnPpEpic.ForeColor = Color.Black;
-            btnPpEpic.BackColor = Color.Transparent;
+            btnPpEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnPpAwesome.ForeColor = Color.Black;
-            btnPpAwesome.BackColor = Color.Transparent;
+            btnPpAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtLow.ForeColor = Color.Black;
-            btnTxtLow.BackColor = Color.Transparent;
+            btnTxtLow.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtMedium.ForeColor = Color.Black;
-            btnTxtMedium.BackColor = Color.Transparent;
+            btnTxtMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtHigh.ForeColor = Color.Black;
-            btnTxtHigh.BackColor = Color.Transparent;
+            btnTxtHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtUltra.ForeColor = Color.Black;
-            btnTxtUltra.BackColor = Color.Transparent;
+            btnTxtUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtEpic.ForeColor = Color.Black;
-            btnTxtEpic.BackColor = Color.Transparent;
+            btnTxtEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtAwesome.ForeColor = Color.Black;
-            btnTxtAwesome.BackColor = Color.Transparent;
+            btnTxtAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnEffLow.ForeColor = Color.Black;
-            btnEffLow.BackColor = Color.Transparent;
+            btnEffLow.BackColor = Color.FromArgb(224, 224, 224);
             btnEffMedium.ForeColor = Color.Black;
-            btnEffMedium.BackColor = Color.Transparent;
+            btnEffMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnEffHigh.ForeColor = Color.Black;
-            btnEffHigh.BackColor = Color.Transparent;
+            btnEffHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnEffUltra.ForeColor = Color.Black;
-            btnEffUltra.BackColor = Color.Transparent;
+            btnEffUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnEffEpic.ForeColor = Color.Black;
-            btnEffEpic.BackColor = Color.Transparent;
+            btnEffEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnEffAwesome.ForeColor = Color.Black;
-            btnEffAwesome.BackColor = Color.Transparent;
+            btnEffAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnFolLow.ForeColor = Color.Black;
-            btnFolLow.BackColor = Color.Transparent;
+            btnFolLow.BackColor = Color.FromArgb(224, 224, 224);
             btnFolMedium.ForeColor = Color.Black;
-            btnFolMedium.BackColor = Color.Transparent;
+            btnFolMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnFolHigh.ForeColor = Color.Black;
-            btnFolHigh.BackColor = Color.Transparent;
+            btnFolHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnFolUltra.ForeColor = Color.Black;
-            btnFolUltra.BackColor = Color.Transparent;
+            btnFolUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnFolEpic.ForeColor = Color.Black;
-            btnFolEpic.BackColor = Color.Transparent;
+            btnFolEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnFolAwesome.ForeColor = Color.Black;
-            btnFolAwesome.BackColor = Color.Transparent;
-            btnShLow.BackColor = Color.Transparent;
+            btnFolAwesome.BackColor = Color.FromArgb(224, 224, 224);
+            btnShLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShLow.ForeColor = Color.Black;
             btnShMedium.ForeColor = Color.Black;
-            btnShMedium.BackColor = Color.Transparent;
+            btnShMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShHigh.ForeColor = Color.Black;
-            btnShHigh.BackColor = Color.Transparent;
-            btnShUltra.BackColor = Color.Transparent;
+            btnShHigh.BackColor = Color.FromArgb(224, 224, 224);
+            btnShUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShUltra.ForeColor = Color.Black;
             btnShEpic.ForeColor = Color.Black;
-            btnShEpic.BackColor = Color.Transparent;
+            btnShEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShAwesome.ForeColor = Color.Black;
-            btnShAwesome.BackColor = Color.Transparent;
-            btnAnimLow.BackColor = Color.Transparent;
+            btnShAwesome.BackColor = Color.FromArgb(224, 224, 224);
+            btnAnimLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimLow.ForeColor = Color.Black;
             btnAnimMedium.ForeColor = Color.Black;
-            btnAnimMedium.BackColor = Color.Transparent;
+            btnAnimMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimHigh.ForeColor = Color.Black;
-            btnAnimHigh.BackColor = Color.Transparent;
+            btnAnimHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimUltra.ForeColor = Color.Black;
-            btnAnimUltra.BackColor = Color.Transparent;
+            btnAnimUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimEpic.ForeColor = Color.Black;
-            btnAnimEpic.BackColor = Color.Transparent;
+            btnAnimEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimAwesome.ForeColor = Color.Black;
-            btnAnimAwesome.BackColor = Color.Transparent;
+            btnAnimAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioLow.ForeColor = Color.Black;
-            btnAudioLow.BackColor = Color.Transparent;
+            btnAudioLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioMedium.ForeColor = Color.Black;
-            btnAudioMedium.BackColor = Color.Transparent;
+            btnAudioMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioHigh.ForeColor = Color.Black;
-            btnAudioHigh.BackColor = Color.Transparent;
+            btnAudioHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioUltra.ForeColor = Color.Black;
-            btnAudioUltra.BackColor = Color.Transparent;
+            btnAudioUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioEpic.ForeColor = Color.Black;
-            btnAudioEpic.BackColor = Color.Transparent;
+            btnAudioEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioAwesome.ForeColor = Color.Black;
-            btnAudioAwesome.BackColor = Color.Transparent;
+            btnAudioAwesome.BackColor = Color.FromArgb(224, 224, 224);
 
             try
             {
@@ -1630,21 +1630,21 @@ namespace DbD_Settings_Changer
 
         private void btnUsersSettings_MouseHover(object sender, EventArgs e)
         {
-            tip.Show("Reset to your own settings before using the program.", btnUsersSettings);
+            tip.Show("Reset the settings to those saved in the backup.", btnUsersSettings);
         }
 
         private void btnVwLow_Click(object sender, EventArgs e)
         {
-            btnVwMedium.BackColor = Color.Transparent;
+            btnVwMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnVwMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAaHigh.BackColor = Color.Transparent;
+            btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAaHigh.ForeColor = Color.Black;
-            btnVwUltra.BackColor = Color.Transparent;
+            btnVwUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnVwUltra.ForeColor = Color.Black;
-            btnVwEpic.BackColor = Color.Transparent;
+            btnVwEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnVwEpic.ForeColor = Color.Black;
-            btnVwAwesome.BackColor = Color.Transparent;
+            btnVwAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnVwAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnVwLow.BackColor = Color.Crimson;
@@ -1675,16 +1675,16 @@ namespace DbD_Settings_Changer
 
         private void btnVwMedium_Click(object sender, EventArgs e)
         {
-            btnVwLow.BackColor = Color.Transparent;
+            btnVwLow.BackColor = Color.FromArgb(224, 224, 224);
             btnVwLow.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnVwHigh.BackColor = Color.Transparent;
+            btnVwHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnVwHigh.ForeColor = Color.Black;
-            btnVwUltra.BackColor = Color.Transparent;
+            btnVwUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnVwUltra.ForeColor = Color.Black;
-            btnVwEpic.BackColor = Color.Transparent;
+            btnVwEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnVwEpic.ForeColor = Color.Black;
-            btnVwAwesome.BackColor = Color.Transparent;
+            btnVwAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnVwAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnVwMedium.BackColor = Color.Crimson;
@@ -1715,16 +1715,16 @@ namespace DbD_Settings_Changer
 
         private void btnVwHigh_Click(object sender, EventArgs e)
         {
-            btnVwLow.BackColor = Color.Transparent;
+            btnVwLow.BackColor = Color.FromArgb(224, 224, 224);
             btnVwLow.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnVwMedium.BackColor = Color.Transparent;
+            btnVwMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnVwMedium.ForeColor = Color.Black;
-            btnVwUltra.BackColor = Color.Transparent;
+            btnVwUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnVwUltra.ForeColor = Color.Black;
-            btnVwEpic.BackColor = Color.Transparent;
+            btnVwEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnVwEpic.ForeColor = Color.Black;
-            btnVwAwesome.BackColor = Color.Transparent;
+            btnVwAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnVwAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnVwHigh.BackColor = Color.Crimson;
@@ -1755,16 +1755,16 @@ namespace DbD_Settings_Changer
 
         private void btnVwUltra_Click(object sender, EventArgs e)
         {
-            btnVwLow.BackColor = Color.Transparent;
+            btnVwLow.BackColor = Color.FromArgb(224, 224, 224);
             btnVwLow.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnVwMedium.BackColor = Color.Transparent;
+            btnVwMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnVwMedium.ForeColor = Color.Black;
-            btnVwHigh.BackColor = Color.Transparent;
+            btnVwHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnVwHigh.ForeColor = Color.Black;
-            btnVwEpic.BackColor = Color.Transparent;
+            btnVwEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnVwEpic.ForeColor = Color.Black;
-            btnVwAwesome.BackColor = Color.Transparent;
+            btnVwAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnVwAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnVwUltra.BackColor = Color.Crimson;
@@ -1795,16 +1795,16 @@ namespace DbD_Settings_Changer
 
         private void btnVwEpic_Click(object sender, EventArgs e)
         {
-            btnVwLow.BackColor = Color.Transparent;
+            btnVwLow.BackColor = Color.FromArgb(224, 224, 224);
             btnVwLow.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnVwMedium.BackColor = Color.Transparent;
+            btnVwMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnVwMedium.ForeColor = Color.Black;
-            btnVwUltra.BackColor = Color.Transparent;
+            btnVwUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnVwUltra.ForeColor = Color.Black;
-            btnVwHigh.BackColor = Color.Transparent;
+            btnVwHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnVwHigh.ForeColor = Color.Black;
-            btnVwAwesome.BackColor = Color.Transparent;
+            btnVwAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnVwAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnVwEpic.BackColor = Color.Crimson;
@@ -1835,16 +1835,16 @@ namespace DbD_Settings_Changer
 
         private void btnAaLow_Click(object sender, EventArgs e)
         {
-            btnAaMedium.BackColor = Color.Transparent;
+            btnAaMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAaMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAaHigh.BackColor = Color.Transparent;
+            btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAaHigh.ForeColor = Color.Black;
-            btnAaUltra.BackColor = Color.Transparent;
+            btnAaUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAaUltra.ForeColor = Color.Black;
-            btnAaEpic.BackColor = Color.Transparent;
+            btnAaEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAaEpic.ForeColor = Color.Black;
-            btnAaAwesome.BackColor = Color.Transparent;
+            btnAaAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAaAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAaLow.BackColor = Color.Crimson;
@@ -1875,16 +1875,16 @@ namespace DbD_Settings_Changer
 
         private void btnAaMedium_Click(object sender, EventArgs e)
         {
-            btnAaLow.BackColor = Color.Transparent;
+            btnAaLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAaLow.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAaHigh.BackColor = Color.Transparent;
+            btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAaHigh.ForeColor = Color.Black;
-            btnAaUltra.BackColor = Color.Transparent;
+            btnAaUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAaUltra.ForeColor = Color.Black;
-            btnAaEpic.BackColor = Color.Transparent;
+            btnAaEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAaEpic.ForeColor = Color.Black;
-            btnAaAwesome.BackColor = Color.Transparent;
+            btnAaAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAaAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAaMedium.BackColor = Color.Crimson;
@@ -1915,16 +1915,16 @@ namespace DbD_Settings_Changer
 
         private void btnAaHigh_Click(object sender, EventArgs e)
         {
-            btnAaMedium.BackColor = Color.Transparent;
+            btnAaMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAaMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAaLow.BackColor = Color.Transparent;
+            btnAaLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAaLow.ForeColor = Color.Black;
-            btnAaUltra.BackColor = Color.Transparent;
+            btnAaUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAaUltra.ForeColor = Color.Black;
-            btnAaEpic.BackColor = Color.Transparent;
+            btnAaEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAaEpic.ForeColor = Color.Black;
-            btnAaAwesome.BackColor = Color.Transparent;
+            btnAaAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAaAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAaHigh.BackColor = Color.Crimson;
@@ -1955,16 +1955,16 @@ namespace DbD_Settings_Changer
 
         private void btnAaUltra_Click(object sender, EventArgs e)
         {
-            btnAaHigh.BackColor = Color.Transparent;
+            btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAaHigh.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAaMedium.BackColor = Color.Transparent;
+            btnAaMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAaMedium.ForeColor = Color.Black;
-            btnAaLow.BackColor = Color.Transparent;
+            btnAaLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAaLow.ForeColor = Color.Black;
-            btnAaEpic.BackColor = Color.Transparent;
+            btnAaEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAaEpic.ForeColor = Color.Black;
-            btnAaAwesome.BackColor = Color.Transparent;
+            btnAaAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAaAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAaUltra.BackColor = Color.Crimson;
@@ -1995,16 +1995,16 @@ namespace DbD_Settings_Changer
 
         private void btnAaEpic_Click(object sender, EventArgs e)
         {
-            btnAaMedium.BackColor = Color.Transparent;
+            btnAaMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAaMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAaHigh.BackColor = Color.Transparent;
+            btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAaHigh.ForeColor = Color.Black;
-            btnAaLow.BackColor = Color.Transparent;
+            btnAaLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAaLow.ForeColor = Color.Black;
-            btnAaUltra.BackColor = Color.Transparent;
+            btnAaUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAaUltra.ForeColor = Color.Black;
-            btnAaAwesome.BackColor = Color.Transparent;
+            btnAaAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAaAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAaEpic.BackColor = Color.Crimson;
@@ -2035,16 +2035,16 @@ namespace DbD_Settings_Changer
 
         private void btnShadLow_Click(object sender, EventArgs e)
         {
-            btnShadEpic.BackColor = Color.Transparent;
+            btnShadEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShadEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShadHigh.BackColor = Color.Transparent;
+            btnShadHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnShadHigh.ForeColor = Color.Black;
-            btnShadMedium.BackColor = Color.Transparent;
+            btnShadMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShadMedium.ForeColor = Color.Black;
-            btnShadUltra.BackColor = Color.Transparent;
+            btnShadUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShadUltra.ForeColor = Color.Black;
-            btnShadAwesome.BackColor = Color.Transparent;
+            btnShadAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnShadAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShadLow.BackColor = Color.Crimson;
@@ -2075,16 +2075,16 @@ namespace DbD_Settings_Changer
 
         private void btnShadMedium_Click(object sender, EventArgs e)
         {
-            btnShadEpic.BackColor = Color.Transparent;
+            btnShadEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShadEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShadHigh.BackColor = Color.Transparent;
+            btnShadHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnShadHigh.ForeColor = Color.Black;
-            btnShadLow.BackColor = Color.Transparent;
+            btnShadLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShadLow.ForeColor = Color.Black;
-            btnShadUltra.BackColor = Color.Transparent;
+            btnShadUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShadUltra.ForeColor = Color.Black;
-            btnShadAwesome.BackColor = Color.Transparent;
+            btnShadAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnShadAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShadMedium.BackColor = Color.Crimson;
@@ -2115,16 +2115,16 @@ namespace DbD_Settings_Changer
 
         private void btnShadHigh_Click(object sender, EventArgs e)
         {
-            btnShadEpic.BackColor = Color.Transparent;
+            btnShadEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShadEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShadLow.BackColor = Color.Transparent;
+            btnShadLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShadLow.ForeColor = Color.Black;
-            btnShadMedium.BackColor = Color.Transparent;
+            btnShadMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShadMedium.ForeColor = Color.Black;
-            btnShadUltra.BackColor = Color.Transparent;
+            btnShadUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShadUltra.ForeColor = Color.Black;
-            btnShadAwesome.BackColor = Color.Transparent;
+            btnShadAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnShadAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShadHigh.BackColor = Color.Crimson;
@@ -2155,16 +2155,16 @@ namespace DbD_Settings_Changer
 
         private void btnShadUltra_Click(object sender, EventArgs e)
         {
-            btnShadEpic.BackColor = Color.Transparent;
+            btnShadEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShadEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShadHigh.BackColor = Color.Transparent;
+            btnShadHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnShadHigh.ForeColor = Color.Black;
-            btnShadMedium.BackColor = Color.Transparent;
+            btnShadMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShadMedium.ForeColor = Color.Black;
-            btnShadLow.BackColor = Color.Transparent;
+            btnShadLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShadLow.ForeColor = Color.Black;
-            btnShadAwesome.BackColor = Color.Transparent;
+            btnShadAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnShadAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShadUltra.BackColor = Color.Crimson;
@@ -2195,16 +2195,16 @@ namespace DbD_Settings_Changer
 
         private void btnShadEpic_Click(object sender, EventArgs e)
         {
-            btnShadLow.BackColor = Color.Transparent;
+            btnShadLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShadLow.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShadHigh.BackColor = Color.Transparent;
+            btnShadHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnShadHigh.ForeColor = Color.Black;
-            btnShadMedium.BackColor = Color.Transparent;
+            btnShadMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShadMedium.ForeColor = Color.Black;
-            btnShadUltra.BackColor = Color.Transparent;
+            btnShadUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShadUltra.ForeColor = Color.Black;
-            btnShadAwesome.BackColor = Color.Transparent;
+            btnShadAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnShadAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShadEpic.BackColor = Color.Crimson;
@@ -2235,16 +2235,16 @@ namespace DbD_Settings_Changer
 
         private void btnPpLow_Click(object sender, EventArgs e)
         {
-            btnPpEpic.BackColor = Color.Transparent;
+            btnPpEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnPpEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnPpHigh.BackColor = Color.Transparent;
+            btnPpHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnPpHigh.ForeColor = Color.Black;
-            btnPpMedium.BackColor = Color.Transparent;
+            btnPpMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnPpMedium.ForeColor = Color.Black;
-            btnPpUltra.BackColor = Color.Transparent;
+            btnPpUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnPpUltra.ForeColor = Color.Black;
-            btnPpAwesome.BackColor = Color.Transparent;
+            btnPpAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnPpAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnPpLow.BackColor = Color.Crimson;
@@ -2275,16 +2275,16 @@ namespace DbD_Settings_Changer
 
         private void btnPpMedium_Click(object sender, EventArgs e)
         {
-            btnPpEpic.BackColor = Color.Transparent;
+            btnPpEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnPpEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnPpHigh.BackColor = Color.Transparent;
+            btnPpHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnPpHigh.ForeColor = Color.Black;
-            btnPpLow.BackColor = Color.Transparent;
+            btnPpLow.BackColor = Color.FromArgb(224, 224, 224);
             btnPpLow.ForeColor = Color.Black;
-            btnPpUltra.BackColor = Color.Transparent;
+            btnPpUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnPpUltra.ForeColor = Color.Black;
-            btnPpAwesome.BackColor = Color.Transparent;
+            btnPpAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnPpAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnPpMedium.BackColor = Color.Crimson;
@@ -2315,16 +2315,16 @@ namespace DbD_Settings_Changer
 
         private void btnPpHigh_Click(object sender, EventArgs e)
         {
-            btnPpEpic.BackColor = Color.Transparent;
+            btnPpEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnPpEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnPpMedium.BackColor = Color.Transparent;
+            btnPpMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnPpMedium.ForeColor = Color.Black;
-            btnPpLow.BackColor = Color.Transparent;
+            btnPpLow.BackColor = Color.FromArgb(224, 224, 224);
             btnPpLow.ForeColor = Color.Black;
-            btnPpUltra.BackColor = Color.Transparent;
+            btnPpUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnPpUltra.ForeColor = Color.Black;
-            btnPpAwesome.BackColor = Color.Transparent;
+            btnPpAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnPpAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnPpHigh.BackColor = Color.Crimson;
@@ -2355,16 +2355,16 @@ namespace DbD_Settings_Changer
 
         private void btnPpUltra_Click(object sender, EventArgs e)
         {
-            btnPpEpic.BackColor = Color.Transparent;
+            btnPpEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnPpEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnPpHigh.BackColor = Color.Transparent;
+            btnPpHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnPpHigh.ForeColor = Color.Black;
-            btnPpLow.BackColor = Color.Transparent;
+            btnPpLow.BackColor = Color.FromArgb(224, 224, 224);
             btnPpLow.ForeColor = Color.Black;
-            btnPpMedium.BackColor = Color.Transparent;
+            btnPpMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnPpMedium.ForeColor = Color.Black;
-            btnPpAwesome.BackColor = Color.Transparent;
+            btnPpAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnPpAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnPpUltra.BackColor = Color.Crimson;
@@ -2395,16 +2395,16 @@ namespace DbD_Settings_Changer
 
         private void btnPpEpic_Click(object sender, EventArgs e)
         {
-            btnPpMedium.BackColor = Color.Transparent;
+            btnPpMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnPpMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnPpHigh.BackColor = Color.Transparent;
+            btnPpHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnPpHigh.ForeColor = Color.Black;
-            btnPpLow.BackColor = Color.Transparent;
+            btnPpLow.BackColor = Color.FromArgb(224, 224, 224);
             btnPpLow.ForeColor = Color.Black;
-            btnPpUltra.BackColor = Color.Transparent;
+            btnPpUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnPpUltra.ForeColor = Color.Black;
-            btnPpAwesome.BackColor = Color.Transparent;
+            btnPpAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnPpAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnPpEpic.BackColor = Color.Crimson;
@@ -2435,16 +2435,16 @@ namespace DbD_Settings_Changer
 
         private void btnTxtLow_Click(object sender, EventArgs e)
         {
-            btnTxtMedium.BackColor = Color.Transparent;
+            btnTxtMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnTxtHigh.BackColor = Color.Transparent;
+            btnTxtHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtHigh.ForeColor = Color.Black;
-            btnTxtEpic.BackColor = Color.Transparent;
+            btnTxtEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtEpic.ForeColor = Color.Black;
-            btnTxtUltra.BackColor = Color.Transparent;
+            btnTxtUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtUltra.ForeColor = Color.Black;
-            btnTxtAwesome.BackColor = Color.Transparent;
+            btnTxtAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnTxtLow.BackColor = Color.Crimson;
@@ -2475,16 +2475,16 @@ namespace DbD_Settings_Changer
 
         private void btnTxtMedium_Click(object sender, EventArgs e)
         {
-            btnTxtLow.BackColor = Color.Transparent;
+            btnTxtLow.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtLow.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnTxtHigh.BackColor = Color.Transparent;
+            btnTxtHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtHigh.ForeColor = Color.Black;
-            btnTxtEpic.BackColor = Color.Transparent;
+            btnTxtEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtEpic.ForeColor = Color.Black;
-            btnTxtUltra.BackColor = Color.Transparent;
+            btnTxtUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtUltra.ForeColor = Color.Black;
-            btnTxtAwesome.BackColor = Color.Transparent;
+            btnTxtAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnTxtMedium.BackColor = Color.Crimson;
@@ -2515,16 +2515,16 @@ namespace DbD_Settings_Changer
 
         private void btnTxtHigh_Click(object sender, EventArgs e)
         {
-            btnTxtMedium.BackColor = Color.Transparent;
+            btnTxtMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnTxtLow.BackColor = Color.Transparent;
+            btnTxtLow.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtLow.ForeColor = Color.Black;
-            btnTxtEpic.BackColor = Color.Transparent;
+            btnTxtEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtEpic.ForeColor = Color.Black;
-            btnTxtUltra.BackColor = Color.Transparent;
+            btnTxtUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtUltra.ForeColor = Color.Black;
-            btnTxtAwesome.BackColor = Color.Transparent;
+            btnTxtAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnTxtHigh.BackColor = Color.Crimson;
@@ -2555,16 +2555,16 @@ namespace DbD_Settings_Changer
 
         private void btnTxtUltra_Click(object sender, EventArgs e)
         {
-            btnTxtMedium.BackColor = Color.Transparent;
+            btnTxtMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnTxtHigh.BackColor = Color.Transparent;
+            btnTxtHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtHigh.ForeColor = Color.Black;
-            btnTxtEpic.BackColor = Color.Transparent;
+            btnTxtEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtEpic.ForeColor = Color.Black;
-            btnTxtLow.BackColor = Color.Transparent;
+            btnTxtLow.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtLow.ForeColor = Color.Black;
-            btnTxtAwesome.BackColor = Color.Transparent;
+            btnTxtAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnTxtUltra.BackColor = Color.Crimson;
@@ -2595,16 +2595,16 @@ namespace DbD_Settings_Changer
 
         private void btnTxtEpic_Click(object sender, EventArgs e)
         {
-            btnTxtMedium.BackColor = Color.Transparent;
+            btnTxtMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnTxtHigh.BackColor = Color.Transparent;
+            btnTxtHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtHigh.ForeColor = Color.Black;
-            btnTxtLow.BackColor = Color.Transparent;
+            btnTxtLow.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtLow.ForeColor = Color.Black;
-            btnTxtUltra.BackColor = Color.Transparent;
+            btnTxtUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtUltra.ForeColor = Color.Black;
-            btnTxtAwesome.BackColor = Color.Transparent;
+            btnTxtAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnTxtEpic.BackColor = Color.Crimson;
@@ -2635,16 +2635,16 @@ namespace DbD_Settings_Changer
 
         private void btnEffLow_Click(object sender, EventArgs e)
         {
-            btnEffEpic.BackColor = Color.Transparent;
+            btnEffEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnEffEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnEffHigh.BackColor = Color.Transparent;
+            btnEffHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnEffHigh.ForeColor = Color.Black;
-            btnEffMedium.BackColor = Color.Transparent;
+            btnEffMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnEffMedium.ForeColor = Color.Black;
-            btnEffUltra.BackColor = Color.Transparent;
+            btnEffUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnEffUltra.ForeColor = Color.Black;
-            btnEffAwesome.BackColor = Color.Transparent;
+            btnEffAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnEffAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnEffLow.BackColor = Color.Crimson;
@@ -2675,16 +2675,16 @@ namespace DbD_Settings_Changer
 
         private void btnEffMedium_Click(object sender, EventArgs e)
         {
-            btnEffEpic.BackColor = Color.Transparent;
+            btnEffEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnEffEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnEffHigh.BackColor = Color.Transparent;
+            btnEffHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnEffHigh.ForeColor = Color.Black;
-            btnEffLow.BackColor = Color.Transparent;
+            btnEffLow.BackColor = Color.FromArgb(224, 224, 224);
             btnEffLow.ForeColor = Color.Black;
-            btnEffUltra.BackColor = Color.Transparent;
+            btnEffUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnEffUltra.ForeColor = Color.Black;
-            btnEffAwesome.BackColor = Color.Transparent;
+            btnEffAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnEffAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnEffMedium.BackColor = Color.Crimson;
@@ -2715,16 +2715,16 @@ namespace DbD_Settings_Changer
 
         private void btnEffHigh_Click(object sender, EventArgs e)
         {
-            btnEffEpic.BackColor = Color.Transparent;
+            btnEffEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnEffEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnEffMedium.BackColor = Color.Transparent;
+            btnEffMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnEffMedium.ForeColor = Color.Black;
-            btnEffLow.BackColor = Color.Transparent;
+            btnEffLow.BackColor = Color.FromArgb(224, 224, 224);
             btnEffLow.ForeColor = Color.Black;
-            btnEffUltra.BackColor = Color.Transparent;
+            btnEffUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnEffUltra.ForeColor = Color.Black;
-            btnEffAwesome.BackColor = Color.Transparent;
+            btnEffAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnEffAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnEffHigh.BackColor = Color.Crimson;
@@ -2755,16 +2755,16 @@ namespace DbD_Settings_Changer
 
         private void btnEffUltra_Click(object sender, EventArgs e)
         {
-            btnEffEpic.BackColor = Color.Transparent;
+            btnEffEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnEffEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnEffMedium.BackColor = Color.Transparent;
+            btnEffMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnEffMedium.ForeColor = Color.Black;
-            btnEffLow.BackColor = Color.Transparent;
+            btnEffLow.BackColor = Color.FromArgb(224, 224, 224);
             btnEffLow.ForeColor = Color.Black;
-            btnEffHigh.BackColor = Color.Transparent;
+            btnEffHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnEffHigh.ForeColor = Color.Black;
-            btnEffAwesome.BackColor = Color.Transparent;
+            btnEffAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnEffAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnEffUltra.BackColor = Color.Crimson;
@@ -2795,16 +2795,16 @@ namespace DbD_Settings_Changer
 
         private void btnEffEpic_Click(object sender, EventArgs e)
         {
-            btnEffUltra.BackColor = Color.Transparent;
+            btnEffUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnEffUltra.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnEffMedium.BackColor = Color.Transparent;
+            btnEffMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnEffMedium.ForeColor = Color.Black;
-            btnEffLow.BackColor = Color.Transparent;
+            btnEffLow.BackColor = Color.FromArgb(224, 224, 224);
             btnEffLow.ForeColor = Color.Black;
-            btnEffHigh.BackColor = Color.Transparent;
+            btnEffHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnEffHigh.ForeColor = Color.Black;
-            btnEffAwesome.BackColor = Color.Transparent;
+            btnEffAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnEffAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnEffEpic.BackColor = Color.Crimson;
@@ -2835,16 +2835,16 @@ namespace DbD_Settings_Changer
 
         private void btnFolLow_Click(object sender, EventArgs e)
         {
-            btnFolUltra.BackColor = Color.Transparent;
+            btnFolUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnFolUltra.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnFolMedium.BackColor = Color.Transparent;
+            btnFolMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnFolMedium.ForeColor = Color.Black;
-            btnFolEpic.BackColor = Color.Transparent;
+            btnFolEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnFolEpic.ForeColor = Color.Black;
-            btnFolHigh.BackColor = Color.Transparent;
+            btnFolHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnFolHigh.ForeColor = Color.Black;
-            btnFolAwesome.BackColor = Color.Transparent;
+            btnFolAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnFolAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnFolLow.BackColor = Color.Crimson;
@@ -2875,16 +2875,16 @@ namespace DbD_Settings_Changer
 
         private void btnFolMedium_Click(object sender, EventArgs e)
         {
-            btnFolUltra.BackColor = Color.Transparent;
+            btnFolUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnFolUltra.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnFolLow.BackColor = Color.Transparent;
+            btnFolLow.BackColor = Color.FromArgb(224, 224, 224);
             btnFolLow.ForeColor = Color.Black;
-            btnFolEpic.BackColor = Color.Transparent;
+            btnFolEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnFolEpic.ForeColor = Color.Black;
-            btnFolHigh.BackColor = Color.Transparent;
+            btnFolHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnFolHigh.ForeColor = Color.Black;
-            btnFolAwesome.BackColor = Color.Transparent;
+            btnFolAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnFolAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnFolMedium.BackColor = Color.Crimson;
@@ -2915,16 +2915,16 @@ namespace DbD_Settings_Changer
 
         private void btnFolHigh_Click(object sender, EventArgs e)
         {
-            btnFolUltra.BackColor = Color.Transparent;
+            btnFolUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnFolUltra.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnFolLow.BackColor = Color.Transparent;
+            btnFolLow.BackColor = Color.FromArgb(224, 224, 224);
             btnFolLow.ForeColor = Color.Black;
-            btnFolEpic.BackColor = Color.Transparent;
+            btnFolEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnFolEpic.ForeColor = Color.Black;
-            btnFolMedium.BackColor = Color.Transparent;
+            btnFolMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnFolMedium.ForeColor = Color.Black;
-            btnFolAwesome.BackColor = Color.Transparent;
+            btnFolAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnFolAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnFolHigh.BackColor = Color.Crimson;
@@ -2955,16 +2955,16 @@ namespace DbD_Settings_Changer
 
         private void btnFolUltra_Click(object sender, EventArgs e)
         {
-            btnFolHigh.BackColor = Color.Transparent;
+            btnFolHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnFolHigh.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnFolLow.BackColor = Color.Transparent;
+            btnFolLow.BackColor = Color.FromArgb(224, 224, 224);
             btnFolLow.ForeColor = Color.Black;
-            btnFolEpic.BackColor = Color.Transparent;
+            btnFolEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnFolEpic.ForeColor = Color.Black;
-            btnFolMedium.BackColor = Color.Transparent;
+            btnFolMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnFolMedium.ForeColor = Color.Black;
-            btnFolAwesome.BackColor = Color.Transparent;
+            btnFolAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnFolAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnFolUltra.BackColor = Color.Crimson;
@@ -2995,16 +2995,16 @@ namespace DbD_Settings_Changer
 
         private void btnFolEpic_Click(object sender, EventArgs e)
         {
-            btnFolUltra.BackColor = Color.Transparent;
+            btnFolUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnFolUltra.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnFolLow.BackColor = Color.Transparent;
+            btnFolLow.BackColor = Color.FromArgb(224, 224, 224);
             btnFolLow.ForeColor = Color.Black;
-            btnFolHigh.BackColor = Color.Transparent;
+            btnFolHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnFolHigh.ForeColor = Color.Black;
-            btnFolMedium.BackColor = Color.Transparent;
+            btnFolMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnFolMedium.ForeColor = Color.Black;
-            btnFolAwesome.BackColor = Color.Transparent;
+            btnFolAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnFolAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnFolEpic.BackColor = Color.Crimson;
@@ -3035,16 +3035,16 @@ namespace DbD_Settings_Changer
 
         private void btnShLow_Click(object sender, EventArgs e)
         {
-            btnShHigh.BackColor = Color.Transparent;
+            btnShHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnShHigh.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShUltra.BackColor = Color.Transparent;
+            btnShUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShUltra.ForeColor = Color.Black;
-            btnShEpic.BackColor = Color.Transparent;
+            btnShEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShEpic.ForeColor = Color.Black;
-            btnShMedium.BackColor = Color.Transparent;
+            btnShMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShMedium.ForeColor = Color.Black;
-            btnShAwesome.BackColor = Color.Transparent;
+            btnShAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnShAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShLow.BackColor = Color.Crimson;
@@ -3075,16 +3075,16 @@ namespace DbD_Settings_Changer
 
         private void btnShMedium_Click(object sender, EventArgs e)
         {
-            btnShHigh.BackColor = Color.Transparent;
+            btnShHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnShHigh.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShUltra.BackColor = Color.Transparent;
+            btnShUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShUltra.ForeColor = Color.Black;
-            btnShEpic.BackColor = Color.Transparent;
+            btnShEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShEpic.ForeColor = Color.Black;
-            btnShLow.BackColor = Color.Transparent;
+            btnShLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShLow.ForeColor = Color.Black;
-            btnShAwesome.BackColor = Color.Transparent;
+            btnShAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnShAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShMedium.BackColor = Color.Crimson;
@@ -3115,16 +3115,16 @@ namespace DbD_Settings_Changer
 
         private void btnShHigh_Click(object sender, EventArgs e)
         {
-            btnShMedium.BackColor = Color.Transparent;
+            btnShMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShUltra.BackColor = Color.Transparent;
+            btnShUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShUltra.ForeColor = Color.Black;
-            btnShEpic.BackColor = Color.Transparent;
+            btnShEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShEpic.ForeColor = Color.Black;
-            btnShLow.BackColor = Color.Transparent;
+            btnShLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShLow.ForeColor = Color.Black;
-            btnShAwesome.BackColor = Color.Transparent;
+            btnShAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnShAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShHigh.BackColor = Color.Crimson;
@@ -3155,16 +3155,16 @@ namespace DbD_Settings_Changer
 
         private void btnShUltra_Click(object sender, EventArgs e)
         {
-            btnShMedium.BackColor = Color.Transparent;
+            btnShMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShHigh.BackColor = Color.Transparent;
+            btnShHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnShHigh.ForeColor = Color.Black;
-            btnShEpic.BackColor = Color.Transparent;
+            btnShEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShEpic.ForeColor = Color.Black;
-            btnShLow.BackColor = Color.Transparent;
+            btnShLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShLow.ForeColor = Color.Black;
-            btnShAwesome.BackColor = Color.Transparent;
+            btnShAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnShAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShUltra.BackColor = Color.Crimson;
@@ -3195,16 +3195,16 @@ namespace DbD_Settings_Changer
 
         private void btnShEpic_Click(object sender, EventArgs e)
         {
-            btnShMedium.BackColor = Color.Transparent;
+            btnShMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShHigh.BackColor = Color.Transparent;
+            btnShHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnShHigh.ForeColor = Color.Black;
-            btnShUltra.BackColor = Color.Transparent;
+            btnShUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShUltra.ForeColor = Color.Black;
-            btnShLow.BackColor = Color.Transparent;
+            btnShLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShLow.ForeColor = Color.Black;
-            btnShAwesome.BackColor = Color.Transparent;
+            btnShAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnShAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShEpic.BackColor = Color.Crimson;
@@ -3235,16 +3235,16 @@ namespace DbD_Settings_Changer
 
         private void btnAnimLow_Click(object sender, EventArgs e)
         {
-            btnAnimMedium.BackColor = Color.Transparent;
+            btnAnimMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAnimHigh.BackColor = Color.Transparent;
+            btnAnimHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimHigh.ForeColor = Color.Black;
-            btnAnimUltra.BackColor = Color.Transparent;
+            btnAnimUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimUltra.ForeColor = Color.Black;
-            btnAnimEpic.BackColor = Color.Transparent;
+            btnAnimEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimEpic.ForeColor = Color.Black;
-            btnAnimAwesome.BackColor = Color.Transparent;
+            btnAnimAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAnimLow.BackColor = Color.Crimson;
@@ -3275,16 +3275,16 @@ namespace DbD_Settings_Changer
 
         private void btnAnimMedium_Click(object sender, EventArgs e)
         {
-            btnAnimLow.BackColor = Color.Transparent;
+            btnAnimLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimLow.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAnimHigh.BackColor = Color.Transparent;
+            btnAnimHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimHigh.ForeColor = Color.Black;
-            btnAnimUltra.BackColor = Color.Transparent;
+            btnAnimUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimUltra.ForeColor = Color.Black;
-            btnAnimEpic.BackColor = Color.Transparent;
+            btnAnimEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimEpic.ForeColor = Color.Black;
-            btnAnimAwesome.BackColor = Color.Transparent;
+            btnAnimAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAnimMedium.BackColor = Color.Crimson;
@@ -3315,16 +3315,16 @@ namespace DbD_Settings_Changer
 
         private void btnAnimHigh_Click(object sender, EventArgs e)
         {
-            btnAnimLow.BackColor = Color.Transparent;
+            btnAnimLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimLow.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAnimMedium.BackColor = Color.Transparent;
+            btnAnimMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimMedium.ForeColor = Color.Black;
-            btnAnimUltra.BackColor = Color.Transparent;
+            btnAnimUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimUltra.ForeColor = Color.Black;
-            btnAnimEpic.BackColor = Color.Transparent;
+            btnAnimEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimEpic.ForeColor = Color.Black;
-            btnAnimAwesome.BackColor = Color.Transparent;
+            btnAnimAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAnimHigh.BackColor = Color.Crimson;
@@ -3355,16 +3355,16 @@ namespace DbD_Settings_Changer
 
         private void btnAnimUltra_Click(object sender, EventArgs e)
         {
-            btnAnimLow.BackColor = Color.Transparent;
+            btnAnimLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimLow.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAnimMedium.BackColor = Color.Transparent;
+            btnAnimMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimMedium.ForeColor = Color.Black;
-            btnAnimHigh.BackColor = Color.Transparent;
+            btnAnimHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimHigh.ForeColor = Color.Black;
-            btnAnimEpic.BackColor = Color.Transparent;
+            btnAnimEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimEpic.ForeColor = Color.Black;
-            btnAnimAwesome.BackColor = Color.Transparent;
+            btnAnimAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAnimUltra.BackColor = Color.Crimson;
@@ -3395,16 +3395,16 @@ namespace DbD_Settings_Changer
 
         private void btnAnimEpic_Click(object sender, EventArgs e)
         {
-            btnAnimLow.BackColor = Color.Transparent;
+            btnAnimLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimLow.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAnimMedium.BackColor = Color.Transparent;
+            btnAnimMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimMedium.ForeColor = Color.Black;
-            btnAnimHigh.BackColor = Color.Transparent;
+            btnAnimHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimHigh.ForeColor = Color.Black;
-            btnAnimUltra.BackColor = Color.Transparent;
+            btnAnimUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimUltra.ForeColor = Color.Black;
-            btnAnimAwesome.BackColor = Color.Transparent;
+            btnAnimAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAnimEpic.BackColor = Color.Crimson;
@@ -3460,16 +3460,16 @@ namespace DbD_Settings_Changer
 
         private void btnAudioLow_Click(object sender, EventArgs e)
         {
-            btnAudioEpic.BackColor = Color.Transparent;
+            btnAudioEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAudioMedium.BackColor = Color.Transparent;
+            btnAudioMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioMedium.ForeColor = Color.Black;
-            btnAudioHigh.BackColor = Color.Transparent;
+            btnAudioHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioHigh.ForeColor = Color.Black;
-            btnAudioUltra.BackColor = Color.Transparent;
+            btnAudioUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioUltra.ForeColor = Color.Black;
-            btnAudioAwesome.BackColor = Color.Transparent;
+            btnAudioAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAudioLow.BackColor = Color.Crimson;
@@ -3506,16 +3506,16 @@ namespace DbD_Settings_Changer
 
         private void btnAudioMedium_Click(object sender, EventArgs e)
         {
-            btnAudioEpic.BackColor = Color.Transparent;
+            btnAudioEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAudioLow.BackColor = Color.Transparent;
+            btnAudioLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioLow.ForeColor = Color.Black;
-            btnAudioHigh.BackColor = Color.Transparent;
+            btnAudioHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioHigh.ForeColor = Color.Black;
-            btnAudioUltra.BackColor = Color.Transparent;
+            btnAudioUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioUltra.ForeColor = Color.Black;
-            btnAudioAwesome.BackColor = Color.Transparent;
+            btnAudioAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAudioMedium.BackColor = Color.Crimson;
@@ -3551,16 +3551,16 @@ namespace DbD_Settings_Changer
 
         private void btnAudioHigh_Click(object sender, EventArgs e)
         {
-            btnAudioEpic.BackColor = Color.Transparent;
+            btnAudioEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAudioLow.BackColor = Color.Transparent;
+            btnAudioLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioLow.ForeColor = Color.Black;
-            btnAudioMedium.BackColor = Color.Transparent;
+            btnAudioMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioMedium.ForeColor = Color.Black;
-            btnAudioUltra.BackColor = Color.Transparent;
+            btnAudioUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioUltra.ForeColor = Color.Black;
-            btnAudioAwesome.BackColor = Color.Transparent;
+            btnAudioAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAudioHigh.BackColor = Color.Crimson;
@@ -3596,16 +3596,16 @@ namespace DbD_Settings_Changer
 
         private void btnAudioUltra_Click(object sender, EventArgs e)
         {
-            btnAudioEpic.BackColor = Color.Transparent;
+            btnAudioEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAudioLow.BackColor = Color.Transparent;
+            btnAudioLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioLow.ForeColor = Color.Black;
-            btnAudioMedium.BackColor = Color.Transparent;
+            btnAudioMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioMedium.ForeColor = Color.Black;
-            btnAudioHigh.BackColor = Color.Transparent;
+            btnAudioHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioHigh.ForeColor = Color.Black;
-            btnAudioAwesome.BackColor = Color.Transparent;
+            btnAudioAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAudioUltra.BackColor = Color.Crimson;
@@ -3641,16 +3641,16 @@ namespace DbD_Settings_Changer
 
         private void btnAudioEpic_Click(object sender, EventArgs e)
         {
-            btnAudioUltra.BackColor = Color.Transparent;
+            btnAudioUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioUltra.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAudioLow.BackColor = Color.Transparent;
+            btnAudioLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioLow.ForeColor = Color.Black;
-            btnAudioMedium.BackColor = Color.Transparent;
+            btnAudioMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioMedium.ForeColor = Color.Black;
-            btnAudioHigh.BackColor = Color.Transparent;
+            btnAudioHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioHigh.ForeColor = Color.Black;
-            btnAudioAwesome.BackColor = Color.Transparent;
+            btnAudioAwesome.BackColor = Color.FromArgb(224, 224, 224);
             btnAudioAwesome.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAudioEpic.BackColor = Color.Crimson;
@@ -4687,6 +4687,8 @@ namespace DbD_Settings_Changer
 
         private void btnResSet_Click(object sender, EventArgs e)
         {
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
             ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
 
             lblHideFocus.Focus();
@@ -4696,45 +4698,88 @@ namespace DbD_Settings_Changer
             int numLines = config.Split('\n').Length;
             string[] lines = File.ReadAllLines(SettingsPath);
             Console.WriteLine(String.Join(Environment.NewLine, lines));
-            for (int i = 0; i <= numLines - 1; i++)
+
+            if(numHeight.Value != screenHeight || numWidth.Value != screenWidth)
             {
+                for (int i = 0; i <= numLines - 1; i++)
+                {
+                    if (lines[i].Contains("ResolutionSizeX") && !lines[i].Contains("LastUser"))
+                    {
+                        view = view.Replace(lines[i], "ResolutionSizeX=" + numWidth.Value);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("ResolutionSizeY") && !lines[i].Contains("LastUser"))
+                    {
+                        view = view.Replace(lines[i], "ResolutionSizeY=" + numHeight.Value);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("LastUserConfirmedResolutionSizeX"))
+                    {
+                        view = view.Replace(lines[i], "LastUserConfirmedResolutionSizeX=" + numWidth.Value);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("LastUserConfirmedResolutionSizeY"))
+                    {
+                        view = view.Replace(lines[i], "LastUserConfirmedResolutionSizeY=" + numHeight.Value);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("FullscreenMode") && !lines[i].Contains("LastConfirmed") && !lines[i].Contains("Prefered"))
+                    {
+                        view = view.Replace(lines[i], "FullscreenMode=" + 0);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("LastConfirmedFullscreenMode") && !lines[i].Contains("Prefered"))
+                    {
+                        view = view.Replace(lines[i], "LastConfirmedFullscreenMode=" + 0);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("PreferredFullscreenMode") && !lines[i].Contains("LastConfirmed"))
+                    {
+                        view = view.Replace(lines[i], "PreferredFullscreenMode=" + 0);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                }
+            }
 
-                if (lines[i].Contains("ResolutionSizeX") && !lines[i].Contains("LastUser"))
+            if (numHeight.Value == screenHeight && numWidth.Value == screenWidth)
+            {
+                for (int i = 0; i <= numLines - 1; i++)
                 {
-                    view = view.Replace(lines[i], "ResolutionSizeX=" + numWidth.Value);
-                    File.WriteAllText(SettingsPath, view);
-                }
-                if (lines[i].Contains("ResolutionSizeY") && !lines[i].Contains("LastUser"))
-                {
-                    view = view.Replace(lines[i], "ResolutionSizeY=" + numHeight.Value);
-                    File.WriteAllText(SettingsPath, view);
-                }
-                if (lines[i].Contains("LastUserConfirmedResolutionSizeX"))
-                {
-                    view = view.Replace(lines[i], "LastUserConfirmedResolutionSizeX=" + numWidth.Value);
-                    File.WriteAllText(SettingsPath, view);
-                }
-                if (lines[i].Contains("LastUserConfirmedResolutionSizeY"))
-                {
-                    view = view.Replace(lines[i], "LastUserConfirmedResolutionSizeY=" + numHeight.Value);
-                    File.WriteAllText(SettingsPath, view);
-                }
-
-
-                if (lines[i].Contains("FullscreenMode") && !lines[i].Contains("LastConfirmed") && !lines[i].Contains("Prefered"))
-                {
-                    view = view.Replace(lines[i], "FullscreenMode=" + 0);
-                    File.WriteAllText(SettingsPath, view);
-                }
-                if (lines[i].Contains("LastConfirmedFullscreenMode") && !lines[i].Contains("Prefered"))
-                {
-                    view = view.Replace(lines[i], "LastConfirmedFullscreenMode=" + 0);
-                    File.WriteAllText(SettingsPath, view);
-                }
-                if (lines[i].Contains("PreferredFullscreenMode") && !lines[i].Contains("LastConfirmed"))
-                {
-                    view = view.Replace(lines[i], "PreferredFullscreenMode=" + 0);
-                    File.WriteAllText(SettingsPath, view);
+                    if (lines[i].Contains("ResolutionSizeX") && !lines[i].Contains("LastUser"))
+                    {
+                        view = view.Replace(lines[i], "ResolutionSizeX=" + numWidth.Value);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("ResolutionSizeY") && !lines[i].Contains("LastUser"))
+                    {
+                        view = view.Replace(lines[i], "ResolutionSizeY=" + numHeight.Value);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("LastUserConfirmedResolutionSizeX"))
+                    {
+                        view = view.Replace(lines[i], "LastUserConfirmedResolutionSizeX=" + numWidth.Value);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("LastUserConfirmedResolutionSizeY"))
+                    {
+                        view = view.Replace(lines[i], "LastUserConfirmedResolutionSizeY=" + numHeight.Value);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("FullscreenMode") && !lines[i].Contains("LastConfirmed") && !lines[i].Contains("Prefered"))
+                    {
+                        view = view.Replace(lines[i], "FullscreenMode=" + 1);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("LastConfirmedFullscreenMode") && !lines[i].Contains("Prefered"))
+                    {
+                        view = view.Replace(lines[i], "LastConfirmedFullscreenMode=" + 1);
+                        File.WriteAllText(SettingsPath, view);
+                    }
+                    if (lines[i].Contains("PreferredFullscreenMode") && !lines[i].Contains("LastConfirmed"))
+                    {
+                        view = view.Replace(lines[i], "PreferredFullscreenMode=" + 1);
+                        File.WriteAllText(SettingsPath, view);
+                    }
                 }
             }
         }
@@ -4751,29 +4796,32 @@ namespace DbD_Settings_Changer
             string[] lines = File.ReadAllLines(SettingsPath);
             Console.WriteLine(String.Join(Environment.NewLine, lines));
 
-            numWidth.Value = 1920;
-            numHeight.Value = 1080;
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            numWidth.Value = screenWidth;
+            numHeight.Value = screenHeight;
             for (int i = 0; i <= numLines - 1; i++)
             {
 
                 if (lines[i].Contains("ResolutionSizeX") && !lines[i].Contains("LastUser"))
                 {
-                    view = view.Replace(lines[i], "ResolutionSizeX=" + 1920);
+                    view = view.Replace(lines[i], "ResolutionSizeX=" + screenWidth);
                     File.WriteAllText(SettingsPath, view);
                 }
                 if (lines[i].Contains("ResolutionSizeY") && !lines[i].Contains("LastUser"))
                 {
-                    view = view.Replace(lines[i], "ResolutionSizeY=" + 1080);
+                    view = view.Replace(lines[i], "ResolutionSizeY=" + screenHeight);
                     File.WriteAllText(SettingsPath, view);
                 }
                 if (lines[i].Contains("LastUserConfirmedResolutionSizeX"))
                 {
-                    view = view.Replace(lines[i], "LastUserConfirmedResolutionSizeX=" + 1920);
+                    view = view.Replace(lines[i], "LastUserConfirmedResolutionSizeX=" + screenWidth);
                     File.WriteAllText(SettingsPath, view);
                 }
                 if (lines[i].Contains("LastUserConfirmedResolutionSizeY"))
                 {
-                    view = view.Replace(lines[i], "LastUserConfirmedResolutionSizeY=" + 1080);
+                    view = view.Replace(lines[i], "LastUserConfirmedResolutionSizeY=" + screenHeight);
                     File.WriteAllText(SettingsPath, view);
                 }
 
@@ -4820,19 +4868,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.ViewDistanceQuality"))
                 {
-                    btnVwLow.BackColor = Color.Transparent;
+                    btnVwLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnVwHigh.BackColor = Color.Transparent;
+                    btnVwHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwHigh.ForeColor = Color.Black;
-                    btnVwUltra.BackColor = Color.Transparent;
+                    btnVwUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwUltra.ForeColor = Color.Black;
-                    btnVwEpic.BackColor = Color.Transparent;
+                    btnVwEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwEpic.ForeColor = Color.Black;
-                    btnVwAwesome.BackColor = Color.Transparent;
+                    btnVwAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnVwMedium.BackColor = Color.Transparent;
+                    btnVwMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.ViewDistanceQuality=0");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -4872,19 +4920,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.AntiAliasingQuality"))
                 {
-                    btnAaLow.BackColor = Color.Transparent;
+                    btnAaLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnAaHigh.BackColor = Color.Transparent;
+                    btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaHigh.ForeColor = Color.Black;
-                    btnAaUltra.BackColor = Color.Transparent;
+                    btnAaUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaUltra.ForeColor = Color.Black;
-                    btnAaEpic.BackColor = Color.Transparent;
+                    btnAaEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaEpic.ForeColor = Color.Black;
-                    btnAaAwesome.BackColor = Color.Transparent;
+                    btnAaAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnAaMedium.BackColor = Color.Transparent;
+                    btnAaMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.AntiAliasingQuality=0");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -4924,19 +4972,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.ShadowQuality"))
                 {
-                    btnShadLow.BackColor = Color.Transparent;
+                    btnShadLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnShadHigh.BackColor = Color.Transparent;
+                    btnShadHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadHigh.ForeColor = Color.Black;
-                    btnShadUltra.BackColor = Color.Transparent;
+                    btnShadUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadUltra.ForeColor = Color.Black;
-                    btnShadEpic.BackColor = Color.Transparent;
+                    btnShadEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadEpic.ForeColor = Color.Black;
-                    btnShadAwesome.BackColor = Color.Transparent;
+                    btnShadAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnShadMedium.BackColor = Color.Transparent;
+                    btnShadMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.ShadowQuality=0");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -4976,19 +5024,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.PostProcessQuality"))
                 {
-                    btnPpLow.BackColor = Color.Transparent;
+                    btnPpLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnPpHigh.BackColor = Color.Transparent;
+                    btnPpHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpHigh.ForeColor = Color.Black;
-                    btnPpUltra.BackColor = Color.Transparent;
+                    btnPpUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpUltra.ForeColor = Color.Black;
-                    btnPpEpic.BackColor = Color.Transparent;
+                    btnPpEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpEpic.ForeColor = Color.Black;
-                    btnPpAwesome.BackColor = Color.Transparent;
+                    btnPpAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnPpMedium.BackColor = Color.Transparent;
+                    btnPpMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.PostProcessQuality=0");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5028,19 +5076,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.TextureQuality"))
                 {
-                    btnTxtLow.BackColor = Color.Transparent;
+                    btnTxtLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnTxtHigh.BackColor = Color.Transparent;
+                    btnTxtHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtHigh.ForeColor = Color.Black;
-                    btnTxtUltra.BackColor = Color.Transparent;
+                    btnTxtUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtUltra.ForeColor = Color.Black;
-                    btnTxtEpic.BackColor = Color.Transparent;
+                    btnTxtEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtEpic.ForeColor = Color.Black;
-                    btnTxtAwesome.BackColor = Color.Transparent;
+                    btnTxtAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnTxtMedium.BackColor = Color.Transparent;
+                    btnTxtMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.TextureQuality=0");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5080,19 +5128,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.EffectsQuality"))
                 {
-                    btnEffLow.BackColor = Color.Transparent;
+                    btnEffLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnEffHigh.BackColor = Color.Transparent;
+                    btnEffHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffHigh.ForeColor = Color.Black;
-                    btnEffUltra.BackColor = Color.Transparent;
+                    btnEffUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffUltra.ForeColor = Color.Black;
-                    btnEffEpic.BackColor = Color.Transparent;
+                    btnEffEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffEpic.ForeColor = Color.Black;
-                    btnEffAwesome.BackColor = Color.Transparent;
+                    btnEffAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnEffMedium.BackColor = Color.Transparent;
+                    btnEffMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.EffectsQuality=0");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5132,19 +5180,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.FoliageQuality"))
                 {
-                    btnFolLow.BackColor = Color.Transparent;
+                    btnFolLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnFolHigh.BackColor = Color.Transparent;
+                    btnFolHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolHigh.ForeColor = Color.Black;
-                    btnFolUltra.BackColor = Color.Transparent;
+                    btnFolUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolUltra.ForeColor = Color.Black;
-                    btnFolEpic.BackColor = Color.Transparent;
+                    btnFolEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolEpic.ForeColor = Color.Black;
-                    btnFolAwesome.BackColor = Color.Transparent;
+                    btnFolAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnFolMedium.BackColor = Color.Transparent;
+                    btnFolMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.FoliageQuality=0");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5184,19 +5232,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.ShadingQuality"))
                 {
-                    btnShLow.BackColor = Color.Transparent;
+                    btnShLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnShLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnShHigh.BackColor = Color.Transparent;
+                    btnShHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnShHigh.ForeColor = Color.Black;
-                    btnShUltra.BackColor = Color.Transparent;
+                    btnShUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnShUltra.ForeColor = Color.Black;
-                    btnShEpic.BackColor = Color.Transparent;
+                    btnShEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnShEpic.ForeColor = Color.Black;
-                    btnShAwesome.BackColor = Color.Transparent;
+                    btnShAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnShAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnShMedium.BackColor = Color.Transparent;
+                    btnShMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnShMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.ShadingQuality=0");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5236,19 +5284,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.AnimationQuality"))
                 {
-                    btnAnimLow.BackColor = Color.Transparent;
+                    btnAnimLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnAnimHigh.BackColor = Color.Transparent;
+                    btnAnimHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimHigh.ForeColor = Color.Black;
-                    btnAnimUltra.BackColor = Color.Transparent;
+                    btnAnimUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimUltra.ForeColor = Color.Black;
-                    btnAnimEpic.BackColor = Color.Transparent;
+                    btnAnimEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimEpic.ForeColor = Color.Black;
-                    btnAnimAwesome.BackColor = Color.Transparent;
+                    btnAnimAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnAnimMedium.BackColor = Color.Transparent;
+                    btnAnimMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.AnimationQuality=0");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5322,19 +5370,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.ViewDistanceQuality"))
                 {
-                    btnVwLow.BackColor = Color.Transparent;
+                    btnVwLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnVwHigh.BackColor = Color.Transparent;
+                    btnVwHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwHigh.ForeColor = Color.Black;
-                    btnVwUltra.BackColor = Color.Transparent;
+                    btnVwUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwUltra.ForeColor = Color.Black;
-                    btnVwEpic.BackColor = Color.Transparent;
+                    btnVwEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwEpic.ForeColor = Color.Black;
-                    btnVwAwesome.BackColor = Color.Transparent;
+                    btnVwAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnVwMedium.BackColor = Color.Transparent;
+                    btnVwMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.ViewDistanceQuality=5");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5374,19 +5422,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.AntiAliasingQuality"))
                 {
-                    btnAaLow.BackColor = Color.Transparent;
+                    btnAaLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnAaHigh.BackColor = Color.Transparent;
+                    btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaHigh.ForeColor = Color.Black;
-                    btnAaUltra.BackColor = Color.Transparent;
+                    btnAaUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaUltra.ForeColor = Color.Black;
-                    btnAaEpic.BackColor = Color.Transparent;
+                    btnAaEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaEpic.ForeColor = Color.Black;
-                    btnAaAwesome.BackColor = Color.Transparent;
+                    btnAaAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnAaMedium.BackColor = Color.Transparent;
+                    btnAaMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.AntiAliasingQuality=5");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5426,19 +5474,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.ShadowQuality"))
                 {
-                    btnShadLow.BackColor = Color.Transparent;
+                    btnShadLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnShadHigh.BackColor = Color.Transparent;
+                    btnShadHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadHigh.ForeColor = Color.Black;
-                    btnShadUltra.BackColor = Color.Transparent;
+                    btnShadUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadUltra.ForeColor = Color.Black;
-                    btnShadEpic.BackColor = Color.Transparent;
+                    btnShadEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadEpic.ForeColor = Color.Black;
-                    btnShadAwesome.BackColor = Color.Transparent;
+                    btnShadAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnShadMedium.BackColor = Color.Transparent;
+                    btnShadMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.ShadowQuality=5");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5478,19 +5526,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.PostProcessQuality"))
                 {
-                    btnPpLow.BackColor = Color.Transparent;
+                    btnPpLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnPpHigh.BackColor = Color.Transparent;
+                    btnPpHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpHigh.ForeColor = Color.Black;
-                    btnPpUltra.BackColor = Color.Transparent;
+                    btnPpUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpUltra.ForeColor = Color.Black;
-                    btnPpEpic.BackColor = Color.Transparent;
+                    btnPpEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpEpic.ForeColor = Color.Black;
-                    btnPpAwesome.BackColor = Color.Transparent;
+                    btnPpAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnPpMedium.BackColor = Color.Transparent;
+                    btnPpMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.PostProcessQuality=5");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5530,19 +5578,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.TextureQuality"))
                 {
-                    btnTxtLow.BackColor = Color.Transparent;
+                    btnTxtLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnTxtHigh.BackColor = Color.Transparent;
+                    btnTxtHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtHigh.ForeColor = Color.Black;
-                    btnTxtUltra.BackColor = Color.Transparent;
+                    btnTxtUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtUltra.ForeColor = Color.Black;
-                    btnTxtEpic.BackColor = Color.Transparent;
+                    btnTxtEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtEpic.ForeColor = Color.Black;
-                    btnTxtAwesome.BackColor = Color.Transparent;
+                    btnTxtAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnTxtMedium.BackColor = Color.Transparent;
+                    btnTxtMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.TextureQuality=5");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5582,19 +5630,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.EffectsQuality"))
                 {
-                    btnEffLow.BackColor = Color.Transparent;
+                    btnEffLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnEffHigh.BackColor = Color.Transparent;
+                    btnEffHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffHigh.ForeColor = Color.Black;
-                    btnEffUltra.BackColor = Color.Transparent;
+                    btnEffUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffUltra.ForeColor = Color.Black;
-                    btnEffEpic.BackColor = Color.Transparent;
+                    btnEffEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffEpic.ForeColor = Color.Black;
-                    btnEffAwesome.BackColor = Color.Transparent;
+                    btnEffAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnEffMedium.BackColor = Color.Transparent;
+                    btnEffMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.EffectsQuality=5");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5634,19 +5682,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.FoliageQuality"))
                 {
-                    btnFolLow.BackColor = Color.Transparent;
+                    btnFolLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnFolHigh.BackColor = Color.Transparent;
+                    btnFolHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolHigh.ForeColor = Color.Black;
-                    btnFolUltra.BackColor = Color.Transparent;
+                    btnFolUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolUltra.ForeColor = Color.Black;
-                    btnFolEpic.BackColor = Color.Transparent;
+                    btnFolEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolEpic.ForeColor = Color.Black;
-                    btnFolAwesome.BackColor = Color.Transparent;
+                    btnFolAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnFolMedium.BackColor = Color.Transparent;
+                    btnFolMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.FoliageQuality=5");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5686,19 +5734,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.ShadingQuality"))
                 {
-                    btnShLow.BackColor = Color.Transparent;
+                    btnShLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnShLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnShHigh.BackColor = Color.Transparent;
+                    btnShHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnShHigh.ForeColor = Color.Black;
-                    btnShUltra.BackColor = Color.Transparent;
+                    btnShUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnShUltra.ForeColor = Color.Black;
-                    btnShEpic.BackColor = Color.Transparent;
+                    btnShEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnShEpic.ForeColor = Color.Black;
-                    btnShAwesome.BackColor = Color.Transparent;
+                    btnShAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnShAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnShMedium.BackColor = Color.Transparent;
+                    btnShMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnShMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.ShadingQuality=5");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5738,19 +5786,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.AnimationQuality"))
                 {
-                    btnAnimLow.BackColor = Color.Transparent;
+                    btnAnimLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnAnimHigh.BackColor = Color.Transparent;
+                    btnAnimHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimHigh.ForeColor = Color.Black;
-                    btnAnimUltra.BackColor = Color.Transparent;
+                    btnAnimUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimUltra.ForeColor = Color.Black;
-                    btnAnimEpic.BackColor = Color.Transparent;
+                    btnAnimEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimEpic.ForeColor = Color.Black;
-                    btnAnimAwesome.BackColor = Color.Transparent;
+                    btnAnimAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnAnimMedium.BackColor = Color.Transparent;
+                    btnAnimMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.AnimationQuality=5");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -5812,7 +5860,7 @@ namespace DbD_Settings_Changer
 
         private void btnResReset_MouseHover(object sender, EventArgs e)
         {
-            tip.Show("Reset game resolution to default.", btnResReset);
+            tip.Show("Reset to system resolution.", btnResReset);
         }
 
         private void btnResReset_MouseLeave(object sender, EventArgs e)
@@ -5998,7 +6046,7 @@ namespace DbD_Settings_Changer
 
         private void btnDelete_MouseHover(object sender, EventArgs e)
         {
-            tip.Show("Delete the backup configuration file and create a new one.", btnDelete);
+            tip.Show("Delete the backup configuration files and create a new ones.", btnDelete);
         }
 
         private void btnDelete_MouseLeave(object sender, EventArgs e)
@@ -6090,19 +6138,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.ViewDistanceQuality"))
                 {
-                    btnVwLow.BackColor = Color.Transparent;
+                    btnVwLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnVwHigh.BackColor = Color.Transparent;
+                    btnVwHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwHigh.ForeColor = Color.Black;
-                    btnVwUltra.BackColor = Color.Transparent;
+                    btnVwUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwUltra.ForeColor = Color.Black;
-                    btnVwEpic.BackColor = Color.Transparent;
+                    btnVwEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwEpic.ForeColor = Color.Black;
-                    btnVwAwesome.BackColor = Color.Transparent;
+                    btnVwAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnVwMedium.BackColor = Color.Transparent;
+                    btnVwMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnVwMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.ViewDistanceQuality=2");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -6142,19 +6190,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.AntiAliasingQuality"))
                 {
-                    btnAaLow.BackColor = Color.Transparent;
+                    btnAaLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnAaHigh.BackColor = Color.Transparent;
+                    btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaHigh.ForeColor = Color.Black;
-                    btnAaUltra.BackColor = Color.Transparent;
+                    btnAaUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaUltra.ForeColor = Color.Black;
-                    btnAaEpic.BackColor = Color.Transparent;
+                    btnAaEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaEpic.ForeColor = Color.Black;
-                    btnAaAwesome.BackColor = Color.Transparent;
+                    btnAaAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnAaMedium.BackColor = Color.Transparent;
+                    btnAaMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnAaMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.AntiAliasingQuality=0");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -6194,19 +6242,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.ShadowQuality"))
                 {
-                    btnShadLow.BackColor = Color.Transparent;
+                    btnShadLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnShadHigh.BackColor = Color.Transparent;
+                    btnShadHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadHigh.ForeColor = Color.Black;
-                    btnShadUltra.BackColor = Color.Transparent;
+                    btnShadUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadUltra.ForeColor = Color.Black;
-                    btnShadEpic.BackColor = Color.Transparent;
+                    btnShadEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadEpic.ForeColor = Color.Black;
-                    btnShadAwesome.BackColor = Color.Transparent;
+                    btnShadAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnShadMedium.BackColor = Color.Transparent;
+                    btnShadMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnShadMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.ShadowQuality=2");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -6246,19 +6294,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.PostProcessQuality"))
                 {
-                    btnPpLow.BackColor = Color.Transparent;
+                    btnPpLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnPpHigh.BackColor = Color.Transparent;
+                    btnPpHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpHigh.ForeColor = Color.Black;
-                    btnPpUltra.BackColor = Color.Transparent;
+                    btnPpUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpUltra.ForeColor = Color.Black;
-                    btnPpEpic.BackColor = Color.Transparent;
+                    btnPpEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpEpic.ForeColor = Color.Black;
-                    btnPpAwesome.BackColor = Color.Transparent;
+                    btnPpAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnPpMedium.BackColor = Color.Transparent;
+                    btnPpMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnPpMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.PostProcessQuality=5");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -6298,19 +6346,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.TextureQuality"))
                 {
-                    btnTxtLow.BackColor = Color.Transparent;
+                    btnTxtLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnTxtHigh.BackColor = Color.Transparent;
+                    btnTxtHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtHigh.ForeColor = Color.Black;
-                    btnTxtUltra.BackColor = Color.Transparent;
+                    btnTxtUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtUltra.ForeColor = Color.Black;
-                    btnTxtEpic.BackColor = Color.Transparent;
+                    btnTxtEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtEpic.ForeColor = Color.Black;
-                    btnTxtAwesome.BackColor = Color.Transparent;
+                    btnTxtAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnTxtMedium.BackColor = Color.Transparent;
+                    btnTxtMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnTxtMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.TextureQuality=2");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -6350,19 +6398,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.EffectsQuality"))
                 {
-                    btnEffLow.BackColor = Color.Transparent;
+                    btnEffLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnEffHigh.BackColor = Color.Transparent;
+                    btnEffHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffHigh.ForeColor = Color.Black;
-                    btnEffUltra.BackColor = Color.Transparent;
+                    btnEffUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffUltra.ForeColor = Color.Black;
-                    btnEffEpic.BackColor = Color.Transparent;
+                    btnEffEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffEpic.ForeColor = Color.Black;
-                    btnEffAwesome.BackColor = Color.Transparent;
+                    btnEffAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnEffMedium.BackColor = Color.Transparent;
+                    btnEffMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnEffMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.EffectsQuality=3");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -6402,19 +6450,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.FoliageQuality"))
                 {
-                    btnFolLow.BackColor = Color.Transparent;
+                    btnFolLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnFolHigh.BackColor = Color.Transparent;
+                    btnFolHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolHigh.ForeColor = Color.Black;
-                    btnFolUltra.BackColor = Color.Transparent;
+                    btnFolUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolUltra.ForeColor = Color.Black;
-                    btnFolEpic.BackColor = Color.Transparent;
+                    btnFolEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolEpic.ForeColor = Color.Black;
-                    btnFolAwesome.BackColor = Color.Transparent;
+                    btnFolAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnFolMedium.BackColor = Color.Transparent;
+                    btnFolMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnFolMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.FoliageQuality=2");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -6454,19 +6502,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.ShadingQuality"))
                 {
-                    btnShLow.BackColor = Color.Transparent;
+                    btnShLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnShLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnShHigh.BackColor = Color.Transparent;
+                    btnShHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnShHigh.ForeColor = Color.Black;
-                    btnShUltra.BackColor = Color.Transparent;
+                    btnShUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnShUltra.ForeColor = Color.Black;
-                    btnShEpic.BackColor = Color.Transparent;
+                    btnShEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnShEpic.ForeColor = Color.Black;
-                    btnShAwesome.BackColor = Color.Transparent;
+                    btnShAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnShAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnShMedium.BackColor = Color.Transparent;
+                    btnShMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnShMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.ShadingQuality=2");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -6506,19 +6554,19 @@ namespace DbD_Settings_Changer
                 }
                 if (lines[i].Contains("sg.AnimationQuality"))
                 {
-                    btnAnimLow.BackColor = Color.Transparent;
+                    btnAnimLow.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimLow.ForeColor = Color.Black;
                     //nazwa wcześniejszego
-                    btnAnimHigh.BackColor = Color.Transparent;
+                    btnAnimHigh.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimHigh.ForeColor = Color.Black;
-                    btnAnimUltra.BackColor = Color.Transparent;
+                    btnAnimUltra.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimUltra.ForeColor = Color.Black;
-                    btnAnimEpic.BackColor = Color.Transparent;
+                    btnAnimEpic.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimEpic.ForeColor = Color.Black;
-                    btnAnimAwesome.BackColor = Color.Transparent;
+                    btnAnimAwesome.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimAwesome.ForeColor = Color.Black;
                     //nazwa klikniętego (poniżej)
-                    btnAnimMedium.BackColor = Color.Transparent;
+                    btnAnimMedium.BackColor = Color.FromArgb(224, 224, 224);
                     btnAnimMedium.ForeColor = Color.Black;
                     ReadConfig = ReadConfig.Replace(lines[i], "sg.AnimationQuality=3");
                     File.WriteAllText(SettingsPath, ReadConfig);
@@ -6570,16 +6618,16 @@ namespace DbD_Settings_Changer
 
         private void btnVwAwesome_Click(object sender, EventArgs e)
         {
-            btnVwMedium.BackColor = Color.Transparent;
+            btnVwMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnVwMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAaHigh.BackColor = Color.Transparent;
+            btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAaHigh.ForeColor = Color.Black;
-            btnVwUltra.BackColor = Color.Transparent;
+            btnVwUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnVwUltra.ForeColor = Color.Black;
-            btnVwEpic.BackColor = Color.Transparent;
+            btnVwEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnVwEpic.ForeColor = Color.Black;
-            btnVwLow.BackColor = Color.Transparent;
+            btnVwLow.BackColor = Color.FromArgb(224, 224, 224);
             btnVwLow.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnVwAwesome.BackColor = Color.Crimson;
@@ -6610,16 +6658,16 @@ namespace DbD_Settings_Changer
 
         private void btnAaAwesome_Click(object sender, EventArgs e)
         {
-            btnAaMedium.BackColor = Color.Transparent;
+            btnAaMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAaMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAaHigh.BackColor = Color.Transparent;
+            btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAaHigh.ForeColor = Color.Black;
-            btnAaUltra.BackColor = Color.Transparent;
+            btnAaUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAaUltra.ForeColor = Color.Black;
-            btnAaEpic.BackColor = Color.Transparent;
+            btnAaEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAaEpic.ForeColor = Color.Black;
-            btnAaLow.BackColor = Color.Transparent;
+            btnAaLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAaLow.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAaAwesome.BackColor = Color.Crimson;
@@ -6650,16 +6698,16 @@ namespace DbD_Settings_Changer
 
         private void btnShadAwesome_Click(object sender, EventArgs e)
         {
-            btnShadEpic.BackColor = Color.Transparent;
+            btnShadEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShadEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShadHigh.BackColor = Color.Transparent;
+            btnShadHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnShadHigh.ForeColor = Color.Black;
-            btnShadMedium.BackColor = Color.Transparent;
+            btnShadMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShadMedium.ForeColor = Color.Black;
-            btnShadUltra.BackColor = Color.Transparent;
+            btnShadUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShadUltra.ForeColor = Color.Black;
-            btnShadLow.BackColor = Color.Transparent;
+            btnShadLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShadLow.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShadAwesome.BackColor = Color.Crimson;
@@ -6690,16 +6738,16 @@ namespace DbD_Settings_Changer
 
         private void btnPpAwesome_Click(object sender, EventArgs e)
         {
-            btnPpEpic.BackColor = Color.Transparent;
+            btnPpEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnPpEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnPpHigh.BackColor = Color.Transparent;
+            btnPpHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnPpHigh.ForeColor = Color.Black;
-            btnPpMedium.BackColor = Color.Transparent;
+            btnPpMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnPpMedium.ForeColor = Color.Black;
-            btnPpUltra.BackColor = Color.Transparent;
+            btnPpUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnPpUltra.ForeColor = Color.Black;
-            btnPpLow.BackColor = Color.Transparent;
+            btnPpLow.BackColor = Color.FromArgb(224, 224, 224);
             btnPpLow.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnPpAwesome.BackColor = Color.Crimson;
@@ -6730,16 +6778,16 @@ namespace DbD_Settings_Changer
 
         private void btnTxtAwesome_Click(object sender, EventArgs e)
         {
-            btnTxtMedium.BackColor = Color.Transparent;
+            btnTxtMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnTxtHigh.BackColor = Color.Transparent;
+            btnTxtHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtHigh.ForeColor = Color.Black;
-            btnTxtEpic.BackColor = Color.Transparent;
+            btnTxtEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtEpic.ForeColor = Color.Black;
-            btnTxtUltra.BackColor = Color.Transparent;
+            btnTxtUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtUltra.ForeColor = Color.Black;
-            btnTxtLow.BackColor = Color.Transparent;
+            btnTxtLow.BackColor = Color.FromArgb(224, 224, 224);
             btnTxtLow.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnTxtAwesome.BackColor = Color.Crimson;
@@ -6770,16 +6818,16 @@ namespace DbD_Settings_Changer
 
         private void btnEffAwesome_Click(object sender, EventArgs e)
         {
-            btnEffEpic.BackColor = Color.Transparent;
+            btnEffEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnEffEpic.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnEffHigh.BackColor = Color.Transparent;
+            btnEffHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnEffHigh.ForeColor = Color.Black;
-            btnEffMedium.BackColor = Color.Transparent;
+            btnEffMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnEffMedium.ForeColor = Color.Black;
-            btnEffUltra.BackColor = Color.Transparent;
+            btnEffUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnEffUltra.ForeColor = Color.Black;
-            btnEffLow.BackColor = Color.Transparent;
+            btnEffLow.BackColor = Color.FromArgb(224, 224, 224);
             btnEffLow.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnEffAwesome.BackColor = Color.Crimson;
@@ -6810,16 +6858,16 @@ namespace DbD_Settings_Changer
 
         private void btnFolAwesome_Click(object sender, EventArgs e)
         {
-            btnFolUltra.BackColor = Color.Transparent;
+            btnFolUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnFolUltra.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnFolMedium.BackColor = Color.Transparent;
+            btnFolMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnFolMedium.ForeColor = Color.Black;
-            btnFolEpic.BackColor = Color.Transparent;
+            btnFolEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnFolEpic.ForeColor = Color.Black;
-            btnFolHigh.BackColor = Color.Transparent;
+            btnFolHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnFolHigh.ForeColor = Color.Black;
-            btnFolLow.BackColor = Color.Transparent;
+            btnFolLow.BackColor = Color.FromArgb(224, 224, 224);
             btnFolLow.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnFolAwesome.BackColor = Color.Crimson;
@@ -6850,16 +6898,16 @@ namespace DbD_Settings_Changer
 
         private void btnShAwesome_Click(object sender, EventArgs e)
         {
-            btnShHigh.BackColor = Color.Transparent;
+            btnShHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnShHigh.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnShUltra.BackColor = Color.Transparent;
+            btnShUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnShUltra.ForeColor = Color.Black;
-            btnShEpic.BackColor = Color.Transparent;
+            btnShEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnShEpic.ForeColor = Color.Black;
-            btnShMedium.BackColor = Color.Transparent;
+            btnShMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnShMedium.ForeColor = Color.Black;
-            btnShLow.BackColor = Color.Transparent;
+            btnShLow.BackColor = Color.FromArgb(224, 224, 224);
             btnShLow.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnShAwesome.BackColor = Color.Crimson;
@@ -6890,16 +6938,16 @@ namespace DbD_Settings_Changer
 
         private void btnAnimAwesome_Click(object sender, EventArgs e)
         {
-            btnAnimMedium.BackColor = Color.Transparent;
+            btnAnimMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAnimHigh.BackColor = Color.Transparent;
+            btnAnimHigh.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimHigh.ForeColor = Color.Black;
-            btnAnimUltra.BackColor = Color.Transparent;
+            btnAnimUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimUltra.ForeColor = Color.Black;
-            btnAnimEpic.BackColor = Color.Transparent;
+            btnAnimEpic.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimEpic.ForeColor = Color.Black;
-            btnAnimLow.BackColor = Color.Transparent;
+            btnAnimLow.BackColor = Color.FromArgb(224, 224, 224);
             btnAnimLow.ForeColor = Color.Black;
             //nazwa klikniętego (poniżej)
             btnAnimAwesome.BackColor = Color.Crimson;
@@ -7175,6 +7223,52 @@ namespace DbD_Settings_Changer
             panelPresets.Hide();
             panelSens.Show();
             panelRes.Hide();
+        }
+
+        private void btnAudioAwesome_Click(object sender, EventArgs e)
+        {
+            btnAudioUltra.BackColor = Color.FromArgb(224, 224, 224);
+            btnAudioUltra.ForeColor = Color.Black;
+            //nazwa wcześniejszego
+            btnAudioLow.BackColor = Color.FromArgb(224, 224, 224);
+            btnAudioLow.ForeColor = Color.Black;
+            btnAudioMedium.BackColor = Color.FromArgb(224, 224, 224);
+            btnAudioMedium.ForeColor = Color.Black;
+            btnAudioHigh.BackColor = Color.FromArgb(224, 224, 224);
+            btnAudioHigh.ForeColor = Color.Black;
+            btnAudioEpic.BackColor = Color.FromArgb(224, 224, 224);
+            btnAudioEpic.ForeColor = Color.Black;
+            //nazwa klikniętego (poniżej)
+            btnAudioAwesome.BackColor = Color.Crimson;
+            btnAudioAwesome.ForeColor = Color.White;
+            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+
+            lblHideFocus.Focus();
+            string view = File.ReadAllText(SettingsPath);
+            string config = File.ReadAllText(SettingsPath);
+            int graphic = 5;
+
+            int numLines = config.Split('\n').Length;
+            string[] lines = File.ReadAllLines(SettingsPath);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+            for (int i = 0; i <= numLines - 1; i++)
+            {
+
+                if (lines[i].Contains("AudioQualityLevel"))
+                {
+                    //lines[i] = "sg.ResolutionQuality=" + resolution + "0.000000";
+                    view = view.Replace(lines[i], "AudioQualityLevel=" + graphic);
+                    File.WriteAllText(SettingsPath, view);
+                }
+
+                if (lines[i].Contains("LastConfirmedAudioQualityLevel"))
+                {
+                    //lines[i] = "sg.ResolutionQuality=" + resolution + "0.000000";
+                    view = view.Replace(lines[i], "LastConfirmedAudioQualityLevel=" + graphic);
+                    File.WriteAllText(SettingsPath, view);
+                }
+            }
         }
     }
 }

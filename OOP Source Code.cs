@@ -115,14 +115,14 @@ namespace DbD_Settings_Changer
                 cbVersion.Items.Add("Steam Version");
                 cbVersion.SelectedIndex = 0;
             }
-            else if (File.Exists(EGSSettingsPath) && File.Exists(EGSEnginePath))
+            if (File.Exists(EGSSettingsPath) && File.Exists(EGSEnginePath))
             {
                 EnginePath = EGSEnginePath;
                 SettingsPath = EGSSettingsPath;
                 cbVersion.Items.Add("Epic Games Store Version");
                 cbVersion.SelectedIndex = 0;
             }
-            else if (File.Exists(MSSettingsPath) && File.Exists(MSEnginePath))
+            if (File.Exists(MSSettingsPath) && File.Exists(MSEnginePath))
             {
                 EnginePath = MSEnginePath;
                 SettingsPath = MSSettingsPath;

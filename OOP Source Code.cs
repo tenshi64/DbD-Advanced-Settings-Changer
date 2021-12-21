@@ -112,21 +112,21 @@ namespace DbD_Settings_Changer
             {
                 EnginePath = SteamEnginePath;
                 SettingsPath = SteamSettingsPath;
-                cbVersion.Items.Add("Steam Version");
+                cbVersion.Items.Add("Steam");
                 cbVersion.SelectedIndex = 0;
             }
             if (File.Exists(EGSSettingsPath) && File.Exists(EGSEnginePath))
             {
                 EnginePath = EGSEnginePath;
                 SettingsPath = EGSSettingsPath;
-                cbVersion.Items.Add("Epic Games Store Version");
+                cbVersion.Items.Add("Epic Games Store");
                 cbVersion.SelectedIndex = 0;
             }
             if (File.Exists(MSSettingsPath) && File.Exists(MSEnginePath))
             {
                 EnginePath = MSEnginePath;
                 SettingsPath = MSSettingsPath;
-                cbVersion.Items.Add("Microsoft Store Version");
+                cbVersion.Items.Add("Microsoft Store");
                 cbVersion.SelectedIndex = 0;
             }
 
@@ -134,7 +134,7 @@ namespace DbD_Settings_Changer
             try
             {
                 WebClient wc = new WebClient();
-                string textFromFile = wc.DownloadString("link");
+                string textFromFile = wc.DownloadString("link to update");
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 if (!textFromFile.Contains(version))
                 {
@@ -229,9 +229,9 @@ namespace DbD_Settings_Changer
 
             int numLines = File.ReadLines(SettingsPath).Count();
             string[] lines = File.ReadAllLines(SettingsPath);
-            Console.WriteLine(String.Join(Environment.NewLine, lines));
+            
 
-            for (int i = 0; i <= numLines - 1; i++)
+            for (int i = 0; i < numLines; i++)
             {
 
                 if (lines[i].Contains("ResolutionQuality"))
@@ -274,8 +274,8 @@ namespace DbD_Settings_Changer
             btnVwMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnVwMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
-            btnAaHigh.ForeColor = Color.Black;
+            btnVwHigh.BackColor = Color.FromArgb(224, 224, 224);
+            btnVwHigh.ForeColor = Color.Black;
             btnVwUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnVwUltra.ForeColor = Color.Black;
             btnVwEpic.BackColor = Color.FromArgb(224, 224, 224);
@@ -1573,7 +1573,7 @@ namespace DbD_Settings_Changer
             }
             if (numFPS.Value > 120)
             {
-                MessageBox.Show("The maximum frame rate in Dead by Daylight is 120. The game will be displayed at 120 frames per second anyway.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"The maximum frame rate in Dead by Daylight is 120. The game will be displayed at 120 frames per second anyway. But the program will set you a limit of {(int)numFPS.Value} FPS anyway ", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var SetFPS = new SetFPS(SettingsPath, "FrameRateLimit=", (int)numFPS.Value);
             }
             if (numFPS.Value < 120)
@@ -1601,9 +1601,6 @@ namespace DbD_Settings_Changer
 
             var ResetFPS = new ResetFPS(EnginePath);
             var SetFPS = new SetFPS(SettingsPath, "FrameRateLimit=", 60);
-
-            ReadEngine = Regex.Replace(ReadEngine, Environment.NewLine + Environment.NewLine, "\r");
-            File.WriteAllText(EnginePath, ReadEngine);
         }
 
         private void btnResetFPS_MouseHover(object sender, EventArgs e)
@@ -1704,7 +1701,7 @@ namespace DbD_Settings_Changer
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            //ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
 
             bool check;
             if (checkBox2.Checked)
@@ -1716,9 +1713,9 @@ namespace DbD_Settings_Changer
 
                 int numLines = File.ReadLines(SettingsPath).Count();
                 string[] lines = File.ReadAllLines(SettingsPath);
-                Console.WriteLine(String.Join(Environment.NewLine, lines));
+                
 
-                for (int i = 0; i <= numLines - 1; i++)
+                for (int i = 0; i < numLines; i++)
                 {
 
                     if (lines[i].Contains("bUseVSync"))
@@ -1738,9 +1735,9 @@ namespace DbD_Settings_Changer
 
                 int numLines = File.ReadLines(SettingsPath).Count();
                 string[] lines = File.ReadAllLines(SettingsPath);
-                Console.WriteLine(String.Join(Environment.NewLine, lines));
+                
 
-                for (int i = 0; i <= numLines - 1; i++)
+                for (int i = 0; i < numLines; i++)
                 {
 
                     if (lines[i].Contains("bUseVSync"))
@@ -1886,8 +1883,8 @@ namespace DbD_Settings_Changer
             btnVwMedium.BackColor = Color.FromArgb(224, 224, 224);
             btnVwMedium.ForeColor = Color.Black;
             //nazwa wcześniejszego
-            btnAaHigh.BackColor = Color.FromArgb(224, 224, 224);
-            btnAaHigh.ForeColor = Color.Black;
+            btnVwHigh.BackColor = Color.FromArgb(224, 224, 224);
+            btnVwHigh.ForeColor = Color.Black;
             btnVwUltra.BackColor = Color.FromArgb(224, 224, 224);
             btnVwUltra.ForeColor = Color.Black;
             btnVwEpic.BackColor = Color.FromArgb(224, 224, 224);
@@ -2522,27 +2519,24 @@ namespace DbD_Settings_Changer
             string ReadConfig = File.ReadAllText(SettingsPath);
             string ReadEngine = File.ReadAllText(EnginePath);
 
-            File.WriteAllText(SettingsPath, ReadConfig);
-            File.WriteAllText(EnginePath, ReadEngine);
-            int numLines = File.ReadLines(EnginePath).Count();
+            int numLines = File.ReadLines(SettingsPath).Count();
             int numLines2 = File.ReadLines(EnginePath).Count();
 
             string[] lines = File.ReadAllLines(SettingsPath);
-            Console.WriteLine(String.Join(Environment.NewLine, lines));
+            
             string[] lines2 = File.ReadAllLines(EnginePath);
-            Console.WriteLine(String.Join(Environment.NewLine, lines2));
 
-            for (int i = 0; i <= numLines - 1; i++)
+            for (int i = 0; i < numLines; i++)
             {
-                if (lines[i].Contains("FrameRateLimit"))
+                if (lines[i].Contains("FrameRateLimit="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
                     if (result == 0)
                     {
-                        for (int a = 0; a <= numLines2 - 1; a++)
+                        for (int a = 0; a < numLines2; a++)
                         {
-                            if (lines2[a].Contains("MaxSmoothedFrameRate"))
+                            if (lines2[a].Contains("MaxSmoothedFrameRate="))
                             {
                                 string str = Regex.Match(lines2[a], @"\d+").Value;
                                 int checkStr = int.Parse(str);
@@ -2560,7 +2554,7 @@ namespace DbD_Settings_Changer
                         numFPS.Value = result;
                     }
                 }
-                if (lines[i].Contains("sg.ResolutionQuality"))
+                if (lines[i].Contains("sg.ResolutionQuality="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2580,7 +2574,7 @@ namespace DbD_Settings_Changer
                     tbRes.Value = result;
                     lblRes.Text = tbRes.Value + "%";
                 }
-                if (lines[i].Contains("sg.ViewDistanceQuality"))
+                if (lines[i].Contains("sg.ViewDistanceQuality="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2616,7 +2610,7 @@ namespace DbD_Settings_Changer
                         btnVwAwesome.ForeColor = Color.White;
                     }
                 }
-                if (lines[i].Contains("sg.AntiAliasingQuality"))
+                if (lines[i].Contains("sg.AntiAliasingQuality="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2678,7 +2672,7 @@ namespace DbD_Settings_Changer
                         btnAaAwesome.ForeColor = Color.White;
                     }
                 }
-                if (lines[i].Contains("sg.ShadowQuality"))
+                if (lines[i].Contains("sg.ShadowQuality="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2714,7 +2708,7 @@ namespace DbD_Settings_Changer
                         btnShadAwesome.ForeColor = Color.White;
                     }
                 }
-                if (lines[i].Contains("sg.PostProcessQuality"))
+                if (lines[i].Contains("sg.PostProcessQuality="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2750,7 +2744,7 @@ namespace DbD_Settings_Changer
                         btnPpAwesome.ForeColor = Color.White;
                     }
                 }
-                if (lines[i].Contains("sg.TextureQuality"))
+                if (lines[i].Contains("sg.TextureQuality="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2786,7 +2780,7 @@ namespace DbD_Settings_Changer
                         btnTxtAwesome.ForeColor = Color.White;
                     }
                 }
-                if (lines[i].Contains("sg.EffectsQuality"))
+                if (lines[i].Contains("sg.EffectsQuality="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2822,7 +2816,7 @@ namespace DbD_Settings_Changer
                         btnEffAwesome.ForeColor = Color.White;
                     }
                 }
-                if (lines[i].Contains("sg.FoliageQuality"))
+                if (lines[i].Contains("sg.FoliageQuality="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2858,7 +2852,7 @@ namespace DbD_Settings_Changer
                         btnFolAwesome.ForeColor = Color.White;
                     }
                 }
-                if (lines[i].Contains("sg.ShadingQuality"))
+                if (lines[i].Contains("sg.ShadingQuality="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2894,7 +2888,7 @@ namespace DbD_Settings_Changer
                         btnShAwesome.ForeColor = Color.White;
                     }
                 }
-                if (lines[i].Contains("sg.AnimationQuality"))
+                if (lines[i].Contains("sg.AnimationQuality="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2930,7 +2924,7 @@ namespace DbD_Settings_Changer
                         btnAnimAwesome.ForeColor = Color.White;
                     }
                 }
-                if (lines[i].Contains("AudioQualityLevel"))
+                if (lines[i].Contains("AudioQualityLevel="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2966,7 +2960,7 @@ namespace DbD_Settings_Changer
                         btnAudioAwesome.ForeColor = Color.White;
                     }
                 }
-                if (lines[i].Contains("MainVolume"))
+                if (lines[i].Contains("MainVolume="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -2987,7 +2981,7 @@ namespace DbD_Settings_Changer
                     trackBar1.Value = result;
                     lblMainVolume.Text = trackBar1.Value + "%";
                 }
-                if (lines[i].Contains("MenuMusicVolume"))
+                if (lines[i].Contains("MenuMusicVolume="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -3009,7 +3003,7 @@ namespace DbD_Settings_Changer
                     trackBar2.Value = result;
                     lblMenu.Text = trackBar2.Value + "%";
                 }
-                if (lines[i].Contains("KillerMouseSensitivity"))
+                if (lines[i].Contains("KillerMouseSensitivity="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -3031,7 +3025,7 @@ namespace DbD_Settings_Changer
                     KillerMouse.Value = result;
                     lblKillerMouse.Text = KillerMouse.Value + "%";
                 }
-                if (lines[i].Contains("SurvivorMouseSensitivity"))
+                if (lines[i].Contains("SurvivorMouseSensitivity="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -3052,7 +3046,7 @@ namespace DbD_Settings_Changer
                     SurvMouse.Value = result;
                     lblSurvMouse.Text = SurvMouse.Value + "%";
                 }
-                if (lines[i].Contains("KillerControllerSensitivity"))
+                if (lines[i].Contains("KillerControllerSensitivity="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -3072,7 +3066,7 @@ namespace DbD_Settings_Changer
                     KillerController.Value = result;
                     lblKillerController.Text = KillerController.Value + "%";
                 }
-                if (lines[i].Contains("SurvivorControllerSensitivity"))
+                if (lines[i].Contains("SurvivorControllerSensitivity="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -3093,7 +3087,7 @@ namespace DbD_Settings_Changer
                     SurvController.Value = result;
                     lblSurvController.Text = SurvController.Value + "%";
                 }
-                if (lines[i].Contains("ResolutionSizeX"))
+                if (lines[i].Contains("ResolutionSizeX="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -3114,7 +3108,7 @@ namespace DbD_Settings_Changer
 
                     numWidth.Value = result;
                 }
-                if (lines[i].Contains("ResolutionSizeY"))
+                if (lines[i].Contains("ResolutionSizeY="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -3135,7 +3129,7 @@ namespace DbD_Settings_Changer
 
                     numHeight.Value = result;
                 }
-                if (lines[i].Contains("bUseVSync"))
+                if (lines[i].Contains("bUseVSync="))
                 {
                     if (lines[i].Contains("False"))
                     {
@@ -3147,7 +3141,7 @@ namespace DbD_Settings_Changer
                     }
                 }
 
-                if (lines[i].Contains("UseHeadphones"))
+                if (lines[i].Contains("UseHeadphones="))
                 {
                     if (lines[i].Contains("False"))
                     {
@@ -3159,7 +3153,7 @@ namespace DbD_Settings_Changer
                     }
                 }
 
-                if (lines[i].Contains("ScreenResolution"))
+                if (lines[i].Contains("ScreenResolution="))
                 {
                     string resultString = Regex.Match(lines[i], @"\d+").Value;
                     int result = int.Parse(resultString);
@@ -3192,19 +3186,19 @@ namespace DbD_Settings_Changer
         private void cbVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
             lblHideFocus.Focus();
-            if((string)cbVersion.SelectedItem == "Steam Version")
+            if((string)cbVersion.SelectedItem == "Steam")
             {
                 EnginePath = SteamEnginePath;
                 SettingsPath = SteamSettingsPath;
                 CheckValues(SettingsPath, EnginePath);
             }
-            else if((string)cbVersion.SelectedItem == "Epic Games Store Version")
+            if((string)cbVersion.SelectedItem == "Epic Games Store")
             {
                 EnginePath = EGSEnginePath;
                 SettingsPath = EGSSettingsPath;
                 CheckValues(SettingsPath, EnginePath);
             }
-            else if ((string)cbVersion.SelectedItem == "Microsoft Store Version")
+            if ((string)cbVersion.SelectedItem == "Microsoft Store")
             {
                 EnginePath = MSEnginePath;
                 SettingsPath = MSSettingsPath;
@@ -3222,7 +3216,7 @@ namespace DbD_Settings_Changer
             int numLines = File.ReadLines(path).Count();
             string[] lines = File.ReadAllLines(path);
 
-            for (int i = 0; i <= numLines - 1; i++)
+            for (int i = 0; i < numLines; i++)
             {
                 if (lines[i].Contains(option))
                 {
@@ -3242,7 +3236,7 @@ namespace DbD_Settings_Changer
             int numLines = File.ReadLines(path).Count();
             string[] lines = File.ReadAllLines(path);
 
-            for (int i = 0; i <= numLines - 1; i++)
+            for (int i = 0; i < numLines; i++)
             {
                 if (lines[i].Contains(option))
                 {
@@ -3254,7 +3248,7 @@ namespace DbD_Settings_Changer
                     }
                     else
                     {
-                        read = read.Replace(lines[i], option + valueInt);
+                        read = read.Replace(lines[i], option + valueInt + ".000000");
                         read = Regex.Replace(read, Environment.NewLine + Environment.NewLine, "\r");
                         File.WriteAllText(path, read);
                     }
@@ -3271,8 +3265,7 @@ namespace DbD_Settings_Changer
             int numLines2 = File.ReadLines(path).Count();
             string[] eng = File.ReadAllLines(path);
 
-
-            for (int a = 0; a <= numLines2 - 1; a++)
+            for (int a = 0; a < numLines2; a++)
             {
                 if (eng[a].Contains("script/ReadEngine.ReadEngine"))
                 {
@@ -3331,7 +3324,7 @@ namespace DbD_Settings_Changer
 
             if (HeightValue != screenHeight || WidthValue != screenWidth)
             {
-                for (int i = 0; i <= numLines - 1; i++)
+                for (int i = 0; i < numLines; i++)
                 {
                     if (lines[i].Contains("ResolutionSizeX") && !lines[i].Contains("LastUser"))
                     {
@@ -3373,7 +3366,7 @@ namespace DbD_Settings_Changer
 
             if (HeightValue == screenHeight && WidthValue == screenWidth)
             {
-                for (int i = 0; i <= numLines - 1; i++)
+                for (int i = 0; i < numLines; i++)
                 {
                     if (lines[i].Contains("ResolutionSizeX") && !lines[i].Contains("LastUser"))
                     {
@@ -3427,7 +3420,7 @@ namespace DbD_Settings_Changer
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
 
-            for (int i = 0; i <= numLines - 1; i++)
+            for (int i = 0; i < numLines; i++)
             {
 
                 if (lines[i].Contains("ResolutionSizeX") && !lines[i].Contains("LastUser"))
@@ -3478,7 +3471,7 @@ namespace DbD_Settings_Changer
             int numLines = File.ReadLines(path).Count();
             string[] lines = File.ReadAllLines(path);
 
-            for (int i = 0; i <= numLines - 1; i++)
+            for (int i = 0; i < numLines; i++)
             {
                 if (lines[i].Contains(option))
                 {
@@ -3546,7 +3539,7 @@ namespace DbD_Settings_Changer
             int numLines2 = File.ReadLines(EnginePath).Count();
             string[] eng = File.ReadAllLines(EnginePath);
 
-            for (int a = 0; a <= numLines2 - 1; a++)
+            for (int a = 0; a < numLines2; a++)
             {
                 if (eng[a].Contains("[/Script/Engine.GarbageCollectionSettings]"))
                 {

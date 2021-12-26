@@ -11,6 +11,10 @@ Advanced Config Editor for Dead by Daylight
 #### Want to see some new feature in the program? Write on Discord server!<br /><br />
 ## Reporting bugs
 #### Submit a bug report on [issues](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/issues) or on a Discord server on the "bug-reports" channel
+## Versions
+#### What platforms does the program support? Steam, Windows Store and Epic Games Store.
+## Operating systems
+#### What operating systems was it created for? Windows only.
 ## Download
 #### Download the latest version from [website](http://dbdconfigeditor.epizy.com/) or from [releases](https://github.com/elefelen/dead-by-daylight-advanced-settings-changer/releases).<br /><br />
 ## Screenshots:<br />

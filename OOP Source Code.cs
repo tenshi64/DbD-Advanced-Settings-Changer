@@ -130,11 +130,10 @@ namespace DbD_Settings_Changer
                 cbVersion.SelectedIndex = 0;
             }
 
-
             try
             {
                 WebClient wc = new WebClient();
-                string textFromFile = wc.DownloadString("link to update");
+                string textFromFile = wc.DownloadString("update check link");
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 if (!textFromFile.Contains(version))
                 {
@@ -163,9 +162,7 @@ namespace DbD_Settings_Changer
             {
                 ReadConfig = File.ReadAllText(SettingsPath);
                 ReadEngine = File.ReadAllText(EnginePath);
-
-                ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
-                ReadEngine = Regex.Replace(ReadEngine, Environment.NewLine + Environment.NewLine, "\r");
+                         
                 File.WriteAllText(EnginePath, ReadEngine);
                 File.WriteAllText(SettingsPath, ReadConfig);
 
@@ -220,26 +217,10 @@ namespace DbD_Settings_Changer
 
         private void tbRes_Scroll(object sender, EventArgs e)
         {
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
-
-            string res = File.ReadAllText(SettingsPath);
-            string config = File.ReadAllText(SettingsPath);
             int resolution = tbRes.Value;
             lblRes.Text = resolution.ToString() + "%";
 
-            int numLines = File.ReadLines(SettingsPath).Count();
-            string[] lines = File.ReadAllLines(SettingsPath);
-            
-
-            for (int i = 0; i < numLines; i++)
-            {
-
-                if (lines[i].Contains("ResolutionQuality"))
-                {
-                    res = res.Replace(lines[i], "sg.ResolutionQuality=" + resolution + ".000000");
-                    File.WriteAllText(SettingsPath, res);
-                }
-            }
+            var ChangeResolution = new ChangeResolution(resolution, SettingsPath);
         }
 
         private void btnUsersSettings_Click(object sender, EventArgs e)
@@ -333,7 +314,7 @@ namespace DbD_Settings_Changer
             btnVwHigh.BackColor = Color.Crimson;
             btnVwHigh.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 2;
@@ -358,7 +339,7 @@ namespace DbD_Settings_Changer
             btnVwUltra.BackColor = Color.Crimson;
             btnVwUltra.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 3;
@@ -383,7 +364,7 @@ namespace DbD_Settings_Changer
             btnVwEpic.BackColor = Color.Crimson;
             btnVwEpic.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 4;
@@ -543,7 +524,7 @@ namespace DbD_Settings_Changer
             btnShadLow.BackColor = Color.Crimson;
             btnShadLow.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 0;
@@ -568,7 +549,7 @@ namespace DbD_Settings_Changer
             btnShadMedium.BackColor = Color.Crimson;
             btnShadMedium.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 1;
@@ -593,7 +574,7 @@ namespace DbD_Settings_Changer
             btnShadHigh.BackColor = Color.Crimson;
             btnShadHigh.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 2;
@@ -618,7 +599,7 @@ namespace DbD_Settings_Changer
             btnShadUltra.BackColor = Color.Crimson;
             btnShadUltra.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 3;
@@ -643,7 +624,7 @@ namespace DbD_Settings_Changer
             btnShadEpic.BackColor = Color.Crimson;
             btnShadEpic.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 4;
@@ -668,7 +649,7 @@ namespace DbD_Settings_Changer
             btnPpLow.BackColor = Color.Crimson;
             btnPpLow.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 0;
@@ -693,7 +674,7 @@ namespace DbD_Settings_Changer
             btnPpMedium.BackColor = Color.Crimson;
             btnPpMedium.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 1;
@@ -718,7 +699,7 @@ namespace DbD_Settings_Changer
             btnPpHigh.BackColor = Color.Crimson;
             btnPpHigh.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 2;
@@ -743,7 +724,7 @@ namespace DbD_Settings_Changer
             btnPpUltra.BackColor = Color.Crimson;
             btnPpUltra.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 3;
@@ -768,7 +749,7 @@ namespace DbD_Settings_Changer
             btnPpEpic.BackColor = Color.Crimson;
             btnPpEpic.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 4;
@@ -793,7 +774,7 @@ namespace DbD_Settings_Changer
             btnTxtLow.BackColor = Color.Crimson;
             btnTxtLow.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 0;
@@ -818,7 +799,7 @@ namespace DbD_Settings_Changer
             btnTxtMedium.BackColor = Color.Crimson;
             btnTxtMedium.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 1;
@@ -843,7 +824,7 @@ namespace DbD_Settings_Changer
             btnTxtHigh.BackColor = Color.Crimson;
             btnTxtHigh.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 2;
@@ -868,7 +849,7 @@ namespace DbD_Settings_Changer
             btnTxtUltra.BackColor = Color.Crimson;
             btnTxtUltra.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 3;
@@ -893,7 +874,7 @@ namespace DbD_Settings_Changer
             btnTxtEpic.BackColor = Color.Crimson;
             btnTxtEpic.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 4;
@@ -918,7 +899,7 @@ namespace DbD_Settings_Changer
             btnEffLow.BackColor = Color.Crimson;
             btnEffLow.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             string view = File.ReadAllText(SettingsPath);
@@ -945,7 +926,7 @@ namespace DbD_Settings_Changer
             btnEffMedium.BackColor = Color.Crimson;
             btnEffMedium.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 1;
@@ -970,7 +951,7 @@ namespace DbD_Settings_Changer
             btnEffHigh.BackColor = Color.Crimson;
             btnEffHigh.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 2;
@@ -995,7 +976,7 @@ namespace DbD_Settings_Changer
             btnEffUltra.BackColor = Color.Crimson;
             btnEffUltra.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 3;
@@ -1020,7 +1001,7 @@ namespace DbD_Settings_Changer
             btnEffEpic.BackColor = Color.Crimson;
             btnEffEpic.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 4;
@@ -1045,7 +1026,7 @@ namespace DbD_Settings_Changer
             btnFolLow.BackColor = Color.Crimson;
             btnFolLow.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 0;
@@ -1070,7 +1051,7 @@ namespace DbD_Settings_Changer
             btnFolMedium.BackColor = Color.Crimson;
             btnFolMedium.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 1;
@@ -1095,7 +1076,7 @@ namespace DbD_Settings_Changer
             btnFolHigh.BackColor = Color.Crimson;
             btnFolHigh.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 2;
@@ -1120,7 +1101,7 @@ namespace DbD_Settings_Changer
             btnFolUltra.BackColor = Color.Crimson;
             btnFolUltra.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 3;
@@ -1145,7 +1126,7 @@ namespace DbD_Settings_Changer
             btnFolEpic.BackColor = Color.Crimson;
             btnFolEpic.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 4;
@@ -1170,7 +1151,7 @@ namespace DbD_Settings_Changer
             btnShLow.BackColor = Color.Crimson;
             btnShLow.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 0;
@@ -1195,7 +1176,7 @@ namespace DbD_Settings_Changer
             btnShMedium.BackColor = Color.Crimson;
             btnShMedium.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 1;
@@ -1220,7 +1201,7 @@ namespace DbD_Settings_Changer
             btnShHigh.BackColor = Color.Crimson;
             btnShHigh.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 2;
@@ -1245,7 +1226,7 @@ namespace DbD_Settings_Changer
             btnShUltra.BackColor = Color.Crimson;
             btnShUltra.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 3;
@@ -1270,7 +1251,7 @@ namespace DbD_Settings_Changer
             btnShEpic.BackColor = Color.Crimson;
             btnShEpic.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 4;
@@ -1295,7 +1276,7 @@ namespace DbD_Settings_Changer
             btnAnimLow.BackColor = Color.Crimson;
             btnAnimLow.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 0;
@@ -1320,7 +1301,7 @@ namespace DbD_Settings_Changer
             btnAnimMedium.BackColor = Color.Crimson;
             btnAnimMedium.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 1;
@@ -1345,7 +1326,7 @@ namespace DbD_Settings_Changer
             btnAnimHigh.BackColor = Color.Crimson;
             btnAnimHigh.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 2;
@@ -1370,7 +1351,7 @@ namespace DbD_Settings_Changer
             btnAnimUltra.BackColor = Color.Crimson;
             btnAnimUltra.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 3;
@@ -1395,7 +1376,7 @@ namespace DbD_Settings_Changer
             btnAnimEpic.BackColor = Color.Crimson;
             btnAnimEpic.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 4;
@@ -1451,7 +1432,7 @@ namespace DbD_Settings_Changer
             //nazwa klikniętego (poniżej)
             btnAudioMedium.BackColor = Color.Crimson;
             btnAudioMedium.ForeColor = Color.White;
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 1;
@@ -1542,9 +1523,9 @@ namespace DbD_Settings_Changer
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
-            bool check;
+            bool check = true;
             if (checkBox1.Checked)
             {
                 lblHideFocus.Focus();
@@ -1573,7 +1554,7 @@ namespace DbD_Settings_Changer
             }
             if (numFPS.Value > 120)
             {
-                MessageBox.Show($"The maximum frame rate in Dead by Daylight is 120. The game will be displayed at 120 frames per second anyway. But the program will set you a limit of {(int)numFPS.Value} FPS anyway ", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"The maximum frame rate in Dead by Daylight is 120. The game will be displayed at 120 frames per second anyway. But the program will set you a limit of {(int)numFPS.Value} FPS anyway. ", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var SetFPS = new SetFPS(SettingsPath, "FrameRateLimit=", (int)numFPS.Value);
             }
             if (numFPS.Value < 120)
@@ -1701,7 +1682,7 @@ namespace DbD_Settings_Changer
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            //ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            //
 
             bool check;
             if (checkBox2.Checked)
@@ -1760,7 +1741,7 @@ namespace DbD_Settings_Changer
 
         private void KillerController_Scroll(object sender, EventArgs e)
         {
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             int sensitivity = KillerController.Value;
             lblKillerController.Text = sensitivity.ToString() + "%";
@@ -2354,7 +2335,7 @@ namespace DbD_Settings_Changer
             btnAudioAwesome.BackColor = Color.Crimson;
             btnAudioAwesome.ForeColor = Color.White;
 
-            ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
+            
 
             lblHideFocus.Focus();
             int graphic = 5;
@@ -3175,8 +3156,8 @@ namespace DbD_Settings_Changer
                 }
                 ReadConfig = File.ReadAllText(SettingsPath);
                 ReadEngine = File.ReadAllText(EnginePath);
-                ReadConfig = Regex.Replace(ReadConfig, Environment.NewLine + Environment.NewLine, "\r");
-                ReadEngine = Regex.Replace(ReadEngine, Environment.NewLine + Environment.NewLine, "\r");
+                
+                
 
                 File.WriteAllText(SettingsPath, ReadConfig);
                 File.WriteAllText(EnginePath, ReadEngine);
@@ -3243,13 +3224,13 @@ namespace DbD_Settings_Changer
                     if (valueInt == 60 || valueInt == 61 || valueInt == 62)
                     {
                         read = read.Replace(lines[i], option + "0.000000");
-                        read = Regex.Replace(read, Environment.NewLine + Environment.NewLine, "\r");
+                        
                         File.WriteAllText(path, read);
                     }
                     else
                     {
                         read = read.Replace(lines[i], option + valueInt + ".000000");
-                        read = Regex.Replace(read, Environment.NewLine + Environment.NewLine, "\r");
+                        
                         File.WriteAllText(path, read);
                     }
                 }
@@ -3368,37 +3349,37 @@ namespace DbD_Settings_Changer
             {
                 for (int i = 0; i < numLines; i++)
                 {
-                    if (lines[i].Contains("ResolutionSizeX") && !lines[i].Contains("LastUser"))
+                    if (lines[i].Contains("ResolutionSizeX=") && !lines[i].Contains("LastUser"))
                     {
                         ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeX=" + WidthValue);
                         File.WriteAllText(path, ReadConfig);
                     }
-                    if (lines[i].Contains("ResolutionSizeY") && !lines[i].Contains("LastUser"))
+                    if (lines[i].Contains("ResolutionSizeY=") && !lines[i].Contains("LastUser"))
                     {
                         ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeY=" + HeightValue);
                         File.WriteAllText(path, ReadConfig);
                     }
-                    if (lines[i].Contains("LastUserConfirmedResolutionSizeX"))
+                    if (lines[i].Contains("LastUserConfirmedResolutionSizeX="))
                     {
                         ReadConfig = ReadConfig.Replace(lines[i], "LastUserConfirmedResolutionSizeX=" + WidthValue);
                         File.WriteAllText(path, ReadConfig);
                     }
-                    if (lines[i].Contains("LastUserConfirmedResolutionSizeY"))
+                    if (lines[i].Contains("LastUserConfirmedResolutionSizeY="))
                     {
                         ReadConfig = ReadConfig.Replace(lines[i], "LastUserConfirmedResolutionSizeY=" + HeightValue);
                         File.WriteAllText(path, ReadConfig);
                     }
-                    if (lines[i].Contains("FullscreenMode") && !lines[i].Contains("LastConfirmed") && !lines[i].Contains("Prefered"))
+                    if (lines[i].Contains("FullscreenMode=") && !lines[i].Contains("LastConfirmed") && !lines[i].Contains("Prefered"))
                     {
                         ReadConfig = ReadConfig.Replace(lines[i], "FullscreenMode=" + 1);
                         File.WriteAllText(path, ReadConfig);
                     }
-                    if (lines[i].Contains("LastConfirmedFullscreenMode") && !lines[i].Contains("Prefered"))
+                    if (lines[i].Contains("LastConfirmedFullscreenMode=") && !lines[i].Contains("Prefered"))
                     {
                         ReadConfig = ReadConfig.Replace(lines[i], "LastConfirmedFullscreenMode=" + 1);
                         File.WriteAllText(path, ReadConfig);
                     }
-                    if (lines[i].Contains("PreferredFullscreenMode") && !lines[i].Contains("LastConfirmed"))
+                    if (lines[i].Contains("PreferredFullscreenMode=") && !lines[i].Contains("LastConfirmed"))
                     {
                         ReadConfig = ReadConfig.Replace(lines[i], "PreferredFullscreenMode=" + 1);
                         File.WriteAllText(path, ReadConfig);
@@ -3423,37 +3404,37 @@ namespace DbD_Settings_Changer
             for (int i = 0; i < numLines; i++)
             {
 
-                if (lines[i].Contains("ResolutionSizeX") && !lines[i].Contains("LastUser"))
+                if (lines[i].Contains("ResolutionSizeX=") && !lines[i].Contains("LastUser"))
                 {
                     ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeX=" + screenWidth);
                     File.WriteAllText(path, ReadConfig);
                 }
-                if (lines[i].Contains("ResolutionSizeY") && !lines[i].Contains("LastUser"))
+                if (lines[i].Contains("ResolutionSizeY=") && !lines[i].Contains("LastUser"))
                 {
                     ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeY=" + screenHeight);
                     File.WriteAllText(path, ReadConfig);
                 }
-                if (lines[i].Contains("LastUserConfirmedResolutionSizeX"))
+                if (lines[i].Contains("LastUserConfirmedResolutionSizeX="))
                 {
                     ReadConfig = ReadConfig.Replace(lines[i], "LastUserConfirmedResolutionSizeX=" + screenWidth);
                     File.WriteAllText(path, ReadConfig);
                 }
-                if (lines[i].Contains("LastUserConfirmedResolutionSizeY"))
+                if (lines[i].Contains("LastUserConfirmedResolutionSizeY="))
                 {
                     ReadConfig = ReadConfig.Replace(lines[i], "LastUserConfirmedResolutionSizeY=" + screenHeight);
                     File.WriteAllText(path, ReadConfig);
                 }
-                if (lines[i].Contains("FullscreenMode") && !lines[i].Contains("LastConfirmed") && !lines[i].Contains("Prefered"))
+                if (lines[i].Contains("FullscreenMode=") && !lines[i].Contains("LastConfirmed") && !lines[i].Contains("Preferred"))
                 {
                     ReadConfig = ReadConfig.Replace(lines[i], "FullscreenMode=" + 1);
                     File.WriteAllText(path, ReadConfig);
                 }
-                if (lines[i].Contains("LastConfirmedFullscreenMode") && !lines[i].Contains("Prefered"))
+                if (lines[i].Contains("LastConfirmedFullscreenMode=") && !lines[i].Contains("Preferred"))
                 {
                     ReadConfig = ReadConfig.Replace(lines[i], "LastConfirmedFullscreenMode=" + 1);
                     File.WriteAllText(path, ReadConfig);
                 }
-                if (lines[i].Contains("PreferredFullscreenMode") && !lines[i].Contains("LastConfirmed"))
+                if (lines[i].Contains("PreferredFullscreenMode=") && !lines[i].Contains("LastConfirmed"))
                 {
                     ReadConfig = ReadConfig.Replace(lines[i], "PreferredFullscreenMode=" + 1);
                     File.WriteAllText(path, ReadConfig);
@@ -3524,7 +3505,7 @@ namespace DbD_Settings_Changer
         {
             string ReadEngine = File.ReadAllText(EnginePath);
             ReadEngine += "\n\n\n[/Script/Engine.GarbageCollectionSettings]\nr.DefaultFeature.AntiAliasing=0";
-            ReadEngine = Regex.Replace(ReadEngine, Environment.NewLine + Environment.NewLine, "\r");
+            
             File.WriteAllText(EnginePath, ReadEngine);
         }
     }
@@ -3552,6 +3533,26 @@ namespace DbD_Settings_Changer
                     ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
 
                     File.WriteAllText(EnginePath, ReadEngine);
+                }
+            }
+        }
+    }
+
+    public class ChangeResolution
+    {
+        public ChangeResolution(int resolution, string SettingsPath)
+        {
+            string ReadConfig = File.ReadAllText(SettingsPath);
+
+            int numLines = File.ReadLines(SettingsPath).Count();
+            string[] lines = File.ReadAllLines(SettingsPath);
+
+            for (int i = 0; i < numLines; i++)
+            {
+                if (lines[i].Contains("ResolutionQuality="))
+                {
+                    ReadConfig = ReadConfig.Replace(lines[i], "sg.ResolutionQuality=" + resolution + ".000000");
+                    File.WriteAllText(SettingsPath, ReadConfig);
                 }
             }
         }

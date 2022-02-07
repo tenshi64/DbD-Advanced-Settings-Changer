@@ -37,6 +37,8 @@ namespace DbD_Settings_Changer
 
         public string ApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Autosave\";
 
+        public string ApplicationLanguageData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Language\";
+
         ToolTip tip = new ToolTip();
 
         public string UsersSettingsContent;
@@ -99,6 +101,67 @@ namespace DbD_Settings_Changer
             panelPresets.Hide();
             panelSens.Hide();
             panelRes.Hide();
+            if(!Directory.Exists(ApplicationLanguageData))
+            {
+                Directory.CreateDirectory(ApplicationLanguageData);
+            }
+            if (!File.Exists(ApplicationLanguageData + @"lang.ini"))
+            {
+                File.WriteAllText(ApplicationLanguageData + @"lang.ini", "en");
+            }
+
+            string path = File.ReadAllText(ApplicationLanguageData + "lang.ini");
+            int numLines = File.ReadLines(ApplicationLanguageData + "lang.ini").Count();
+            string[] lang = File.ReadAllLines(ApplicationLanguageData + "lang.ini");
+            string[] words = new string[] { "en", "pl", "ru", "du", "fr", "jp", "ch", "tu", "esp", "it"};
+
+            string word = "";
+            for (int a = 0; a < numLines; a++)
+            {
+                for(int i = 0; i < words.Length; i++)
+                {
+                    if (lang[a] == words[i])
+                    {
+                        word = words[i];
+
+                        switch(word)
+                        {
+                            case "en":
+                                word = "English";
+                                break;
+                            case "pl":
+                                word = "Polski";
+                                break;
+                            case "ru":
+                                word = "русский";
+                                break;
+                            case "du":
+                                word = "Deutsch";
+                                break;
+                            case "fr":
+                                word = "Français";
+                                break;
+                            case "jp":
+                                word = "日本";
+                                break;
+                            case "ch":
+                                word = "中国人";
+                                break;
+                            case "tu":
+                                word = "Türkçe";
+                                break;
+                            case "esp":
+                                word = "Español";
+                                break;
+                            case "it":
+                                word = "Italiano";
+                                break;
+                        }
+                    }
+                }
+            }
+            cbLanguage.SelectedIndex = cbLanguage.Items.IndexOf(word);
+            ChangeAppLanguage(word);
 
             if (!File.Exists(SteamSettingsPath) && !File.Exists(SteamEnginePath) && !File.Exists(EGSSettingsPath) && !File.Exists(EGSEnginePath) && !File.Exists(MSSettingsPath) && !File.Exists(MSEnginePath))
             {
@@ -133,7 +196,7 @@ namespace DbD_Settings_Changer
             try
             {
                 WebClient wc = new WebClient();
-                string textFromFile = wc.DownloadString("update check link");
+                string textFromFile = wc.DownloadString("https://pastebin.com/yjMGKd4u");
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 if (!textFromFile.Contains(version))
                 {
@@ -2236,7 +2299,7 @@ namespace DbD_Settings_Changer
 
         private void label19_Click(object sender, EventArgs e)
         {
-            this.Size = new Size(1145, 530);
+            this.Size = new Size(1145, 520);
             label19.BackColor = Color.Crimson;
             label19.Location = new Point(label19.Location.X, 2);
             label19.Size = new Size(label19.Size.Width, 40);
@@ -3184,6 +3247,1219 @@ namespace DbD_Settings_Changer
                 EnginePath = MSEnginePath;
                 SettingsPath = MSSettingsPath;
                 CheckValues(SettingsPath, EnginePath);
+            }
+        }
+
+        private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lblHideFocus.Focus();
+            ChangeAppLanguage(cbLanguage.SelectedItem.ToString());
+            string word = "";
+            switch (cbLanguage.SelectedItem.ToString())
+            {
+                case "English":
+                    word = "en";
+                    break;
+                case "Polski":
+                    word = "pl";
+                    break;
+                case "русский":
+                    word = "ru";
+                    break;
+                case "Deutsch":
+                    word = "du";
+                    break;
+                case "Français":
+                    word = "fr";
+                    break;
+                case "日本":
+                    word = "jp";
+                    break;
+                case "中国人":
+                    word = "ch";
+                    break;
+                case "Türkçe":
+                    word = "tu";
+                    break;
+                case "Español":
+                    word = "esp";
+                    break;
+                case "Italiano":
+                    word = "it";
+                    break;
+            }
+
+            string path = File.ReadAllText(ApplicationLanguageData + "lang.ini");
+            int numLines = File.ReadLines(ApplicationLanguageData + "lang.ini").Count();
+            string[] lang = File.ReadAllLines(ApplicationLanguageData + "lang.ini");
+            string[] words = new string[] { "en", "pl", "ru", "du", "fr", "jp", "ch", "tu", "esp", "it" };
+
+            for (int a = 0; a < numLines; a++)
+            {
+                for (int i = 0; i < words.Length; i++)
+                {
+                    if (lang[a].Contains(words[i]))
+                    {
+                        path = path.Replace(lang[a], word);
+                        File.WriteAllText(ApplicationLanguageData + "lang.ini", path);
+                    }
+                }    
+            }
+        }
+
+        public void ChangeAppLanguage(string Language)
+        {
+            if (Language == "English")
+            {
+                lblInAppLang.Text = "In-app language:";
+                lblChangeSettings.Text = "Game version:";
+                label12.Text = "Audio";
+                label2.Text = "Graphics";
+                label14.Text = "FPS Cap";
+                label16.Text = "Graphic presets";
+                label15.Text = "Mouse sensitivity";
+                label19.Text = "Screen";
+                lblWidth.Text = "Width";
+                lblHeight.Text = "Height";
+                label35.Text = "2D Resolution";
+                btnResSet.Text = "Set";
+                btnResReset.Text = "Reset";
+                label1.Text = "3D Resolution";
+                label3.Text = "View Distance Quality";
+                lblAaQuality.Text = "Anti-Aliasing Quality";
+                label5.Text = "Shadow Quality";
+                label6.Text = "Post-Processing Quality";
+                label7.Text = "Textures Quality";
+                label8.Text = "Effects Quality";
+                label9.Text = "Foliage Quality";
+                label10.Text = "Shading Quality";
+                label11.Text = "Animations Quality";
+
+                btnVwLow.Text = "Low";
+                btnVwMedium.Text = "Medium";
+                btnVwHigh.Text = "High";
+                btnVwUltra.Text = "Ultra";
+                btnVwEpic.Text = "Epic";
+                btnVwAwesome.Text = "Awesome";
+
+                btnAaLow.Text = "Low";
+                btnAaMedium.Text = "Medium";
+                btnAaHigh.Text = "High";
+                btnAaUltra.Text = "Ultra";
+                btnAaEpic.Text = "Epic";
+                btnAaAwesome.Text = "Awesome";
+
+                btnShadLow.Text = "Low";
+                btnShadMedium.Text = "Medium";
+                btnShadHigh.Text = "High";
+                btnShadUltra.Text = "Ultra";
+                btnShadEpic.Text = "Epic";
+                btnShadAwesome.Text = "Awesome";
+
+                btnPpLow.Text = "Low";
+                btnPpMedium.Text = "Medium";
+                btnPpHigh.Text = "High";
+                btnPpUltra.Text = "Ultra";
+                btnPpEpic.Text = "Epic";
+                btnPpAwesome.Text = "Awesome";
+
+                btnTxtLow.Text = "Low";
+                btnTxtMedium.Text = "Medium";
+                btnTxtHigh.Text = "High";
+                btnTxtUltra.Text = "Ultra";
+                btnTxtEpic.Text = "Epic";
+                btnTxtAwesome.Text = "Awesome";
+
+                btnEffLow.Text = "Low";
+                btnEffMedium.Text = "Medium";
+                btnEffHigh.Text = "High";
+                btnEffUltra.Text = "Ultra";
+                btnEffEpic.Text = "Epic";
+                btnEffAwesome.Text = "Awesome";
+
+                btnFolLow.Text = "Low";
+                btnFolMedium.Text = "Medium";
+                btnFolHigh.Text = "High";
+                btnFolUltra.Text = "Ultra";
+                btnFolEpic.Text = "Epic";
+                btnFolAwesome.Text = "Awesome";
+
+                btnShLow.Text = "Low";
+                btnShMedium.Text = "Medium";
+                btnShHigh.Text = "High";
+                btnShUltra.Text = "Ultra";
+                btnShEpic.Text = "Epic";
+                btnShAwesome.Text = "Awesome";
+
+                btnAnimLow.Text = "Low";
+                btnAnimMedium.Text = "Medium";
+                btnAnimHigh.Text = "High";
+                btnAnimUltra.Text = "Ultra";
+                btnAnimEpic.Text = "Epic";
+                btnAnimAwesome.Text = "Awesome";
+                btnAaDisable.Text = "Disable";
+                checkBox2.Text = "V-Sync";
+                btnSetFPS.Text = "Set";
+                btnResetFPS.Text = "Reset";
+                label18.Text = "Set your own FPS cap";
+                label22.Text = "Main Volume";
+                label13.Text = "Menu Music";
+                label21.Text = "Audio Quality";
+                checkBox1.Text = "Headphones";
+
+                btnAudioLow.Text = "Low";
+                btnAudioMedium.Text = "Medium";
+                btnAudioHigh.Text = "High";
+                btnAudioUltra.Text = "Ultra";
+                btnAudioEpic.Text = "Epic";
+                btnAudioAwesome.Text = "Awesome";
+                
+                label17.Text = "Choose one of the graphic presets.";
+                btnPresetLow.Text = "Super low";
+                btnPresetMedium.Text = "Medium";
+                btnPresetEpic.Text = "Awesome";
+
+                label24.Text = "Killer (mouse)";
+                label25.Text = "Killer (controller)";
+                label29.Text = "Survivor (mouse)";
+                label27.Text = "Survivor (controller)";
+            }
+            if (Language == "Polski")
+            {
+                lblInAppLang.Text = "Język w aplikacji:";
+                lblChangeSettings.Text = "Wersja gry:";
+                label12.Text = "Dźwięk";
+                label2.Text = "Grafika";
+                label14.Text = "Limit FPS";
+                label16.Text = "Graficz. presety";
+                label15.Text = "Czułość myszy";
+                label19.Text = "Ekran";
+                lblWidth.Text = "Szerokość";
+                lblHeight.Text = "Wysokość";
+                label35.Text = "Rozdzielczość 2D";
+                btnResSet.Text = "Ustaw";
+                btnResReset.Text = "Zresetuj";
+                label1.Text = "Rozdzielczość 3D";
+                label3.Text = "Jakość odgległości renderowania";
+                lblAaQuality.Text = "Jakość Anty-Aliasingu";
+                label5.Text = "Jakość cieni";
+                label6.Text = "Jakość Post-Processingu";
+                label7.Text = "Jakość tekstur";
+                label8.Text = "Jakość efektów";
+                label9.Text = "Jakość trawy/natury";
+                label10.Text = "Jakość cieniowania";
+                label11.Text = "Jakość animacji";
+
+                btnVwLow.Text = "Niska";
+                btnVwMedium.Text = "Średnia";
+                btnVwHigh.Text = "Wysoka";
+                btnVwUltra.Text = "Ultra";
+                btnVwEpic.Text = "Epicka";
+                btnVwAwesome.Text = "Świetna";
+
+                btnAaLow.Text = "Niska";
+                btnAaMedium.Text = "Średnia";
+                btnAaHigh.Text = "Wysoka";
+                btnAaUltra.Text = "Ultra";
+                btnAaEpic.Text = "Epicka";
+                btnAaAwesome.Text = "Świetna";
+
+                btnShadLow.Text = "Niska";
+                btnShadMedium.Text = "Średnia";
+                btnShadHigh.Text = "Wysoka";
+                btnShadUltra.Text = "Ultra";
+                btnShadEpic.Text = "Epicka";
+                btnShadAwesome.Text = "Świetna";
+
+                btnPpLow.Text = "Niska";
+                btnPpMedium.Text = "Średnia";
+                btnPpHigh.Text = "Wysoka";
+                btnPpUltra.Text = "Ultra";
+                btnPpEpic.Text = "Epicka";
+                btnPpAwesome.Text = "Świetna";
+
+                btnTxtLow.Text = "Niska";
+                btnTxtMedium.Text = "Średnia";
+                btnTxtHigh.Text = "Wysoka";
+                btnTxtUltra.Text = "Ultra";
+                btnTxtEpic.Text = "Epicka";
+                btnTxtAwesome.Text = "Świetna";
+
+                btnEffLow.Text = "Niska";
+                btnEffMedium.Text = "Średnia";
+                btnEffHigh.Text = "Wysoka";
+                btnEffUltra.Text = "Ultra";
+                btnEffEpic.Text = "Epicka";
+                btnEffAwesome.Text = "Świetna";
+
+                btnFolLow.Text = "Niska";
+                btnFolMedium.Text = "Średnia";
+                btnFolHigh.Text = "Wysoka";
+                btnFolUltra.Text = "Ultra";
+                btnFolEpic.Text = "Epicka";
+                btnFolAwesome.Text = "Świetna";
+
+                btnShLow.Text = "Niska";
+                btnShMedium.Text = "Średnia";
+                btnShHigh.Text = "Wysoka";
+                btnShUltra.Text = "Ultra";
+                btnShEpic.Text = "Epicka";
+                btnShAwesome.Text = "Świetna";
+
+                btnAnimLow.Text = "Niska";
+                btnAnimMedium.Text = "Średnia";
+                btnAnimHigh.Text = "Wysoka";
+                btnAnimUltra.Text = "Ultra";
+                btnAnimEpic.Text = "Epicka";
+                btnAnimAwesome.Text = "Świetna";
+                btnAaDisable.Text = "Wyłącz";
+
+                checkBox2.Text = "Synchronizacja pionowa";
+                btnSetFPS.Text = "Ustaw";
+                btnResetFPS.Text = "Zresetuj";
+                label18.Text = "Ustaw własny limit FPS";
+
+                label22.Text = "Główna głośność";
+                label13.Text = "Muzyka w menu";
+                label21.Text = "Jakość dźwięku";
+                checkBox1.Text = "Słuchawki";
+
+                btnAudioLow.Text = "Niska";
+                btnAudioMedium.Text = "Średnia";
+                btnAudioHigh.Text = "Wysoka";
+                btnAudioUltra.Text = "Ultra";
+                btnAudioEpic.Text = "Epicka";
+                btnAudioAwesome.Text = "Świetna";
+
+                label17.Text = "Wybierz jeden z graficznych presetów";
+                btnPresetLow.Text = "Bardzo niskie";
+                btnPresetMedium.Text = "Średnie";
+                btnPresetEpic.Text = "Świetne";
+
+                label24.Text = "Zabójca (mysz)";
+                label25.Text = "Zabójca (kontroler)";
+                label29.Text = "Ocalały (mysz)";
+                label27.Text = "Ocalały (kontroler)";
+            }
+            if (Language == "русский")
+            {
+                lblInAppLang.Text = "Язык приложения:";
+                lblChangeSettings.Text = "Версия игры:";
+                label12.Text = "Аудио";
+                label2.Text = "Графика";
+                label14.Text = "FPS";
+                label16.Text = "пресеты";
+                label15.Text = "чувствительность";
+                label19.Text = "Экран";
+                lblWidth.Text = "Ширина";
+                lblHeight.Text = "Высота";
+                label35.Text = "2D-разрешение";
+                btnResSet.Text = "Набор";
+                btnResReset.Text = "Перезагрузить";
+                label1.Text = "3D-разрешение";
+                label3.Text = "Просмотр качества расстояния";
+                lblAaQuality.Text = "Качество сглаживания";
+                label5.Text = "Качество теней";
+                label6.Text = "Качество постобработки";
+                label7.Text = "Качество текстур";
+                label8.Text = "Качество эффектов";
+                label9.Text = "Качество листвы";
+                label10.Text = "Качество затенения";
+                label11.Text = "Качество анимации";
+
+                btnVwLow.Text = "Низкий";
+                btnVwMedium.Text = "Середина";
+                btnVwHigh.Text = "Высокий";
+                btnVwUltra.Text = "Ультра";
+                btnVwEpic.Text = "Эпический";
+                btnVwAwesome.Text = "Потрясающий";
+
+                btnAaLow.Text = "Низкий";
+                btnAaMedium.Text = "Середина";
+                btnAaHigh.Text = "Высокий";
+                btnAaUltra.Text = "Ультра";
+                btnAaEpic.Text = "Эпический";
+                btnAaAwesome.Text = "Потрясающий";
+
+                btnShadLow.Text = "Низкий";
+                btnShadMedium.Text = "Середина";
+                btnShadHigh.Text = "Высокий";
+                btnShadUltra.Text = "Ультра";
+                btnShadEpic.Text = "Эпический";
+                btnShadAwesome.Text = "Потрясающий";
+
+                btnPpLow.Text = "Низкий";
+                btnPpMedium.Text = "Середина";
+                btnPpHigh.Text = "Высокий";
+                btnPpUltra.Text = "Ультра";
+                btnPpEpic.Text = "Эпический";
+                btnPpAwesome.Text = "Потрясающий";
+
+                btnTxtLow.Text = "Низкий";
+                btnTxtMedium.Text = "Середина";
+                btnTxtHigh.Text = "Высокий";
+                btnTxtUltra.Text = "Ультра";
+                btnTxtEpic.Text = "Эпический";
+                btnTxtAwesome.Text = "Потрясающий";
+
+                btnEffLow.Text = "Низкий";
+                btnEffMedium.Text = "Середина";
+                btnEffHigh.Text = "Высокий";
+                btnEffUltra.Text = "Ультра";
+                btnEffEpic.Text = "Эпический";
+                btnEffAwesome.Text = "Потрясающий";
+
+                btnFolLow.Text = "Низкий";
+                btnFolMedium.Text = "Середина";
+                btnFolHigh.Text = "Высокий";
+                btnFolUltra.Text = "Ультра";
+                btnFolEpic.Text = "Эпический";
+                btnFolAwesome.Text = "Потрясающий";
+
+                btnShLow.Text = "Низкий";
+                btnShMedium.Text = "Середина";
+                btnShHigh.Text = "Высокий";
+                btnShUltra.Text = "Ультра";
+                btnShEpic.Text = "Эпический";
+                btnShAwesome.Text = "Потрясающий";
+
+                btnAnimLow.Text = "Низкий";
+                btnAnimMedium.Text = "Середина";
+                btnAnimHigh.Text = "Высокий";
+                btnAnimUltra.Text = "Ультра";
+                btnAnimEpic.Text = "Эпический";
+                btnAnimAwesome.Text = "Потрясающий";
+                btnAaDisable.Text = "Запрещать";
+                checkBox2.Text = "вертикальная синхронизация";
+                btnSetFPS.Text = "Набор";
+                btnResetFPS.Text = "Перезагрузить";
+                label18.Text = "Установите собственное ограничение FPS";
+                label22.Text = "Основной объем";
+                label13.Text = "Меню Музыка";
+                label21.Text = "Качество звука";
+                checkBox1.Text = "Наушники";
+
+                btnAudioLow.Text = "Низкий";
+                btnAudioMedium.Text = "Середина";
+                btnAudioHigh.Text = "Высокий";
+                btnAudioUltra.Text = "Ультра";
+                btnAudioEpic.Text = "Эпический";
+                btnAudioAwesome.Text = "Потрясающий";
+
+                label17.Text = "Выберите один из графических пресетов.";
+                btnPresetLow.Text = "Супер низкий";
+                btnPresetMedium.Text = "Середина";
+                btnPresetEpic.Text = "Потрясающий";
+
+                label24.Text = "Убийца (мышь)";
+                label25.Text = "Киллер (контролер)";
+                label29.Text = "Выживший (мышь)";
+                label27.Text = "Выживший (контроллер)";
+            }
+            if (Language == "Deutsch")
+            {
+                lblInAppLang.Text = "In-App-Sprache:";
+                lblChangeSettings.Text = "Spielversion:";
+                label12.Text = "Audio";
+                label2.Text = "Grafik";
+                label14.Text = "FPS";
+                label16.Text = "Voreinstellungen";
+                label15.Text = "Empfindlichkeit";
+                label19.Text = "Schirm";
+                lblWidth.Text = "Breite";
+                lblHeight.Text = "Höhe";
+                label35.Text = "2D-Auflösung";
+                btnResSet.Text = "Satz";
+                btnResReset.Text = "Zurücksetzen";
+                label1.Text = "3D-Auflösung";
+                label3.Text = "Entfernungsqualität anzeigen";
+                lblAaQuality.Text = "Anti-Aliasing-Qualität";
+                label5.Text = "Schattenqualität";
+                label6.Text = "Qualität der Nachbearbeitung";
+                label7.Text = "Qualität der Texturen";
+                label8.Text = "Effektqualität";
+                label9.Text = "Laubqualität";
+                label10.Text = "Schattierungsqualität";
+                label11.Text = "Animationsqualität";
+
+                btnVwLow.Text = "Niedrig";
+                btnVwMedium.Text = "Mittel";
+                btnVwHigh.Text = "Hoch";
+                btnVwUltra.Text = "Ultra";
+                btnVwEpic.Text = "Episch";
+                btnVwAwesome.Text = "Toll";
+
+                btnAaLow.Text = "Niedrig";
+                btnAaMedium.Text = "Mittel";
+                btnAaHigh.Text = "Hoch";
+                btnAaUltra.Text = "Ultra";
+                btnAaEpic.Text = "Episch";
+                btnAaAwesome.Text = "Toll";
+
+                btnShadLow.Text = "Niedrig";
+                btnShadMedium.Text = "Mittel";
+                btnShadHigh.Text = "Hoch";
+                btnShadUltra.Text = "Ultra";
+                btnShadEpic.Text = "Episch";
+                btnShadAwesome.Text = "Toll";
+
+                btnPpLow.Text = "Niedrig";
+                btnPpMedium.Text = "Mittel";
+                btnPpHigh.Text = "Hoch";
+                btnPpUltra.Text = "Ultra";
+                btnPpEpic.Text = "Episch";
+                btnPpAwesome.Text = "Toll";
+
+                btnTxtLow.Text = "Niedrig";
+                btnTxtMedium.Text = "Mittel";
+                btnTxtHigh.Text = "Hoch";
+                btnTxtUltra.Text = "Ultra";
+                btnTxtEpic.Text = "Episch";
+                btnTxtAwesome.Text = "Toll";
+
+                btnEffLow.Text = "Niedrig";
+                btnEffMedium.Text = "Mittel";
+                btnEffHigh.Text = "Hoch";
+                btnEffUltra.Text = "Ultra";
+                btnEffEpic.Text = "Episch";
+                btnEffAwesome.Text = "Toll";
+
+                btnFolLow.Text = "Niedrig";
+                btnFolMedium.Text = "Mittel";
+                btnFolHigh.Text = "Hoch";
+                btnFolUltra.Text = "Ultra";
+                btnFolEpic.Text = "Episch";
+                btnFolAwesome.Text = "Toll";
+
+                btnShLow.Text = "Niedrig";
+                btnShMedium.Text = "Mittel";
+                btnShHigh.Text = "Hoch";
+                btnShUltra.Text = "Ultra";
+                btnShEpic.Text = "Episch";
+                btnShAwesome.Text = "Toll";
+
+                btnAnimLow.Text = "Niedrig";
+                btnAnimMedium.Text = "Mittel";
+                btnAnimHigh.Text = "Hoch";
+                btnAnimUltra.Text = "Ultra";
+                btnAnimEpic.Text = "Episch";
+                btnAnimAwesome.Text = "Toll";
+                btnAaDisable.Text = "Deaktivieren";
+                checkBox2.Text = "Vertikale Synchronisation";
+                btnSetFPS.Text = "Satz";
+                btnResetFPS.Text = "Zurücksetzen";
+                label18.Text = "Legen Sie Ihre eigene FPS-Obergrenze fest";
+                label22.Text = "Hauptvolumen";
+                label13.Text = "Menü Musik";
+                label21.Text = "Audio Qualität";
+                checkBox1.Text = "Kopfhörer";
+
+                btnAudioLow.Text = "Niedrig";
+                btnAudioMedium.Text = "Mittel";
+                btnAudioHigh.Text = "Hoch";
+                btnAudioUltra.Text = "Ultra";
+                btnAudioEpic.Text = "Episch";
+                btnAudioAwesome.Text = "Toll";
+
+                label17.Text = "Wählen Sie eine der Grafikvorgaben aus.";
+                btnPresetLow.Text = "Sehr niedrig";
+                btnPresetMedium.Text = "Mittel";
+                btnPresetEpic.Text = "Toll";
+
+                label24.Text = "Mörder (Maus)";
+                label25.Text = "Mörder (Controller)";
+                label29.Text = "Überlebender (Maus)";
+                label27.Text = "Überlebender (Controller)";
+            }
+            if (Language == "Français")
+            {
+                lblInAppLang.Text = "Langue:";
+                lblChangeSettings.Text = "Version du jeu:";
+                label12.Text = "Audio";
+                label2.Text = "Graphiques";
+                label14.Text = "FPS";
+                label16.Text = "Préréglages";
+                label15.Text = "Sensibilité";
+                label19.Text = "Écran";
+                lblWidth.Text = "Largeur";
+                lblHeight.Text = "Hauteur";
+                label35.Text = "Résolution 2D";
+                btnResSet.Text = "Définir";
+                btnResReset.Text = "Réinitialiser";
+                label1.Text = "Résolution 3D";
+                label3.Text = "Afficher la qualité de la distance";
+                lblAaQuality.Text = "Qualité anticrénelage";
+                label5.Text = "Qualité de l'ombre";
+                label6.Text = "Qualité post-traitement";
+                label7.Text = "Qualité des textures";
+                label8.Text = "Qualité des effets";
+                label9.Text = "Qualité du feuillage";
+                label10.Text = "Qualité de l'ombrage";
+                label11.Text = "Qualité des animations";
+
+                btnVwLow.Text = "Bas";
+                btnVwMedium.Text = "Moyen";
+                btnVwHigh.Text = "Élevé";
+                btnVwUltra.Text = "Ultra";
+                btnVwEpic.Text = "Epique";
+                btnVwAwesome.Text = "Génial";
+
+                btnAaLow.Text = "Bas";
+                btnAaMedium.Text = "Moyen";
+                btnAaHigh.Text = "Élevé";
+                btnAaUltra.Text = "Ultra";
+                btnAaEpic.Text = "Epique";
+                btnAaAwesome.Text = "Génial";
+
+                btnShadLow.Text = "Bas";
+                btnShadMedium.Text = "Moyen";
+                btnShadHigh.Text = "Élevé";
+                btnShadUltra.Text = "Ultra";
+                btnShadEpic.Text = "Epique";
+                btnShadAwesome.Text = "Génial";
+
+                btnPpLow.Text = "Bas";
+                btnPpMedium.Text = "Moyen";
+                btnPpHigh.Text = "Élevé";
+                btnPpUltra.Text = "Ultra";
+                btnPpEpic.Text = "Epique";
+                btnPpAwesome.Text = "Génial";
+
+                btnTxtLow.Text = "Bas";
+                btnTxtMedium.Text = "Moyen";
+                btnTxtHigh.Text = "Élevé";
+                btnTxtUltra.Text = "Ultra";
+                btnTxtEpic.Text = "Epique";
+                btnTxtAwesome.Text = "Génial";
+
+                btnEffLow.Text = "Bas";
+                btnEffMedium.Text = "Moyen";
+                btnEffHigh.Text = "Élevé";
+                btnEffUltra.Text = "Ultra";
+                btnEffEpic.Text = "Epique";
+                btnEffAwesome.Text = "Génial";
+
+                btnFolLow.Text = "Bas";
+                btnFolMedium.Text = "Moyen";
+                btnFolHigh.Text = "Élevé";
+                btnFolUltra.Text = "Ultra";
+                btnFolEpic.Text = "Epique";
+                btnFolAwesome.Text = "Génial";
+
+                btnShLow.Text = "Bas";
+                btnShMedium.Text = "Moyen";
+                btnShHigh.Text = "Élevé";
+                btnShUltra.Text = "Ultra";
+                btnShEpic.Text = "Epique";
+                btnShAwesome.Text = "Génial";
+
+                btnAnimLow.Text = "Bas";
+                btnAnimMedium.Text = "Moyen";
+                btnAnimHigh.Text = "Élevé";
+                btnAnimUltra.Text = "Ultra";
+                btnAnimEpic.Text = "Epique";
+                btnAnimAwesome.Text = "Génial";
+                btnAaDisable.Text = "Désactiver";
+                checkBox2.Text = "Synchronisation verticale";
+                btnSetFPS.Text = "Définir";
+                btnResetFPS.Text = "Réinitialiser";
+                label18.Text = "Définissez votre propre plafond FPS";
+                label22.Text = "Volume principal";
+                label13.Text = "Menu Musique";
+                label21.Text = "Qualité audio";
+                checkBox1.Text = "Écouteurs";
+
+                btnAudioLow.Text = "Bas";
+                btnAudioMedium.Text = "Moyen";
+                btnAudioHigh.Text = "Élevé";
+                btnAudioUltra.Text = "Ultra";
+                btnAudioEpic.Text = "Epique";
+                btnAudioAwesome.Text = "Génial";
+
+                label17.Text = "Choisissez l'un des préréglages graphiques.";
+                btnPresetLow.Text = "Super bas";
+                btnPresetMedium.Text = "Moyen";
+                btnPresetEpic.Text = "Génial";
+
+                label24.Text = "Tueur (souris)";
+                label25.Text = "Tueur (contrôleur)";
+                label29.Text = "Survivant (souris)";
+                label27.Text = "Survivant (contrôleur)";
+            }
+            if (Language == "日本")
+            {
+                lblInAppLang.Text = "アプリ内言語：";
+                lblChangeSettings.Text = "ゲームバージョン：";
+                label12.Text = "オーディオ";
+                label2.Text = "グラフィックス";
+                label14.Text = "FPSキャップ";
+                label16.Text = "グラフィックプリセット";
+                label15.Text = "マウスの感度";
+                label19.Text = "画面";
+                lblWidth.Text = "幅";
+                lblHeight.Text = "高さ";
+                label35.Text = "2D解像度";
+                btnResSet.Text = "設定";
+                btnResReset.Text = "リセット";
+                label1.Text = "3D解像度";
+                label3.Text = "距離の品質を表示";
+                lblAaQuality.Text = "アンチエイリアシング品質";
+                label5.Text = "シャドウ品質";
+                label6.Text = "後処理品質";
+                label7.Text = "テクスチャ品質";
+                label8.Text = "効果の品質";
+                label9.Text = "葉の品質";
+                label10.Text = "シェーディング品質";
+                label11.Text = "アニメーションの品質";
+
+                btnVwLow.Text = "低";
+                btnVwMedium.Text = "中";
+                btnVwHigh.Text = "高";
+                btnVwUltra.Text = "ウルトラ";
+                btnVwEpic.Text = "大作";
+                btnVwAwesome.Text = "素晴らしい";
+
+                btnAaLow.Text = "低";
+                btnAaMedium.Text = "中";
+                btnAaHigh.Text = "高";
+                btnAaUltra.Text = "ウルトラ";
+                btnAaEpic.Text = "大作";
+                btnAaAwesome.Text = "素晴らしい";
+
+                btnShadLow.Text = "低";
+                btnShadMedium.Text = "中";
+                btnShadHigh.Text = "高";
+                btnShadUltra.Text = "ウルトラ";
+                btnShadEpic.Text = "大作";
+                btnShadAwesome.Text = "素晴らしい";
+
+                btnPpLow.Text = "低";
+                btnPpMedium.Text = "中";
+                btnPpHigh.Text = "高";
+                btnPpUltra.Text = "ウルトラ";
+                btnPpEpic.Text = "大作";
+                btnPpAwesome.Text = "素晴らしい";
+
+                btnTxtLow.Text = "低";
+                btnTxtMedium.Text = "中";
+                btnTxtHigh.Text = "高";
+                btnTxtUltra.Text = "ウルトラ";
+                btnTxtEpic.Text = "大作";
+                btnTxtAwesome.Text = "素晴らしい";
+
+                btnEffLow.Text = "低";
+                btnEffMedium.Text = "中";
+                btnEffHigh.Text = "高";
+                btnEffUltra.Text = "ウルトラ";
+                btnEffEpic.Text = "大作";
+                btnEffAwesome.Text = "素晴らしい";
+
+                btnFolLow.Text = "低";
+                btnFolMedium.Text = "中";
+                btnFolHigh.Text = "高";
+                btnFolUltra.Text = "ウルトラ";
+                btnFolEpic.Text = "大作";
+                btnFolAwesome.Text = "素晴らしい";
+
+                btnShLow.Text = "低";
+                btnShMedium.Text = "中";
+                btnShHigh.Text = "高";
+                btnShUltra.Text = "ウルトラ";
+                btnShEpic.Text = "大作";
+                btnShAwesome.Text = "素晴らしい";
+
+                btnAnimLow.Text = "低";
+                btnAnimMedium.Text = "中";
+                btnAnimHigh.Text = "高";
+                btnAnimUltra.Text = "ウルトラ";
+                btnAnimEpic.Text = "大作";
+                btnAnimAwesome.Text = "素晴らしい";
+                btnAaDisable.Text = "無効";
+                checkBox2.Text = "垂直同期";
+                btnSetFPS.Text = "設定";
+                btnResetFPS.Text = "リセット";
+                label18.Text = "独自のFPSキャップを設定";
+                label22.Text = "メインボリューム";
+                label13.Text = "メニュー音楽";
+                label21.Text = "オーディオ品質";
+                checkBox1.Text = "ヘッドフォン";
+
+                btnAudioLow.Text = "低";
+                btnAudioMedium.Text = "中";
+                btnAudioHigh.Text = "高";
+                btnAudioUltra.Text = "ウルトラ";
+                btnAudioEpic.Text = "大作";
+                btnAudioAwesome.Text = "素晴らしい";
+
+                label17.Text = "グラフィックプリセットの1つを選択してください。";
+                btnPresetLow.Text = "超低";
+                btnPresetMedium.Text = "中";
+                btnPresetEpic.Text = "素晴らしい";
+
+                label24.Text = "キラー（マウス）";
+                label25.Text = "キラー（コントローラー）";
+                label29.Text = "サバイバー（マウス）";
+                label27.Text = "サバイバー（コントローラー）";
+            }
+            if (Language == "中国人")
+            {
+                lblInAppLang.Text = "应用内语言：";
+                lblChangeSettings.Text = "游戏版本：";
+                label12.Text = "音频";
+                label2.Text = "图形";
+                label14.Text = "帧数限制";
+                label16.Text = "图形预设";
+                label15.Text = "鼠标灵敏度";
+                label19.Text = "屏幕";
+                lblWidth.Text = "宽度";
+                lblHeight.Text = "高度";
+                label35.Text = "二维分辨率";
+                btnResSet.Text = "设置";
+                btnResReset.Text = "重置";
+                label1.Text = "3D 分辨率";
+                label3.Text = "查看距离质量";
+                lblAaQuality.Text = "抗锯齿质量";
+                label5.Text = "阴影质量";
+                label6.Text = "后处理质量";
+                label7.Text = "纹理质量";
+                label8.Text = "影响质量";
+                label9.Text = "树叶质量";
+                label10.Text = "着色质量";
+                label11.Text = "动画质量";
+
+                btnVwLow.Text = "低";
+                btnVwMedium.Text = "中等";
+                btnVwHigh.Text = "高";
+                btnVwUltra.Text = "超";
+                btnVwEpic.Text = "史诗";
+                btnVwAwesome.Text = "真棒";
+
+                btnAaLow.Text = "低";
+                btnAaMedium.Text = "中等";
+                btnAaHigh.Text = "高";
+                btnAaUltra.Text = "超";
+                btnAaEpic.Text = "史诗";
+                btnAaAwesome.Text = "真棒";
+
+                btnShadLow.Text = "低";
+                btnShadMedium.Text = "中等";
+                btnShadHigh.Text = "高";
+                btnShadUltra.Text = "超";
+                btnShadEpic.Text = "史诗";
+                btnShadAwesome.Text = "真棒";
+
+                btnPpLow.Text = "低";
+                btnPpMedium.Text = "中等";
+                btnPpHigh.Text = "高";
+                btnPpUltra.Text = "超";
+                btnPpEpic.Text = "史诗";
+                btnPpAwesome.Text = "真棒";
+
+                btnTxtLow.Text = "低";
+                btnTxtMedium.Text = "中等";
+                btnTxtHigh.Text = "高";
+                btnTxtUltra.Text = "超";
+                btnTxtEpic.Text = "史诗";
+                btnTxtAwesome.Text = "真棒";
+
+                btnEffLow.Text = "低";
+                btnEffMedium.Text = "中等";
+                btnEffHigh.Text = "高";
+                btnEffUltra.Text = "超";
+                btnEffEpic.Text = "史诗";
+                btnEffAwesome.Text = "真棒";
+
+                btnFolLow.Text = "低";
+                btnFolMedium.Text = "中等";
+                btnFolHigh.Text = "高";
+                btnFolUltra.Text = "超";
+                btnFolEpic.Text = "史诗";
+                btnFolAwesome.Text = "真棒";
+
+                btnShLow.Text = "低";
+                btnShMedium.Text = "中等";
+                btnShHigh.Text = "高";
+                btnShUltra.Text = "超";
+                btnShEpic.Text = "史诗";
+                btnShAwesome.Text = "真棒";
+
+                btnAnimLow.Text = "低";
+                btnAnimMedium.Text = "中等";
+                btnAnimHigh.Text = "高";
+                btnAnimUltra.Text = "超";
+                btnAnimEpic.Text = "史诗";
+                btnAnimAwesome.Text = "真棒";
+                btnAaDisable.Text = "禁用";
+                checkBox2.Text = "垂直同步";
+                btnSetFPS.Text = "设置";
+                btnResetFPS.Text = "重置";
+                label18.Text = "设置你自己的 FPS 上限";
+                label22.Text = "主卷";
+                label13.Text = "菜单音乐";
+                label21.Text = "音频质量";
+                checkBox1.Text = "耳机";
+
+                btnAudioLow.Text = "低";
+                btnAudioMedium.Text = "中等";
+                btnAudioHigh.Text = "高";
+                btnAudioUltra.Text = "超";
+                btnAudioEpic.Text = "史诗";
+                btnAudioAwesome.Text = "真棒";
+
+                label17.Text = "选择图形预设之一。";
+                btnPresetLow.Text = "超低";
+                btnPresetMedium.Text = "中";
+                btnPresetEpic.Text = "真棒";
+
+                label24.Text = "杀手（鼠标）";
+                label25.Text = "杀手（控制器）";
+                label29.Text = "幸存者（鼠标）";
+                label27.Text = "幸存者（控制器）";
+            }
+            if (Language == "Türkçe")
+            {
+                lblInAppLang.Text = "Uygulama içi dil:";
+                lblChangeSettings.Text = "Oyun sürümü:";
+                label12.Text = "Ses";
+                label2.Text = "Grafikler";
+                label14.Text = "FPS Sınırı";
+                label16.Text = "Grafik ön ayarları";
+                label15.Text = "Fare duyarlılığı";
+                label19.Text = "Ekran";
+                lblWidth.Text = "Genişlik";
+                lblHeight.Text = "Yükseklik";
+                label35.Text = "2D Çözünürlük";
+                btnResSet.Text = "Ayarla";
+                btnResReset.Text = "Sıfırla";
+                label1.Text = "3D Çözünürlük";
+                label3.Text = "Mesafe Kalitesini Görüntüle";
+                lblAaQuality.Text = "Örtüşme Önleme Kalitesi";
+                label5.Text = "Gölge Kalitesi";
+                label6.Text = "İşlem Sonrası Kalite";
+                label7.Text = "Doku Kalitesi";
+                label8.Text = "Etki Kalitesi";
+                label9.Text = "Yaprak Kalitesi";
+                label10.Text = "Gölgeleme Kalitesi";
+                label11.Text = "Animasyon Kalitesi";
+
+                btnVwLow.Text = "Düşük";
+                btnVwMedium.Text = "Orta";
+                btnVwHigh.Text = "Yüksek";
+                btnVwUltra.Text = "Ultra";
+                btnVwEpic.Text = "Epik";
+                btnVwAwesome.Text = "Harika";
+
+                btnAaLow.Text = "Düşük";
+                btnAaMedium.Text = "Orta";
+                btnAaHigh.Text = "Yüksek";
+                btnAaUltra.Text = "Ultra";
+                btnAaEpic.Text = "Epik";
+                btnAaAwesome.Text = "Harika";
+
+                btnShadLow.Text = "Düşük";
+                btnShadMedium.Text = "Orta";
+                btnShadHigh.Text = "Yüksek";
+                btnShadUltra.Text = "Ultra";
+                btnShadEpic.Text = "Epik";
+                btnShadAwesome.Text = "Harika";
+
+                btnPpLow.Text = "Düşük";
+                btnPpMedium.Text = "Orta";
+                btnPpHigh.Text = "Yüksek";
+                btnPpUltra.Text = "Ultra";
+                btnPpEpic.Text = "Epik";
+                btnPpAwesome.Text = "Harika";
+
+                btnTxtLow.Text = "Düşük";
+                btnTxtMedium.Text = "Orta";
+                btnTxtHigh.Text = "Yüksek";
+                btnTxtUltra.Text = "Ultra";
+                btnTxtEpic.Text = "Epik";
+                btnTxtAwesome.Text = "Harika";
+
+                btnEffLow.Text = "Düşük";
+                btnEffMedium.Text = "Orta";
+                btnEffHigh.Text = "Yüksek";
+                btnEffUltra.Text = "Ultra";
+                btnEffEpic.Text = "Epik";
+                btnEffAwesome.Text = "Harika";
+
+                btnFolLow.Text = "Düşük";
+                btnFolMedium.Text = "Orta";
+                btnFolHigh.Text = "Yüksek";
+                btnFolUltra.Text = "Ultra";
+                btnFolEpic.Text = "Epik";
+                btnFolAwesome.Text = "Harika";
+
+                btnShLow.Text = "Düşük";
+                btnShMedium.Text = "Orta";
+                btnShHigh.Text = "Yüksek";
+                btnShUltra.Text = "Ultra";
+                btnShEpic.Text = "Epik";
+                btnShAwesome.Text = "Harika";
+
+                btnAnimLow.Text = "Düşük";
+                btnAnimMedium.Text = "Orta";
+                btnAnimHigh.Text = "Yüksek";
+                btnAnimUltra.Text = "Ultra";
+                btnAnimEpic.Text = "Epik";
+                btnAnimAwesome.Text = "Harika";
+                btnAaDisable.Text = "Devre Dışı Bırak";
+                checkBox2.Text = "Dikey senkronizasyon";
+                btnSetFPS.Text = "Ayarla";
+                btnResetFPS.Text = "Sıfırla";
+                label18.Text = "Kendi FPS sınırınızı belirleyin";
+                label22.Text = "Ana Cilt";
+                label13.Text = "Menü Müziği";
+                label21.Text = "Ses Kalitesi";
+                checkBox1.Text = "Kulaklıklar";
+
+                btnAudioLow.Text = "Düşük";
+                btnAudioMedium.Text = "Orta";
+                btnAudioHigh.Text = "Yüksek";
+                btnAudioUltra.Text = "Ultra";
+                btnAudioEpic.Text = "Epik";
+                btnAudioAwesome.Text = "Harika";
+
+                label17.Text = "Grafik ön ayarlarından birini seçin.";
+                btnPresetLow.Text = "Süper düşük";
+                btnPresetMedium.Text = "Orta";
+                btnPresetEpic.Text = "Harika";
+
+                label24.Text = "Katil (fare)";
+                label25.Text = "Killer (denetleyici)";
+                label29.Text = "Hayatta kalan (fare)";
+                label27.Text = "Hayatta kalan (kontrolör)";
+            }
+            if (Language == "Español")
+            {
+                lblInAppLang.Text = "Idioma:";
+                lblChangeSettings.Text = "Versión del juego:";
+                label12.Text = "Audio";
+                label2.Text = "Gráficos";
+                label14.Text = "FPS";
+                label16.Text = "Presets gráficos";
+                label15.Text = "Sensibilidad";
+                label19.Text = "Pantalla";
+                lblWidth.Text = "Ancho";
+                lblHeight.Text = "Altura";
+                label35.Text = "Resolución 2D";
+                btnResSet.Text = "Establecer";
+                btnResReset.Text = "Reiniciar";
+                label1.Text = "Resolución 3D";
+                label3.Text = "Ver calidad de distancia";
+                lblAaQuality.Text = "Calidad de suavizado";
+                label5.Text = "Calidad de la sombra";
+                label6.Text = "Calidad de posprocesamiento";
+                label7.Text = "Calidad de las texturas";
+                label8.Text = "Calidad de los efectos";
+                label9.Text = "Calidad del follaje";
+                label10.Text = "Calidad de sombreado";
+                label11.Text = "Calidad de las animaciones";
+
+                btnVwLow.Text = "Bajo";
+                btnVwMedium.Text = "Medio";
+                btnVwHigh.Text = "Alto";
+                btnVwUltra.Text = "Ultra";
+                btnVwEpic.Text = "Épico";
+                btnVwAwesome.Text = "Impresionante";
+
+                btnAaLow.Text = "Bajo";
+                btnAaMedium.Text = "Medio";
+                btnAaHigh.Text = "Alto";
+                btnAaUltra.Text = "Ultra";
+                btnAaEpic.Text = "Épico";
+                btnAaAwesome.Text = "Impresionante";
+
+                btnShadLow.Text = "Bajo";
+                btnShadMedium.Text = "Medio";
+                btnShadHigh.Text = "Alto";
+                btnShadUltra.Text = "Ultra";
+                btnShadEpic.Text = "Épico";
+                btnShadAwesome.Text = "Impresionante";
+
+                btnPpLow.Text = "Bajo";
+                btnPpMedium.Text = "Medio";
+                btnPpHigh.Text = "Alto";
+                btnPpUltra.Text = "Ultra";
+                btnPpEpic.Text = "Épico";
+                btnPpAwesome.Text = "Impresionante";
+
+                btnTxtLow.Text = "Bajo";
+                btnTxtMedium.Text = "Medio";
+                btnTxtHigh.Text = "Alto";
+                btnTxtUltra.Text = "Ultra";
+                btnTxtEpic.Text = "Épico";
+                btnTxtAwesome.Text = "Impresionante";
+
+                btnEffLow.Text = "Bajo";
+                btnEffMedium.Text = "Medio";
+                btnEffHigh.Text = "Alto";
+                btnEffUltra.Text = "Ultra";
+                btnEffEpic.Text = "Épico";
+                btnEffAwesome.Text = "Impresionante";
+
+                btnFolLow.Text = "Bajo";
+                btnFolMedium.Text = "Medio";
+                btnFolHigh.Text = "Alto";
+                btnFolUltra.Text = "Ultra";
+                btnFolEpic.Text = "Épico";
+                btnFolAwesome.Text = "Impresionante";
+
+                btnShLow.Text = "Bajo";
+                btnShMedium.Text = "Medio";
+                btnShHigh.Text = "Alto";
+                btnShUltra.Text = "Ultra";
+                btnShEpic.Text = "Épico";
+                btnShAwesome.Text = "Impresionante";
+
+                btnAnimLow.Text = "Bajo";
+                btnAnimMedium.Text = "Medio";
+                btnAnimHigh.Text = "Alto";
+                btnAnimUltra.Text = "Ultra";
+                btnAnimEpic.Text = "Épico";
+                btnAnimAwesome.Text = "Impresionante";
+                btnAaDisable.Text = "Deshabilitar";
+                checkBox2.Text = "Sincronización vertical";
+                btnSetFPS.Text = "Establecer";
+                btnResetFPS.Text = "Reiniciar";
+                label18.Text = "Establece tu propio límite de FPS";
+                label22.Text = "Volumen principal";
+                label13.Text = "Menú Música";
+                label21.Text = "Calidad de audio";
+                checkBox1.Text = "Auriculares";
+
+                btnAudioLow.Text = "Bajo";
+                btnAudioMedium.Text = "Medio";
+                btnAudioHigh.Text = "Alto";
+                btnAudioUltra.Text = "Ultra";
+                btnAudioEpic.Text = "Épico";
+                btnAudioAwesome.Text = "Impresionante";
+
+                label17.Text = "Elija uno de los ajustes preestablecidos gráficos.";
+                btnPresetLow.Text = "Muy bajo";
+                btnPresetMedium.Text = "Medio";
+                btnPresetEpic.Text = "Impresionante";
+
+                label24.Text = "Asesino (ratón)";
+                label25.Text = "Asesino (controlador)";
+                label29.Text = "Superviviente (ratón)";
+                label27.Text = "Superviviente (controlador)";
+            }
+            if (Language == "Italiano")
+            {
+                lblInAppLang.Text = "Lingua nell'app:";
+                lblChangeSettings.Text = "Versione del gioco:";
+                label12.Text = "Audio";
+                label2.Text = "Grafica";
+                label14.Text = "Tappo FPS";
+                label16.Text = "Preimpostazioni grafiche";
+                label15.Text = "Sensibilità del mouse";
+                label19.Text = "Schermo";
+                lblWidth.Text = "Larghezza";
+                lblHeight.Text = "Altezza";
+                label35.Text = "Risoluzione 2D";
+                btnResSet.Text = "Imposta";
+                btnResReset.Text = "Ripristina";
+                label1.Text = "Risoluzione 3D";
+                label3.Text = "Visualizza la qualità della distanza";
+                lblAaQuality.Text = "Qualità anti-aliasing";
+                label5.Text = "Qualità ombra";
+                label6.Text = "Qualità post-elaborazione";
+                label7.Text = "Qualità delle trame";
+                label8.Text = "Qualità degli effetti";
+                label9.Text = "Qualità fogliame";
+                label10.Text = "Qualità dell'ombreggiatura";
+                label11.Text = "Qualità animazioni";
+
+                btnVwLow.Text = "Basso";
+                btnVwMedium.Text = "Medio";
+                btnVwHigh.Text = "Alto";
+                btnVwUltra.Text = "Ultra";
+                btnVwEpic.Text = "Epico";
+                btnVwAwesome.Text = "Fantastico";
+
+                btnAaLow.Text = "Basso";
+                btnAaMedium.Text = "Medio";
+                btnAaHigh.Text = "Alto";
+                btnAaUltra.Text = "Ultra";
+                btnAaEpic.Text = "Epico";
+                btnAaAwesome.Text = "Fantastico";
+
+                btnShadLow.Text = "Basso";
+                btnShadMedium.Text = "Medio";
+                btnShadHigh.Text = "Alto";
+                btnShadUltra.Text = "Ultra";
+                btnShadEpic.Text = "Epico";
+                btnShadAwesome.Text = "Fantastico";
+
+                btnPpLow.Text = "Basso";
+                btnPpMedium.Text = "Medio";
+                btnPpHigh.Text = "Alto";
+                btnPpUltra.Text = "Ultra";
+                btnPpEpic.Text = "Epico";
+                btnPpAwesome.Text = "Fantastico";
+
+                btnTxtLow.Text = "Basso";
+                btnTxtMedium.Text = "Medio";
+                btnTxtHigh.Text = "Alto";
+                btnTxtUltra.Text = "Ultra";
+                btnTxtEpic.Text = "Epico";
+                btnTxtAwesome.Text = "Fantastico";
+
+                btnEffLow.Text = "Basso";
+                btnEffMedium.Text = "Medio";
+                btnEffHigh.Text = "Alto";
+                btnEffUltra.Text = "Ultra";
+                btnEffEpic.Text = "Epico";
+                btnEffAwesome.Text = "Fantastico";
+
+                btnFolLow.Text = "Basso";
+                btnFolMedium.Text = "Medio";
+                btnFolHigh.Text = "Alto";
+                btnFolUltra.Text = "Ultra";
+                btnFolEpic.Text = "Epico";
+                btnFolAwesome.Text = "Fantastico";
+
+                btnShLow.Text = "Basso";
+                btnShMedium.Text = "Medio";
+                btnShHigh.Text = "Alto";
+                btnShUltra.Text = "Ultra";
+                btnShEpic.Text = "Epico";
+                btnShAwesome.Text = "Fantastico";
+
+                btnAnimLow.Text = "Basso";
+                btnAnimMedium.Text = "Medio";
+                btnAnimHigh.Text = "Alto";
+                btnAnimUltra.Text = "Ultra";
+                btnAnimEpic.Text = "Epico";
+                btnAnimAwesome.Text = "Fantastico";
+                btnAaDisable.Text = "Disabilita";
+                checkBox2.Text = "Sincronizzazione verticale";
+                btnSetFPS.Text = "Imposta";
+                btnResetFPS.Text = "Ripristina";
+                label18.Text = "Imposta il tuo limite FPS";
+                label22.Text = "Volume principale";
+                label13.Text = "Menu Musica";
+                label21.Text = "Qualità audio";
+                checkBox1.Text = "Cuffie";
+
+                btnAudioLow.Text = "Basso";
+                btnAudioMedium.Text = "Medio";
+                btnAudioHigh.Text = "Alto";
+                btnAudioUltra.Text = "Ultra";
+                btnAudioEpic.Text = "Epico";
+                btnAudioAwesome.Text = "Fantastico";
+
+                label17.Text = "Scegli uno dei predefiniti grafici.";
+                btnPresetLow.Text = "Super basso";
+                btnPresetMedium.Text = "Medio";
+                btnPresetEpic.Text = "Fantastico";
+
+                label24.Text = "Killer (mouse)";
+                label25.Text = "Killer (controllore)";
+                label29.Text = "Sopravvissuto (mouse)";
+                label27.Text = "Sopravvissuto (controllore)";
             }
         }
     }

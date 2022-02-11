@@ -115,6 +115,7 @@ namespace DbD_Settings_Changer
             string[] lang = File.ReadAllLines(ApplicationLanguageData + "lang.ini");
             string[] words = new string[] { "en", "pl", "ru", "du", "fr", "jp", "ch", "tu", "esp", "it"};
 
+            bool found = false;
             string word = "";
             for (int a = 0; a < numLines; a++)
             {
@@ -123,7 +124,7 @@ namespace DbD_Settings_Changer
                     if (lang[a] == words[i])
                     {
                         word = words[i];
-
+                        found = true;
                         switch(word)
                         {
                             case "en":
@@ -159,6 +160,12 @@ namespace DbD_Settings_Changer
                         }
                     }
                 }
+            }
+
+            if(!found)
+            {
+                word = "English";
+                File.WriteAllText(ApplicationLanguageData + "lang.ini", "en");
             }
             cbLanguage.SelectedIndex = cbLanguage.Items.IndexOf(word);
             ChangeAppLanguage(word);
@@ -1855,9 +1862,6 @@ namespace DbD_Settings_Changer
                 File.Delete(ApplicationData + "UsEng.ini");
                 File.Delete(ApplicationData + "UsSet.ini");
                 Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Autosave");
-                Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs");
-                Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data");
-                Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer");
                 Application.Restart();
             }
         }

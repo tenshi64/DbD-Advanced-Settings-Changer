@@ -46,6 +46,7 @@ namespace DbD_Settings_Changer
 
         string ReadConfig;
         string ReadEngine;
+        IDictionary<string, string> errors = new Dictionary<string, string>();
 
         public Form1()
         {
@@ -172,7 +173,7 @@ namespace DbD_Settings_Changer
 
             if (!File.Exists(SteamSettingsPath) && !File.Exists(SteamEnginePath) && !File.Exists(EGSSettingsPath) && !File.Exists(EGSEnginePath) && !File.Exists(MSSettingsPath) && !File.Exists(MSEnginePath))
             {
-                MessageBox.Show("Dead by Daylight confiuration files do not exist! Please, launch the game.", "Error",
+                MessageBox.Show(errors["confs-dont-exist"], errors["error"],
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
@@ -207,7 +208,7 @@ namespace DbD_Settings_Changer
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 if (!textFromFile.Contains(version))
                 {
-                    DialogResult result = MessageBox.Show("A new version of the program has been found.\n\nDo you want to download it?", "Check for updates",
+                    DialogResult result = MessageBox.Show(errors["new-version"], errors["new-version-title"],
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (result == DialogResult.Yes)
                     {
@@ -222,7 +223,7 @@ namespace DbD_Settings_Changer
             }
             catch (Exception)
             {
-                MessageBox.Show("Checking newer program versions failed!", "Check for updates",
+                MessageBox.Show(errors["new-version-fail"], errors["new-version-title"],
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -317,7 +318,7 @@ namespace DbD_Settings_Changer
 
         private void btnUsersSettings_MouseHover(object sender, EventArgs e)
         {
-            tip.Show("Reset the settings to those saved in the backup.", btnUsersSettings);
+            tip.Show(errors["tip1"], btnUsersSettings);
         }
 
         private void btnVwLow_Click(object sender, EventArgs e)
@@ -1624,7 +1625,7 @@ namespace DbD_Settings_Changer
             }
             if (numFPS.Value > 120)
             {
-                MessageBox.Show($"The maximum frame rate in Dead by Daylight is 120. The game will be displayed at 120 frames per second anyway. But the program will set you a limit of {(int)numFPS.Value} FPS anyway. ", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(errors["max-fps"] +  (int)numFPS.Value + errors["max-fps-continuation"], errors["information"], MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var SetFPS = new SetFPS(SettingsPath, "FrameRateLimit=", (int)numFPS.Value);
             }
             if (numFPS.Value < 120)
@@ -1656,7 +1657,7 @@ namespace DbD_Settings_Changer
 
         private void btnResetFPS_MouseHover(object sender, EventArgs e)
         {
-            tip.Show("Reset FPS cap.", btnResetFPS);
+            tip.Show(errors["tip2"], btnResetFPS);
         }
 
         private void btnResetFPS_MouseLeave(object sender, EventArgs e)
@@ -1666,7 +1667,7 @@ namespace DbD_Settings_Changer
 
         private void btnSetFPS_MouseHover(object sender, EventArgs e)
         {
-            tip.Show("Set your own FPS cap.", btnSetFPS);
+            tip.Show(errors["tip3"], btnSetFPS);
         }
 
         private void btnSetFPS_MouseLeave(object sender, EventArgs e)
@@ -1732,7 +1733,7 @@ namespace DbD_Settings_Changer
 
         private void btnResSet_MouseHover(object sender, EventArgs e)
         {
-            tip.Show("Set your own game resolution.", btnResSet);
+            tip.Show(errors["tip4"], btnResSet);
         }
 
         private void btnResSet_MouseLeave(object sender, EventArgs e)
@@ -1742,7 +1743,7 @@ namespace DbD_Settings_Changer
 
         private void btnResReset_MouseHover(object sender, EventArgs e)
         {
-            tip.Show("Reset to system resolution.", btnResReset);
+            tip.Show(errors["tip5"], btnResReset);
         }
 
         private void btnResReset_MouseLeave(object sender, EventArgs e)
@@ -1844,7 +1845,7 @@ namespace DbD_Settings_Changer
 
         private void btnDelete_MouseHover(object sender, EventArgs e)
         {
-            tip.Show("Delete the backup configuration files and create a new ones.", btnDelete);
+            tip.Show(errors["tip6"], btnDelete);
         }
 
         private void btnDelete_MouseLeave(object sender, EventArgs e)
@@ -1855,7 +1856,7 @@ namespace DbD_Settings_Changer
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to delete the configuration file and create a new one?", "Delete backup config",
+            DialogResult result = MessageBox.Show(errors["delete-confs"], errors["delete-confs-title"],
                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
@@ -1878,14 +1879,14 @@ namespace DbD_Settings_Changer
             }
             catch (Exception)
             {
-                MessageBox.Show("There was a problem opening the Discord link!", "Error",
+                MessageBox.Show(errors["discord-link-fail"], errors["error"],
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnDiscord_MouseHover(object sender, EventArgs e)
         {
-            tip.Show("Official Discord Server", btnDiscord);
+            tip.Show(errors["tip7"], btnDiscord);
         }
 
         private void btnDiscord_MouseLeave(object sender, EventArgs e)
@@ -3221,6 +3222,36 @@ namespace DbD_Settings_Changer
                     tbScRes.Value = result;
                     lblScRes.Text = tbScRes.Value + "%";
                 }
+                if (lines[i].Contains("HUDConstrainedAspectRatio="))
+                {
+                    if (lines[i].Contains("True"))
+                    {
+                        int check = 0;
+                        int numLines3 = File.ReadLines(EnginePath).Count();
+                        string[] eng = File.ReadAllLines(EnginePath);
+
+                        for (int a = 0; a <= numLines3 - 1; a++)
+                        {
+                            if (eng[a] == "[/Script/Engine.LocalPlayer]")
+                            {
+                                check++;
+                            }
+                            if (eng[a] == "AspectRatioAxisConstraint=AspectRatio_MAX")
+                            {
+                                check++;
+                            }
+                        }
+
+                        if (check == 2)
+                        {
+                            checkBox3.Checked = true;
+                        }
+                        else
+                        {
+                            checkBox3.Checked = false;
+                        }
+                    }
+                }
                 ReadConfig = File.ReadAllText(SettingsPath);
                 ReadEngine = File.ReadAllText(EnginePath);
                 
@@ -3315,6 +3346,28 @@ namespace DbD_Settings_Changer
         {
             if (Language == "English")
             {
+                errors["confs-dont-exist"] = "Dead by Daylight confiuration files do not exist! Please, launch the game.";
+                errors["new-version"] = "A new version of the program has been found.\n\nDo you want to download it?";
+                errors["new-version-fail"] = "Checking newer program versions failed!";
+                errors["max-fps"] = "The maximum frame rate in Dead by Daylight is 120. The game will be displayed at 120 frames per second anyway. Program will set you a limit of ";
+                errors["max-fps-continuation"] = " FPS anyway.";
+                errors["delete-confs"] = "Are you sure you want to delete the configuration file and create a new one?";
+                errors["delete-confs-title"] = "Delete backup config";
+                errors["discord-link-fail"] = "There was a problem opening the Discord link!";
+                errors["new-version-title"] = "Check for updates";
+                errors["information"] = "Information";
+                errors["error"] = "Error";
+
+                errors["tip1"] = "Reset settings to those saved in the backup.";
+                errors["tip2"] = "Reset FPS cap.";
+                errors["tip3"] = "Set your own FPS cap.";
+                errors["tip4"] = "Set your own game resolution.";
+                errors["tip5"] = "Reset to system resolution.";
+                errors["tip6"] = "Delete the backup configuration file and create a new one.";
+                errors["tip7"] = "Official Discord Server.";
+
+
+                checkBox3.Text = "Remove black bars";
                 lblInAppLang.Text = "In-app language:";
                 lblChangeSettings.Text = "Game version:";
                 label12.Text = "Audio";
@@ -3430,6 +3483,27 @@ namespace DbD_Settings_Changer
             }
             if (Language == "Polski")
             {
+                errors["confs-dont-exist"] = "Pliki konfiguracyjne Dead by Daylight nie istnieją! Uruchom grę.";
+                errors["new-version"] = "Znaleziono nową wersję programu.\n\nCzy chcesz ją pobrać?";
+                errors["new-version-fail"] = "Sprawdzanie nowszych wersji programu nie powiodło się!";
+                errors["max-fps"] = "Maksymalna liczba klatek na sekundę w Dead by Daylight to 120. Gra i tak będzie wyświetlana z szybkością 120 klatek na sekundę. Program ustawi ci limit na ";
+                errors["max-fps-continuation"] = " FPS mimo to.";
+                errors["delete-confs"] = "Czy na pewno chcesz usunąć plik konfiguracyjny i utworzyć nowy?";
+                errors["delete-confs-title"] = "Usuń konfigurację kopii zapasowej";
+                errors["discord-link-fail"] = "Wystąpił problem podczas otwierania linku Discord!";
+                errors["new-version-title"] = "Sprawdź aktualizacje";
+                errors["information"] = "Informacje";
+                errors["error"] = "Błąd";
+
+                errors["tip1"] = "Zresetuj ustawienia do tych zapisanych w kopii zapasowej.";
+                errors["tip2"] = "Zresetuj limit FPS.";
+                errors["tip3"] = "Ustaw własny limit FPS.";
+                errors["tip4"] = "Ustaw własną rozdzielczość gry.";
+                errors["tip5"] = "Zresetuj do rozdzielczości systemu.";
+                errors["tip6"] = "Usuń plik konfiguracyjny kopii zapasowej i utwórz nowy.";
+                errors["tip7"] = "Oficjalny serwer Discord.";
+
+                checkBox3.Text = "Usuń czarne paski";
                 lblInAppLang.Text = "Język w aplikacji:";
                 lblChangeSettings.Text = "Wersja gry:";
                 label12.Text = "Dźwięk";
@@ -3547,6 +3621,27 @@ namespace DbD_Settings_Changer
             }
             if (Language == "русский")
             {
+                errors["confs-dont-exist"] = "Файлы конфигурации Dead by Daylight не существуют! Пожалуйста, запустите игру.";
+                errors["new-version"] = "Обнаружена новая версия программы.\n\nВы хотите ее скачать?";
+                errors["new-version-fail"] = "Проверка новых версий программы не удалась!";
+                errors["max-fps"] = "Максимальная частота кадров в Dead by Daylight - 120. Игра будет отображаться со скоростью 120 кадров в секунду в любом случае. Программа установит вам ограничение ";
+                errors["max-fps-continuation"] = " Все равно FPS.";
+                errors["delete-confs"] = "Вы уверены, что хотите удалить файл конфигурации и создать новый?";
+                errors["delete-confs-title"] = "Удалить резервную копию конфигурации";
+                errors["discord-link-fail"] = "Не удалось открыть ссылку Discord!";
+                errors["new-version-title"] = "Проверить наличие обновлений";
+                errors["information"] = "Информация";
+                errors["error"] = "Ошибка";
+
+                errors["tip1"] = "Сбросить настройки до сохраненных в резервной копии.";
+                errors["tip2"] = "Сбросить ограничение FPS.";
+                errors["tip3"] = "Установите собственное ограничение FPS.";
+                errors["tip4"] = "Установите собственное разрешение игры.";
+                errors["tip5"] = "Сбросить системное разрешение.";
+                errors["tip6"] = "Удалите резервный файл конфигурации и создайте новый.";
+                errors["tip7"] = "Официальный сервер Discord.";
+
+                checkBox3.Text = "Удалить черные полосы";
                 lblInAppLang.Text = "Язык приложения:";
                 lblChangeSettings.Text = "Версия игры:";
                 label12.Text = "Аудио";
@@ -3662,6 +3757,27 @@ namespace DbD_Settings_Changer
             }
             if (Language == "Deutsch")
             {
+                errors["confs-dont-exist"] = "Dead by Daylight Konfigurationsdateien existieren nicht! Bitte starten Sie das Spiel.";
+                errors["new-version"] = "Eine neue Version des Programms wurde gefunden.\n\nMöchten Sie sie herunterladen?";
+                errors["new-version-fail"] = "Überprüfung neuerer Programmversionen fehlgeschlagen!";
+                errors["max-fps"] = "Die maximale Bildrate in Dead by Daylight beträgt 120. Das Spiel wird trotzdem mit 120 Bildern pro Sekunde angezeigt. Das Programm setzt Ihnen ein Limit von ";
+                errors["max-fps-continuation"] = " FPS sowieso.";
+                errors["delete-confs"] = "Möchten Sie die Konfigurationsdatei wirklich löschen und eine neue erstellen?";
+                errors["delete-confs-title"] = "Backup-Konfiguration löschen";
+                errors["discord-link-fail"] = "Beim Öffnen des Discord-Links ist ein Problem aufgetreten!";
+                errors["new-version-title"] = "Nach Updates suchen";
+                errors["information"] = "Informationen";
+                errors["error"] = "Fehler";
+
+                errors["tip1"] = "Einstellungen auf die im Backup gespeicherten zurücksetzen.";
+                errors["tip2"] = "FPS-Obergrenze zurücksetzen.";
+                errors["tip3"] = "Legen Sie Ihre eigene FPS-Obergrenze fest.";
+                errors["tip4"] = "Stellen Sie Ihre eigene Spielauflösung ein.";
+                errors["tip5"] = "Auf Systemauflösung zurücksetzen.";
+                errors["tip6"] = "Löschen Sie die Backup-Konfigurationsdatei und erstellen Sie eine neue.";
+                errors["tip7"] = "Offizieller Discord-Server.";
+
+                checkBox3.Text = "Schwarze Balken entfernen";
                 lblInAppLang.Text = "In-App-Sprache:";
                 lblChangeSettings.Text = "Spielversion:";
                 label12.Text = "Audio";
@@ -3777,6 +3893,27 @@ namespace DbD_Settings_Changer
             }
             if (Language == "Français")
             {
+                errors["confs-dont-exist"] = "Les fichiers de configuration de Dead by Daylight n'existent pas ! Veuillez lancer le jeu.";
+                errors["new-version"] = "Une nouvelle version du programme a été trouvée.\n\nVoulez-vous la télécharger ?";
+                errors["new-version-fail"] = "La vérification des nouvelles versions du programme a échoué !";
+                errors["max-fps"] = "La fréquence d'images maximale dans Dead by Daylight est de 120. Le jeu sera affiché à 120 images par seconde de toute façon. Le programme vous fixera une limite de ";
+                errors["max-fps-continuation"] = " FPS quand même.";
+                errors["delete-confs"] = "Êtes-vous sûr de vouloir supprimer le fichier de configuration et en créer un nouveau ?";
+                errors["delete-confs-title"] = "Supprimer la configuration de sauvegarde";
+                errors["discord-link-fail"] = "Un problème est survenu lors de l'ouverture du lien Discord !";
+                errors["new-version-title"] = "Vérifier les mises à jour";
+                errors["information"] = "Informations";
+                errors["error"] = "Erreur";
+
+                errors["tip1"] = "Réinitialisez les paramètres à ceux enregistrés dans la sauvegarde.";
+                errors["tip2"] = "Réinitialiser le plafond FPS.";
+                errors["tip3"] = "Définissez votre propre plafond FPS.";
+                errors["tip4"] = "Définissez votre propre résolution de jeu.";
+                errors["tip5"] = "Réinitialiser à la résolution du système.";
+                errors["tip6"] = "Supprimez le fichier de configuration de sauvegarde et créez-en un nouveau.";
+                errors["tip7"] = "Serveur Discord officiel.";
+
+                checkBox3.Text = "Supprimer les barres noires";
                 lblInAppLang.Text = "Langue:";
                 lblChangeSettings.Text = "Version du jeu:";
                 label12.Text = "Audio";
@@ -3892,6 +4029,27 @@ namespace DbD_Settings_Changer
             }
             if (Language == "日本")
             {
+                errors["confs-dont-exist"] = "Dead by Daylightの設定ファイルが存在しません！ゲームを起動してください。";
+                errors["new-version"] = "プログラムの新しいバージョンが見つかりました\n\nダウンロードしますか？";
+                errors["new-version-fail"] = "新しいプログラムバージョンのチェックに失敗しました！";
+                errors["max-fps"] = "Dead by Daylightの最大フレームレートは120です。ゲームはとにかく毎秒120フレームで表示されます。プログラムは の制限を設定します ";
+                errors["max-fps-continuation"] = " とにかくFPS";
+                errors["delete-confs"] = "構成ファイルを削除して、新しいファイルを作成してもよろしいですか？";
+                errors["delete-confs-title"] = "バックアップ構成の削除";
+                errors["discord-link-fail"] = "Discordリンクを開くときに問題が発生しました！";
+                errors["new-version-title"] = "更新を確認してください";
+                errors["information"] = "情報";
+                errors["error"] = "エラー";
+
+                errors["tip1"] = "バックアップに保存されている設定にリセットします。";
+                errors["tip2"] = "FPSキャップをリセットします。";
+                errors["tip3"] = "独自のFPSキャップを設定します。";
+                errors["tip4"] = "独自のゲーム解像度を設定してください。";
+                errors["tip5"] = "システム解像度にリセットします。";
+                errors["tip6"] = "バックアップ構成ファイルを削除し、新しいファイルを作成します。";
+                errors["tip7"] = "公式Discordサーバー。";
+
+                checkBox3.Text = "黒いバーを削除します";
                 lblInAppLang.Text = "アプリ内言語：";
                 lblChangeSettings.Text = "ゲームバージョン：";
                 label12.Text = "オーディオ";
@@ -4007,6 +4165,27 @@ namespace DbD_Settings_Changer
             }
             if (Language == "中国人")
             {
+                errors["confs-dont-exist"] = "Dead by Daylight 配置文件不存在！请启动游戏。";
+                errors["new-version"] = "已找到该程序的新版本。\n\n您要下载吗？";
+                errors["new-version-fail"] = "检查较新的程序版本失败！";
+                errors["max-fps"] = "Dead by Daylight 中的最大帧速率为 120。游戏将以每秒 120 帧的速度显示。程序将为您设置一个限制 ";
+                errors["max-fps-continuation"] = " FPS 无论如何。";
+                errors["delete-confs"] = "您确定要删除配置文件并新建一个吗？";
+                errors["delete-confs-title"] = "删除备份配置";
+                errors["discord-link-fail"] = "打开 Discord 链接时出现问题！";
+                errors["new-version-title"] = "检查更新";
+                errors["information"] = "信息";
+                errors["error"] = "错误";
+
+                errors["tip1"] = "将设置重置为备份中保存的设置。";
+                errors["tip2"] = "重置 FPS 上限。";
+                errors["tip3"] = "设置你自己的 FPS 上限。";
+                errors["tip4"] = "设置你自己的游戏分辨率。";
+                errors["tip5"] = "重置为系统分辨率。";
+                errors["tip6"] = "删除备份配置文件并新建一个。";
+                errors["tip7"] = "官方 Discord 服务器。";
+
+                checkBox3.Text = "去除黑条";
                 lblInAppLang.Text = "应用内语言：";
                 lblChangeSettings.Text = "游戏版本：";
                 label12.Text = "音频";
@@ -4122,6 +4301,27 @@ namespace DbD_Settings_Changer
             }
             if (Language == "Türkçe")
             {
+                errors["confs-dont-exist"] = "Dead by Daylight yapılandırma dosyaları mevcut değil! Lütfen oyunu başlatın.";
+                errors["new-version"] = "Programın yeni bir sürümü bulundu.\n\nİndirmek istiyor musunuz?";
+                errors["new-version-fail"] = "Daha yeni program sürümleri kontrol edilemedi!";
+                errors["max-fps"] = "Dead by Daylight'ta maksimum kare hızı 120'dir. Oyun zaten 120 kare/saniye olarak gösterilecektir. Program size bir limit belirleyecektir ";
+                errors["max-fps-continuation"] = " FPS yine de.";
+                errors["delete-confs"] = "Yapılandırma dosyasını silip yeni bir tane oluşturmak istediğinizden emin misiniz?";
+                errors["delete-confs-title"] = "Yedekleme yapılandırmasını sil";
+                errors["discord-link-fail"] = "Discord bağlantısı açılırken bir sorun oluştu!";
+                errors["new-version-title"] = "Güncellemeleri kontrol et";
+                errors["information"] = "Bilgi";
+                errors["error"] = "Hata";
+
+                errors["tip1"] = "Ayarları yedekte kayıtlı olanlara sıfırlayın.";
+                errors["tip2"] = "FPS sınırını sıfırla.";
+                errors["tip3"] = "Kendi FPS sınırınızı belirleyin.";
+                errors["tip4"] = "Kendi oyun çözünürlüğünüzü ayarlayın.";
+                errors["tip5"] = "Sistem çözünürlüğüne sıfırla.";
+                errors["tip6"] = "Yedek yapılandırma dosyasını silin ve yeni bir tane oluşturun.";
+                errors["tip7"] = "Resmi Discord Sunucusu.";
+
+                checkBox3.Text = "Siyah çubukları kaldır";
                 lblInAppLang.Text = "Uygulama içi dil:";
                 lblChangeSettings.Text = "Oyun sürümü:";
                 label12.Text = "Ses";
@@ -4237,6 +4437,27 @@ namespace DbD_Settings_Changer
             }
             if (Language == "Español")
             {
+                errors["confs-dont-exist"] = "¡Los archivos de configuración de Dead by Daylight no existen! Por favor, inicia el juego.";
+                errors["new-version"] = "Se ha encontrado una nueva versión del programa.\n\n¿Desea descargarla?";
+                errors["new-version-fail"] = "¡Error al comprobar las versiones más recientes del programa!";
+                errors["max-fps"] = "La velocidad de fotogramas máxima en Dead by Daylight es 120. El juego se mostrará a 120 fotogramas por segundo de todos modos. El programa establecerá un límite de ";
+                errors["max-fps-continuation"] = " FPS de todos modos.";
+                errors["delete-confs"] = "¿Está seguro de que desea eliminar el archivo de configuración y crear uno nuevo?";
+                errors["delete-confs-title"] = "Eliminar configuración de copia de seguridad";
+                errors["discord-link-fail"] = "¡Hubo un problema al abrir el enlace de Discord!";
+                errors["new-version-title"] = "Buscar actualizaciones";
+                errors["information"] = "Información";
+                errors["error"] = "Error";
+
+                errors["tip1"] = "Restablecer la configuración a la guardada en la copia de seguridad.";
+                errors["tip2"] = "Restablecer límite de FPS.";
+                errors["tip3"] = "Establece tu propio límite de FPS.";
+                errors["tip4"] = "Establece tu propia resolución de juego.";
+                errors["tip5"] = "Restablecer a la resolución del sistema.";
+                errors["tip6"] = "Elimine el archivo de configuración de la copia de seguridad y cree uno nuevo.";
+                errors["tip7"] = "Servidor oficial de Discord.";
+
+                checkBox3.Text = "Eliminar barras negras";
                 lblInAppLang.Text = "Idioma:";
                 lblChangeSettings.Text = "Versión del juego:";
                 label12.Text = "Audio";
@@ -4352,6 +4573,27 @@ namespace DbD_Settings_Changer
             }
             if (Language == "Italiano")
             {
+                errors["confs-dont-exist"] = "I file di configurazione di Dead by Daylight non esistono! Per favore, avvia il gioco.";
+                errors["new-version"] = "È stata trovata una nuova versione del programma.\n\nVuoi scaricarla?";
+                errors["new-version-fail"] = "Controllo delle versioni più recenti del programma fallito!";
+                errors["max-fps"] = "Il frame rate massimo in Dead by Daylight è 120. Il gioco verrà comunque visualizzato a 120 frame al secondo. Il programma ti imposterà un limite di ";
+                errors["max-fps-continuation"] = " FPS comunque.";
+                errors["delete-confs"] = "Sei sicuro di voler eliminare il file di configurazione e crearne uno nuovo?";
+                errors["delete-confs-title"] = "Elimina configurazione di backup";
+                errors["discord-link-fail"] = "Si è verificato un problema durante l'apertura del collegamento Discord!";
+                errors["new-version-title"] = "Verifica aggiornamenti";
+                errors["information"] = "Informazioni";
+                errors["error"] = "Errore";
+
+                errors["tip1"] = "Ripristina le impostazioni su quelle salvate nel backup.";
+                errors["tip2"] = "Reimposta limite FPS.";
+                errors["tip3"] = "Imposta il tuo limite FPS.";
+                errors["tip4"] = "Imposta la tua risoluzione di gioco.";
+                errors["tip5"] = "Ripristina risoluzione di sistema.";
+                errors["tip6"] = "Elimina il file di configurazione del backup e creane uno nuovo.";
+                errors["tip7"] = "Server Discord ufficiale.";
+
+                checkBox3.Text = "Rimuovere le barre nere";
                 lblInAppLang.Text = "Lingua nell'app:";
                 lblChangeSettings.Text = "Versione del gioco:";
                 label12.Text = "Audio";
@@ -4464,6 +4706,19 @@ namespace DbD_Settings_Changer
                 label25.Text = "Killer (controllore)";
                 label29.Text = "Sopravvissuto (mouse)";
                 label27.Text = "Sopravvissuto (controllore)";
+            }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            var changeHUDRatio = new SettingsTrueOrFalse(SettingsPath, "HUDConstrainedAspectRatio=", !checkBox3.Checked);
+            if(checkBox3.Checked)
+            {
+                var remove = new RemoveBlackBars(EnginePath);
+            }
+            else
+            {
+                var reset = new ResetBlackBars(EnginePath);
             }
         }
     }
@@ -4787,6 +5042,43 @@ namespace DbD_Settings_Changer
             ReadEngine += "\n\n\n[/Script/Engine.GarbageCollectionSettings]\nr.DefaultFeature.AntiAliasing=0";
             
             File.WriteAllText(EnginePath, ReadEngine);
+        }
+    }
+
+    public class RemoveBlackBars
+    {
+        public RemoveBlackBars(string EnginePath)
+        {
+            string ReadEngine = File.ReadAllText(EnginePath);
+            ReadEngine += "\n\n\n[/Script/Engine.LocalPlayer]\nAspectRatioAxisConstraint=AspectRatio_MAX";
+
+            File.WriteAllText(EnginePath, ReadEngine);
+        }
+    }
+
+    public class ResetBlackBars
+    {
+        public ResetBlackBars(string path)
+        {
+            string ReadEngine = File.ReadAllText(path);
+            int numLines2 = File.ReadLines(path).Count();
+            string[] eng = File.ReadAllLines(path);
+
+            for (int a = 0; a < numLines2; a++)
+            {
+                if (eng[a].Contains("[/Script/Engine.LocalPlayer]"))
+                {
+                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
+
+                    File.WriteAllText(path, ReadEngine);
+                }
+                if (eng[a].Contains("AspectRatioAxisConstraint=AspectRatio_MAX"))
+                {
+                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
+
+                    File.WriteAllText(path, ReadEngine);
+                }
+            }
         }
     }
 

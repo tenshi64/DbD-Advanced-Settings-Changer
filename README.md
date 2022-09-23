@@ -5,7 +5,7 @@ Advanced Config Editor for Dead by Daylight
 [![Tutorial](https://i9.ytimg.com/vi_webp/3lOGWBIzMes/mqdefault.webp?v=617827ba&sqp=CPyot5kG&rs=AOn4CLBesfQe5yXQ0tF_d0F-pwpH27PJeQ)](https://youtu.be/3lOGWBIzMes)
 
 ## More informations
-### Dead by Daylight ADVANCED SETTINGS CHANGER is an advanced Config Editor for Dead by Daylight developed by eleven. You can change all graphic or audio settings, change the resolution to stretched or remove the FPS Cap through this program. Application creates a backup of your configuration file, which you can delete and create again it by clicking on the trash can button. By clicking the arrow button, you reset the settings to the settings saved in the backup. 
+### Dead by Daylight ADVANCED SETTINGS CHANGER is an advanced Config Editor for Dead by Daylight developed by єℓєνєи. You can change all graphic or audio settings, change the resolution to stretched or remove the FPS Cap through this program. Application creates a backup of your configuration file, which you can delete and create again it by clicking on the trash can button. By clicking the arrow button, you reset the settings to the settings saved in the backup. 
 
 ### Please remember that the program does not change the settings while playing, because it would have to change them in RAM, for which you could be banned. Therefore, it is best to use the program before launching DbD, because when playing, not everything is saved or read correctly (this is how DbD works). And if you use it while playing, you'll need to reset the game to see the effects.<br /><br />
 ## Contact 

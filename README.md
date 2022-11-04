@@ -1,7 +1,7 @@
 # Dead by Daylight | ADVANCED SETTINGS CHANGER
 Advanced Config Editor for Dead by Daylight
 <br /><br />
-## How to use the app
+## Tutorial
 [YouTube tutorial](https://youtu.be/3lOGWBIzMes)
 
 ## More informations

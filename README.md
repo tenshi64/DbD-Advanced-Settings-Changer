@@ -21,9 +21,9 @@ Advanced Config Editor for Dead by Daylight
 ## Download
 #### Download the latest version from [website](http://dbdconfigeditor.epizy.com/) or from [releases](https://github.com/elefelen/dead-by-daylight-advanced-settings-changer/releases).<br /><br />
 ## Screenshots:<br />
-![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/1.PNG)
-![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/2.PNG)
-![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/3.PNG)
-![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/4.PNG)
-![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/5.PNG)
-![Screenshot](https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER/blob/main/6.PNG)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/1.PNG)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/2.PNG)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/3.PNG)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/4.PNG)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/5.PNG)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/6.PNG)

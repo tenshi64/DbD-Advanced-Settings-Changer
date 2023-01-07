@@ -2,7 +2,7 @@
 Advanced Config Editor for Dead by Daylight
 <br /><br />
 ## Tutorial
-[YouTube tutorial](https://youtu.be/3lOGWBIzMes)
+[![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/thumbnail.png)](https://youtu.be/NEiNAB8ho0o)
 
 ## More information
 ### Dead by Daylight ADVANCED SETTINGS CHANGER is an advanced Config Editor for Dead by Daylight developed by єℓєνєи. With this program, you can change all the graphics or audio settings, change the resolution to stretched, or remove the FPS Cap. This application allows you to use ready-made graphics settings prepared for both high-end and low-end PCs. To run this application you will need to install the .NET framework. When the program detects that you do not have it installed, it will launch the installer to help you download it.

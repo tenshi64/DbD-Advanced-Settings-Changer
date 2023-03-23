@@ -5,7 +5,7 @@ Advanced Config Editor for Dead by Daylight
 [![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/thumbnail.png)](https://youtu.be/NEiNAB8ho0o)
 
 ## More information
-### Dead by Daylight ADVANCED SETTINGS CHANGER is an advanced Config Editor for Dead by Daylight developed by єℓєνєи. With this program, you can change all the graphics or audio settings, change the resolution to stretched, or remove the FPS Cap. This application allows you to use ready-made graphics settings prepared for both high-end and low-end PCs. To run this application you will need to install the .NET framework. When the program detects that you do not have it installed, it will launch the installer to help you download it.
+### Dead by Daylight ADVANCED SETTINGS CHANGER is an advanced Config Editor for Dead by Daylight. With this program, you can change all the graphics or audio settings, change the resolution to stretched, or remove the FPS Cap. This application allows you to use ready-made graphics settings prepared for both high-end and low-end PCs. To run this application you will need to install the .NET framework. When the program detects that you do not have it installed, it will launch the installer to help you download it.
 
 ### It is highly recommended that you change your settings after quitting the game as some changes may not be saved.<br /><br />
 
@@ -13,7 +13,7 @@ Advanced Config Editor for Dead by Daylight
 ### The application saves changes automatically as soon as you make any. The program has a backup system for configuration files and creates a file backup when the application is started for the first time. To restore the current files to files that were saved earlier, just click the arrow button in the upper right corner. To create a new restore point, you need to click on the trash can button in the upper right corner.
 
 ## Contact 
-#### Join [Discord server](https://discord.com/invite/EY9uaqTS7Z) or dm me: єℓєνєи#8485<br /><br />
+#### Join [Discord server](https://discord.com/invite/EY9uaqTS7Z) or dm me: 𝘁𝗲𝗻𝘀𝗵𝗶#8485 <br /><br />
 ## New Features
 #### Want to see some new feature in the program? Write on Discord server!<br /><br />
 ## Reporting bugs

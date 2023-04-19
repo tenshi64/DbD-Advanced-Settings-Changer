@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -80,7 +80,7 @@ namespace DbD_Settings_Changer
             if ((sender as Label).Name.Contains("Game"))
             {
                 menuColors((sender as Label).Name.Substring(4, (sender as Label).Name.Length - 4));
-                this.Size = new Size(1145, 830);
+                this.Size = new Size(1145, 870);
             }
         }
 
@@ -150,6 +150,10 @@ namespace DbD_Settings_Changer
             if ((sender as CheckBox).Name.Contains("SprintToCancel"))
             {
                 EditConfig.GameUserSettings(SettingsPath, "SprintToCancel=", cbSprintToCancel.Checked.ToString());
+            }
+            if ((sender as CheckBox).Name.Contains("HeartIcon"))
+            {
+                EditConfig.GameUserSettings(SettingsPath, "TerrorRadiusVisualFeedback=", cbHeartIcon.Checked.ToString());
             }
         }
 

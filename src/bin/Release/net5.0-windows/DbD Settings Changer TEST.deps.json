@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "DbD Settings Changer TEST/4.0.3.0": {
+        "runtime": {
+          "DbD Settings Changer TEST.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DbD Settings Changer TEST/4.0.3.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

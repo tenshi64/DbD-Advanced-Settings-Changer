@@ -1,5 +1,0 @@
-C:\Users\User\Documents\DbD Settings Changer\DbD Settings Changer\DbD Settings Changer\bin\Release\net5.0-windows\publish\DbD Settings Changer TEST.exe
-C:\Users\User\Documents\DbD Settings Changer\DbD Settings Changer\DbD Settings Changer\bin\Release\net5.0-windows\publish\DbD Settings Changer TEST.dll
-C:\Users\User\Documents\DbD Settings Changer\DbD Settings Changer\DbD Settings Changer\bin\Release\net5.0-windows\publish\DbD Settings Changer TEST.deps.json
-C:\Users\User\Documents\DbD Settings Changer\DbD Settings Changer\DbD Settings Changer\bin\Release\net5.0-windows\publish\DbD Settings Changer TEST.runtimeconfig.json
-C:\Users\User\Documents\DbD Settings Changer\DbD Settings Changer\DbD Settings Changer\bin\Release\net5.0-windows\publish\DbD Settings Changer TEST.pdb

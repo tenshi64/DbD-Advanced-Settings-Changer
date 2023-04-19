@@ -1,5 +1,0 @@
-C:\Users\User\Documents\DbD Settings Changer\DbD Settings Changer - Renovation\DbD Settings Changer\bin\Release\net6.0-windows\publish\DbD Settings Changer.exe
-C:\Users\User\Documents\DbD Settings Changer\DbD Settings Changer - Renovation\DbD Settings Changer\bin\Release\net6.0-windows\publish\DbD Settings Changer.dll
-C:\Users\User\Documents\DbD Settings Changer\DbD Settings Changer - Renovation\DbD Settings Changer\bin\Release\net6.0-windows\publish\DbD Settings Changer.deps.json
-C:\Users\User\Documents\DbD Settings Changer\DbD Settings Changer - Renovation\DbD Settings Changer\bin\Release\net6.0-windows\publish\DbD Settings Changer.runtimeconfig.json
-C:\Users\User\Documents\DbD Settings Changer\DbD Settings Changer - Renovation\DbD Settings Changer\bin\Release\net6.0-windows\publish\DbD Settings Changer.pdb

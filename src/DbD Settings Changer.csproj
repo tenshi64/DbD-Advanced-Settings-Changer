@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>DbD_Settings_Changer</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>dead-by-daylight_1.ico</ApplicationIcon>
+    <Authors>𝘁𝗲𝗻𝘀𝗵𝗶</Authors>
+    <Description>Advanced change of Dead by Daylight settings.</Description>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <SignAssembly>false</SignAssembly>
+    <DelaySign>true</DelaySign>
+    <Version>4.3.1</Version>
+    <AssemblyVersion>4.3.1</AssemblyVersion>
+    <Copyright>𝘁𝗲𝗻𝘀𝗵𝗶</Copyright>
+    <PackageLicenseExpression>CC-BY-NC-ND-4.0</PackageLicenseExpression>
+    <PackageIcon>ico.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryUrl>https://github.com/elefelen/DbD_ADVANCED_SETTINGS_CHANGER</RepositoryUrl>
+    <PackageProjectUrl>http://dbdconfigeditor.epizy.com/</PackageProjectUrl>
+    <FileVersion>4.3.1</FileVersion>
+    <StartupObject />
+    <AssemblyName>DbD Settings Changer</AssemblyName>
+    <PackageId>$(AssemblyName)</PackageId>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>3</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="..\Settings Changer Website\ico.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

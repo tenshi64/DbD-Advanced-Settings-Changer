@@ -13,7 +13,7 @@ Advanced Config Editor for Dead by Daylight
 ### The application saves changes automatically as soon as you make any. The program has a backup system for configuration files and creates a file backup when the application is started for the first time. To restore the current files to files that were saved earlier, just click the arrow button in the upper right corner. To create a new restore point, you need to click on the trash can button in the upper right corner.
 
 ## Contact 
-#### Join [Discord server](https://discord.com/invite/EY9uaqTS7Z) or dm me: @nalzy64 <br /><br />
+#### Join [Discord server](https://discord.com/invite/EY9uaqTS7Z) or dm me: @tenshi64bit <br /><br />
 ## New Features
 #### Want to see some new feature in the program? Write on Discord server!<br /><br />
 ## Reporting bugs

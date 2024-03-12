@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -79,7 +79,7 @@ namespace DbD_Settings_Changer
         {
             int numLines = File.ReadLines(ApplicationLanguageData + "lang.ini").Count();
             string[] lang = File.ReadAllLines(ApplicationLanguageData + "lang.ini");
-            string[] words = new string[] { "en", "pl", "ru", "du", "fr", "jp", "ch", "tu", "esp", "it" };
+            string[] words = new string[] { "en", "pl", "ru", "de", "fr", "jp", "ch", "tu", "esp", "it" };
 
             bool found = false;
             string word = "";
@@ -102,7 +102,7 @@ namespace DbD_Settings_Changer
                             case "ru":
                                 word = "русский";
                                 break;
-                            case "du":
+                            case "de":
                                 word = "Deutsch";
                                 break;
                             case "fr":

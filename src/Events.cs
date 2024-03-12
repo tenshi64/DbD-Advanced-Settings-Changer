@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -589,7 +589,7 @@ namespace DbD_Settings_Changer
             switch (cbInGameLangauge.SelectedItem.ToString())
             {
                 case "Deutsch":
-                    word = "du";
+                    word = "de";
                     break;
                 case "English":
                     word = "en";
@@ -655,7 +655,7 @@ namespace DbD_Settings_Changer
                     word = "ru";
                     break;
                 case "Deutsch":
-                    word = "du";
+                    word = "de";
                     break;
                 case "Français":
                     word = "fr";
@@ -680,7 +680,7 @@ namespace DbD_Settings_Changer
             string file = File.ReadAllText(ApplicationLanguageData + "lang.ini");
             int numLines = File.ReadLines(ApplicationLanguageData + "lang.ini").Count();
             string[] lang = File.ReadAllLines(ApplicationLanguageData + "lang.ini");
-            string[] words = new string[] { "en", "pl", "ru", "du", "fr", "jp", "ch", "tu", "esp", "it" };
+            string[] words = new string[] { "en", "pl", "ru", "de", "fr", "jp", "ch", "tu", "esp", "it" };
 
             for (int a = 0; a < numLines; a++)
             {

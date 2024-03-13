@@ -31,6 +31,6 @@ Advanced Config Editor for Dead by Daylight
 ![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/1.png)
 ![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/2.png)
 ![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/3.png)
-![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/4.png)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/42.png)
 ![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/5.png)
 ![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/6.png)

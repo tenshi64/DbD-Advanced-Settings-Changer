@@ -28,9 +28,9 @@ Advanced Config Editor for Dead by Daylight
 ### This program is used to change settings in a configuration file as you do manually. Setting everything to the highest setting may damage your computer, for which I am not responsible. Please use the program with caution and consider hardware limitations when changing settings.
 
 ## Screenshots:<br />
-![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/1.PNG)
-![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/2.PNG)
-![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/3.PNG)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/1.png)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/2.png)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/3.png)
 ![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/4.png)
-![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/5.PNG)
-![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/6.PNG)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/5.png)
+![Screenshot](https://github.com/elefelen/ADVANCED_SETTINGS_CHANGER/blob/main/screenshots/6.png)

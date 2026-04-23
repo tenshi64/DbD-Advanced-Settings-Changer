@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -494,9 +494,18 @@ namespace DbD_Settings_Changer
             DialogResult result = MessageBox.Show(errors["delete-confs"], errors["delete-confs-title"], MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                File.Delete(ApplicationData + "UsEng.ini");
-                File.Delete(ApplicationData + "UsSet.ini");
-                Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Autosave");
+                if(File.Exists(ApplicationData + "UsEng.ini"))
+                {
+                    File.Delete(ApplicationData + "UsEng.ini");
+                }
+                if (File.Exists(ApplicationData + "UsSet.ini"))
+                {
+                    File.Delete(ApplicationData + "UsSet.ini");
+                }
+                if(Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Autosave"))
+                {
+                    Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Autosave");
+                }
                 Application.Restart();
             }
         }

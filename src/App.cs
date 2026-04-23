@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -238,32 +238,27 @@ namespace DbD_Settings_Changer
 
                 if (ReadConfig == null || ReadConfig.Length == 0)
                 {
+                    MessageBox.Show("It seems like your Dead by Daylight configuration files are empty!", "Error",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
                     File.WriteAllText(SettingsPath, UsersSettingsContent);
-                    if (ReadEngine == null || ReadEngine.Length == 0)
-                    {
-                        File.WriteAllText(EnginePath, UsersEngineContent);
-                    }
-                    Application.Restart();
                 }
 
                 if (ReadEngine == null || ReadEngine.Length == 0)
                 {
                     File.WriteAllText(EnginePath, UsersEngineContent);
-                    if (ReadConfig == null || ReadConfig.Length == 0)
-                    {
-                        File.WriteAllText(SettingsPath, UsersSettingsContent);
-                    }
-                    Application.Restart();
                 }
+
+                ReadConfig = File.ReadAllText(SettingsPath);
+                ReadEngine = File.ReadAllText(EnginePath);
 
                 if (ReadConfig != null || ReadConfig.Length != 0)
                 {
                     ReadAndFixAllValues();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                MessageBox.Show(e.Message);
             }
         }
 

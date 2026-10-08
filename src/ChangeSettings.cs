@@ -1,276 +1,243 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
 
 namespace DbD_Settings_Changer
 {
-    public partial class ChangeConfig
+    public static class ChangeConfig
     {
-        public void GameUserSettings(string path, string option, string valueInt)
+        public static void GameUserSettings(string path, string option, string valueInt)
         {
             string config = File.ReadAllText(path);
-
-            int numLines = File.ReadLines(path).Count();
             string[] lines = File.ReadAllLines(path);
 
-            for (int i = 0; i < numLines; i++)
+            foreach (string line in lines)
             {
-                if (lines[i].Contains(option))
+                if (line.Contains(option, StringComparison.Ordinal))
                 {
-                    config = config.Replace(lines[i], option + valueInt);
+                    config = config.Replace(line, option + valueInt, StringComparison.Ordinal);
                     File.WriteAllText(path, config);
                 }
             }
         }
 
-        public void SetFPS(string path, string option, int valueInt)
+        public static void SetFPS(string path, string option, int valueInt)
         {
             string read = File.ReadAllText(path);
-            int numLines = File.ReadLines(path).Count();
             string[] lines = File.ReadAllLines(path);
 
-            for (int i = 0; i < numLines; i++)
+            foreach (string line in lines)
             {
-                if (lines[i].Contains(option))
+                if (line.Contains(option, StringComparison.Ordinal))
                 {
-                    if (valueInt == 60 || valueInt == 61 || valueInt == 62)
+                    if (valueInt is 60 or 61 or 62)
                     {
-                        string text = !option.Contains("FPSLimitMode") ? "0.000000" : "";
-                        read = read.Replace(lines[i], option + text);
-
+                        string text = !option.Contains("FPSLimitMode", StringComparison.Ordinal) ? "0.000000" : string.Empty;
+                        read = read.Replace(line, option + text, StringComparison.Ordinal);
                         File.WriteAllText(path, read);
                     }
                     else
                     {
-                        string text = !option.Contains("FPSLimitMode") ? ".000000" : "";
-                        read = read.Replace(lines[i], option + valueInt + text);
-
+                        string text = !option.Contains("FPSLimitMode", StringComparison.Ordinal) ? ".000000" : string.Empty;
+                        read = read.Replace(line, option + valueInt + text, StringComparison.Ordinal);
                         File.WriteAllText(path, read);
                     }
                 }
             }
 
-            if(option.Contains("FPSLimitMode"))
+            if (option.Contains("FPSLimitMode", StringComparison.Ordinal))
             {
-                if (valueInt != 30 && valueInt != 59 && valueInt != 60 && valueInt != 90 && valueInt != 120)
+                if (valueInt is not (30 or 59 or 60 or 90 or 120))
                 {
                     MessageBox.Show(Main.errors["fps-error"], Main.errors["information"], MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
 
-        public void EngineFPS(string EnginePath, int value)
+        public static void EngineFPS(string enginePath, int value)
         {
-            string ReadEngine = File.ReadAllText(EnginePath);
-            ReadEngine += "\n\n[/script/ReadEngine.ReadEngine]\nbSmoothFrameRate=False\nMinSmoothedFrameRate=1\nMaxSmoothedFrameRate=" + value;
-            File.WriteAllText(EnginePath, ReadEngine);
+            string readEngine = File.ReadAllText(enginePath);
+            readEngine += "\n\n[/script/ReadEngine.ReadEngine]\nbSmoothFrameRate=False\nMinSmoothedFrameRate=1\nMaxSmoothedFrameRate=" + value;
+            File.WriteAllText(enginePath, readEngine);
         }
 
-        public void ResetFPS(string path)
+        public static void ResetFPS(string path)
         {
-            string ReadEngine = File.ReadAllText(path);
-            int numLines2 = File.ReadLines(path).Count();
+            string readEngine = File.ReadAllText(path);
             string[] eng = File.ReadAllLines(path);
 
-            for (int a = 0; a < numLines2; a++)
+            foreach (string line in eng)
             {
-                if (eng[a].ToLower().Contains("[/script/ReadEngine.ReadEngine]".ToLower()))
+                if (line.Contains("[/script/ReadEngine.ReadEngine]", StringComparison.OrdinalIgnoreCase))
                 {
-                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
-
-                    File.WriteAllText(path, ReadEngine);
+                    readEngine = readEngine.Replace(line, string.Empty, StringComparison.Ordinal);
+                    File.WriteAllText(path, readEngine);
                 }
-                if (eng[a].ToLower().Contains("[/script/engine.engine]".ToLower()))
+                if (line.Contains("[/script/engine.engine]", StringComparison.OrdinalIgnoreCase))
                 {
-                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
-
-                    File.WriteAllText(path, ReadEngine);
+                    readEngine = readEngine.Replace(line, string.Empty, StringComparison.Ordinal);
+                    File.WriteAllText(path, readEngine);
                 }
-                if (eng[a].ToLower().Contains("bSmoothFrameRate".ToLower()))
+                if (line.Contains("bSmoothFrameRate", StringComparison.OrdinalIgnoreCase))
                 {
-                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
-
-                    File.WriteAllText(path, ReadEngine);
+                    readEngine = readEngine.Replace(line, string.Empty, StringComparison.Ordinal);
+                    File.WriteAllText(path, readEngine);
                 }
-                if (eng[a].ToLower().Contains("MinSmoothedFrameRate".ToLower()))
+                if (line.Contains("MinSmoothedFrameRate", StringComparison.OrdinalIgnoreCase))
                 {
-                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
-
-                    File.WriteAllText(path, ReadEngine);
+                    readEngine = readEngine.Replace(line, string.Empty, StringComparison.Ordinal);
+                    File.WriteAllText(path, readEngine);
                 }
-                if (eng[a].ToLower().Contains("MaxSmoothedFrameRate".ToLower()))
+                if (line.Contains("MaxSmoothedFrameRate", StringComparison.OrdinalIgnoreCase))
                 {
-                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
-
-                    File.WriteAllText(path, ReadEngine);
+                    readEngine = readEngine.Replace(line, string.Empty, StringComparison.Ordinal);
+                    File.WriteAllText(path, readEngine);
                 }
-                if (eng[a].ToLower().Contains("bUseVSync".ToLower()))
+                if (line.Contains("bUseVSync", StringComparison.OrdinalIgnoreCase))
                 {
-                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
-
-                    File.WriteAllText(path, ReadEngine);
+                    readEngine = readEngine.Replace(line, string.Empty, StringComparison.Ordinal);
+                    File.WriteAllText(path, readEngine);
                 }
             }
         }
 
-        public void SetResolution(string path, int WidthValue, int HeightValue)
+        public static void SetResolution(string path, int widthValue, int heightValue)
         {
-            string ReadConfig = File.ReadAllText(path);
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            string readConfig = File.ReadAllText(path);
+            int screenWidth = Screen.PrimaryScreen?.Bounds.Width ?? 1920;
+            int screenHeight = Screen.PrimaryScreen?.Bounds.Height ?? 1080;
 
-            int numLines = File.ReadLines(path).Count();
             string[] lines = File.ReadAllLines(path);
 
-            if (HeightValue != screenHeight || WidthValue != screenWidth)
+            if (heightValue != screenHeight || widthValue != screenWidth)
             {
-                for (int i = 0; i < numLines; i++)
+                foreach (string line in lines)
                 {
-                    if (lines[i].Contains("ResolutionSizeX") && !lines[i].Contains("LastUser"))
+                    if (line.Contains("ResolutionSizeX", StringComparison.Ordinal) && !line.Contains("LastUser", StringComparison.Ordinal))
                     {
-                        ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeX=" + WidthValue);
-                        File.WriteAllText(path, ReadConfig);
+                        readConfig = readConfig.Replace(line, "ResolutionSizeX=" + widthValue, StringComparison.Ordinal);
+                        File.WriteAllText(path, readConfig);
                     }
-                    if (lines[i].Contains("ResolutionSizeY") && !lines[i].Contains("LastUser"))
+                    if (line.Contains("ResolutionSizeY", StringComparison.Ordinal) && !line.Contains("LastUser", StringComparison.Ordinal))
                     {
-                        ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeY=" + HeightValue);
-                        File.WriteAllText(path, ReadConfig);
+                        readConfig = readConfig.Replace(line, "ResolutionSizeY=" + heightValue, StringComparison.Ordinal);
+                        File.WriteAllText(path, readConfig);
                     }
-                    if (lines[i].Contains("LastUserConfirmedResolutionSizeX"))
+                    if (line.Contains("LastUserConfirmedResolutionSizeX", StringComparison.Ordinal))
                     {
-                        ReadConfig = ReadConfig.Replace(lines[i], "LastUserConfirmedResolutionSizeX=" + WidthValue);
-                        File.WriteAllText(path, ReadConfig);
+                        readConfig = readConfig.Replace(line, "LastUserConfirmedResolutionSizeX=" + widthValue, StringComparison.Ordinal);
+                        File.WriteAllText(path, readConfig);
                     }
-                    if (lines[i].Contains("LastUserConfirmedResolutionSizeY"))
+                    if (line.Contains("LastUserConfirmedResolutionSizeY", StringComparison.Ordinal))
                     {
-                        ReadConfig = ReadConfig.Replace(lines[i], "LastUserConfirmedResolutionSizeY=" + HeightValue);
-                        File.WriteAllText(path, ReadConfig);
+                        readConfig = readConfig.Replace(line, "LastUserConfirmedResolutionSizeY=" + heightValue, StringComparison.Ordinal);
+                        File.WriteAllText(path, readConfig);
                     }
-                    if (lines[i].Contains("FullscreenMode") && !lines[i].Contains("LastConfirmed") && !lines[i].Contains("Preferred"))
+                    if (line.Contains("FullscreenMode", StringComparison.Ordinal) && !line.Contains("LastConfirmed", StringComparison.Ordinal) && !line.Contains("Preferred", StringComparison.Ordinal))
                     {
-                        ReadConfig = ReadConfig.Replace(lines[i], "FullscreenMode=" + 0);
-                        File.WriteAllText(path, ReadConfig);
+                        readConfig = readConfig.Replace(line, "FullscreenMode=0", StringComparison.Ordinal);
+                        File.WriteAllText(path, readConfig);
                     }
-                    if (lines[i].Contains("LastConfirmedFullscreenMode"))
+                    if (line.Contains("LastConfirmedFullscreenMode", StringComparison.Ordinal))
                     {
-                        ReadConfig = ReadConfig.Replace(lines[i], "LastConfirmedFullscreenMode=" + 0);
-                        File.WriteAllText(path, ReadConfig);
+                        readConfig = readConfig.Replace(line, "LastConfirmedFullscreenMode=0", StringComparison.Ordinal);
+                        File.WriteAllText(path, readConfig);
                     }
-                    if (lines[i].Contains("PreferredFullscreenMode"))
+                    if (line.Contains("PreferredFullscreenMode", StringComparison.Ordinal))
                     {
-                        ReadConfig = ReadConfig.Replace(lines[i], "PreferredFullscreenMode=" + 0);
-                        File.WriteAllText(path, ReadConfig);
+                        readConfig = readConfig.Replace(line, "PreferredFullscreenMode=0", StringComparison.Ordinal);
+                        File.WriteAllText(path, readConfig);
                     }
                 }
             }
-            else if (HeightValue == screenHeight && WidthValue == screenWidth)
+            else if (heightValue == screenHeight && widthValue == screenWidth)
             {
                 ResetResolution(path);
             }
         }
 
-        public void ResetResolution(string path)
+        public static void ResetResolution(string path)
         {
-            string ReadConfig = File.ReadAllText(path);
-
-            int numLines = File.ReadLines(path).Count();
+            string readConfig = File.ReadAllText(path);
             string[] lines = File.ReadAllLines(path);
 
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            int screenWidth = Screen.PrimaryScreen?.Bounds.Width ?? 1920;
+            int screenHeight = Screen.PrimaryScreen?.Bounds.Height ?? 1080;
 
-            for (int i = 0; i < numLines; i++)
+            foreach (string line in lines)
             {
-
-                if (lines[i].Contains("ResolutionSizeX=") && !lines[i].Contains("LastUser"))
+                if (line.Contains("ResolutionSizeX=", StringComparison.Ordinal) && !line.Contains("LastUser", StringComparison.Ordinal))
                 {
-                    ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeX=" + screenWidth);
-                    File.WriteAllText(path, ReadConfig);
+                    readConfig = readConfig.Replace(line, "ResolutionSizeX=" + screenWidth, StringComparison.Ordinal);
+                    File.WriteAllText(path, readConfig);
                 }
-                if (lines[i].Contains("ResolutionSizeY=") && !lines[i].Contains("LastUser"))
+                if (line.Contains("ResolutionSizeY=", StringComparison.Ordinal) && !line.Contains("LastUser", StringComparison.Ordinal))
                 {
-                    ReadConfig = ReadConfig.Replace(lines[i], "ResolutionSizeY=" + screenHeight);
-                    File.WriteAllText(path, ReadConfig);
+                    readConfig = readConfig.Replace(line, "ResolutionSizeY=" + screenHeight, StringComparison.Ordinal);
+                    File.WriteAllText(path, readConfig);
                 }
-                if (lines[i].Contains("LastUserConfirmedResolutionSizeX="))
+                if (line.Contains("LastUserConfirmedResolutionSizeX=", StringComparison.Ordinal))
                 {
-                    ReadConfig = ReadConfig.Replace(lines[i], "LastUserConfirmedResolutionSizeX=" + screenWidth);
-                    File.WriteAllText(path, ReadConfig);
+                    readConfig = readConfig.Replace(line, "LastUserConfirmedResolutionSizeX=" + screenWidth, StringComparison.Ordinal);
+                    File.WriteAllText(path, readConfig);
                 }
-                if (lines[i].Contains("LastUserConfirmedResolutionSizeY="))
+                if (line.Contains("LastUserConfirmedResolutionSizeY=", StringComparison.Ordinal))
                 {
-                    ReadConfig = ReadConfig.Replace(lines[i], "LastUserConfirmedResolutionSizeY=" + screenHeight);
-                    File.WriteAllText(path, ReadConfig);
+                    readConfig = readConfig.Replace(line, "LastUserConfirmedResolutionSizeY=" + screenHeight, StringComparison.Ordinal);
+                    File.WriteAllText(path, readConfig);
                 }
-                if (lines[i].Contains("FullscreenMode=") && !lines[i].Contains("LastConfirmed") && !lines[i].Contains("Preferred"))
+                if (line.Contains("FullscreenMode=", StringComparison.Ordinal) && !line.Contains("LastConfirmed", StringComparison.Ordinal) && !line.Contains("Preferred", StringComparison.Ordinal))
                 {
-                    ReadConfig = ReadConfig.Replace(lines[i], "FullscreenMode=" + 1);
-                    File.WriteAllText(path, ReadConfig);
+                    readConfig = readConfig.Replace(line, "FullscreenMode=1", StringComparison.Ordinal);
+                    File.WriteAllText(path, readConfig);
                 }
-                if (lines[i].Contains("LastConfirmedFullscreenMode=") && !lines[i].Contains("Preferred"))
+                if (line.Contains("LastConfirmedFullscreenMode=", StringComparison.Ordinal) && !line.Contains("Preferred", StringComparison.Ordinal))
                 {
-                    ReadConfig = ReadConfig.Replace(lines[i], "LastConfirmedFullscreenMode=" + 1);
-                    File.WriteAllText(path, ReadConfig);
+                    readConfig = readConfig.Replace(line, "LastConfirmedFullscreenMode=1", StringComparison.Ordinal);
+                    File.WriteAllText(path, readConfig);
                 }
-                if (lines[i].Contains("PreferredFullscreenMode=") && !lines[i].Contains("LastConfirmed"))
+                if (line.Contains("PreferredFullscreenMode=", StringComparison.Ordinal) && !line.Contains("LastConfirmed", StringComparison.Ordinal))
                 {
-                    ReadConfig = ReadConfig.Replace(lines[i], "PreferredFullscreenMode=" + 1);
-                    File.WriteAllText(path, ReadConfig);
+                    readConfig = readConfig.Replace(line, "PreferredFullscreenMode=1", StringComparison.Ordinal);
+                    File.WriteAllText(path, readConfig);
                 }
             }
         }
 
-        public void DisableAntiAliasing(string EnginePath)
+        public static void DisableAntiAliasing(string enginePath)
         {
-            string ReadEngine = File.ReadAllText(EnginePath);
-            ReadEngine += "\n\n\n[/Script/Engine.GarbageCollectionSettings]\nr.DefaultFeature.AntiAliasing=0";
-
-            File.WriteAllText(EnginePath, ReadEngine);
+            string readEngine = File.ReadAllText(enginePath);
+            readEngine += "\n\n\n[/Script/Engine.GarbageCollectionSettings]\nr.DefaultFeature.AntiAliasing=0";
+            File.WriteAllText(enginePath, readEngine);
         }
 
-        public void EnableAntiAliasing(string EnginePath)
+        public static void EnableAntiAliasing(string enginePath)
         {
-            string ReadEngine = File.ReadAllText(EnginePath);
+            string readEngine = File.ReadAllText(enginePath);
+            File.WriteAllText(enginePath, readEngine);
+            string[] eng = File.ReadAllLines(enginePath);
 
-            File.WriteAllText(EnginePath, ReadEngine);
-            int numLines2 = File.ReadLines(EnginePath).Count();
-            string[] eng = File.ReadAllLines(EnginePath);
-
-            for (int a = 0; a < numLines2; a++)
+            foreach (string line in eng)
             {
-                if (eng[a].ToLower().Contains("[/Script/Engine.GarbageCollectionSettings]".ToLower()))
+                if (line.Contains("[/Script/Engine.GarbageCollectionSettings]", StringComparison.OrdinalIgnoreCase))
                 {
-                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
-
-                    File.WriteAllText(EnginePath, ReadEngine);
+                    readEngine = readEngine.Replace(line, string.Empty, StringComparison.Ordinal);
+                    File.WriteAllText(enginePath, readEngine);
                 }
-                if (eng[a].ToLower().Contains("r.DefaultFeature.AntiAliasing=0".ToLower()))
+                if (line.Contains("r.DefaultFeature.AntiAliasing=0", StringComparison.OrdinalIgnoreCase))
                 {
-                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
-
-                    File.WriteAllText(EnginePath, ReadEngine);
+                    readEngine = readEngine.Replace(line, string.Empty, StringComparison.Ordinal);
+                    File.WriteAllText(enginePath, readEngine);
                 }
-                if (eng[a].ToLower().Contains("[/Script/Engine.RendererOverrideSettings]".ToLower()))
+                if (line.Contains("[/Script/Engine.RendererOverrideSettings]", StringComparison.OrdinalIgnoreCase))
                 {
-                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
-
-                    File.WriteAllText(EnginePath, ReadEngine);
+                    readEngine = readEngine.Replace(line, string.Empty, StringComparison.Ordinal);
+                    File.WriteAllText(enginePath, readEngine);
                 }
-                if (eng[a].ToLower().Contains("[/ script / engine.streamingsettings]".ToLower()))
+                if (line.Contains("[/ script / engine.streamingsettings]", StringComparison.OrdinalIgnoreCase))
                 {
-                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
-
-                    File.WriteAllText(EnginePath, ReadEngine);
-                }
-                if (eng[a].ToLower().Contains("[/ script / engine.streamingsettings]".ToLower()))
-                {
-                    ReadEngine = ReadEngine.Replace(eng[a], String.Empty);
-
-                    File.WriteAllText(EnginePath, ReadEngine);
+                    readEngine = readEngine.Replace(line, string.Empty, StringComparison.Ordinal);
+                    File.WriteAllText(enginePath, readEngine);
                 }
             }
         }

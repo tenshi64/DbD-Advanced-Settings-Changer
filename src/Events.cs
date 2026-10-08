@@ -1,27 +1,24 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DbD_Settings_Changer
 {
     public partial class Main : Form
     {
-        private void menuColors(string avoidedName)
+        private void MenuColors(string avoidedName)
         {
             foreach (Control control in panel10.Controls)
             {
-                if (control.Name.Contains("panel"))
+                if (control.Name.Contains("panel", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (!control.Name.Contains(avoidedName) && !control.Name.Contains("Discord") && !control.Name.Contains("User"))
+                    if (!control.Name.Contains(avoidedName, StringComparison.OrdinalIgnoreCase) && !control.Name.Contains("Discord", StringComparison.OrdinalIgnoreCase) && !control.Name.Contains("User", StringComparison.OrdinalIgnoreCase))
                     {
                         control.Hide();
                     }
-                    if (control.Name.Contains(avoidedName) && !control.Name.Contains("Discord") && !control.Name.Contains("User"))
+                    if (control.Name.Contains(avoidedName, StringComparison.OrdinalIgnoreCase) && !control.Name.Contains("Discord", StringComparison.OrdinalIgnoreCase) && !control.Name.Contains("User", StringComparison.OrdinalIgnoreCase))
                     {
                         control.Show();
                     }
@@ -30,19 +27,19 @@ namespace DbD_Settings_Changer
                 {
                     foreach (Control ctrl in control.Controls)
                     {
-                        if (ctrl is Label)
+                        if (ctrl is Label label)
                         {
-                            if (!ctrl.Name.Contains(avoidedName) && ctrl.Name.Contains("menu"))
+                            if (!label.Name.Contains(avoidedName, StringComparison.OrdinalIgnoreCase) && label.Name.Contains("menu", StringComparison.OrdinalIgnoreCase))
                             {
-                                ctrl.BackColor = Color.FromArgb(68, 80, 102);
-                                ctrl.Location = new Point(ctrl.Location.X, 13);
-                                ctrl.Size = new Size(ctrl.Size.Width, 40);
+                                label.BackColor = Color.FromArgb(68, 80, 102);
+                                label.Location = new Point(label.Location.X, 13);
+                                label.Size = new Size(label.Size.Width, 40);
                             }
-                            if (ctrl.Name.Contains(avoidedName) && ctrl.Name.Contains("menu"))
+                            if (label.Name.Contains(avoidedName, StringComparison.OrdinalIgnoreCase) && label.Name.Contains("menu", StringComparison.OrdinalIgnoreCase))
                             {
-                                ctrl.BackColor = Color.Crimson;
-                                ctrl.Location = new Point(ctrl.Location.X, 6);
-                                ctrl.Size = new Size(ctrl.Size.Width, 44);
+                                label.BackColor = Color.Crimson;
+                                label.Location = new Point(label.Location.X, 6);
+                                label.Size = new Size(label.Size.Width, 44);
                             }
                         }
                     }
@@ -50,118 +47,102 @@ namespace DbD_Settings_Changer
             }
         }
 
-        private void menuClick(object sender, EventArgs e)
+        private void MenuClick(object sender, EventArgs e)
         {
-            if ((sender as Label).Name.Contains("Audio"))
+            if (sender is Label label)
             {
-                menuColors((sender as Label).Name.Substring(4, (sender as Label).Name.Length - 4));
-                //this.Size = new Size(1145, 566);
-            }
-            if ((sender as Label).Name.Contains("Graphics"))
-            {
-                menuColors((sender as Label).Name.Substring(4, (sender as Label).Name.Length - 4));
-                //this.Size = new Size(1145, 1022);
-            }
-            if ((sender as Label).Name.Contains("FPS"))
-            {
-                menuColors((sender as Label).Name.Substring(4, (sender as Label).Name.Length - 4));
-                //this.Size = new Size(1145, 408);
-            }
-            if ((sender as Label).Name.Contains("Presets"))
-            {
-                menuColors((sender as Label).Name.Substring(4, (sender as Label).Name.Length - 4));
-                //this.Size = new Size(1145, 550);
-            }
-            if ((sender as Label).Name.Contains("Sensitivity"))
-            {
-                menuColors((sender as Label).Name.Substring(4, (sender as Label).Name.Length - 4));
-                //this.Size = new Size(1145, 665);
-            }
-            if ((sender as Label).Name.Contains("Game"))
-            {
-                menuColors((sender as Label).Name.Substring(4, (sender as Label).Name.Length - 4));
-                //this.Size = new Size(1145, 870);
-            }
-        }
-
-        private int getValue(object sender)
-        {
-            switch ((sender as Button).Name)
-            {
-                case string value0 when value0.Contains("Low"): return 0;
-                case string value1 when value1.Contains("Medium"): return 1;
-                case string value2 when value2.Contains("High"): return 2;
-                case string value3 when value3.Contains("Ultra"): return 3;
-                case string value4 when value4.Contains("Epic"): return 4;
-                case string value5 when value5.Contains("Awesome"): return 5;
-            }
-            return 0;
-        }
-
-        private void changeButtonColor(object sender, string name, string avoidedName)
-        {
-            foreach (Button btn in (sender as Button).Parent.Controls.OfType<Button>())
-            {
-                if (!btn.Name.Contains(avoidedName) && btn.Name.Contains(name) && btn != (sender as Button))
+                if (label.Name.Contains("Audio", StringComparison.Ordinal) ||
+                    label.Name.Contains("Graphics", StringComparison.Ordinal) ||
+                    label.Name.Contains("FPS", StringComparison.Ordinal) ||
+                    label.Name.Contains("Presets", StringComparison.Ordinal) ||
+                    label.Name.Contains("Sensitivity", StringComparison.Ordinal) ||
+                    label.Name.Contains("Game", StringComparison.Ordinal))
                 {
-                    btn.BackColor = Color.FromArgb(255, 255, 255);
-                    btn.ForeColor = Color.Black;
-                }
-                if (btn == (sender as Button))
-                {
-                    btn.BackColor = Color.Crimson;
-                    btn.ForeColor = Color.White;
+                    MenuColors(label.Name[4..]);
                 }
             }
-
         }
 
-        private void cbCheckedChanged(object sender, EventArgs e)
+        private static int GetValue(object sender) =>
+            (sender as Button)?.Name switch
+            {
+                string name when name.Contains("Low", StringComparison.Ordinal) => 0,
+                string name when name.Contains("Medium", StringComparison.Ordinal) => 1,
+                string name when name.Contains("High", StringComparison.Ordinal) => 2,
+                string name when name.Contains("Ultra", StringComparison.Ordinal) => 3,
+                string name when name.Contains("Epic", StringComparison.Ordinal) => 4,
+                string name when name.Contains("Awesome", StringComparison.Ordinal) => 5,
+                _ => 0
+            };
+
+        private static void ChangeButtonColor(object sender, string name, string avoidedName)
+        {
+            if (sender is Button currentBtn && currentBtn.Parent != null)
+            {
+                foreach (Button btn in currentBtn.Parent.Controls.OfType<Button>())
+                {
+                    if (!btn.Name.Contains(avoidedName, StringComparison.Ordinal) && btn.Name.Contains(name, StringComparison.Ordinal) && btn != currentBtn)
+                    {
+                        btn.BackColor = Color.FromArgb(255, 255, 255);
+                        btn.ForeColor = Color.Black;
+                    }
+                    if (btn == currentBtn)
+                    {
+                        btn.BackColor = Color.Crimson;
+                        btn.ForeColor = Color.White;
+                    }
+                }
+            }
+        }
+
+        private void CbCheckedChanged(object sender, EventArgs e)
         {
             lblHideFocus.Focus();
-            if ((sender as CheckBox).Name.Contains("SurvivorToggle"))
+            if (sender is not CheckBox cb) return;
+
+            if (cb.Name.Contains("SurvivorToggle", StringComparison.Ordinal))
             {
-                EditConfig.GameUserSettings(SettingsPath, "SurvivorToggleInteractions=", cbSurvivorToggle.Checked.ToString());
+                ChangeConfig.GameUserSettings(SettingsPath, "SurvivorToggleInteractions=", cbSurvivorToggle.Checked.ToString());
             }
-            if ((sender as CheckBox).Name.Contains("KillerToggle"))
+            if (cb.Name.Contains("KillerToggle", StringComparison.Ordinal))
             {
-                EditConfig.GameUserSettings(SettingsPath, "KillerToggleInteractions=", cbKillerToggle.Checked.ToString());
+                ChangeConfig.GameUserSettings(SettingsPath, "KillerToggleInteractions=", cbKillerToggle.Checked.ToString());
             }
-            if ((sender as CheckBox).Name.Contains("Vsync"))
+            if (cb.Name.Contains("Vsync", StringComparison.Ordinal))
             {
-                EditConfig.GameUserSettings(SettingsPath, "bUseVSync=", cbVsync.Checked.ToString());
+                ChangeConfig.GameUserSettings(SettingsPath, "bUseVSync=", cbVsync.Checked.ToString());
             }
-            if ((sender as CheckBox).Name.Contains("Headphones"))
+            if (cb.Name.Contains("Headphones", StringComparison.Ordinal))
             {
-                EditConfig.GameUserSettings(SettingsPath, "UseHeadphones=", cbHeadphones.Checked.ToString());
+                ChangeConfig.GameUserSettings(SettingsPath, "UseHeadphones=", cbHeadphones.Checked.ToString());
             }
-            if ((sender as CheckBox).Name.Contains("MuteFocusLost"))
+            if (cb.Name.Contains("MuteFocusLost", StringComparison.Ordinal))
             {
-                EditConfig.GameUserSettings(SettingsPath, "MuteOnFocusLost=", cbMuteFocusLost.Checked.ToString());
+                ChangeConfig.GameUserSettings(SettingsPath, "MuteOnFocusLost=", cbMuteFocusLost.Checked.ToString());
             }
-            if ((sender as CheckBox).Name.Contains("LegacyPrestige"))
+            if (cb.Name.Contains("LegacyPrestige", StringComparison.Ordinal))
             {
-                EditConfig.GameUserSettings(SettingsPath, "LegacyPrestigePortraits=", cbLegacyPrestige.Checked.ToString());
+                ChangeConfig.GameUserSettings(SettingsPath, "LegacyPrestigePortraits=", cbLegacyPrestige.Checked.ToString());
             }
-            if ((sender as CheckBox).Name.Contains("HapticsVibration"))
+            if (cb.Name.Contains("HapticsVibration", StringComparison.Ordinal))
             {
-                EditConfig.GameUserSettings(SettingsPath, "HapticsVibrationPS5=", cbHapticsVibration.Checked.ToString());
+                ChangeConfig.GameUserSettings(SettingsPath, "HapticsVibrationPS5=", cbHapticsVibration.Checked.ToString());
             }
-            if ((sender as CheckBox).Name.Contains("SprintToCancel"))
+            if (cb.Name.Contains("SprintToCancel", StringComparison.Ordinal))
             {
-                EditConfig.GameUserSettings(SettingsPath, "SprintToCancel=", cbSprintToCancel.Checked.ToString());
+                ChangeConfig.GameUserSettings(SettingsPath, "SprintToCancel=", cbSprintToCancel.Checked.ToString());
             }
-            if ((sender as CheckBox).Name.Contains("HeartIcon"))
+            if (cb.Name.Contains("HeartIcon", StringComparison.Ordinal))
             {
-                EditConfig.GameUserSettings(SettingsPath, "TerrorRadiusVisualFeedback=", cbHeartIcon.Checked.ToString());
+                ChangeConfig.GameUserSettings(SettingsPath, "TerrorRadiusVisualFeedback=", cbHeartIcon.Checked.ToString());
             }
-            if ((sender as CheckBox).Name.Contains("Copyright"))
+            if (cb.Name.Contains("Copyright", StringComparison.Ordinal))
             {
-                EditConfig.GameUserSettings(SettingsPath, "AllowCopyrightedMusic=", cbCopyright.Checked.ToString());
+                ChangeConfig.GameUserSettings(SettingsPath, "AllowCopyrightedMusic=", cbCopyright.Checked.ToString());
             }
         }
 
-        private void changeSensitivityOrResolutionOrAudio(TrackBar tb, Label lbl, string line)
+        private void ChangeSensitivityOrResolutionOrAudio(TrackBar tb, Label lbl, string line)
         {
             if (tb.Name == "tbRes")
             {
@@ -169,12 +150,12 @@ namespace DbD_Settings_Changer
                 lbl.Text = value.ToString() + "%";
                 string stringValue = value.ToString() + ".000000";
 
-                EditConfig.GameUserSettings(SettingsPath, line, stringValue);
+                ChangeConfig.GameUserSettings(SettingsPath, line, stringValue);
             }
             else
             {
                 int value = tb.Value;
-                if(lbl.Name.Contains("FOV"))
+                if (lbl.Name.Contains("FOV", StringComparison.Ordinal))
                 {
                     lbl.Text = value.ToString() + "°";
                 }
@@ -183,235 +164,237 @@ namespace DbD_Settings_Changer
                     lbl.Text = value.ToString() + "%";
                 }
 
-                EditConfig.GameUserSettings(SettingsPath, line, value.ToString());
+                ChangeConfig.GameUserSettings(SettingsPath, line, value.ToString());
             }
         }
 
-        private void tbScroll(object sender, EventArgs e)
+        private void TbScroll(object sender, EventArgs e)
         {
             lblHideFocus.Focus();
-            if ((sender as TrackBar).Name.Contains("Res"))
+            if (sender is not TrackBar tb) return;
+
+            if (tb.Name.Contains("Res", StringComparison.Ordinal))
             {
-                changeSensitivityOrResolutionOrAudio(tbRes, lblRes, "sg.ResolutionQuality=");
+                ChangeSensitivityOrResolutionOrAudio(tbRes, lblRes, "sg.ResolutionQuality=");
             }
-            if ((sender as TrackBar).Name.Contains("KillerMouse"))
+            if (tb.Name.Contains("KillerMouse", StringComparison.Ordinal))
             {
-                changeSensitivityOrResolutionOrAudio(tbKillerMouse, lblKillerMouse, "KillerMouseSensitivity=");
+                ChangeSensitivityOrResolutionOrAudio(tbKillerMouse, lblKillerMouse, "KillerMouseSensitivity=");
             }
-            if ((sender as TrackBar).Name.Contains("KillerController"))
+            if (tb.Name.Contains("KillerController", StringComparison.Ordinal))
             {
-                changeSensitivityOrResolutionOrAudio(tbKillerController, lblKillerController, "KillerControllerSensitivity=");
+                ChangeSensitivityOrResolutionOrAudio(tbKillerController, lblKillerController, "KillerControllerSensitivity=");
             }
-            if ((sender as TrackBar).Name.Contains("SurvMouse"))
+            if (tb.Name.Contains("SurvMouse", StringComparison.Ordinal))
             {
-                changeSensitivityOrResolutionOrAudio(tbSurvMouse, lblSurvMouse, "SurvivorMouseSensitivity=");
+                ChangeSensitivityOrResolutionOrAudio(tbSurvMouse, lblSurvMouse, "SurvivorMouseSensitivity=");
             }
-            if ((sender as TrackBar).Name.Contains("SurvController"))
+            if (tb.Name.Contains("SurvController", StringComparison.Ordinal))
             {
-                changeSensitivityOrResolutionOrAudio(tbSurvController, lblSurvController, "SurvivorControllerSensitivity=");
+                ChangeSensitivityOrResolutionOrAudio(tbSurvController, lblSurvController, "SurvivorControllerSensitivity=");
             }
-            if ((sender as TrackBar).Name.Contains("ScRes"))
+            if (tb.Name.Contains("ScRes", StringComparison.Ordinal))
             {
-                changeSensitivityOrResolutionOrAudio(tbScRes, lblScRes, "ScreenRenderSize=");
+                ChangeSensitivityOrResolutionOrAudio(tbScRes, lblScRes, "ScreenRenderSize=");
             }
-            if ((sender as TrackBar).Name.Contains("tbVolume"))
+            if (tb.Name.Contains("tbVolume", StringComparison.Ordinal))
             {
-                changeSensitivityOrResolutionOrAudio(tbVolume, lblMainVolume, "MainVolume=");
+                ChangeSensitivityOrResolutionOrAudio(tbVolume, lblMainVolume, "MainVolume=");
             }
-            if ((sender as TrackBar).Name.Contains("tbMusic"))
+            if (tb.Name.Contains("tbMusic", StringComparison.Ordinal))
             {
-                changeSensitivityOrResolutionOrAudio(tbMusic, lblMenu, "MenuMusicVolume=");
+                ChangeSensitivityOrResolutionOrAudio(tbMusic, lblMenu, "MenuMusicVolume=");
             }
-            if ((sender as TrackBar).Name.Contains("tbFOV"))
+            if (tb.Name.Contains("tbFOV", StringComparison.Ordinal))
             {
-                changeSensitivityOrResolutionOrAudio(tbFOV, lblFOV, "FieldOfView=");
+                ChangeSensitivityOrResolutionOrAudio(tbFOV, lblFOV, "FieldOfView=");
             }
         }
 
-        private void btnClick(object sender, EventArgs e)
+        private void BtnClick(object sender, EventArgs e)
         {
             lblHideFocus.Focus();
-            if ((sender as Button).Name.Contains("Aa"))
+            if (sender is not Button btn) return;
+
+            if (btn.Name.Contains("Aa", StringComparison.Ordinal))
             {
-                changeButtonColor(sender, "Aa", " ");
-                EditConfig.GameUserSettings(SettingsPath, "sg.AntiAliasingQuality=", getValue(sender).ToString());
-                if (!(sender as Button).Name.Contains("Disable"))
+                ChangeButtonColor(btn, "Aa", " ");
+                ChangeConfig.GameUserSettings(SettingsPath, "sg.AntiAliasingQuality=", GetValue(btn).ToString());
+                if (!btn.Name.Contains("Disable", StringComparison.Ordinal))
                 {
-                    EditConfig.GameUserSettings(SettingsPath, "AntiAliasingMode=", 2.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "AntiAliasingMode=", 2.ToString());
                 }
                 else
                 {
-                    EditConfig.GameUserSettings(SettingsPath, "sg.AntiAliasingQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "AntiAliasingMode=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.AntiAliasingQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "AntiAliasingMode=", 0.ToString());
                 }
             }
-            if ((sender as Button).Name.Contains("Pp"))
+            if (btn.Name.Contains("Pp", StringComparison.Ordinal))
             {
-                changeButtonColor(sender, "Pp", " ");
-                EditConfig.GameUserSettings(SettingsPath, "sg.PostProcessQuality=", getValue(sender).ToString());
+                ChangeButtonColor(btn, "Pp", " ");
+                ChangeConfig.GameUserSettings(SettingsPath, "sg.PostProcessQuality=", GetValue(btn).ToString());
             }
-            if ((sender as Button).Name.Contains("Vw"))
+            if (btn.Name.Contains("Vw", StringComparison.Ordinal))
             {
-                changeButtonColor(sender, "Vw", " ");
-                EditConfig.GameUserSettings(SettingsPath, "sg.ViewDistanceQuality=", getValue(sender).ToString());
+                ChangeButtonColor(btn, "Vw", " ");
+                ChangeConfig.GameUserSettings(SettingsPath, "sg.ViewDistanceQuality=", GetValue(btn).ToString());
             }
-            if ((sender as Button).Name.Contains("Shad"))
+            if (btn.Name.Contains("Shad", StringComparison.Ordinal))
             {
-                changeButtonColor(sender, "Shad", " ");
-                EditConfig.GameUserSettings(SettingsPath, "sg.ShadowQuality=", getValue(sender).ToString());
+                ChangeButtonColor(btn, "Shad", " ");
+                ChangeConfig.GameUserSettings(SettingsPath, "sg.ShadowQuality=", GetValue(btn).ToString());
             }
-            if ((sender as Button).Name.Contains("Txt"))
+            if (btn.Name.Contains("Txt", StringComparison.Ordinal))
             {
-                changeButtonColor(sender, "Txt", " ");
-                EditConfig.GameUserSettings(SettingsPath, "sg.TextureQuality=", getValue(sender).ToString());
+                ChangeButtonColor(btn, "Txt", " ");
+                ChangeConfig.GameUserSettings(SettingsPath, "sg.TextureQuality=", GetValue(btn).ToString());
             }
-            if ((sender as Button).Name.Contains("Eff"))
+            if (btn.Name.Contains("Eff", StringComparison.Ordinal))
             {
-                changeButtonColor(sender, "Eff", " ");
-                EditConfig.GameUserSettings(SettingsPath, "sg.EffectsQuality=", getValue(sender).ToString());
+                ChangeButtonColor(btn, "Eff", " ");
+                ChangeConfig.GameUserSettings(SettingsPath, "sg.EffectsQuality=", GetValue(btn).ToString());
             }
-            if ((sender as Button).Name.Contains("Fol"))
+            if (btn.Name.Contains("Fol", StringComparison.Ordinal))
             {
-                changeButtonColor(sender, "Fol", " ");
-                EditConfig.GameUserSettings(SettingsPath, "sg.FoliageQuality=", getValue(sender).ToString());
+                ChangeButtonColor(btn, "Fol", " ");
+                ChangeConfig.GameUserSettings(SettingsPath, "sg.FoliageQuality=", GetValue(btn).ToString());
             }
-            if (!(sender as Button).Name.Contains("Shad") && (sender as Button).Name.Contains("Sh"))
+            if (!btn.Name.Contains("Shad", StringComparison.Ordinal) && btn.Name.Contains("Sh", StringComparison.Ordinal))
             {
-                changeButtonColor(sender, "Sh", "Shad");
-                EditConfig.GameUserSettings(SettingsPath, "sg.ShadingQuality=", getValue(sender).ToString());
+                ChangeButtonColor(btn, "Sh", "Shad");
+                ChangeConfig.GameUserSettings(SettingsPath, "sg.ShadingQuality=", GetValue(btn).ToString());
             }
-            if ((sender as Button).Name.Contains("Anim"))
+            if (btn.Name.Contains("Anim", StringComparison.Ordinal))
             {
-                changeButtonColor(sender, "Anim", " ");
-                EditConfig.GameUserSettings(SettingsPath, "sg.AnimationQuality=", getValue(sender).ToString());
+                ChangeButtonColor(btn, "Anim", " ");
+                ChangeConfig.GameUserSettings(SettingsPath, "sg.AnimationQuality=", GetValue(btn).ToString());
             }
-            if ((sender as Button).Name.Contains("Audio"))
+            if (btn.Name.Contains("Audio", StringComparison.Ordinal))
             {
-                changeButtonColor(sender, "Audio", " ");
-                EditConfig.GameUserSettings(SettingsPath, "AudioQualityLevel=", getValue(sender).ToString());
+                ChangeButtonColor(btn, "Audio", " ");
+                ChangeConfig.GameUserSettings(SettingsPath, "AudioQualityLevel=", GetValue(btn).ToString());
             }
-            if ((sender as Button).Name.Contains("Preset"))
+            if (btn.Name.Contains("Preset", StringComparison.Ordinal))
             {
-                if ((sender as Button).Name.Contains("Low"))
+                if (btn.Name.Contains("Low", StringComparison.Ordinal))
                 {
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ResolutionQuality=", 1.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ViewDistanceQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.AntiAliasingQuality=", 0.ToString());
-                    EditConfig.EnableAntiAliasing(EnginePath);
-                    EditConfig.DisableAntiAliasing(EnginePath);
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ShadowQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.PostProcessQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.TextureQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.EffectsQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.FoliageQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ShadingQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.AnimationQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "ScreenRenderSize=", 1.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ResolutionQuality=", 1.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ViewDistanceQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.AntiAliasingQuality=", 0.ToString());
+                    ChangeConfig.EnableAntiAliasing(EnginePath);
+                    ChangeConfig.DisableAntiAliasing(EnginePath);
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ShadowQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.PostProcessQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.TextureQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.EffectsQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.FoliageQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ShadingQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.AnimationQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "ScreenRenderSize=", 1.ToString());
 
                     ReadAndFixAllValues();
                 }
-                if ((sender as Button).Name.Contains("Balanced"))
+                if (btn.Name.Contains("Balanced", StringComparison.Ordinal))
                 {
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ResolutionQuality=", 100.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ViewDistanceQuality=", 3.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.AntiAliasingQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ShadowQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.PostProcessQuality=", 3.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.TextureQuality=", 2.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.EffectsQuality=", 2.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.FoliageQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ShadingQuality=", 0.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.AnimationQuality=", 2.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "ScreenRenderSize=", 100.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ResolutionQuality=", 100.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ViewDistanceQuality=", 3.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.AntiAliasingQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ShadowQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.PostProcessQuality=", 3.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.TextureQuality=", 2.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.EffectsQuality=", 2.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.FoliageQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ShadingQuality=", 0.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.AnimationQuality=", 2.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "ScreenRenderSize=", 100.ToString());
 
                     ReadAndFixAllValues();
                 }
-                if ((sender as Button).Name.Contains("Epic"))
+                if (btn.Name.Contains("Epic", StringComparison.Ordinal))
                 {
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ResolutionQuality=", 200.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ViewDistanceQuality=", 5.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.AntiAliasingQuality=", 5.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ShadowQuality=", 5.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.PostProcessQuality=", 5.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.TextureQuality=", 5.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.EffectsQuality=", 5.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.FoliageQuality=", 5.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.ShadingQuality=", 5.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "sg.AnimationQuality=", 5.ToString());
-                    EditConfig.GameUserSettings(SettingsPath, "ScreenRenderSize=", 200.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ResolutionQuality=", 200.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ViewDistanceQuality=", 5.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.AntiAliasingQuality=", 5.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ShadowQuality=", 5.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.PostProcessQuality=", 5.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.TextureQuality=", 5.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.EffectsQuality=", 5.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.FoliageQuality=", 5.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.ShadingQuality=", 5.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "sg.AnimationQuality=", 5.ToString());
+                    ChangeConfig.GameUserSettings(SettingsPath, "ScreenRenderSize=", 200.ToString());
 
                     ReadAndFixAllValues();
                 }
             }
-            if ((sender as Button).Name.Contains("Res") && !(sender as Button).Name.Contains("FPS"))
+            if (btn.Name.Contains("Res", StringComparison.Ordinal) && !btn.Name.Contains("FPS", StringComparison.Ordinal))
             {
-                if ((sender as Button).Name.Contains("Set"))
+                if (btn.Name.Contains("Set", StringComparison.Ordinal))
                 {
-                    EditConfig.SetResolution(SettingsPath, (int)numWidth.Value, (int)numHeight.Value);
+                    ChangeConfig.SetResolution(SettingsPath, (int)numWidth.Value, (int)numHeight.Value);
                 }
-                if ((sender as Button).Name.Contains("Reset"))
+                if (btn.Name.Contains("Reset", StringComparison.Ordinal))
                 {
-                    int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-                    int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+                    int screenWidth = Screen.PrimaryScreen?.Bounds.Width ?? 1920;
+                    int screenHeight = Screen.PrimaryScreen?.Bounds.Height ?? 1080;
 
                     numWidth.Value = screenWidth;
                     numHeight.Value = screenHeight;
                     lblHideFocus.Focus();
 
-                    EditConfig.ResetResolution(SettingsPath);
+                    ChangeConfig.ResetResolution(SettingsPath);
                 }
             }
-            if ((sender as Button).Name.Contains("FPS"))
+            if (btn.Name.Contains("FPS", StringComparison.Ordinal))
             {
-                if ((sender as Button).Name.Contains("Set"))
+                if (btn.Name.Contains("Set", StringComparison.Ordinal))
                 {
                     cbVsync.Checked = false;
 
-                    EditConfig.ResetFPS(EnginePath);
+                    ChangeConfig.ResetFPS(EnginePath);
                     if (numFPS.Value == 120)
                     {
-                        EditConfig.SetFPS(SettingsPath, "FrameRateLimit=", (int)numFPS.Value);
-                        EditConfig.SetFPS(SettingsPath, "FPSLimitMode=", (int)numFPS.Value);
+                        ChangeConfig.SetFPS(SettingsPath, "FrameRateLimit=", (int)numFPS.Value);
+                        ChangeConfig.SetFPS(SettingsPath, "FPSLimitMode=", (int)numFPS.Value);
                     }
                     if (numFPS.Value > 120)
                     {
                         MessageBox.Show(errors["max-fps"] + (int)numFPS.Value + errors["max-fps-continuation"], errors["information"], MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        EditConfig.SetFPS(SettingsPath, "FrameRateLimit=", (int)numFPS.Value);
-                        EditConfig.SetFPS(SettingsPath, "FPSLimitMode=", (int)numFPS.Value);
+                        ChangeConfig.SetFPS(SettingsPath, "FrameRateLimit=", (int)numFPS.Value);
+                        ChangeConfig.SetFPS(SettingsPath, "FPSLimitMode=", (int)numFPS.Value);
                     }
                     if (numFPS.Value < 120)
                     {
-                        EditConfig.SetFPS(SettingsPath, "FrameRateLimit=", (int)numFPS.Value);
-                        EditConfig.SetFPS(SettingsPath, "FPSLimitMode=", (int)numFPS.Value);
+                        ChangeConfig.SetFPS(SettingsPath, "FrameRateLimit=", (int)numFPS.Value);
+                        ChangeConfig.SetFPS(SettingsPath, "FPSLimitMode=", (int)numFPS.Value);
                     }
 
                     if (numFPS.Value <= 5)
                     {
-                        EditConfig.SetFPS(SettingsPath, "FrameRateLimit=", (int)numFPS.Value);
-                        EditConfig.SetFPS(SettingsPath, "FPSLimitMode=", (int)numFPS.Value);
-                        EditConfig.EngineFPS(EnginePath, (int)numFPS.Value);
+                        ChangeConfig.SetFPS(SettingsPath, "FrameRateLimit=", (int)numFPS.Value);
+                        ChangeConfig.SetFPS(SettingsPath, "FPSLimitMode=", (int)numFPS.Value);
+                        ChangeConfig.EngineFPS(EnginePath, (int)numFPS.Value);
                     }
 
                     if (numFPS.Value >= 63 && numFPS.Value >= 120)
                     {
-                        EditConfig.EngineFPS(EnginePath, (int)numFPS.Value);
+                        ChangeConfig.EngineFPS(EnginePath, (int)numFPS.Value);
                     }
-
-
                 }
-                if ((sender as Button).Name.Contains("Reset"))
+                if (btn.Name.Contains("Reset", StringComparison.Ordinal))
                 {
                     cbVsync.Checked = true;
                     numFPS.Value = 62;
 
-                    EditConfig.ResetFPS(EnginePath);
-                    EditConfig.SetFPS(SettingsPath, "FrameRateLimit=", 60);
-                    EditConfig.SetFPS(SettingsPath, "FPSLimitMode=", 60);
+                    ChangeConfig.ResetFPS(EnginePath);
+                    ChangeConfig.SetFPS(SettingsPath, "FrameRateLimit=", 60);
+                    ChangeConfig.SetFPS(SettingsPath, "FPSLimitMode=", 60);
                 }
             }
         }
 
-        private void btnUsersSettings_Click(object sender, EventArgs e)
+        private void BtnUsersSettings_Click(object sender, EventArgs e)
         {
             try
             {
@@ -423,78 +406,77 @@ namespace DbD_Settings_Changer
             }
             catch (Exception)
             {
-
             }
         }
 
-        private void btnUsersSettings_MouseLeave(object sender, EventArgs e)
+        private void BtnUsersSettings_MouseLeave(object sender, EventArgs e)
         {
             btnUsersSettings.BackColor = Color.Transparent;
             tip.Hide(btnUsersSettings);
         }
 
-        private void btnUsersSettings_MouseHover(object sender, EventArgs e)
+        private void BtnUsersSettings_MouseHover(object sender, EventArgs e)
         {
             tip.Show(errors["tip1"], btnUsersSettings);
         }
 
-        private void btnResetFPS_MouseHover(object sender, EventArgs e)
+        private void BtnResetFPS_MouseHover(object sender, EventArgs e)
         {
             tip.Show(errors["tip2"], btnResetFPS);
         }
 
-        private void btnResetFPS_MouseLeave(object sender, EventArgs e)
+        private void BtnResetFPS_MouseLeave(object sender, EventArgs e)
         {
             tip.Hide(btnResetFPS);
         }
 
-        private void btnSetFPS_MouseHover(object sender, EventArgs e)
+        private void BtnSetFPS_MouseHover(object sender, EventArgs e)
         {
             tip.Show(errors["tip3"], btnSetFPS);
         }
 
-        private void btnSetFPS_MouseLeave(object sender, EventArgs e)
+        private void BtnSetFPS_MouseLeave(object sender, EventArgs e)
         {
             tip.Hide(btnSetFPS);
         }
 
-        private void btnResSet_MouseHover(object sender, EventArgs e)
+        private void BtnResSet_MouseHover(object sender, EventArgs e)
         {
             tip.Show(errors["tip4"], btnResSet);
         }
 
-        private void btnResSet_MouseLeave(object sender, EventArgs e)
+        private void BtnResSet_MouseLeave(object sender, EventArgs e)
         {
             tip.Hide(btnResSet);
         }
 
-        private void btnResReset_MouseHover(object sender, EventArgs e)
+        private void BtnResReset_MouseHover(object sender, EventArgs e)
         {
             tip.Show(errors["tip5"], btnResReset);
         }
 
-        private void btnResReset_MouseLeave(object sender, EventArgs e)
+        private void BtnResReset_MouseLeave(object sender, EventArgs e)
         {
             tip.Hide(btnResReset);
         }
 
-        private void btnDelete_MouseHover(object sender, EventArgs e)
+        private void BtnDelete_MouseHover(object sender, EventArgs e)
         {
             tip.Show(errors["tip6"], btnDelete);
         }
 
-        private void btnDelete_MouseLeave(object sender, EventArgs e)
+        private void BtnDelete_MouseLeave(object sender, EventArgs e)
         {
             btnDelete.BackColor = Color.Transparent;
             tip.Hide(btnDelete);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(errors["delete-confs"], errors["delete-confs-title"], MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                if(File.Exists(ApplicationData + "UsEng.ini"))
+                if (File.Exists(ApplicationData + "UsEng.ini"))
                 {
                     File.Delete(ApplicationData + "UsEng.ini");
                 }
@@ -502,7 +484,7 @@ namespace DbD_Settings_Changer
                 {
                     File.Delete(ApplicationData + "UsSet.ini");
                 }
-                if(Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Autosave"))
+                if (Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Autosave"))
                 {
                     Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Autosave");
                 }
@@ -510,50 +492,51 @@ namespace DbD_Settings_Changer
             }
         }
 
-        private void btnDiscord_Click(object sender, EventArgs e)
+        private void BtnDiscord_Click(object sender, EventArgs e)
         {
             try
             {
                 var uri = "https://discord.com/invite/EY9uaqTS7Z";
-                var psi = new System.Diagnostics.ProcessStartInfo();
-                psi.UseShellExecute = true;
-                psi.FileName = uri;
+                var psi = new System.Diagnostics.ProcessStartInfo
+                {
+                    UseShellExecute = true,
+                    FileName = uri
+                };
                 System.Diagnostics.Process.Start(psi);
             }
             catch (Exception)
             {
-                MessageBox.Show(errors["discord-link-fail"], errors["error"],
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(errors["discord-link-fail"], errors["error"], MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void btnDiscord_MouseHover(object sender, EventArgs e)
+        private void BtnDiscord_MouseHover(object sender, EventArgs e)
         {
             tip.Show(errors["tip7"], btnDiscord);
         }
 
-        private void btnDiscord_MouseLeave(object sender, EventArgs e)
+        private void BtnDiscord_MouseLeave(object sender, EventArgs e)
         {
             tip.Hide(btnDiscord);
             btnDiscord.BackColor = Color.Transparent;
         }
 
-        private void btnDelete_MouseEnter(object sender, EventArgs e)
+        private void BtnDelete_MouseEnter(object sender, EventArgs e)
         {
             btnDelete.BackColor = Color.Crimson;
         }
 
-        private void btnUsersSettings_MouseEnter(object sender, EventArgs e)
+        private void BtnUsersSettings_MouseEnter(object sender, EventArgs e)
         {
             btnUsersSettings.BackColor = Color.Crimson;
         }
 
-        private void btnDiscord_MouseEnter(object sender, EventArgs e)
+        private void BtnDiscord_MouseEnter(object sender, EventArgs e)
         {
             btnDiscord.BackColor = Color.Crimson;
         }
 
-        private void cbVersion_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbVersion_SelectedIndexChanged(object sender, EventArgs e)
         {
             lblHideFocus.Focus();
             if ((string)cbVersion.SelectedItem == "Steam")
@@ -576,132 +559,67 @@ namespace DbD_Settings_Changer
             }
         }
 
-        private void cbInGameLangauge_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbInGameLangauge_SelectedIndexChanged(object sender, EventArgs e)
         {
             lblHideFocus.Focus();
-            string word = "";
-
-            /*
-                Deutsch du
-                English en
-                Español es
-                Español (México) es-MX
-                Français fr
-                Italiano it
-                Polski pl
-                Português (Brasil) pt-BR
-                Türkçe tr
-                русский ru
-                ไทย th
-                中文 (简体) zh-Hans
-                中文 (繁體) zh-Hant
-                日本語 ja
-                한국어 ko
-            */
-            switch (cbInGameLangauge.SelectedItem.ToString())
+            string word = cbInGameLangauge.SelectedItem?.ToString() switch
             {
-                case "Deutsch":
-                    word = "de";
-                    break;
-                case "English":
-                    word = "en";
-                    break;
-                case "Español":
-                    word = "es";
-                    break;
-                case "Español (México)":
-                    word = "es-MX";
-                    break;
-                case "Français":
-                    word = "fr";
-                    break;
-                case "Italiano":
-                    word = "it";
-                    break;
-                case "Polski":
-                    word = "pl";
-                    break;
-                case "Português (Brasil)":
-                    word = "pt-BR";
-                    break;
-                case "Türkçe":
-                    word = "tr";
-                    break;
-                case "русский":
-                    word = "ru";
-                    break;
-                case "ไทย":
-                    word = "th";
-                    break;
-                case "中文 (简体)":
-                    word = "zh-Hans";
-                    break;
-                case "中文 (繁體)":
-                    word = "zh-Hant";
-                    break;
-                case "日本語":
-                    word = "ja";
-                    break;
-                case "한국어":
-                    word = "ko";
-                    break;
-            }
+                "Deutsch" => "de",
+                "English" => "en",
+                "Español" => "es",
+                "Español (México)" => "es-MX",
+                "Français" => "fr",
+                "Italiano" => "it",
+                "Polski" => "pl",
+                "Português (Brasil)" => "pt-BR",
+                "Türkçe" => "tr",
+                "русский" => "ru",
+                "ไทย" => "th",
+                "中文 (简体)" => "zh-Hans",
+                "中文 (繁體)" => "zh-Hant",
+                "日本語" => "ja",
+                "한국어" => "ko",
+                _ => "en"
+            };
 
-            EditConfig.GameUserSettings(SettingsPath, "Language=", word);
+            ChangeConfig.GameUserSettings(SettingsPath, "Language=", word);
         }
 
-        private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
             lblHideFocus.Focus();
-            changeAppLanguage(cbLanguage.SelectedItem.ToString());
-            string word = "";
-            switch (cbLanguage.SelectedItem.ToString())
-            {
-                case "English":
-                    word = "en";
-                    break;
-                case "Polski":
-                    word = "pl";
-                    break;
-                case "русский":
-                    word = "ru";
-                    break;
-                case "Deutsch":
-                    word = "de";
-                    break;
-                case "Français":
-                    word = "fr";
-                    break;
-                case "日本":
-                    word = "jp";
-                    break;
-                case "中国人":
-                    word = "ch";
-                    break;
-                case "Türkçe":
-                    word = "tu";
-                    break;
-                case "Español":
-                    word = "esp";
-                    break;
-                case "Italiano":
-                    word = "it";
-                    break;
-            }
+            ChangeAppLanguage(cbLanguage.SelectedItem?.ToString() ?? "English");
 
-            string file = File.ReadAllText(ApplicationLanguageData + "lang.ini");
-            int numLines = File.ReadLines(ApplicationLanguageData + "lang.ini").Count();
-            string[] lang = File.ReadAllLines(ApplicationLanguageData + "lang.ini");
-            string[] words = new string[] { "en", "pl", "ru", "de", "fr", "jp", "ch", "tu", "esp", "it" };
-
-            for (int a = 0; a < numLines; a++)
+            string word = cbLanguage.SelectedItem?.ToString() switch
             {
-                for (int i = 0; i < words.Length; i++)
+                "English" => "en",
+                "Polski" => "pl",
+                "русский" => "ru",
+                "Deutsch" => "de",
+                "Français" => "fr",
+                "日本" => "jp",
+                "中国人" => "ch",
+                "Türkçe" => "tu",
+                "Español" => "esp",
+                "Italiano" => "it",
+                _ => "en"
+            };
+
+            string filePath = ApplicationLanguageData + "lang.ini";
+            if (!File.Exists(filePath)) return;
+
+            string file = File.ReadAllText(filePath);
+            string[] lang = File.ReadAllLines(filePath);
+            string[] words = ["en", "pl", "ru", "de", "fr", "jp", "ch", "tu", "esp", "it"];
+
+            foreach (string l in lang)
+            {
+                foreach (string w in words)
                 {
-                    if (lang[a].Contains(words[i]))
+                    if (l.Contains(w, StringComparison.Ordinal))
                     {
-                        file = file.Replace(lang[a], word);
-                        File.WriteAllText(ApplicationLanguageData + "lang.ini", file);
+                        file = file.Replace(l, word, StringComparison.Ordinal);
+                        File.WriteAllText(filePath, file);
                     }
                 }
             }

@@ -1,24 +1,25 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net;
+using System.Net.Http;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DbD_Settings_Changer
 {
     public partial class Main : Form
     {
-        private void CheckDate(PictureBox imgPumpkin, PictureBox imgXmasTree, PictureBox imgFireworks)
+        private static readonly HttpClient httpClient = new();
+
+        [GeneratedRegex(@"\d+")]
+        private static partial Regex DigitsRegex();
+
+        private static void CheckDate(PictureBox imgPumpkin, PictureBox imgXmasTree, PictureBox imgFireworks)
         {
-            //halloween
+            // halloween
             DateTime date = DateTime.Now;
-            if (date.Month == 10 && date.Day >= 16 && date.Day <= 31)
+            if (date.Month == 10 && date.Day is >= 16 and <= 31)
             {
                 imgPumpkin.Show();
             }
@@ -27,8 +28,8 @@ namespace DbD_Settings_Changer
                 imgPumpkin.Hide();
             }
 
-            //christmas
-            if (date.Month == 12 && date.Day >= 1 && date.Day <= 28)
+            // christmas
+            if (date.Month == 12 && date.Day is >= 1 and <= 28)
             {
                 imgXmasTree.Show();
             }
@@ -36,8 +37,9 @@ namespace DbD_Settings_Changer
             {
                 imgXmasTree.Hide();
             }
-            //new Year's Eve
-            if (date.Month == 12 && date.Day >= 29 && date.Day <= 31)
+
+            // new Year's Eve
+            if (date.Month == 12 && date.Day is >= 29 and <= 31)
             {
                 imgFireworks.Show();
             }
@@ -61,11 +63,10 @@ namespace DbD_Settings_Changer
 
         private void DefaultTab()
         {
-            //this.Size = new Size(1145, 1022);
             menuGraphics.BackColor = Color.Crimson;
             menuGraphics.Location = new Point(menuGraphics.Location.X, 14);
             menuGraphics.Size = new Size(menuGraphics.Size.Width, 40);
-            menuColors("menuGraphics");
+            MenuColors("menuGraphics");
 
             panelGraphics.Show();
             panelAudio.Hide();
@@ -77,13 +78,18 @@ namespace DbD_Settings_Changer
 
         private void ChangeLanguageInFile()
         {
-            int numLines = File.ReadLines(ApplicationLanguageData + "lang.ini").Count();
-            string[] lang = File.ReadAllLines(ApplicationLanguageData + "lang.ini");
-            string[] words = new string[] { "en", "pl", "ru", "de", "fr", "jp", "ch", "tu", "esp", "it" };
+            string langFile = ApplicationLanguageData + "lang.ini";
+            if (!File.Exists(langFile))
+            {
+                CreateLanguageConfig();
+            }
+
+            string[] lang = File.ReadAllLines(langFile);
+            string[] words = ["en", "pl", "ru", "de", "fr", "jp", "ch", "tu", "esp", "it"];
 
             bool found = false;
             string word = "";
-            for (int a = 0; a < numLines; a++)
+            for (int a = 0; a < lang.Length; a++)
             {
                 for (int i = 0; i < words.Length; i++)
                 {
@@ -91,39 +97,20 @@ namespace DbD_Settings_Changer
                     {
                         word = words[i];
                         found = true;
-                        switch (word)
+                        word = word switch
                         {
-                            case "en":
-                                word = "English";
-                                break;
-                            case "pl":
-                                word = "Polski";
-                                break;
-                            case "ru":
-                                word = "русский";
-                                break;
-                            case "de":
-                                word = "Deutsch";
-                                break;
-                            case "fr":
-                                word = "Français";
-                                break;
-                            case "jp":
-                                word = "日本";
-                                break;
-                            case "ch":
-                                word = "中国人";
-                                break;
-                            case "tu":
-                                word = "Türkçe";
-                                break;
-                            case "esp":
-                                word = "Español";
-                                break;
-                            case "it":
-                                word = "Italiano";
-                                break;
-                        }
+                            "en" => "English",
+                            "pl" => "Polski",
+                            "ru" => "русский",
+                            "de" => "Deutsch",
+                            "fr" => "Français",
+                            "jp" => "日本",
+                            "ch" => "中国人",
+                            "tu" => "Türkçe",
+                            "esp" => "Español",
+                            "it" => "Italiano",
+                            _ => word
+                        };
                     }
                 }
             }
@@ -131,29 +118,29 @@ namespace DbD_Settings_Changer
             if (!found)
             {
                 word = "English";
-                File.WriteAllText(ApplicationLanguageData + "lang.ini", "en");
+                File.WriteAllText(langFile, "en");
             }
             cbLanguage.SelectedIndex = cbLanguage.Items.IndexOf(word);
-            changeAppLanguage(word);
+            ChangeAppLanguage(word);
         }
 
-        private void CheckForUpdates()
+        private static void CheckForUpdates()
         {
             try
             {
-                WebClient wc = new WebClient();
-                string textFromFile = wc.DownloadString("https://pastebin.com/yjMGKd4u");
-                string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                if (!textFromFile.Contains(version))
+                string textFromFile = httpClient.GetStringAsync("https://pastebin.com/yjMGKd4u").GetAwaiter().GetResult();
+                string version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? string.Empty;
+                if (!textFromFile.Contains(version, StringComparison.Ordinal))
                 {
                     DialogResult result = MessageBox.Show(errors["new-version"], errors["new-version-title"],
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (result == DialogResult.Yes)
                     {
-                        var uri = "http://dbdconfigeditor.epizy.com/";
-                        var psi = new System.Diagnostics.ProcessStartInfo();
-                        psi.UseShellExecute = true;
-                        psi.FileName = uri;
+                        var psi = new System.Diagnostics.ProcessStartInfo
+                        {
+                            UseShellExecute = true,
+                            FileName = "http://dbdconfigeditor.epizy.com/"
+                        };
                         System.Diagnostics.Process.Start(psi);
                         Application.Exit();
                     }
@@ -162,7 +149,7 @@ namespace DbD_Settings_Changer
             catch (Exception)
             {
                 MessageBox.Show(errors["new-version-fail"], errors["new-version-title"],
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -171,10 +158,9 @@ namespace DbD_Settings_Changer
             if (!File.Exists(SteamSettingsPath) && !File.Exists(SteamEnginePath) && !File.Exists(EGSSettingsPath) && !File.Exists(EGSEnginePath) && !File.Exists(MSSettingsPath) && !File.Exists(MSEnginePath))
             {
                 MessageBox.Show(errors["confs-dont-exist"], errors["error"],
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-
 
             if (File.Exists(SteamSettingsPath) && File.Exists(SteamEnginePath))
             {
@@ -189,7 +175,6 @@ namespace DbD_Settings_Changer
                 cbVersion.Items.Add("Microsoft Store");
             }
             cbVersion.SelectedIndex = 0;
-
 
             if (cbVersion.Items[0].ToString() == "Steam")
             {
@@ -236,14 +221,14 @@ namespace DbD_Settings_Changer
                 UsersEngineContent = File.ReadAllText(ApplicationData + "UsEng.ini");
                 UsersSettingsContent = File.ReadAllText(ApplicationData + "UsSet.ini");
 
-                if (ReadConfig == null || ReadConfig.Length == 0)
+                if (string.IsNullOrEmpty(ReadConfig))
                 {
                     MessageBox.Show("It seems like your Dead by Daylight configuration files are empty!", "Error",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                     File.WriteAllText(SettingsPath, UsersSettingsContent);
                 }
 
-                if (ReadEngine == null || ReadEngine.Length == 0)
+                if (string.IsNullOrEmpty(ReadEngine))
                 {
                     File.WriteAllText(EnginePath, UsersEngineContent);
                 }
@@ -251,7 +236,7 @@ namespace DbD_Settings_Changer
                 ReadConfig = File.ReadAllText(SettingsPath);
                 ReadEngine = File.ReadAllText(EnginePath);
 
-                if (ReadConfig != null || ReadConfig.Length != 0)
+                if (!string.IsNullOrEmpty(ReadConfig))
                 {
                     ReadAndFixAllValues();
                 }
@@ -266,11 +251,11 @@ namespace DbD_Settings_Changer
         {
             foreach (Control panels in panel10.Controls)
             {
-                if (panels.Name.Contains("panel"))
+                if (panels.Name.Contains("panel", StringComparison.OrdinalIgnoreCase))
                 {
                     foreach (Control control in panels.Controls)
                     {
-                        if (control.Name.Contains("btn") && !control.Name.Contains("Discord") && !control.Name.Contains("UsersSettings") && !control.Name.Contains("Delete"))
+                        if (control.Name.Contains("btn", StringComparison.OrdinalIgnoreCase) && !control.Name.Contains("Discord", StringComparison.OrdinalIgnoreCase) && !control.Name.Contains("UsersSettings", StringComparison.OrdinalIgnoreCase) && !control.Name.Contains("Delete", StringComparison.OrdinalIgnoreCase))
                         {
                             control.BackColor = Color.FromArgb(255, 255, 255);
                             control.ForeColor = Color.Black;
@@ -282,31 +267,24 @@ namespace DbD_Settings_Changer
 
         public void ReadAndFixAllValues()
         {
-            int SuperLow = 0;
-            int Balanced = 0;
-            int Awesome = 0;
-
             ResetColors();
-            int numSettingsLines = File.ReadLines(SettingsPath).Count();
-            int numEngineLines = File.ReadLines(EnginePath).Count();
 
             string[] settingsLines = File.ReadAllLines(SettingsPath);
-
             string[] engineLines = File.ReadAllLines(EnginePath);
 
-            for (int i = 0; i < numSettingsLines; i++)
+            for (int i = 0; i < settingsLines.Length; i++)
             {
-                if (settingsLines[i].Contains("FPSLimitMode="))
+                if (settingsLines[i].Contains("FPSLimitMode=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
                     if (result == 0)
                     {
-                        for (int a = 0; a < numEngineLines; a++)
+                        for (int a = 0; a < engineLines.Length; a++)
                         {
-                            if (engineLines[a].Contains("MaxSmoothedFrameRate="))
+                            if (engineLines[a].Contains("MaxSmoothedFrameRate=", StringComparison.Ordinal))
                             {
-                                string str = Regex.Match(engineLines[a], @"\d+").Value;
+                                string str = DigitsRegex().Match(engineLines[a]).Value;
                                 int checkStr = int.Parse(str);
 
                                 numFPS.Value = checkStr;
@@ -322,27 +300,27 @@ namespace DbD_Settings_Changer
                         numFPS.Value = result;
                     }
                 }
-                if (settingsLines[i].Contains("sg.ResolutionQuality="))
+                if (settingsLines[i].Contains("sg.ResolutionQuality=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
                     if (result < tbRes.Minimum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "sg.ResolutionQuality=", tbRes.Minimum.ToString() + ".000000");
+                        ChangeConfig.GameUserSettings(SettingsPath, "sg.ResolutionQuality=", tbRes.Minimum.ToString() + ".000000");
                         result = tbRes.Minimum;
                     }
 
                     if (result > tbRes.Maximum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "sg.ResolutionQuality=", tbRes.Maximum.ToString() + ".000000");
+                        ChangeConfig.GameUserSettings(SettingsPath, "sg.ResolutionQuality=", tbRes.Maximum.ToString() + ".000000");
                         result = tbRes.Maximum;
                     }
                     tbRes.Value = result;
                     lblRes.Text = tbRes.Value + "%";
                 }
-                if (settingsLines[i].Contains("sg.ViewDistanceQuality="))
+                if (settingsLines[i].Contains("sg.ViewDistanceQuality=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result == 0)
@@ -376,9 +354,9 @@ namespace DbD_Settings_Changer
                         btnVwAwesome.ForeColor = Color.White;
                     }
                 }
-                if (settingsLines[i].Contains("sg.AntiAliasingQuality="))
+                if (settingsLines[i].Contains("sg.AntiAliasingQuality=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result == 0)
@@ -412,9 +390,9 @@ namespace DbD_Settings_Changer
                         btnAaAwesome.ForeColor = Color.White;
                     }
                 }
-                if (settingsLines[i].Contains("AntiAliasingMode="))
+                if (settingsLines[i].Contains("AntiAliasingMode=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result == 0)
@@ -441,9 +419,9 @@ namespace DbD_Settings_Changer
                         btnAaAwesome.ForeColor = Color.Black;
                     }
                 }
-                if (settingsLines[i].Contains("sg.ShadowQuality="))
+                if (settingsLines[i].Contains("sg.ShadowQuality=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result == 0)
@@ -477,9 +455,9 @@ namespace DbD_Settings_Changer
                         btnShadAwesome.ForeColor = Color.White;
                     }
                 }
-                if (settingsLines[i].Contains("sg.PostProcessQuality="))
+                if (settingsLines[i].Contains("sg.PostProcessQuality=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result == 0)
@@ -513,9 +491,9 @@ namespace DbD_Settings_Changer
                         btnPpAwesome.ForeColor = Color.White;
                     }
                 }
-                if (settingsLines[i].Contains("sg.TextureQuality="))
+                if (settingsLines[i].Contains("sg.TextureQuality=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result == 0)
@@ -549,9 +527,9 @@ namespace DbD_Settings_Changer
                         btnTxtAwesome.ForeColor = Color.White;
                     }
                 }
-                if (settingsLines[i].Contains("sg.EffectsQuality="))
+                if (settingsLines[i].Contains("sg.EffectsQuality=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result == 0)
@@ -585,9 +563,9 @@ namespace DbD_Settings_Changer
                         btnEffAwesome.ForeColor = Color.White;
                     }
                 }
-                if (settingsLines[i].Contains("sg.FoliageQuality="))
+                if (settingsLines[i].Contains("sg.FoliageQuality=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result == 0)
@@ -621,9 +599,9 @@ namespace DbD_Settings_Changer
                         btnFolAwesome.ForeColor = Color.White;
                     }
                 }
-                if (settingsLines[i].Contains("sg.ShadingQuality="))
+                if (settingsLines[i].Contains("sg.ShadingQuality=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result == 0)
@@ -657,9 +635,9 @@ namespace DbD_Settings_Changer
                         btnShAwesome.ForeColor = Color.White;
                     }
                 }
-                if (settingsLines[i].Contains("sg.AnimationQuality="))
+                if (settingsLines[i].Contains("sg.AnimationQuality=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result == 0)
@@ -693,9 +671,9 @@ namespace DbD_Settings_Changer
                         btnAnimAwesome.ForeColor = Color.White;
                     }
                 }
-                if (settingsLines[i].Contains("AudioQualityLevel="))
+                if (settingsLines[i].Contains("AudioQualityLevel=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result == 0)
@@ -729,375 +707,335 @@ namespace DbD_Settings_Changer
                         btnAudioAwesome.ForeColor = Color.White;
                     }
                 }
-                if (settingsLines[i].Contains("MainVolume="))
+                if (settingsLines[i].Contains("MainVolume=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result < tbVolume.Minimum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "MainVolume=", tbVolume.Minimum.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "MainVolume=", tbVolume.Minimum.ToString());
                         result = tbVolume.Minimum;
                     }
 
                     if (result > tbVolume.Maximum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "MainVolume=", tbVolume.Maximum.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "MainVolume=", tbVolume.Maximum.ToString());
                         result = tbVolume.Maximum;
                     }
                     tbVolume.Value = result;
                     lblMainVolume.Text = tbVolume.Value + "%";
                 }
-                if (settingsLines[i].Contains("MenuMusicVolume="))
+                if (settingsLines[i].Contains("MenuMusicVolume=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result < tbMusic.Minimum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "MenuMusicVolume=", tbMusic.Minimum.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "MenuMusicVolume=", tbMusic.Minimum.ToString());
                         result = tbMusic.Minimum;
                     }
 
                     if (result > tbMusic.Maximum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "MenuMusicVolume=", tbMusic.Maximum.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "MenuMusicVolume=", tbMusic.Maximum.ToString());
                         result = tbMusic.Maximum;
                     }
 
                     tbMusic.Value = result;
                     lblMenu.Text = tbMusic.Value + "%";
                 }
-                if (settingsLines[i].Contains("KillerMouseSensitivity="))
+                if (settingsLines[i].Contains("KillerMouseSensitivity=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result < tbKillerMouse.Minimum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "KillerMouseSensitivity=", 1.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "KillerMouseSensitivity=", 1.ToString());
                         result = 1;
                     }
 
                     if (result > tbKillerMouse.Maximum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "KillerMouseSensitivity=", 100.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "KillerMouseSensitivity=", 100.ToString());
                         result = 100;
                     }
 
                     tbKillerMouse.Value = result;
                     lblKillerMouse.Text = tbKillerMouse.Value + "%";
                 }
-                if (settingsLines[i].Contains("SurvivorMouseSensitivity="))
+                if (settingsLines[i].Contains("SurvivorMouseSensitivity=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result < tbSurvMouse.Minimum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "SurvivorMouseSensitivity=", 1.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "SurvivorMouseSensitivity=", 1.ToString());
                         result = 1;
                     }
 
                     if (result > tbSurvMouse.Maximum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "SurvivorMouseSensitivity=", 100.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "SurvivorMouseSensitivity=", 100.ToString());
                         result = 100;
                     }
                     tbSurvMouse.Value = result;
                     lblSurvMouse.Text = tbSurvMouse.Value + "%";
                 }
-                if (settingsLines[i].Contains("KillerControllerSensitivity="))
+                if (settingsLines[i].Contains("KillerControllerSensitivity=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
                     if (result < tbKillerController.Minimum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "KillerControllerSensitivity=", 1.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "KillerControllerSensitivity=", 1.ToString());
                         result = 1;
                     }
 
                     if (result > tbKillerController.Maximum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "KillerControllerSensitivity=", 100.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "KillerControllerSensitivity=", 100.ToString());
                         result = 100;
                     }
                     tbKillerController.Value = result;
                     lblKillerController.Text = tbKillerController.Value + "%";
                 }
-                if (settingsLines[i].Contains("FieldOfView="))
+                if (settingsLines[i].Contains("FieldOfView=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result < tbSurvController.Minimum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "FieldOfView=", 87.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "FieldOfView=", 87.ToString());
                         result = 90;
                     }
 
                     if (result > tbSurvController.Maximum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "FieldOfView=", 103.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "FieldOfView=", 103.ToString());
                         result = 103;
                     }
                     tbFOV.Value = result;
                     lblFOV.Text = tbFOV.Value + "°";
                 }
-                if (settingsLines[i].Contains("SurvivorControllerSensitivity="))
+                if (settingsLines[i].Contains("SurvivorControllerSensitivity=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
                     if (result < tbSurvController.Minimum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "SurvivorControllerSensitivity=", 1.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "SurvivorControllerSensitivity=", 1.ToString());
                         result = 1;
                     }
 
                     if (result > tbSurvController.Maximum)
                     {
-                        EditConfig.GameUserSettings(SettingsPath, "SurvivorControllerSensitivity=", 100.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "SurvivorControllerSensitivity=", 100.ToString());
                         result = 100;
                     }
                     tbSurvController.Value = result;
                     lblSurvController.Text = tbSurvController.Value + "%";
                 }
-                if (settingsLines[i].Contains("ResolutionSizeX="))
+                if (settingsLines[i].Contains("ResolutionSizeX=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
-                    if (result > numWidth.Maximum)
+                    if (result > numWidth.Maximum || result < numWidth.Minimum)
                     {
                         result = 1920;
-                        EditConfig.GameUserSettings(SettingsPath, "ResolutionSizeX=", result.ToString());
-                    }
-
-                    if (result < numWidth.Minimum)
-                    {
-                        result = 1920;
-                        EditConfig.GameUserSettings(SettingsPath, "ResolutionSizeX=", result.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "ResolutionSizeX=", result.ToString());
                     }
 
                     numWidth.Value = result;
                 }
-                if (settingsLines[i].Contains("ResolutionSizeY="))
+                if (settingsLines[i].Contains("ResolutionSizeY=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
 
-                    if (result > numHeight.Maximum)
+                    if (result > numHeight.Maximum || result < numHeight.Minimum)
                     {
                         result = 1080;
-                        EditConfig.GameUserSettings(SettingsPath, "ResolutionSizeY=", result.ToString());
-                    }
-
-                    if (result < numHeight.Minimum)
-                    {
-                        result = 1080;
-                        EditConfig.GameUserSettings(SettingsPath, "ResolutionSizeY=", result.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "ResolutionSizeY=", result.ToString());
                     }
 
                     numHeight.Value = result;
                 }
-                if (settingsLines[i].Contains("bUseVSync="))
+                if (settingsLines[i].Contains("bUseVSync=", StringComparison.Ordinal))
                 {
-                    if (settingsLines[i].ToLower().Contains("False".ToLower()))
+                    if (settingsLines[i].Contains("False", StringComparison.OrdinalIgnoreCase))
                     {
                         cbVsync.Checked = false;
                     }
-                    if (settingsLines[i].ToLower().Contains("True".ToLower()))
+                    if (settingsLines[i].Contains("True", StringComparison.OrdinalIgnoreCase))
                     {
                         cbVsync.Checked = true;
                     }
                 }
 
-                if (settingsLines[i].Contains("UseHeadphones="))
+                if (settingsLines[i].Contains("UseHeadphones=", StringComparison.Ordinal))
                 {
-                    if (settingsLines[i].ToLower().Contains("False".ToLower()))
+                    if (settingsLines[i].Contains("False", StringComparison.OrdinalIgnoreCase))
                     {
                         cbHeadphones.Checked = false;
                     }
-                    if (settingsLines[i].ToLower().Contains("True".ToLower()))
+                    if (settingsLines[i].Contains("True", StringComparison.OrdinalIgnoreCase))
                     {
                         cbHeadphones.Checked = true;
                     }
                 }
 
-                if (settingsLines[i].Contains("AllowCopyrightedMusic="))
+                if (settingsLines[i].Contains("AllowCopyrightedMusic=", StringComparison.Ordinal))
                 {
-                    if (settingsLines[i].ToLower().Contains("False".ToLower()))
+                    if (settingsLines[i].Contains("False", StringComparison.OrdinalIgnoreCase))
                     {
                         cbCopyright.Checked = false;
                     }
-                    if (settingsLines[i].ToLower().Contains("True".ToLower()))
+                    if (settingsLines[i].Contains("True", StringComparison.OrdinalIgnoreCase))
                     {
                         cbCopyright.Checked = true;
                     }
                 }
 
-                if (settingsLines[i].Contains("MuteOnFocusLost="))
+                if (settingsLines[i].Contains("MuteOnFocusLost=", StringComparison.Ordinal))
                 {
-                    if (settingsLines[i].Contains("False".ToLower()))
+                    if (settingsLines[i].Contains("False", StringComparison.OrdinalIgnoreCase))
                     {
                         cbMuteFocusLost.Checked = false;
                     }
-                    if (settingsLines[i].ToLower().Contains("True".ToLower()))
+                    if (settingsLines[i].Contains("True", StringComparison.OrdinalIgnoreCase))
                     {
                         cbMuteFocusLost.Checked = true;
                     }
                 }
-                if (settingsLines[i].Contains("LegacyPrestigePortraits="))
+                if (settingsLines[i].Contains("LegacyPrestigePortraits=", StringComparison.Ordinal))
                 {
-                    if (settingsLines[i].ToLower().Contains("False".ToLower()))
+                    if (settingsLines[i].Contains("False", StringComparison.OrdinalIgnoreCase))
                     {
                         cbLegacyPrestige.Checked = false;
                     }
-                    if (settingsLines[i].ToLower().Contains("True".ToLower()))
+                    if (settingsLines[i].Contains("True", StringComparison.OrdinalIgnoreCase))
                     {
                         cbLegacyPrestige.Checked = true;
                     }
                 }
-                if (settingsLines[i].Contains("HapticsVibrationPS5="))
+                if (settingsLines[i].Contains("HapticsVibrationPS5=", StringComparison.Ordinal))
                 {
-                    if (settingsLines[i].ToLower().Contains("False".ToLower()))
+                    if (settingsLines[i].Contains("False", StringComparison.OrdinalIgnoreCase))
                     {
                         cbHapticsVibration.Checked = false;
                     }
-                    if (settingsLines[i].ToLower().Contains("True".ToLower()))
+                    if (settingsLines[i].Contains("True", StringComparison.OrdinalIgnoreCase))
                     {
                         cbHapticsVibration.Checked = true;
                     }
                 }
-                if (settingsLines[i].Contains("SprintToCancel="))
+                if (settingsLines[i].Contains("SprintToCancel=", StringComparison.Ordinal))
                 {
-                    if (settingsLines[i].ToLower().Contains("False".ToLower()))
+                    if (settingsLines[i].Contains("False", StringComparison.OrdinalIgnoreCase))
                     {
                         cbSprintToCancel.Checked = false;
                     }
-                    if (settingsLines[i].ToLower().Contains("True".ToLower()))
+                    if (settingsLines[i].Contains("True", StringComparison.OrdinalIgnoreCase))
                     {
                         cbSprintToCancel.Checked = true;
                     }
                 }
 
-                if (settingsLines[i].Contains("Language="))
+                if (settingsLines[i].Contains("Language=", StringComparison.Ordinal))
                 {
-                    string word = "";
-                    switch (word)
+                    string word = settingsLines[i] switch
                     {
-                        case var text when settingsLines[i].Contains("=du"):
-                            word = "Deutsch";
-                            break;
-                        case var text when settingsLines[i].Contains("=en"):
-                            word = "English";
-                            break;
-                        case var text when settingsLines[i].Contains("=es"):
-                            word = "Español";
-                            break;
-                        case var text when settingsLines[i].Contains("=es-MX"):
-                            word = "Español (México)";
-                            break;
-                        case var text when settingsLines[i].Contains("=fr"):
-                            word = "Français";
-                            break;
-                        case var text when settingsLines[i].Contains("=it"):
-                            word = "Italiano";
-                            break;
-                        case var text when settingsLines[i].Contains("=pl"):
-                            word = "Polski";
-                            break;
-                        case var text when settingsLines[i].Contains("=pt-BR"):
-                            word = "Português (Brasil)";
-                            break;
-                        case var text when settingsLines[i].Contains("=tr"):
-                            word = "Türkçe";
-                            break;
-                        case var text when settingsLines[i].Contains("=ru"):
-                            word = "русский";
-                            break;
-                        case var text when settingsLines[i].Contains("=th"):
-                            word = "ไทย";
-                            break;
-                        case var text when settingsLines[i].Contains("=zh-Hans"):
-                            word = "中文 (简体)";
-                            break;
-                        case var text when settingsLines[i].Contains("=zh-Hant"):
-                            word = "中文 (繁體)";
-                            break;
-                        case var text when settingsLines[i].Contains("=ja"):
-                            word = "日本語";
-                            break;
-                        case var text when settingsLines[i].Contains("=ko"):
-                            word = "한국어";
-                            break;
-                        default:
-                            var changeConfig = new ChangeConfig();
-                            changeConfig.GameUserSettings(SettingsPath, "Language=", "en");
-                            word = "English";
-                            break;
+                        var text when text.Contains("=du", StringComparison.Ordinal) => "Deutsch",
+                        var text when text.Contains("=en", StringComparison.Ordinal) => "English",
+                        var text when text.Contains("=es-MX", StringComparison.Ordinal) => "Español (México)",
+                        var text when text.Contains("=es", StringComparison.Ordinal) => "Español",
+                        var text when text.Contains("=fr", StringComparison.Ordinal) => "Français",
+                        var text when text.Contains("=it", StringComparison.Ordinal) => "Italiano",
+                        var text when text.Contains("=pl", StringComparison.Ordinal) => "Polski",
+                        var text when text.Contains("=pt-BR", StringComparison.Ordinal) => "Português (Brasil)",
+                        var text when text.Contains("=tr", StringComparison.Ordinal) => "Türkçe",
+                        var text when text.Contains("=ru", StringComparison.Ordinal) => "русский",
+                        var text when text.Contains("=th", StringComparison.Ordinal) => "ไทย",
+                        var text when text.Contains("=zh-Hans", StringComparison.Ordinal) => "中文 (简体)",
+                        var text when text.Contains("=zh-Hant", StringComparison.Ordinal) => "中文 (繁體)",
+                        var text when text.Contains("=ja", StringComparison.Ordinal) => "日本語",
+                        var text when text.Contains("=ko", StringComparison.Ordinal) => "한국어",
+                        _ => null
+                    };
+
+                    if (word == null)
+                    {
+                        ChangeConfig.GameUserSettings(SettingsPath, "Language=", "en");
+                        word = "English";
                     }
                     cbInGameLangauge.SelectedIndex = cbInGameLangauge.Items.IndexOf(word);
                 }
-                
-                if (settingsLines[i].Contains("ScreenRenderSize="))
+
+                if (settingsLines[i].Contains("ScreenRenderSize=", StringComparison.Ordinal))
                 {
-                    string resultString = Regex.Match(settingsLines[i], @"\d+").Value;
+                    string resultString = DigitsRegex().Match(settingsLines[i]).Value;
                     int result = int.Parse(resultString);
                     if (result < tbScRes.Minimum)
                     {
                         result = tbScRes.Minimum;
-                        EditConfig.GameUserSettings(SettingsPath, "ScreenRenderSize=", result.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "ScreenRenderSize=", result.ToString());
                     }
 
                     if (result > tbScRes.Maximum)
                     {
                         result = tbScRes.Maximum;
-                        EditConfig.GameUserSettings(SettingsPath, "ScreenRenderSize=", result.ToString());
+                        ChangeConfig.GameUserSettings(SettingsPath, "ScreenRenderSize=", result.ToString());
                     }
                     tbScRes.Value = result;
                     lblScRes.Text = tbScRes.Value + "%";
                 }
-                if (settingsLines[i].Contains("KillerToggleInteractions="))
+                if (settingsLines[i].Contains("KillerToggleInteractions=", StringComparison.Ordinal))
                 {
-                    if (settingsLines[i].ToLower().Contains("True".ToLower()))
+                    if (settingsLines[i].Contains("True", StringComparison.OrdinalIgnoreCase))
                     {
                         cbKillerToggle.Checked = true;
                     }
-                    if (settingsLines[i].ToLower().Contains("False".ToLower()))
+                    if (settingsLines[i].Contains("False", StringComparison.OrdinalIgnoreCase))
                     {
                         cbKillerToggle.Checked = false;
                     }
                 }
-                if (settingsLines[i].Contains("SurvivorToggleInteractions="))
+                if (settingsLines[i].Contains("SurvivorToggleInteractions=", StringComparison.Ordinal))
                 {
-                    if (settingsLines[i].ToLower().Contains("True".ToLower()))
+                    if (settingsLines[i].Contains("True", StringComparison.OrdinalIgnoreCase))
                     {
                         cbSurvivorToggle.Checked = true;
                     }
-                    if (settingsLines[i].ToLower().Contains("False".ToLower()))
+                    if (settingsLines[i].Contains("False", StringComparison.OrdinalIgnoreCase))
                     {
                         cbSurvivorToggle.Checked = false;
                     }
                 }
-                if (settingsLines[i].Contains("TerrorRadiusVisualFeedback="))
+                if (settingsLines[i].Contains("TerrorRadiusVisualFeedback=", StringComparison.Ordinal))
                 {
-                    if (settingsLines[i].ToLower().Contains("True".ToLower()))
+                    if (settingsLines[i].Contains("True", StringComparison.OrdinalIgnoreCase))
                     {
                         cbHeartIcon.Checked = true;
                     }
-                    if (settingsLines[i].ToLower().Contains("False".ToLower()))
+                    if (settingsLines[i].Contains("False", StringComparison.OrdinalIgnoreCase))
                     {
                         cbHeartIcon.Checked = false;
                     }
                 }
-                ReadConfig = File.ReadAllText(SettingsPath);
-                ReadEngine = File.ReadAllText(EnginePath);
-
-                File.WriteAllText(SettingsPath, ReadConfig);
-                File.WriteAllText(EnginePath, ReadEngine);
             }
+
+            ReadConfig = File.ReadAllText(SettingsPath);
+            ReadEngine = File.ReadAllText(EnginePath);
+
+            File.WriteAllText(SettingsPath, ReadConfig);
+            File.WriteAllText(EnginePath, ReadEngine);
         }
     }
 }

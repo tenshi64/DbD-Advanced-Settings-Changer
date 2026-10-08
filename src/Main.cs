@@ -1,49 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
-using System.Net;
-using System.Reflection;
 
 namespace DbD_Settings_Changer
 {
     public partial class Main : Form
     {
-        ChangeConfig EditConfig = new ChangeConfig();
+        private string SettingsPath = string.Empty;
+        private string EnginePath = string.Empty;
 
-        private string SettingsPath = "";
-        private string EnginePath = "";
+        private readonly string SteamSettingsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\WindowsClient\GameUserSettings.ini";
+        private readonly string SteamEnginePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\WindowsClient\Engine.ini";
 
-        private string SteamSettingsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\WindowsClient\GameUserSettings.ini";
-        private string SteamEnginePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\WindowsClient\Engine.ini";
+        private readonly string EGSSettingsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\EGSClient\GameUserSettings.ini";
+        private readonly string EGSEnginePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\EGSClient\Engine.ini";
 
+        private readonly string MSSettingsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\WinGDKClient\GameUserSettings.ini";
+        private readonly string MSEnginePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\WinGDKClient\Engine.ini";
 
-        private string EGSSettingsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\EGSClient\GameUserSettings.ini";
-        private string EGSEnginePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\EGSClient\Engine.ini";
+        private readonly string ApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Autosave\";
 
+        private readonly string ApplicationLanguageData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Language\";
 
-        private string MSSettingsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\WinGDKClient\GameUserSettings.ini";
-        private string MSEnginePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DeadByDaylight\Saved\Config\WinGDKClient\Engine.ini";
+        private readonly ToolTip tip = new();
 
+        private string UsersSettingsContent = string.Empty;
+        private string UsersEngineContent = string.Empty;
 
-        private string ApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Autosave\";
+        private string ReadConfig = string.Empty;
+        private string ReadEngine = string.Empty;
 
-        private string ApplicationLanguageData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\DbD Settings Changer\Data\Configs\Language\";
-
-        ToolTip tip = new ToolTip();
-
-        private string UsersSettingsContent;
-        private string UsersEngineContent;
-
-        private string ReadConfig;
-        private string ReadEngine;
-
-        public static IDictionary<string, string> errors = new Dictionary<string, string>();
+        public static readonly IDictionary<string, string> errors = new Dictionary<string, string>();
 
         public Main()
         {
@@ -65,38 +52,36 @@ namespace DbD_Settings_Changer
 
             foreach (Control control in panel10.Controls)
             {
-                if (control.Name.Contains("panel"))
+                if (control is Panel panel && control.Name.Contains("panel", StringComparison.OrdinalIgnoreCase))
                 {
-                    (control as Panel).HorizontalScroll.Maximum = 0;
-                    (control as Panel).AutoScroll = false;
-                    (control as Panel).VerticalScroll.Visible = false;
-                    (control as Panel).AutoScroll = true;
-                    foreach (Control ctrl in control.Controls)
+                    panel.HorizontalScroll.Maximum = 0;
+                    panel.AutoScroll = false;
+                    panel.VerticalScroll.Visible = false;
+                    panel.AutoScroll = true;
+
+                    foreach (Control ctrl in panel.Controls)
                     {
-                        if (ctrl is Button)
+                        if (ctrl is Button button)
                         {
-                            (ctrl as Button).Click += new EventHandler(this.btnClick);
+                            button.Click += BtnClick;
                         }
-                        if (ctrl is TrackBar)
+                        if (ctrl is TrackBar trackBar)
                         {
-                            (ctrl as TrackBar).Scroll += new EventHandler(this.tbScroll);
+                            trackBar.Scroll += TbScroll;
                         }
-                        if (ctrl is CheckBox)
+                        if (ctrl is CheckBox checkBox)
                         {
-                            (ctrl as CheckBox).CheckedChanged += new EventHandler(this.cbCheckedChanged);
+                            checkBox.CheckedChanged += CbCheckedChanged;
                         }
                     }
                 }
-                if(control.Name == "Nav")
+                if (control.Name == "Nav")
                 {
                     foreach (Control ctrl in control.Controls)
                     {
-                        if (ctrl is Label)
+                        if (ctrl is Label label && label.Name.Contains("menu", StringComparison.OrdinalIgnoreCase))
                         {
-                            if (ctrl.Name.Contains("menu"))
-                            {
-                                (ctrl as Label).Click += new EventHandler(this.menuClick);
-                            }
+                            label.Click += MenuClick;
                         }
                     }
                 }

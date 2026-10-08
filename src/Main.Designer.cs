@@ -1,5 +1,4 @@
-﻿
-namespace DbD_Settings_Changer
+﻿namespace DbD_Settings_Changer
 {
     partial class Main
     {
@@ -1046,7 +1045,7 @@ namespace DbD_Settings_Changer
             btnAaHigh.TabIndex = 13;
             btnAaHigh.TabStop = false;
             btnAaHigh.Text = "High";
-            btnAaHigh.UseVisualStyleBackColor = false;
+            btnAaUltra.UseVisualStyleBackColor = false;
             // 
             // btnAaMedium
             // 
@@ -1475,8 +1474,8 @@ namespace DbD_Settings_Changer
             btnResetFPS.TabStop = false;
             btnResetFPS.Text = "Reset";
             btnResetFPS.UseVisualStyleBackColor = false;
-            btnResetFPS.MouseLeave += btnResetFPS_MouseLeave;
-            btnResetFPS.MouseHover += btnResetFPS_MouseHover;
+            btnResetFPS.MouseLeave += BtnResetFPS_MouseLeave;
+            btnResetFPS.MouseHover += BtnResetFPS_MouseHover;
             // 
             // btnSetFPS
             // 
@@ -1490,8 +1489,8 @@ namespace DbD_Settings_Changer
             btnSetFPS.TabStop = false;
             btnSetFPS.Text = "Set";
             btnSetFPS.UseVisualStyleBackColor = false;
-            btnSetFPS.MouseLeave += btnSetFPS_MouseLeave;
-            btnSetFPS.MouseHover += btnSetFPS_MouseHover;
+            btnSetFPS.MouseLeave += BtnSetFPS_MouseLeave;
+            btnSetFPS.MouseHover += BtnSetFPS_MouseHover;
             // 
             // numFPS
             // 
@@ -1623,7 +1622,7 @@ namespace DbD_Settings_Changer
             cbInGameLangauge.Size = new System.Drawing.Size(191, 23);
             cbInGameLangauge.TabIndex = 71;
             cbInGameLangauge.TabStop = false;
-            cbInGameLangauge.SelectedIndexChanged += cbInGameLangauge_SelectedIndexChanged;
+            cbInGameLangauge.SelectedIndexChanged += CbInGameLangauge_SelectedIndexChanged;
             // 
             // cbSprintToCancel
             // 
@@ -1712,8 +1711,8 @@ namespace DbD_Settings_Changer
             btnResReset.TabStop = false;
             btnResReset.Text = "Reset";
             btnResReset.UseVisualStyleBackColor = false;
-            btnResReset.MouseLeave += btnResReset_MouseLeave;
-            btnResReset.MouseHover += btnResReset_MouseHover;
+            btnResReset.MouseLeave += BtnResReset_MouseLeave;
+            btnResReset.MouseHover += BtnResReset_MouseHover;
             // 
             // btnResSet
             // 
@@ -1727,8 +1726,8 @@ namespace DbD_Settings_Changer
             btnResSet.TabStop = false;
             btnResSet.Text = "Set";
             btnResSet.UseVisualStyleBackColor = false;
-            btnResSet.MouseLeave += btnResSet_MouseLeave;
-            btnResSet.MouseHover += btnResSet_MouseHover;
+            btnResSet.MouseLeave += BtnResSet_MouseLeave;
+            btnResSet.MouseHover += BtnResSet_MouseHover;
             // 
             // lblHeight
             // 
@@ -1974,7 +1973,7 @@ namespace DbD_Settings_Changer
             btnAudioHigh.TabIndex = 6;
             btnAudioHigh.TabStop = false;
             btnAudioHigh.Text = "High";
-            btnAudioHigh.UseVisualStyleBackColor = false;
+            btnAudioUltra.UseVisualStyleBackColor = false;
             // 
             // btnAudioMedium
             // 
@@ -2133,10 +2132,10 @@ namespace DbD_Settings_Changer
             btnDelete.TabIndex = 34;
             btnDelete.TabStop = false;
             btnDelete.UseVisualStyleBackColor = false;
-            btnDelete.Click += btnDelete_Click;
-            btnDelete.MouseEnter += btnDelete_MouseEnter;
-            btnDelete.MouseLeave += btnDelete_MouseLeave;
-            btnDelete.MouseHover += btnDelete_MouseHover;
+            btnDelete.Click += BtnDelete_Click;
+            btnDelete.MouseEnter += BtnDelete_MouseEnter;
+            btnDelete.MouseLeave += BtnDelete_MouseLeave;
+            btnDelete.MouseHover += BtnDelete_MouseHover;
             // 
             // btnUsersSettings
             // 
@@ -2155,10 +2154,10 @@ namespace DbD_Settings_Changer
             btnUsersSettings.TabIndex = 3;
             btnUsersSettings.TabStop = false;
             btnUsersSettings.UseVisualStyleBackColor = false;
-            btnUsersSettings.Click += btnUsersSettings_Click;
-            btnUsersSettings.MouseEnter += btnUsersSettings_MouseEnter;
-            btnUsersSettings.MouseLeave += btnUsersSettings_MouseLeave;
-            btnUsersSettings.MouseHover += btnUsersSettings_MouseHover;
+            btnUsersSettings.Click += BtnUsersSettings_Click;
+            btnUsersSettings.MouseEnter += BtnUsersSettings_MouseEnter;
+            btnUsersSettings.MouseLeave += BtnUsersSettings_MouseLeave;
+            btnUsersSettings.MouseHover += BtnUsersSettings_MouseHover;
             // 
             // panelDiscord
             // 
@@ -2183,10 +2182,10 @@ namespace DbD_Settings_Changer
             btnDiscord.Size = new System.Drawing.Size(72, 72);
             btnDiscord.TabIndex = 0;
             btnDiscord.TabStop = false;
-            btnDiscord.Click += btnDiscord_Click;
-            btnDiscord.MouseEnter += btnDiscord_MouseEnter;
-            btnDiscord.MouseLeave += btnDiscord_MouseLeave;
-            btnDiscord.MouseHover += btnDiscord_MouseHover;
+            btnDiscord.Click += BtnDiscord_Click;
+            btnDiscord.MouseEnter += BtnDiscord_MouseEnter;
+            btnDiscord.MouseLeave += BtnDiscord_MouseLeave;
+            btnDiscord.MouseHover += BtnDiscord_MouseHover;
             // 
             // panel10
             // 
@@ -2248,7 +2247,7 @@ namespace DbD_Settings_Changer
             cbLanguage.Size = new System.Drawing.Size(191, 23);
             cbLanguage.TabIndex = 69;
             cbLanguage.TabStop = false;
-            cbLanguage.SelectedIndexChanged += cbLanguage_SelectedIndexChanged;
+            cbLanguage.SelectedIndexChanged += CbLanguage_SelectedIndexChanged;
             // 
             // lblChangeSettings
             // 
@@ -2272,7 +2271,7 @@ namespace DbD_Settings_Changer
             cbVersion.Size = new System.Drawing.Size(191, 23);
             cbVersion.TabIndex = 39;
             cbVersion.TabStop = false;
-            cbVersion.SelectedIndexChanged += cbVersion_SelectedIndexChanged;
+            cbVersion.SelectedIndexChanged += CbVersion_SelectedIndexChanged;
             // 
             // label31
             // 
@@ -2574,4 +2573,3 @@ namespace DbD_Settings_Changer
         protected internal System.Windows.Forms.CheckBox cbCopyright;
     }
 }
-
